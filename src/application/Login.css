@@ -1,0 +1,25 @@
+.leftbox {
+  -fx-background-color: "#706f6f";
+}
+
+.rightbox {
+  -fx-background-color: white;
+}
+
+.btn {
+  -fx-background-color: "#fac400";
+  -fx-color: white;
+}
+
+
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./Helvetica\ CE\ Bold.otf");
+}
+
+
+.title {
+  -fx-font-family: "Roboto";
+  -fx-font-size: 40px;
+}
