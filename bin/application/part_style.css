@@ -1,0 +1,12 @@
+.table-view {
+  -fx-background-color: white;
+}
+
+.table-view .column-header-background .filler {
+  -fx-background-color: white;
+}
+
+.btn_add {
+  -fx-background-color: "#fac400";
+  -fx-text-fill: White;
+}

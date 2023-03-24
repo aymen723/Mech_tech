@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="930.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="390.0" prefWidth="930.0" BorderPane.alignment="CENTER">
+         <children>
+            <TableView prefHeight="382.0" prefWidth="800.0" stylesheets="@part_style.css">
+              <columns>
+                <TableColumn prefWidth="140.80002290010452" style="-fx-background-color: white;" text="Name" />
+                <TableColumn minWidth="4.000030517578125" prefWidth="149.6000213623047" style="-fx-background-color: white;" text="ID" />
+                  <TableColumn minWidth="4.000030517578125" prefWidth="149.6000213623047" style="-fx-background-color: white;" text="Status" />
+                  <TableColumn minWidth="4.000030517578125" prefWidth="149.6000213623047" style="-fx-background-color: white;" text="quantité" />
+                  <TableColumn minWidth="4.000030517578125" prefWidth="149.6000213623047" style="-fx-background-color: white;" text="C2" />
+              </columns>
+            </TableView>
+         </children>
+      </HBox>
+   </bottom>
+   <top>
+      <GridPane prefHeight="180.0" prefWidth="930.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Pane prefHeight="58.0" prefWidth="320.0" />
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <children>
+                  <TextField layoutX="14.0" layoutY="14.0" prefHeight="30.0" prefWidth="250.0" promptText="Recherche" />
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <children>
+                  <Text layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin &gt;">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="133.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Parts">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <Button layoutX="332.0" layoutY="10.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" styleClass="btn_add" stylesheets="@part_style.css" text="Add">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+         </children>
+      </GridPane>
+   </top>
+</BorderPane>

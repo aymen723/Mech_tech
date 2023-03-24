@@ -35,12 +35,13 @@ public class Main extends Application {
 //		Group root = new Group();
 		Parent fxml;
 		try {
-			fxml = FXMLLoader.load(getClass().getResource("Login.fxml"));
+			fxml = FXMLLoader.load(getClass().getResource("Dashbord.fxml"));
 //			fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
 
 			Scene scene = new Scene(fxml);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Mecha Tech");
+		
 //			primaryStage.initStyle(StageStyle.UNDECORATED);
 
 			primaryStage.setResizable(false); 
