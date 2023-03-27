@@ -89,8 +89,8 @@
                               <TableColumn fx:id="prenom" prefWidth="101.5999755859375" style="-fx-background-color: white;" text="Prenom" />
                               <TableColumn fx:id="nuermo" prefWidth="74.39999389648438" style="-fx-background-color: white;" text="Numero" />
                               <TableColumn fx:id="address" minWidth="0.0" prefWidth="140.0" style="-fx-background-color: white;" text="Address" />
-                              <TableColumn fx:id="address1" minWidth="0.0" prefWidth="103.20001220703125" style="-fx-background-color: white;" text="Email" />
-                              <TableColumn fx:id="address2" minWidth="0.0" prefWidth="81.5999755859375" style="-fx-background-color: white;" text="Role" />
+                              <TableColumn fx:id="email" minWidth="0.0" prefWidth="103.20001220703125" style="-fx-background-color: white;" text="Email" />
+                              <TableColumn fx:id="role" minWidth="0.0" prefWidth="81.5999755859375" style="-fx-background-color: white;" text="Role" />
                           </columns>
                         </TableView>
                      </children>

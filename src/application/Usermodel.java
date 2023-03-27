@@ -1,4 +1,4 @@
-package Models;
+package application;
 
 import javafx.beans.property.SimpleStringProperty;
 
@@ -39,34 +39,11 @@ public class Usermodel {
 //		id.set(value);
 //	}
 
-	String id;
-	String username;
-	String password;
-	String nom;
-	String prenom;
-	String numero;
-	String address;
-	String email;
-	String role;
-
-	public Usermodel(String id, String username, String password, String nom, String prenom, String numero, String address,
-			String email,String role) {
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.numero = numero;
-		this.address = address;
-		this.email = email;
-		
-	}
-
-	public String getid() {
+	public int getId() {
 		return id;
 	}
 
-	public void setid(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -125,5 +102,38 @@ public class Usermodel {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public Usermodel(int id, String username, String password, String nom, String prenom, String numero, String address,
+			String email, String role) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.numero = numero;
+		this.address = address;
+		this.email = email;
+		this.role = role;
+	}
+
+	int id;
+
+	String username;
+	String password;
+	String nom;
+	String prenom;
+	String numero;
+	String address;
+	String email;
+	String role;
 
 }

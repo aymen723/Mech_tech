@@ -10,3 +10,8 @@
   -fx-background-color: "#fac400";
   -fx-text-fill: White;
 }
+
+.btn_mod {
+  -fx-background-color: black;
+  -fx-text-fill: White;
+}

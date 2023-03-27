@@ -28,6 +28,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 public class Main extends Application {
 
@@ -45,6 +46,7 @@ public class Main extends Application {
 			Scene scene = new Scene(fxml);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Mecha Tech");
+			scene.setFill(Color.TRANSPARENT);
 
 //			primaryStage.initStyle(StageStyle.UNDECORATED);
 			primaryStage.initStyle(StageStyle.TRANSPARENT);
@@ -60,42 +62,7 @@ public class Main extends Application {
 	}
 
 	
-	
-//	 @Override
-//	  public void start(Stage primaryStage) {
-//
-//	    TableView tableView = new TableView();
-//
-//	    TableColumn<Person, String> column1 = 
-//	    new TableColumn<>("First Name");
-//	    
-//	    column1.setCellValueFactory(
-//	        new PropertyValueFactory<>("firstName"));
-//
-//
-//	    TableColumn<Person, String> column2 = 
-//	    new TableColumn<>("Last Name");
-//	    
-//	    column2.setCellValueFactory(
-//	        new PropertyValueFactory<>("lastName"));
-//
-//
-//	    tableView.getColumns().add(column1);
-//	    tableView.getColumns().add(column2);
-//
-//	    tableView.getItems().add(
-//	      new Person("John", "Doe"));
-//	    tableView.getItems().add(
-//	      new Person("adzadazdaz", "Deer"));
-//
-//	    VBox vbox = new VBox(tableView);
-//
-//	    Scene scene = new Scene(vbox);
-//
-//	    primaryStage.setScene(scene);
-//
-//	    primaryStage.show();
-//	  }
+
 	public static void main(String[] args) {
 		launch(args);
 	}

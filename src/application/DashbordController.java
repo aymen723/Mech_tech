@@ -8,11 +8,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class DashbordController implements Initializable {
+
+
+  
 
 	@FXML
 	Button dashbord_btn;
@@ -30,6 +34,21 @@ public class DashbordController implements Initializable {
 	Button add_btn;
 	@FXML
 	Button close_add;
+
+    @FXML
+    private Button add_btn1;
+
+    @FXML
+    private TextField description;
+
+    @FXML
+    private TextField name;
+
+    @FXML
+    private TextField price;
+
+    @FXML
+    private TextField quntitie;
 
 	public void dashbord(javafx.event.ActionEvent actione) throws IOException {
 		try {
