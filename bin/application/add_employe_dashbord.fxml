@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="930.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.add_employer_controller">
+   <top>
+      <GridPane prefHeight="200.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <children>
+                  <Text fill="#a1a1a1" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin &gt;">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="119.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les employés">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <Button layoutX="372.0" layoutY="16.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" styleClass="btn_add" stylesheets="@add_employe_style.css" text="Ajouter">
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.8631578683853149" green="0.8631578683853149" blue="0.8631578683853149" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="269.0" layoutY="16.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="80.0" styleClass="btn_mod" stylesheets="@add_employe_style.css" text="Modifier">
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.6105263233184814" green="0.6105263233184814" blue="0.6105263233184814" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+         </children>
+      </GridPane>
+   </top>
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="400.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ScrollPane prefHeight="262.0" prefWidth="800.0" styleClass="scroll-bar" stylesheets="@scrollbar_style.css">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="800.0">
+                     <children>
+                        <TableView fx:id="table" prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: white;">
+                          <columns>
+                            <TableColumn fx:id="id" prefWidth="45.600007593631744" style="-fx-background-color: white;" text="Id" />
+                            <TableColumn fx:id="username" prefWidth="126.39996337890625" style="-fx-background-color: white;" text="nom d'utilisateur" />
+                              <TableColumn fx:id="nom" prefWidth="116.80001831054688" style="-fx-background-color: white;" text="Nom" />
+                              <TableColumn fx:id="prenom" prefWidth="101.5999755859375" style="-fx-background-color: white;" text="Prenom" />
+                              <TableColumn fx:id="nuermo" prefWidth="74.39999389648438" style="-fx-background-color: white;" text="Numero" />
+                              <TableColumn fx:id="address" minWidth="0.0" prefWidth="140.0" style="-fx-background-color: white;" text="Address" />
+                              <TableColumn fx:id="address1" minWidth="0.0" prefWidth="103.20001220703125" style="-fx-background-color: white;" text="Email" />
+                              <TableColumn fx:id="address2" minWidth="0.0" prefWidth="81.5999755859375" style="-fx-background-color: white;" text="Role" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>

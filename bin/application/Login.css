@@ -12,13 +12,3 @@
 }
 
 
-@font-face {
- font-family: "Roboto";
-src: url("./Helvetica\ CE\ Bold.otf");
-}
-
-
-.title {
-  -fx-font-family: "Roboto";
-  -fx-font-size: 40px;
-}

@@ -38,7 +38,7 @@
                <padding>
                   <Insets left="30.0" />
                </padding></Button>
-            <Button id="btn1" fx:id="btn4" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btn4" prefHeight="60.0" prefWidth="170.0" styleClass="btn_leftmenu" stylesheets="@dashbord_style.css" text="btn4" textFill="#9c9c9c">
+            <Button id="btn1" fx:id="btn4" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#btn4" prefHeight="60.0" prefWidth="170.0" styleClass="btn_leftmenu" stylesheets="@dashbord_style.css" text="Add Employer" textFill="#9c9c9c">
                <padding>
                   <Insets left="30.0" />
                </padding></Button>
