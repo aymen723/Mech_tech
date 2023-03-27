@@ -40,7 +40,7 @@ public class Main extends Application {
 //		Group root = new Group();
 		Parent fxml;
 		try {
-			fxml = FXMLLoader.load(getClass().getResource("Dashbord.fxml"));
+			fxml = FXMLLoader.load(getClass().getResource("dashbord.fxml"));
 //			fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
 
 			Scene scene = new Scene(fxml);
