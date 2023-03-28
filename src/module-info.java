@@ -3,10 +3,11 @@ module mecha {
 	requires javafx.graphics;
 	requires javafx.fxml;
 	requires java.sql;
-	requires mongo.java.driver;
 	requires java.desktop;
+	requires mongo.java.driver;
 
-//    requires de.jensd.fx.fontawesomefx.fontawesome;
+
+//  requires de.jensd.fx.fontawesomefx.fontawesome;
 //	opens application.models;
 
 	

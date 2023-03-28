@@ -36,7 +36,7 @@ public class LoginController implements Initializable {
 		Document filter = new Document("username", usern);
 		filter.append("password", password.getText());
 
-		MongoCollection collection = Connectdatabase.connectdb("users");
+		MongoCollection<Document> collection = Connectdatabase.connectdb("users");
 		MongoCursor<Document> cursor = collection.find(filter).iterator();
 		while (cursor.hasNext()) {
 			System.out.println(cursor.next().toJson());
@@ -46,9 +46,9 @@ public class LoginController implements Initializable {
 
 	public void testquery(ActionEvent e) {
 
-		MongoCollection collection = Connectdatabase.connectdb("users");
+		MongoCollection<Document> collection = Connectdatabase.connectdb("users");
 		FindIterable<Document> iterDoc = collection.find();
-		Iterator it = iterDoc.iterator();
+		Iterator<Document> it = iterDoc.iterator();
 		while (it.hasNext()) {
 			System.out.println(it.next());
 		}
