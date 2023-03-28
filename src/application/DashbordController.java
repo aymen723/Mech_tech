@@ -49,6 +49,7 @@ public class DashbordController implements Initializable {
 
     @FXML
     private TextField quntitie;
+    
 
 	public void dashbord(javafx.event.ActionEvent actione) throws IOException {
 		try {

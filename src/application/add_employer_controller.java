@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 
 import java.util.ResourceBundle;
@@ -7,10 +8,19 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class add_employer_controller implements Initializable {
 
@@ -41,6 +51,43 @@ public class add_employer_controller implements Initializable {
 	@FXML
 	private TableView<Usermodel> table;
 
+	@FXML
+	private Button add_emp;
+
+	@FXML
+	private Button mod_emp;
+	
+	@FXML
+	private Button return_back;
+	
+	
+    @FXML
+    private BorderPane emp_container;
+    
+    
+    @FXML
+    private Button ajouter_employer;
+
+    @FXML
+    private TextField emailfield;
+
+    @FXML
+    private TextField namefield;
+
+    @FXML
+    private TextField numerofield;
+
+    @FXML
+    private TextField prenomfield;
+
+    @FXML
+    private TextField rolefield;
+
+    @FXML
+    private TextField usernamefield;
+    
+
+
 	ObservableList<Usermodel> list = FXCollections.observableArrayList(
 			new Usermodel(1, "test", "test", "test", "test", "0011", "test", "test1", "admin"),
 			new Usermodel(2, "teszdat", "test", "test", "test", "0022", "test", "test2", "admint"),
@@ -48,6 +95,78 @@ public class add_employer_controller implements Initializable {
 			new Usermodel(4, "test4", "test", "test", "test", "0044", "test", "test4", "slave")
 
 	);
+
+	
+	
+	public void add_emp_conatiner() {
+		System.out.println("test hna1");
+
+		try {
+			Parent fxml = FXMLLoader.load(getClass().getResource("add_employe_container.fxml"));
+			emp_container.getChildren().removeAll();
+			emp_container.getChildren().setAll(fxml);
+			System.out.println("test hna 2");
+
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		System.out.println("test hna 3");
+
+
+	}
+	
+	
+	
+
+	public void mod_emp_conatiner() {
+		
+		System.out.println("test hna1");
+
+		try {
+			Parent fxml = FXMLLoader.load(getClass().getResource("mod_employe_container.fxml"));
+			emp_container.getChildren().removeAll();
+			emp_container.getChildren().setAll(fxml);
+			System.out.println("test hna 2");
+
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		System.out.println("test hna 3");
+		
+	
+////		Group root = new Group();
+//		Parent fxml;
+//		try {
+//			fxml = FXMLLoader.load(getClass().getResource("mod_employe_container.fxml"));
+////			fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
+//
+//			Scene scene = new Scene(fxml);
+//			Stage stage = new Stage();
+//			stage.setScene(scene);
+//			stage.show();
+//
+//
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+
+	}
+	
+	
+	public void return_back(javafx.event.ActionEvent event) {
+
+		try {
+			Parent fxml = FXMLLoader.load(getClass().getResource("add_employe_dashbord.fxml"));
+			emp_container.getChildren().removeAll();
+			emp_container.getChildren().setAll(fxml);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
