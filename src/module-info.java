@@ -5,6 +5,8 @@ module mecha {
 	requires java.sql;
 	requires java.desktop;
 	requires mongo.java.driver;
+	requires javafx.base;
+//	requires javafx.media;
 
 
 //  requires de.jensd.fx.fontawesomefx.fontawesome;
