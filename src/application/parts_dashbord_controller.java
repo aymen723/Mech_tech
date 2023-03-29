@@ -42,6 +42,7 @@ public class parts_dashbord_controller {
 
 	@FXML
 	private TableColumn<?, ?> nom_col;
+	
 	@FXML
 	private TableColumn<?, ?> desc_col;
 

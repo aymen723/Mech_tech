@@ -6,6 +6,7 @@ module mecha {
 	requires java.desktop;
 	requires mongo.java.driver;
 	requires javafx.base;
+	requires com.calendarfx.view;
 	
 //	requires javafx.media;
 

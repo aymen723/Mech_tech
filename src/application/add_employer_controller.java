@@ -91,35 +91,35 @@ public class add_employer_controller implements Initializable {
 
 	public void mod_emp_conatiner() {
 
-//		System.out.println("test hna1");
-//
-//		try {
-//			Parent fxml = FXMLLoader.load(getClass().getResource("mod_employe_container.fxml"));
-//			emp_container.getChildren().removeAll();
-//			emp_container.getChildren().setAll(fxml);
-//			System.out.println("test hna 2");
-//
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-//		System.out.println("test hna 3");
+		System.out.println("test hna1");
 
-//		Group root = new Group();
-		Parent fxml;
 		try {
-			fxml = FXMLLoader.load(getClass().getResource("add_employe_container.fxml"));
-//			fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
+			Parent fxml = FXMLLoader.load(getClass().getResource("mod_employe_container.fxml"));
+			emp_container.getChildren().removeAll();
+			emp_container.getChildren().setAll(fxml);
+			System.out.println("test hna 2");
 
-			Scene scene = new Scene(fxml);
-			Stage stage = new Stage();
-			stage.setScene(scene);
-			stage.show();
-
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
+		System.out.println("test hna 3");
+
+////		Group root = new Group();
+//		Parent fxml;
+//		try {
+//			fxml = FXMLLoader.load(getClass().getResource("add_employe_container.fxml"));
+////			fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
+//
+//			Scene scene = new Scene(fxml);
+//			Stage stage = new Stage();
+//			stage.setScene(scene);
+//			stage.show();
+//
+//
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 	}
 
