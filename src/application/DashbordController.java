@@ -30,25 +30,11 @@ public class DashbordController implements Initializable {
 	Button btn5;
 	@FXML
 	BorderPane container;
-	@FXML
-	Button add_btn;
+
 	@FXML
 	Button close_add;
 
-    @FXML
-    private Button add_btn1;
 
-    @FXML
-    private TextField description;
-
-    @FXML
-    private TextField name;
-
-    @FXML
-    private TextField price;
-
-    @FXML
-    private TextField quntitie;
     
 
 	public void dashbord(javafx.event.ActionEvent actione) throws IOException {
@@ -127,29 +113,13 @@ public class DashbordController implements Initializable {
 
 	}
 
-	public void add_parts(javafx.event.ActionEvent actione) {
 
-		Parent fxml;
-		try {
-			fxml = FXMLLoader.load(getClass().getResource("Add_parts.fxml"));
-			Stage popup = new Stage();
-			Scene scene = new Scene(fxml);
-			popup.setScene(scene);
-			popup.initStyle(StageStyle.UNDECORATED);
-			popup.show();
 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-	public void closing_add_parts(javafx.event.ActionEvent actione) {
-		((Node) (actione.getSource())).getScene().getWindow().hide();
-
-		System.out.println("quitter");
-
-	}
+//	public void closing_add_parts(javafx.event.ActionEvent actione) {
+//		((Node) (actione.getSource())).getScene().getWindow().hide();
+//
+//		System.out.println("quitter");
+//
+//	}
 
 }

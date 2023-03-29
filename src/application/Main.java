@@ -49,7 +49,7 @@ public class Main extends Application {
 			scene.setFill(Color.TRANSPARENT);
 
 //			primaryStage.initStyle(StageStyle.UNDECORATED);
-			primaryStage.initStyle(StageStyle.TRANSPARENT);
+//			primaryStage.initStyle(StageStyle.TRANSPARENT);
 
 			primaryStage.setResizable(false);
 			primaryStage.show();
