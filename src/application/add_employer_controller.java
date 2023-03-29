@@ -87,6 +87,7 @@ public class add_employer_controller implements Initializable {
 		}
 		System.out.println("test hna 3");
 
+
 	}
 
 	public void mod_emp_conatiner() {
@@ -104,22 +105,22 @@ public class add_employer_controller implements Initializable {
 		}
 		System.out.println("test hna 3");
 
-////		Group root = new Group();
-//		Parent fxml;
-//		try {
-//			fxml = FXMLLoader.load(getClass().getResource("add_employe_container.fxml"));
-////			fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
-//
-//			Scene scene = new Scene(fxml);
-//			Stage stage = new Stage();
-//			stage.setScene(scene);
-//			stage.show();
-//
-//
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+// //		Group root = new Group();
+// 		Parent fxml;
+// 		try {
+// 			fxml = FXMLLoader.load(getClass().getResource("add_employe_container.fxml"));
+// //			fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
+
+// 			Scene scene = new Scene(fxml);
+// 			Stage stage = new Stage();
+// 			stage.setScene(scene);
+// 			stage.show();
+
+
+// 		} catch (IOException e) {
+// 			// TODO Auto-generated catch block
+// 			e.printStackTrace();
+// 		}
 
 	}
 
@@ -134,6 +135,8 @@ public class add_employer_controller implements Initializable {
 //			// TODO: handle exception
 //		}
 //	}
+
+
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

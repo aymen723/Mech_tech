@@ -1,7 +1,9 @@
 package application;
 
-import javafx.fxml.FXML;
+import org.bson.Document;
 
+import application.controller.AdminController;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
@@ -11,49 +13,49 @@ import javafx.scene.layout.BorderPane;
 public class Add_employe_container_controller {
 
 	@FXML
-	private TextField emailfield;
+	private static TextField emailfield;
 
 	@FXML
-	private TextField namefield;
+	private static TextField namefield;
 
 	@FXML
-	private TextField numerofield;
+	private static TextField numerofield;
 
 	@FXML
-	private TextField prenomfield;
+	private static TextField prenomfield;
 
 	@FXML
-	private TextField rolefield;
+	private static TextField rolefield;
 
 	@FXML
-	private TextField usernamefield;
+	private static TextField usernamefield;
 
 	@FXML
-	private TextField email_field_mod;
+	private static TextField email_field_mod;
 
 	@FXML
-	private TextField name_field_mod;
+	private static TextField name_field_mod;
 
 	@FXML
-	private TextField numero_field_mod;
+	private static TextField numero_field_mod;
 
 	@FXML
-	private TextField prenom_field_mod;
+	private static TextField prenom_field_mod;
 
 	@FXML
-	private TextField role_field_mod;
+	private static TextField role_field_mod;
 
 	@FXML
-	private TextField username_field_mod;
+	private static TextField username_field_mod;
 
 	@FXML
-	private Button ajouter_employe;
+	private static Button ajouter_employe;
 
 	@FXML
-	private Button return_back_add;
+	private static Button return_back_add;
 
 	@FXML
-	private BorderPane add_container;
+	private static BorderPane add_container;
 
 	public void return_back() {
 		System.out.println("azda");
@@ -68,7 +70,8 @@ public class Add_employe_container_controller {
 		}
 	}
 
-	public void ajouter_employer() {
+	public static void ajouter_employer() {
+		
 		// Document newemp = new Document("email",emailfield.getText());
 		// newemp.append("nom", namefield.getText());
 		// newemp.append("prenom", prenomfield.getText());
@@ -76,8 +79,7 @@ public class Add_employe_container_controller {
 		// newemp.append("role", rolefield.getText());
 		// newemp.append("username", usernamefield.getText());
 		
-		//  AdminController.AddEmp(newemp);		
-		
+		//  AdminController.AddEmp(newemp);
 	}
 
 	public void modifier_employer() {
