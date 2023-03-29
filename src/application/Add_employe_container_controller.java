@@ -69,8 +69,14 @@ public class Add_employe_container_controller {
 	}
 
 	public void ajouter_employer() {
-		System.out.println("add_emp");	
+		// Document newemp = new Document("email",emailfield.getText());
+		// newemp.append("nom", namefield.getText());
+		// newemp.append("prenom", prenomfield.getText());
+		// newemp.append("numero", numerofield.getText());
+		// newemp.append("role", rolefield.getText());
+		// newemp.append("username", usernamefield.getText());
 		
+		//  AdminController.AddEmp(newemp);		
 		
 	}
 
