@@ -1,7 +1,7 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
-
 
 import java.util.ResourceBundle;
 
@@ -11,12 +11,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class add_employer_controller implements Initializable {
 
@@ -52,36 +54,16 @@ public class add_employer_controller implements Initializable {
 
 	@FXML
 	private Button mod_emp;
-	
+
 	@FXML
 	private Button return_back;
-	
-	
-    @FXML
-    private BorderPane emp_container;
-    
-    
-    @FXML
-    private Button ajouter_employer;
 
-    @FXML
-    private TextField emailfield;
+	@FXML
+	private BorderPane emp_container;
 
-    @FXML
-    private TextField namefield;
+	@FXML
+	private Button ajouter_employer;
 
-    @FXML
-    private TextField numerofield;
-
-    @FXML
-    private TextField prenomfield;
-
-    @FXML
-    private TextField rolefield;
-
-    @FXML
-    private TextField usernamefield;
-    
 
 
 	ObservableList<Usermodel> list = FXCollections.observableArrayList(
@@ -92,8 +74,6 @@ public class add_employer_controller implements Initializable {
 
 	);
 
-	
-	
 	public void add_emp_conatiner() {
 		System.out.println("test hna1");
 
@@ -103,18 +83,15 @@ public class add_employer_controller implements Initializable {
 			emp_container.getChildren().setAll(fxml);
 			System.out.println("test hna 2");
 
-
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		System.out.println("test hna 3");
 
-
 	}
-	
-	
+
 	public void mod_emp_conatiner() {
-		
+
 		System.out.println("test hna1");
 
 		try {
@@ -123,17 +100,15 @@ public class add_employer_controller implements Initializable {
 			emp_container.getChildren().setAll(fxml);
 			System.out.println("test hna 2");
 
-
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		System.out.println("test hna 3");
-		
-	
+
 ////		Group root = new Group();
 //		Parent fxml;
 //		try {
-//			fxml = FXMLLoader.load(getClass().getResource("mod_employe_container.fxml"));
+//			fxml = FXMLLoader.load(getClass().getResource("add_employe_container.fxml"));
 ////			fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
 //
 //			Scene scene = new Scene(fxml);
@@ -148,8 +123,7 @@ public class add_employer_controller implements Initializable {
 //		}
 
 	}
-	
-	
+
 	public void return_back(javafx.event.ActionEvent event) {
 
 		try {
