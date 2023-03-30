@@ -5,6 +5,7 @@ import java.net.URL;
 
 import java.util.ResourceBundle;
 
+import application.controller.AdminController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -66,10 +67,10 @@ public class add_employer_controller implements Initializable {
 
 
 	ObservableList<Usermodel> list = FXCollections.observableArrayList(
-			new Usermodel(1, "test", "test", "test", "test", "0011", "test", "test1", "admin"),
-			new Usermodel(2, "teszdat", "test", "test", "test", "0022", "test", "test2", "admint"),
-			new Usermodel(3, "test3", "test", "test", "test", "0033", "test", "test3", "addd"),
-			new Usermodel(4, "test4", "test", "test", "test", "0044", "test", "test4", "slave")
+			new Usermodel("1", "test", "test", "test", "test", "0011", "test", "test1", "admin")
+			// new Usermodel(2, "teszdat", "test", "test", "test", "0022", "test", "test2", "admint"),
+			// new Usermodel(3, "test3", "test", "test", "test", "0033", "test", "test3", "addd"),
+			// new Usermodel(4, "test4", "test", "test", "test", "0044", "test", "test4", "slave")
 
 	);
 
@@ -140,6 +141,9 @@ public class add_employer_controller implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		System.out.println("hna list mazal");
+			list = AdminController.EmpLiist();
+		 System.out.println("hna wra list");
 
 		id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		username.setCellValueFactory(new PropertyValueFactory<>("username"));
@@ -151,6 +155,8 @@ public class add_employer_controller implements Initializable {
 		role.setCellValueFactory(new PropertyValueFactory<>("role"));
 
 		table.setItems(list);
+
+		
 
 	}
 
