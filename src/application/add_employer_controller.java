@@ -10,11 +10,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
@@ -55,23 +58,32 @@ public class add_employer_controller implements Initializable {
 	@FXML
 	private Button mod_emp;
 
-
-
 	@FXML
 	private BorderPane emp_container;
 
 	@FXML
 	private Button ajouter_employer;
 
-
-
+	static Usermodel user;
+	
 	ObservableList<Usermodel> list = FXCollections.observableArrayList(
-			new Usermodel(1, "test", "test", "test", "test", "0011", "test", "test1", "admin"),
-			new Usermodel(2, "teszdat", "test", "test", "test", "0022", "test", "test2", "admint"),
-			new Usermodel(3, "test3", "test", "test", "test", "0033", "test", "test3", "addd"),
-			new Usermodel(4, "test4", "test", "test", "test", "0044", "test", "test4", "slave")
+			new Usermodel(1, "test", "password1", "test", "test", "0011", "test", "test1", "admin"),
+			new Usermodel(2, "teszdat", "password2", "test", "test", "0022", "test", "test2", "admint"),
+			new Usermodel(3, "test3", "password3", "test", "test", "0033", "test", "test3", "addd"),
+			new Usermodel(4, "test4", "password4", "test", "test", "0044", "test", "test4", "slave")
 
 	);
+
+//	TableViewSelectionModel selectionModel = 
+//			table.getSelectionModel();
+
+	public void testselection() {
+		TableViewSelectionModel<Usermodel> selectionModel = table.getSelectionModel();
+		selectionModel.setSelectionMode(SelectionMode.SINGLE);
+		ObservableList selectedItems = selectionModel.getSelectedItems();
+
+		System.out.println(selectionModel.getSelectedItems().get(0).password);
+	}
 
 	public void add_emp_conatiner() {
 		System.out.println("test hna1");
@@ -87,13 +99,16 @@ public class add_employer_controller implements Initializable {
 		}
 		System.out.println("test hna 3");
 
-
 	}
 
 	public void mod_emp_conatiner() {
-
-		System.out.println("test hna1");
-
+		System.out.println("test hna 3");
+		TableViewSelectionModel<Usermodel> selectionModel = table.getSelectionModel();
+		selectionModel.setSelectionMode(SelectionMode.SINGLE);
+		ObservableList selectedItems = selectionModel.getSelectedItems();
+		System.out.println("hna fl mod "+selectionModel.getSelectedItems().get(0).id);
+		Usermodel user_mod = selectionModel.getSelectedItems().get(0);
+		user = user_mod;
 		try {
 			Parent fxml = FXMLLoader.load(getClass().getResource("mod_employe_container.fxml"));
 			emp_container.getChildren().removeAll();
@@ -103,40 +118,8 @@ public class add_employer_controller implements Initializable {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		System.out.println("test hna 3");
-
-// //		Group root = new Group();
-// 		Parent fxml;
-// 		try {
-// 			fxml = FXMLLoader.load(getClass().getResource("add_employe_container.fxml"));
-// //			fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
-
-// 			Scene scene = new Scene(fxml);
-// 			Stage stage = new Stage();
-// 			stage.setScene(scene);
-// 			stage.show();
-
-
-// 		} catch (IOException e) {
-// 			// TODO Auto-generated catch block
-// 			e.printStackTrace();
-// 		}
 
 	}
-
-//	public void return_back(javafx.event.ActionEvent event) {
-//
-//		try {
-//			Parent fxml = FXMLLoader.load(getClass().getResource("add_employe_dashbord.fxml"));
-//			emp_container.getChildren().removeAll();
-//			emp_container.getChildren().setAll(fxml);
-//
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//		}
-//	}
-
-
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

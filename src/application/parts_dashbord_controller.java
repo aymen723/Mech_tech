@@ -35,19 +35,19 @@ public class parts_dashbord_controller {
 	private TextField reserch_field;
 
 	@FXML
-	private TableColumn<?, ?> prix_col;
+	private TableColumn<Usermodel,String> prix_col;
 
 	@FXML
-	private TableColumn<?, ?> quntite_col;
+	private TableColumn<Usermodel,String> quntite_col;
 
 	@FXML
-	private TableColumn<?, ?> nom_col;
+	private TableColumn<Usermodel,String> nom_col;
 	
 	@FXML
-	private TableColumn<?, ?> desc_col;
+	private TableColumn<Usermodel,String> desc_col;
 
 	@FXML
-	private TableView<?> parts_table;
+	private TableView<Usermodel> parts_table;
 
 	public void add_parts(javafx.event.ActionEvent actione) {
 		System.out.println("test add");
