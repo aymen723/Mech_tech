@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Spliterator;
 
+import javax.print.Doc;
+
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -19,7 +21,7 @@ import application.Connectdatabase;
 import application.Usermodel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
+import application.add_employer_controller;
 
 public class AdminController {
 
@@ -32,13 +34,16 @@ public class AdminController {
 
     public static void UpdateEmp(Document Doc){
 
-        System.out.println(Doc.get("username"));
+        
         MongoCollection collection = Connectdatabase.connectdb("users");
-
-        Document found = (Document) collection.find(new Document ("username",Doc.get("username"))).first();
+        ObjectId objid = new ObjectId(add_employer_controller.user.getId());
+        Document found = (Document) collection.find(new Document ("_id",objid)).first();
+        // Document found = (Document) collection.find;
         System.out.println(found.get("password"));
+        Doc.append("_id", objid);
         Document updateop = new Document("$set",Doc);
         collection.updateOne(found, updateop);
+        // collection.findOneAndUpdate(found, updateop);
         
         
     }

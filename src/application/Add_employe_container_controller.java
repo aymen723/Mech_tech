@@ -8,13 +8,12 @@ import org.bson.Document;
 import application.controller.AdminController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
-public class Add_employe_container_controller implements Initializable{
+public class Add_employe_container_controller{
 
 	@FXML
 	private  TextField emailfield;
@@ -86,29 +85,8 @@ public class Add_employe_container_controller implements Initializable{
 		 AdminController.AddEmp(newemp);
 	}
 
-	public void modifier_employer() {
-		Document newemp = new Document("username", username_field_mod.getText());
-		// newemp.append("nom", namefield.getText());
-		// newemp.append("prenom", prenomfield.getText());
-		// newemp.append("numero", numerofield.getText());
-		// newemp.append("role", rolefield.getText());
-		// newemp.append("email",emailfield.getText());
-		newemp.append("password",email_field_mod.getText());
-		 AdminController.UpdateEmp(newemp);
-	}
+	
 
-	@Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        // TODO Auto-generated method stub
-        System.out.println("hna fl inti"+add_employer_controller.user.getPassword());
-		System.out.println("conflict fix");
-        username_field_mod.setText(add_employer_controller.user.getUsername());
-        name_field_mod.setText(add_employer_controller.user.getNom());
-        prenom_field_mod.setText(add_employer_controller.user.getPrenom());
-        numero_field_mod.setText(add_employer_controller.user.getNumero());
-        email_field_mod.setText(add_employer_controller.user.getEmail());
-        role_field_mod.setText(add_employer_controller.user.getRole());
-    }
 
 	}
 
