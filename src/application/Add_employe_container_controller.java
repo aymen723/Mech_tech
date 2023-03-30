@@ -101,6 +101,7 @@ public class Add_employe_container_controller implements Initializable{
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
         System.out.println("hna fl inti"+add_employer_controller.user.getPassword());
+		System.out.println("conflict fix");
         username_field_mod.setText(add_employer_controller.user.getUsername());
         name_field_mod.setText(add_employer_controller.user.getNom());
         prenom_field_mod.setText(add_employer_controller.user.getPrenom());
