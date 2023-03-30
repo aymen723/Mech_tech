@@ -14,9 +14,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -64,6 +66,7 @@ public class add_employer_controller implements Initializable {
 	@FXML
 	private Button ajouter_employer;
 
+	Usermodel user ;
 
 
 	ObservableList<Usermodel> list = FXCollections.observableArrayList(
@@ -92,38 +95,24 @@ public class add_employer_controller implements Initializable {
 	}
 
 	public void mod_emp_conatiner() {
+        System.out.println("test hna 3");
+        TableViewSelectionModel<Usermodel> selectionModel = table.getSelectionModel();
+        selectionModel.setSelectionMode(SelectionMode.SINGLE);
+        ObservableList selectedItems = selectionModel.getSelectedItems();
+        System.out.println("hna fl mod "+selectionModel.getSelectedItems().get(0).id);
+        Usermodel user_mod = selectionModel.getSelectedItems().get(0);
+        user = user_mod;
+        try {
+            Parent fxml = FXMLLoader.load(getClass().getResource("mod_employe_container.fxml"));
+            emp_container.getChildren().removeAll();
+            emp_container.getChildren().setAll(fxml);
+            System.out.println("test hna 2");
 
-		System.out.println("test hna1");
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
 
-		try {
-			Parent fxml = FXMLLoader.load(getClass().getResource("mod_employe_container.fxml"));
-			emp_container.getChildren().removeAll();
-			emp_container.getChildren().setAll(fxml);
-			System.out.println("test hna 2");
-
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		System.out.println("test hna 3");
-
-// //		Group root = new Group();
-// 		Parent fxml;
-// 		try {
-// 			fxml = FXMLLoader.load(getClass().getResource("add_employe_container.fxml"));
-// //			fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
-
-// 			Scene scene = new Scene(fxml);
-// 			Stage stage = new Stage();
-// 			stage.setScene(scene);
-// 			stage.show();
-
-
-// 		} catch (IOException e) {
-// 			// TODO Auto-generated catch block
-// 			e.printStackTrace();
-// 		}
-
-	}
+    }
 
 //	public void return_back(javafx.event.ActionEvent event) {
 //
