@@ -66,16 +66,14 @@ public class add_employer_controller implements Initializable {
 	@FXML
 	private Button ajouter_employer;
 
-	Usermodel user ;
+	static Usermodel user ;
 
 
 	ObservableList<Usermodel> list = FXCollections.observableArrayList(
-			new Usermodel("1", "test", "test", "test", "test", "0011", "test", "test1", "admin")
-			// new Usermodel(2, "teszdat", "test", "test", "test", "0022", "test", "test2", "admint"),
-			// new Usermodel(3, "test3", "test", "test", "test", "0033", "test", "test3", "addd"),
-			// new Usermodel(4, "test4", "test", "test", "test", "0044", "test", "test4", "slave")
-
-	);
+			new Usermodel("1", "test", "test", "test", "test", "0011", "test", "test1", "admin"),
+			new Usermodel("2", "teszdat", "test", "test", "test", "0022", "test", "test2", "admint"),
+			new Usermodel("3", "test3", "test", "test", "test", "0033", "test", "test3", "addd"),
+			new Usermodel("4", "test4", "test", "test", "test", "0044", "test", "test4", "slave"));
 
 	public void add_emp_conatiner() {
 		System.out.println("test hna1");
