@@ -39,11 +39,11 @@ public class Usermodel {
 //		id.set(value);
 //	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -111,7 +111,7 @@ public class Usermodel {
 		this.role = role;
 	}
 
-	public Usermodel(int id, String username, String password, String nom, String prenom, String numero, String address,
+	public Usermodel(String id, String username, String password, String nom, String prenom, String numero, String address,
 			String email, String role) {
 		super();
 		this.id = id;
@@ -125,7 +125,11 @@ public class Usermodel {
 		this.role = role;
 	}
 
-	int id;
+	public Usermodel() {
+		super();
+}
+
+	String id;
 
 	String username;
 	String password;

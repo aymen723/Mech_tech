@@ -18,7 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class Add_employe_container_controller  implements Initializable {
+public class Add_employe_container_controller   {
 
 	@FXML
 	private  TextField emailfield;
@@ -38,23 +38,23 @@ public class Add_employe_container_controller  implements Initializable {
 	@FXML
 	private  TextField usernamefield;
 
-	@FXML
-	private  TextField email_field_mod;
-
-	@FXML
-	private  TextField name_field_mod;
-
-	@FXML
-	private  TextField numero_field_mod;
-
-	@FXML
-	private  TextField prenom_field_mod;
-
-	@FXML
-	private  TextField role_field_mod;
-
-	@FXML
-	private  TextField username_field_mod;
+//	@FXML
+//	private  TextField email_field_mod;
+//
+//	@FXML
+//	private  TextField name_field_mod;
+//
+//	@FXML
+//	private  TextField numero_field_mod;
+//
+//	@FXML
+//	private  TextField prenom_field_mod;
+//
+//	@FXML
+//	private  TextField role_field_mod;
+//
+//	@FXML
+//	private  TextField username_field_mod;
 
 	@FXML
 	private  Button add_emp;
@@ -67,48 +67,31 @@ public class Add_employe_container_controller  implements Initializable {
 	
 
 	public void return_back() {
+		System.out.println("azda");
 		try {
 			Parent fxml = FXMLLoader.load(getClass().getResource("add_employe_dashbord.fxml"));
 			add_container.getChildren().removeAll();
 			add_container.getChildren().setAll(fxml);
+			System.out.println("test hna 2");
 
-			
 		} catch (Exception e) {
-			
+			// TODO: handle exception
 		}
+	}
+
+	public void ajouter_employer() {
 		
-		
-
+		Document newemp = new Document("username", usernamefield.getText());
+		// newemp.append("nom", namefield.getText());
+		// newemp.append("prenom", prenomfield.getText());
+		// newemp.append("numero", numerofield.getText());
+		// newemp.append("role", rolefield.getText());
+		// newemp.append("email",emailfield.getText());
+		newemp.append("password",emailfield.getText());
+		 AdminController.AddEmp(newemp);
 	}
 
-	public void ajouter_ep() {
 
-//		 Document newemp = new Document("email",emailfield.getText());
-//		 newemp.append("nom", namefield.getText());
-//		 newemp.append("prenom", prenomfield.getText());
-//		 newemp.append("numero", numerofield.getText());
-//		 newemp.append("role", rolefield.getText());
-//	     newemp.append("username", usernamefield.getText());
-//		
-//	     AdminController.AddEmp(newemp);
-	}
-
-	public void modifier_employer() {
-		System.out.println("mod_emp");
-
-	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		System.out.println("hna fl inti"+add_employer_controller.user.getPassword());
-		username_field_mod.setText(add_employer_controller.user.getUsername());
-		name_field_mod.setText(add_employer_controller.user.getNom());
-		prenom_field_mod.setText(add_employer_controller.user.getPrenom());
-		numero_field_mod.setText(add_employer_controller.user.getNumero());
-		email_field_mod.setText(add_employer_controller.user.getEmail());
-		role_field_mod.setText(add_employer_controller.user.getRole());
-	}
 	
 	
 }

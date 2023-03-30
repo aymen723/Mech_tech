@@ -5,6 +5,7 @@ import java.net.URL;
 
 import java.util.ResourceBundle;
 
+import application.controller.AdminController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -66,24 +67,13 @@ public class add_employer_controller implements Initializable {
 
 	static Usermodel user;
 	
+
+
 	ObservableList<Usermodel> list = FXCollections.observableArrayList(
-			new Usermodel(1, "test", "password1", "test", "test", "0011", "test", "test1", "admin"),
-			new Usermodel(2, "teszdat", "password2", "test", "test", "0022", "test", "test2", "admint"),
-			new Usermodel(3, "test3", "password3", "test", "test", "0033", "test", "test3", "addd"),
-			new Usermodel(4, "test4", "password4", "test", "test", "0044", "test", "test4", "slave")
-
-	);
-
-//	TableViewSelectionModel selectionModel = 
-//			table.getSelectionModel();
-
-	public void testselection() {
-		TableViewSelectionModel<Usermodel> selectionModel = table.getSelectionModel();
-		selectionModel.setSelectionMode(SelectionMode.SINGLE);
-		ObservableList selectedItems = selectionModel.getSelectedItems();
-
-		System.out.println(selectionModel.getSelectedItems().get(0).password);
-	}
+			new Usermodel("1", "test", "test", "test", "test", "0011", "test", "test1", "admin"),
+			new Usermodel("2", "teszdat", "test", "test", "test", "0022", "test", "test2", "admint"),
+			new Usermodel("3", "test3", "test", "test", "test", "0033", "test", "test3", "addd"),
+			new Usermodel("4", "test4", "test", "test", "test", "0044", "test", "test4", "slave"));
 
 	public void add_emp_conatiner() {
 		System.out.println("test hna1");
@@ -99,30 +89,47 @@ public class add_employer_controller implements Initializable {
 		}
 		System.out.println("test hna 3");
 
+
 	}
 
 	public void mod_emp_conatiner() {
-		System.out.println("test hna 3");
-		TableViewSelectionModel<Usermodel> selectionModel = table.getSelectionModel();
-		selectionModel.setSelectionMode(SelectionMode.SINGLE);
-		ObservableList selectedItems = selectionModel.getSelectedItems();
-		System.out.println("hna fl mod "+selectionModel.getSelectedItems().get(0).id);
-		Usermodel user_mod = selectionModel.getSelectedItems().get(0);
-		user = user_mod;
-		try {
-			Parent fxml = FXMLLoader.load(getClass().getResource("mod_employe_container.fxml"));
-			emp_container.getChildren().removeAll();
-			emp_container.getChildren().setAll(fxml);
-			System.out.println("test hna 2");
+        System.out.println("test hna 3");
+        TableViewSelectionModel<Usermodel> selectionModel = table.getSelectionModel();
+        selectionModel.setSelectionMode(SelectionMode.SINGLE);
+        ObservableList selectedItems = selectionModel.getSelectedItems();
+        System.out.println("hna fl mod "+selectionModel.getSelectedItems().get(0).id);
+        Usermodel user_mod = selectionModel.getSelectedItems().get(0);
+        user = user_mod;
+        try {
+            Parent fxml = FXMLLoader.load(getClass().getResource("mod_employe_container.fxml"));
+            emp_container.getChildren().removeAll();
+            emp_container.getChildren().setAll(fxml);
+            System.out.println("test hna 2");
 
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
 
-	}
+    }
+
+//	public void return_back(javafx.even	t.ActionEvent event) {
+//
+//		try {
+//			Parent fxml = FXMLLoader.load(getClass().getResource("add_employe_dashbord.fxml"));
+//			emp_container.getChildren().removeAll();
+//			emp_container.getChildren().setAll(fxml);
+//
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//	}
+
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		System.out.println("hna list mazal");
+			list = AdminController.EmpLiist();
+		 System.out.println("hna wra list");
 
 		id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		username.setCellValueFactory(new PropertyValueFactory<>("username"));
@@ -134,6 +141,8 @@ public class add_employer_controller implements Initializable {
 		role.setCellValueFactory(new PropertyValueFactory<>("role"));
 
 		table.setItems(list);
+
+		
 
 	}
 
