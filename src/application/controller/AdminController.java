@@ -1,19 +1,10 @@
 package application.controller;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Spliterator;
-
-import javax.print.Doc;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
-import com.mongodb.client.FindIterable;
+
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 
