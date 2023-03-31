@@ -10,6 +10,7 @@ import com.mongodb.client.MongoCursor;
 
 import application.Connectdatabase;
 import application.Usermodel;
+import application.Parts;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import application.add_employer_controller;
@@ -29,13 +30,11 @@ public class AdminController {
         MongoCollection collection = Connectdatabase.connectdb("users");
         ObjectId objid = new ObjectId(add_employer_controller.user.getId());
         Document found = (Document) collection.find(new Document ("_id",objid)).first();
-        // Document found = (Document) collection.find;
         System.out.println(found.get("password"));
         Doc.append("_id", objid);
         Document updateop = new Document("$set",Doc);
         collection.updateOne(found, updateop);
-        // collection.findOneAndUpdate(found, updateop);
-        
+
         
     }
     
@@ -48,7 +47,9 @@ public class AdminController {
             while (cursor.hasNext()) {
                 Document doc = cursor.next();
                 Usermodel user = new Usermodel();
+                
                 user.setId(doc.getObjectId("_id").toString());
+                
                 user.setUsername(doc.getString("username"));
                 user.setEmail(doc.getString("email"));
                 
@@ -63,5 +64,31 @@ public class AdminController {
 
     }
 
+    public static ObservableList<Parts> PartList(){
+        ObservableList<Parts> List = FXCollections.observableArrayList();
+        MongoCollection collection = Connectdatabase.connectdb("parts");
+
+        MongoCursor<Document> cursor = collection.find().iterator();
+        try {
+            while (cursor.hasNext()) {
+                Document doc = cursor.next();
+                Parts part = new Parts();
+                
+                part.setId(doc.getObjectId("_id").toString());
+                
+                part.setName(doc.getString("name"));
+                part.setDescription(doc.getString("description"));
+                part.setQuntitie(doc.getInteger("quantity"));
+                
+                List.add(part);
+                
+            }
+        } finally {
+            cursor.close();
+        }
+
+        return List;
+
+    }
     
 }
