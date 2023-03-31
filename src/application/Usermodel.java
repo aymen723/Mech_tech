@@ -111,8 +111,8 @@ public class Usermodel {
 		this.role = role;
 	}
 
-	public Usermodel(String id, String username, String password, String nom, String prenom, String numero, String address,
-			String email, String role) {
+	public Usermodel(String id, String username, String password, String nom, String prenom, String numero,
+			String address, String email, String role) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -127,7 +127,7 @@ public class Usermodel {
 
 	public Usermodel() {
 		super();
-}
+	}
 
 	String id;
 
