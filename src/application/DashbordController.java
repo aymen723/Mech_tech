@@ -53,6 +53,9 @@ public class DashbordController implements Initializable {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+	
+		
+
 
 
 	}
@@ -106,6 +109,8 @@ public class DashbordController implements Initializable {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		
+
 
 	}
 
