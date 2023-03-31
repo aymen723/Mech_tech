@@ -10,13 +10,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class DashbordController implements Initializable {
-
-
-  
 
 	@FXML
 	Button dashbord_btn;
@@ -33,9 +31,6 @@ public class DashbordController implements Initializable {
 
 	@FXML
 	Button close_add;
-
-
-    
 
 	public void dashbord(javafx.event.ActionEvent actione) throws IOException {
 		try {
@@ -58,6 +53,7 @@ public class DashbordController implements Initializable {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+
 
 	}
 
@@ -112,8 +108,6 @@ public class DashbordController implements Initializable {
 		}
 
 	}
-
-
 
 //	public void closing_add_parts(javafx.event.ActionEvent actione) {
 //		((Node) (actione.getSource())).getScene().getWindow().hide();

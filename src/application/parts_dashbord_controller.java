@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -20,9 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-
-
-public class parts_dashbord_controller implements Initializable{
+public class parts_dashbord_controller implements Initializable {
 	@FXML
 	private Button mod_btn;
 	@FXML
@@ -44,23 +43,21 @@ public class parts_dashbord_controller implements Initializable{
 	private TextField reserch_field;
 
 	@FXML
-	private TableColumn<?, ?> prix_col;
+	private TableColumn<Parts, String> prix_col;
 
 	@FXML
-	private TableColumn<?, ?> quntite_col;
+	private TableColumn<Parts, String> quntite_col;
 
 	@FXML
-	private TableColumn<?, ?> nom_col;
+	private TableColumn<Parts, String> nom_col;
 	@FXML
-	private TableColumn<?, ?> desc_col;
+	private TableColumn<Parts, String> desc_col;
 
 	@FXML
 	private TableView<Parts> parts_table;
 
-	ObservableList<Parts> list =  FXCollections.observableArrayList(
-		new Parts("1","part1",5,"good",1000),
-		new Parts("2","part2",6,"bad",300)
-	);
+	ObservableList<Parts> list = FXCollections.observableArrayList(new Parts("1", "part1", 5, "good", 1000),
+			new Parts("2", "part2", 6, "bad", 300));
 
 	public void add_parts(javafx.event.ActionEvent actione) {
 		System.out.println("test add");
@@ -73,8 +70,8 @@ public class parts_dashbord_controller implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		System.out.println("hna list mazal");
-			// list = AdminController.PartList();
-		 System.out.println("hna wra list");
+		 list = AdminController.PartList();
+		System.out.println("hna wra list");
 
 		// id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		nom_col.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -82,10 +79,7 @@ public class parts_dashbord_controller implements Initializable{
 		quntite_col.setCellValueFactory(new PropertyValueFactory<>("quntitie"));
 		desc_col.setCellValueFactory(new PropertyValueFactory<>("description"));
 
-
 		parts_table.setItems(list);
-
-		
 
 	}
 
