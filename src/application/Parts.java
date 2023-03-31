@@ -39,20 +39,18 @@ public class Parts {
     public void setDescription(String description) {
         this.description = description;
     }
-    public Parts(String id, String name, int quntitie, String description,int price) {
+    public Parts(String id, String name, int quntitie, String description, int price) {
         this.id = id;
         this.name = name;
         this.quntitie = quntitie;
         this.description = description;
-        this.price = price ;
+        this.price = price;
     }
     public Parts() {
-        super();
+        
     }
-
-    
-
-
+  
     
     
+
 }
