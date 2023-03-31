@@ -6,22 +6,17 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/CalendarFX">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javaFX">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/java/javafx/nosql jar/mongo-java-driver-3.12.12.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/java/resour/slf4j-simple-1.6.1.jar/slf4j-simple-1.6.1.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/CalendarFX">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
