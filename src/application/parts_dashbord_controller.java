@@ -43,21 +43,27 @@ public class parts_dashbord_controller implements Initializable {
 	private TextField reserch_field;
 
 	@FXML
-	private TableColumn<Parts, String> prix_col;
+	private TableColumn<Parts, Integer> prix_col;
 
 	@FXML
-	private TableColumn<Parts, String> quntite_col;
+	private TableColumn<Parts, Integer> quntite_col;
 
 	@FXML
 	private TableColumn<Parts, String> nom_col;
 	@FXML
 	private TableColumn<Parts, String> desc_col;
+	
+    @FXML
+    private TableColumn<Parts , String> id;
+    
 
 	@FXML
 	private TableView<Parts> parts_table;
+	
 
 	ObservableList<Parts> list = FXCollections.observableArrayList(new Parts("1", "part1", 5, "good", 1000),
 			new Parts("2", "part2", 6, "bad", 300));
+	
 
 	public void add_parts(javafx.event.ActionEvent actione) {
 		System.out.println("test add");
@@ -66,19 +72,21 @@ public class parts_dashbord_controller implements Initializable {
 	public void mod_parts(javafx.event.ActionEvent actione) {
 		System.out.println("test add");
 	}
+	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		
 		System.out.println("hna list mazal");
 		 list = AdminController.PartList();
 		System.out.println("hna wra list");
 
-		// id.setCellValueFactory(new PropertyValueFactory<>("id"));
+		id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		nom_col.setCellValueFactory(new PropertyValueFactory<>("name"));
 		prix_col.setCellValueFactory(new PropertyValueFactory<>("price"));
 		quntite_col.setCellValueFactory(new PropertyValueFactory<>("quntitie"));
 		desc_col.setCellValueFactory(new PropertyValueFactory<>("description"));
-
 		parts_table.setItems(list);
 
 	}

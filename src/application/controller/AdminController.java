@@ -79,7 +79,8 @@ public class AdminController {
                 part.setName(doc.getString("name"));
                 part.setDescription(doc.getString("description"));
                 part.setQuntitie(doc.getInteger("quantity"));
-                
+               part.setPrice(doc.getInteger("price"));
+
                 List.add(part);
                 
             }
@@ -89,6 +90,14 @@ public class AdminController {
 
         return List;
 
+    }
+    
+    
+    public static void addpart(Document Doc){
+
+        MongoCollection collection = Connectdatabase.connectdb("parts");
+        collection.insertOne(Doc);
+        
     }
     
 }

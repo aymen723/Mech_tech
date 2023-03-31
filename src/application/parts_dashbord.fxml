@@ -27,6 +27,7 @@
                      <children>
                         <TableView fx:id="parts_table" prefHeight="390.0" prefWidth="900.0">
                           <columns>
+                              <TableColumn fx:id="id" prefWidth="75.0" text="Id" />
                             <TableColumn fx:id="nom_col" prefWidth="142.0" text="Nom" />
                             <TableColumn fx:id="parts_table" prefWidth="219.0" text="Description" />
                               <TableColumn fx:id="quntite_col" prefWidth="88.0" text="Quntite" />
