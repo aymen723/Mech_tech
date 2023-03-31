@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="emp_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="930.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/17.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.add_employer_controller">
+<BorderPane fx:id="emp_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="930.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.add_employer_controller">
    <top>
       <GridPane prefHeight="200.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -84,14 +84,15 @@
                      <children>
                         <TableView fx:id="table" prefHeight="400.0" prefWidth="900.0" style="-fx-background-color: white;">
                           <columns>
-                            <TableColumn fx:id="id" prefWidth="62.39999204874039" style="-fx-background-color: white;" text="Id" />
-                            <TableColumn fx:id="username" prefWidth="163.1999855041504" style="-fx-background-color: white;" text="nom d'utilisateur" />
-                              <TableColumn fx:id="nom" prefWidth="114.4000244140625" style="-fx-background-color: white;" text="Nom" />
-                              <TableColumn fx:id="prenom" prefWidth="88.79998779296875" style="-fx-background-color: white;" text="Prenom" />
-                              <TableColumn fx:id="nuermo" prefWidth="71.99996948242188" style="-fx-background-color: white;" text="Numero" />
-                              <TableColumn fx:id="address" minWidth="0.0" prefWidth="108.0" style="-fx-background-color: white;" text="Address" />
-                              <TableColumn fx:id="email" minWidth="0.0" prefWidth="149.5999755859375" style="-fx-background-color: white;" text="Email" />
-                              <TableColumn fx:id="role" minWidth="0.0" prefWidth="90.4000244140625" style="-fx-background-color: white;" text="Role" />
+                            <TableColumn fx:id="id" prefWidth="62.39999204874039" style="-fx-selection-bar: red;" text="Id" />
+                            <TableColumn fx:id="username" prefWidth="163.1999855041504" style="-fx-background-color: transparent;" text="nom d'utilisateur" />
+                              <TableColumn fx:id="nom" prefWidth="114.4000244140625" style="-fx-background-color: transparent;" text="Nom" />
+                              <TableColumn fx:id="prenom" prefWidth="88.79998779296875" style="-fx-background-color: transparent;" text="Prenom" />
+                              <TableColumn fx:id="nuermo" prefWidth="71.99996948242188" style="-fx-background-color: transparent;" text="Numero" />
+                              <TableColumn fx:id="address" minWidth="0.0" prefWidth="108.0" style="-fx-background-color: transparent;" text="Address" />
+                              <TableColumn fx:id="email" minWidth="0.0" prefWidth="149.5999755859375" style="-fx-background-color: transparent;" text="Email" />
+                              <TableColumn fx:id="role" minWidth="0.0" prefWidth="86.0" style="-fx-background-color: transparent;" text="Role" />
+                              <TableColumn fx:id="id1" prefWidth="68.0" style="-fx-background-color: transparent; -fx-selection-bar: red;" text="Id" />
                           </columns>
                         </TableView>
                      </children>
