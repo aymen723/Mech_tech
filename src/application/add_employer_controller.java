@@ -1,6 +1,6 @@
 package application;
 
-import java.io.IOException;
+
 import java.net.URL;
 
 import java.util.ResourceBundle;
@@ -11,18 +11,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableView.TableViewSelectionModel;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 public class add_employer_controller implements Initializable {
 
@@ -59,14 +55,15 @@ public class add_employer_controller implements Initializable {
 	@FXML
 	private Button mod_emp;
 
+
+
 	@FXML
 	private BorderPane emp_container;
 
 	@FXML
 	private Button ajouter_employer;
 
-	static Usermodel user;
-	
+	public static Usermodel user ;
 
 
 	ObservableList<Usermodel> list = FXCollections.observableArrayList(
@@ -96,7 +93,7 @@ public class add_employer_controller implements Initializable {
         System.out.println("test hna 3");
         TableViewSelectionModel<Usermodel> selectionModel = table.getSelectionModel();
         selectionModel.setSelectionMode(SelectionMode.SINGLE);
-        ObservableList selectedItems = selectionModel.getSelectedItems();
+        // ObservableList<Usermodel> selectedItems = selectionModel.getSelectedItems();
         System.out.println("hna fl mod "+selectionModel.getSelectedItems().get(0).id);
         Usermodel user_mod = selectionModel.getSelectedItems().get(0);
         user = user_mod;
@@ -112,7 +109,7 @@ public class add_employer_controller implements Initializable {
 
     }
 
-//	public void return_back(javafx.even	t.ActionEvent event) {
+//	public void return_back(javafx.event.ActionEvent event) {
 //
 //		try {
 //			Parent fxml = FXMLLoader.load(getClass().getResource("add_employe_dashbord.fxml"));
@@ -123,6 +120,7 @@ public class add_employer_controller implements Initializable {
 //			// TODO: handle exception
 //		}
 //	}
+
 
 
 	@Override

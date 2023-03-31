@@ -25,7 +25,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="390.0" prefWidth="900.0">
                      <children>
-                        <TableView fx:id="parts_table" prefHeight="390.0" prefWidth="900.0">
+                        <TableView prefHeight="390.0" prefWidth="900.0">
                           <columns>
                             <TableColumn fx:id="nom_col" prefWidth="142.0" text="Nom" />
                             <TableColumn fx:id="desc_col" prefWidth="219.0" text="Description" />
@@ -58,12 +58,12 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <children>
+                  <TextField fx:id="price" layoutX="71.0" layoutY="18.0" />
                   <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix :" wrappingWidth="40.030338287353516">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="price" layoutX="54.0" layoutY="17.0" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0">
@@ -82,7 +82,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                <children>
-                  <TextField fx:id="reserch_field" layoutX="15.0" layoutY="20.0" prefHeight="30.0" prefWidth="206.0" promptText="Recherche" />
+                  <TextField fx:id="reserch_field" layoutX="14.0" layoutY="15.0" prefHeight="30.0" prefWidth="206.0" promptText="Recherche" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">

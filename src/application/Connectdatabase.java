@@ -2,7 +2,6 @@ package application;
 
 import org.bson.Document;
 
-
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import com.mongodb.client.MongoCollection;
@@ -18,7 +17,7 @@ public class Connectdatabase {
 		MongoDatabase dbmongo = clinet.getDatabase("Meca_tech");
 		MongoCollection collection = dbmongo.getCollection(coll);
 
-		System.out.println(clinet);
+		
 //         if (dbmongo.hashCode() == 0) {
 //	    	 System.out.println("null");
 //	    	 System.out.println(dbmongo.hashCode());
