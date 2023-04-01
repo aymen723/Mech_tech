@@ -7,6 +7,8 @@ module mecha {
 	requires mongo.java.driver;
 	requires javafx.base;
 	
+
+	
 //	requires javafx.media;
 
 
@@ -16,5 +18,7 @@ module mecha {
 	
 //	opens application to javafx.graphics, javafx.fxml;
 	opens application to javafx.graphics, javafx.fxml, javafx.base;
+	opens application.ViewController to javafx.graphics, javafx.fxml, javafx.base;
+	opens application.controller to javafx.graphics, javafx.fxml, javafx.base;
 
 }

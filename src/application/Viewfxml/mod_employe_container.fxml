@@ -10,13 +10,13 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="add_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDetected="#return_back" prefHeight="600.0" prefWidth="930.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/17.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Add_employe_container_controller">
+<BorderPane fx:id="mod_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="930.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.mod_employe_container_controller">
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="346.60003662109375" minWidth="10.0" prefWidth="287.2" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="600.0" minWidth="10.0" prefWidth="400.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="253.5999755859375" minWidth="10.0" prefWidth="253.5999755859375" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="301.20001220703125" minWidth="10.0" prefWidth="150.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="429.9999694824219" minWidth="10.0" prefWidth="430.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -36,7 +36,7 @@
                         <Font size="25.0" />
                      </font>
                   </Text>
-                  <Text fill="#a1a1a1" layoutX="122.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les employés &gt;">
+                  <Text fill="#a1a1a1" layoutX="111.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les employes &gt;">
                      <font>
                         <Font size="25.0" />
                      </font>
@@ -45,87 +45,79 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <Text layoutX="14.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter  Employe">
+                  <Text layoutX="14.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier employes">
                      <font>
                         <Font name="System Bold" size="25.0" />
                      </font>
                   </Text>
                </children>
             </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
-               <children>
-                  <Button fx:id="return_back_add" layoutX="86.0" layoutY="18.0" mnemonicParsing="false" onAction="#return_back" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #F8F9FA;" text="&lt;     Retour">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Button>
-               </children></Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <TextField fx:id="usernamefield" layoutX="89.0" layoutY="26.0" prefWidth="220.0" />
-                  <Text layoutX="-49.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom d'utilisateur :">
+                  <Text layoutX="-51.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom d'utilisateur :">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Text>
+                  <TextField fx:id="username_field_mod" layoutX="90.0" layoutY="23.0" prefHeight="30.0" prefWidth="250.0" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <TextField fx:id="namefield" layoutX="89.0" layoutY="26.0" prefWidth="220.0" />
-                  <Text layoutX="34.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :">
+                  <Text layoutX="33.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Text>
+                  <TextField fx:id="name_field_mod" layoutX="90.0" layoutY="23.0" prefHeight="30.0" prefWidth="250.0" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <TextField fx:id="prenomfield" layoutX="89.0" layoutY="26.0" prefWidth="220.0" />
                   <Text layoutX="14.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom :">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Text>
+                  <TextField fx:id="prenom_field_mod" layoutX="90.0" layoutY="22.0" prefHeight="30.0" prefWidth="250.0" />
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <children>
+                  <Text layoutX="36.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email :">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="email_field_mod" layoutX="90.0" layoutY="23.0" prefHeight="30.0" prefWidth="250.0" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <children>
-                  <TextField fx:id="numerofield" layoutX="89.0" layoutY="26.0" prefWidth="220.0" />
                   <Text layoutX="14.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro :">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Text>
-               </children>
-            </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-               <children>
-                  <TextField fx:id="emailfield" layoutX="89.0" layoutY="26.0" prefWidth="220.0" />
-                  <Text layoutX="27.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email :">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Text>
+                  <TextField fx:id="numero_field_mod" layoutX="90.0" layoutY="23.0" prefHeight="30.0" prefWidth="250.0" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <children>
-                  <TextField fx:id="rolefield" layoutX="89.0" layoutY="26.0" prefWidth="220.0" />
-                  <Text layoutX="34.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Role :">
+                  <Text layoutX="44.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Role :">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Text>
+                  <TextField fx:id="role_field_mod" layoutX="90.0" layoutY="23.0" prefHeight="30.0" prefWidth="250.0" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                <children>
-                  <Button layoutX="72.0" layoutY="21.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="Button" />
-                  <Button fx:id="ajouter_employer" layoutX="210.0" layoutY="21.0" mnemonicParsing="false" onAction="#ajouter_employer" prefHeight="35.0" prefWidth="100.0" text="Ajouter">
+                  <Button layoutX="84.0" layoutY="20.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="100.0" text="Button" />
+                  <Button fx:id="modifier_employer" layoutX="246.0" layoutY="20.0" mnemonicParsing="false" onAction="#modifier_employer" prefHeight="35.0" prefWidth="90.0" text="Modifier">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
                </children></Pane>

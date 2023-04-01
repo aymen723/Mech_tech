@@ -1,4 +1,4 @@
-package application;
+package application.ViewController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,7 +34,7 @@ public class DashbordController implements Initializable {
 
 	public void dashbord(javafx.event.ActionEvent actione) throws IOException {
 		try {
-			Parent fxml = FXMLLoader.load(getClass().getResource("home_dashbord.fxml"));
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/home_dashbord.fxml"));
 			container.getChildren().removeAll();
 			container.getChildren().setAll(fxml);
 
@@ -46,26 +46,50 @@ public class DashbordController implements Initializable {
 	public void parts(javafx.event.ActionEvent actione) throws IOException {
 
 		try {
-			Parent fxml = FXMLLoader.load(getClass().getResource("parts_dashbord.fxml"));
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/parts_dashbord.fxml"));
 			container.getChildren().removeAll();
 			container.getChildren().setAll(fxml);
 
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+<<<<<<< HEAD:src/application/DashbordController.java
 
 		
 	
 		
 
+=======
+>>>>>>> origin/master:src/application/ViewController/DashbordController.java
 
+//		Group root = new Group();
+//		Parent fxml;
+//		try {
+//			fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/parts_dashbord.fxml"));
+////			fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
+//			Stage stage = new Stage();
+//			Scene scene = new Scene(fxml);
+//			stage.setScene(scene);
+//			stage.setTitle("Mecha Tech");
+//			scene.setFill(Color.TRANSPARENT);
+//
+////			primaryStage.initStyle(StageStyle.UNDECORATED);
+////			primaryStage.initStyle(StageStyle.TRANSPARENT);
+//
+////			primaryStage.setResizable(false);
+//			stage.show();
+//
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 	}
 
 	public void Rendez_vous(javafx.event.ActionEvent actione) throws IOException {
 
 		try {
-			Parent fxml = FXMLLoader.load(getClass().getResource("Rendez_vous_dashbord.fxml"));
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Rendez_vous_dashbord.fxml"));
 			container.getChildren().removeAll();
 			container.getChildren().setAll(fxml);
 
@@ -77,7 +101,7 @@ public class DashbordController implements Initializable {
 	public void btn4(javafx.event.ActionEvent actione) throws IOException {
 
 		try {
-			Parent fxml = FXMLLoader.load(getClass().getResource("add_employe_dashbord.fxml"));
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/add_employe_dashbord.fxml"));
 			container.getChildren().removeAll();
 			container.getChildren().setAll(fxml);
 
@@ -90,7 +114,7 @@ public class DashbordController implements Initializable {
 	public void btn5(javafx.event.ActionEvent actione) throws IOException {
 
 		try {
-			Parent fxml = FXMLLoader.load(getClass().getResource("btn5_dashbord.fxml"));
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/btn5_dashbord.fxml"));
 			container.getChildren().removeAll();
 			container.getChildren().setAll(fxml);
 
@@ -104,15 +128,13 @@ public class DashbordController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 		try {
-			Parent fxml = FXMLLoader.load(getClass().getResource("home_dashbord.fxml"));
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/home_dashbord.fxml"));
 			container.getChildren().removeAll();
 			container.getChildren().setAll(fxml);
 
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
-
 
 	}
 

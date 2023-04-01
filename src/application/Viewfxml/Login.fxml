@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/17.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.LoginController">
    <right>
       <VBox prefHeight="200.0" prefWidth="400.0" stylesheets="@Login.css" BorderPane.alignment="CENTER">
          <children>
@@ -23,7 +23,7 @@
                      <children>
                         <ImageView fitHeight="80.0" fitWidth="80.0">
                            <image>
-                              <Image url="@../pics/mechanic%20(1).png" />
+                              <Image url="@../../pics/mechanic%20(1).png" />
                            </image>
                         </ImageView>
                      </children>
@@ -67,7 +67,7 @@
                <children>
                   <ImageView fitHeight="218.0" fitWidth="269.0">
                      <image>
-                        <Image url="@../pics/Asset%202.png" />
+                        <Image url="@../../pics/Asset%202.png" />
                      </image>
                   </ImageView>
                </children>

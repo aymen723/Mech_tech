@@ -1,11 +1,13 @@
-package application;
+package application.ViewController;
 
 import org.bson.Document;
+
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 
+import application.Connectdatabase;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
@@ -35,8 +37,8 @@ public class LoginController implements Initializable {
 		String usern = username.getText();
 		Document filter = new Document("username", usern);
 		filter.append("password", password.getText());
-
-		MongoCollection<Document> collection = Connectdatabase.connectdb("users");
+		Connectdatabase connecterdatabase = new Connectdatabase();
+		MongoCollection<Document> collection = connecterdatabase.connectdb("users");
 		MongoCursor<Document> cursor = collection.find(filter).iterator();
 		while (cursor.hasNext()) {
 			System.out.println(cursor.next().toJson());

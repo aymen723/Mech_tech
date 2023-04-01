@@ -1,4 +1,4 @@
-package application;
+package application.ViewController;
 
 
 
@@ -62,7 +62,7 @@ public class Add_employe_container_controller{
 	public void return_back() {
 		System.out.println("azda");
 		try {
-			Parent fxml = FXMLLoader.load(getClass().getResource("add_employe_dashbord.fxml"));
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/add_employe_dashbord.fxml"));
 			add_container.getChildren().removeAll();
 			add_container.getChildren().setAll(fxml);
 			System.out.println("test hna 2");
@@ -82,6 +82,22 @@ public class Add_employe_container_controller{
 		// newemp.append("email",emailfield.getText());
 		newemp.append("password",emailfield.getText());
 		 AdminController.AddEmp(newemp);
+		 
+			System.out.println("test hna1");
+
+			try {
+				Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/add_employe_dashbord.fxml"));
+				add_container.getChildren().removeAll();
+				add_container.getChildren().setAll(fxml);
+				System.out.println("test hna 2");
+
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			System.out.println("test hna 3");
+
+		 
+		 
 	}
 
 	
