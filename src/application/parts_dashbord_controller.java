@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.ViewController.Parts;
 import application.controller.AdminController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
