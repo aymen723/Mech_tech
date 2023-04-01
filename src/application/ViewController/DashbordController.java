@@ -45,49 +45,49 @@ public class DashbordController implements Initializable {
 
 	public void parts(javafx.event.ActionEvent actione) throws IOException {
 
-		// try {
-		// 	Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/parts_dashbord.fxml"));
-		// 	container.getChildren().removeAll();
-		// 	container.getChildren().setAll(fxml);
-
-		// } catch (Exception e) {
-		// 	// TODO: handle exception
-		// }
-
-		Group root = new Group();
-		Parent fxml;
 		try {
-			fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/parts_dashbord.fxml"));
-//			fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
-			Stage stage = new Stage();
-			Scene scene = new Scene(fxml);
-			stage.setScene(scene);
-			stage.setTitle("Mecha Tech");
-			scene.setFill(Color.TRANSPARENT);
-
-//			primaryStage.initStyle(StageStyle.UNDECORATED);
-//			primaryStage.initStyle(StageStyle.TRANSPARENT);
-
-//			primaryStage.setResizable(false);
-			stage.show();
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
-
-	public void Rendez_vous(javafx.event.ActionEvent actione) throws IOException {
-
-		try {
-			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Rendez_vous_dashbord.fxml"));
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/parts_dashbord.fxml"));
 			container.getChildren().removeAll();
 			container.getChildren().setAll(fxml);
 
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+
+// 		Group root = new Group();
+// 		Parent fxml;
+// 		try {
+// 			fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/parts_dashbord.fxml"));
+// //			fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
+// 			Stage stage = new Stage();
+// 			Scene scene = new Scene(fxml);
+// 			stage.setScene(scene);
+// 			stage.setTitle("Mecha Tech");
+// 			scene.setFill(Color.TRANSPARENT);
+
+// //			primaryStage.initStyle(StageStyle.UNDECORATED);
+// //			primaryStage.initStyle(StageStyle.TRANSPARENT);
+
+// //			primaryStage.setResizable(false);
+// 			stage.show();
+
+// 		} catch (IOException e) {
+// 			// TODO Auto-generated catch block
+// 			e.printStackTrace();
+// 		}
+
+// 	}
+
+// 	public void Rendez_vous(javafx.event.ActionEvent actione) throws IOException {
+
+// 		try {
+// 			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Rendez_vous_dashbord.fxml"));
+// 			container.getChildren().removeAll();
+// 			container.getChildren().setAll(fxml);
+
+// 		} catch (Exception e) {
+// 			// TODO: handle exception
+// 		}
 	}
 
 	public void btn4(javafx.event.ActionEvent actione) throws IOException {

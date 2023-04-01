@@ -132,12 +132,6 @@ public class parts_dashbord_controller implements Initializable {
 	
 public void dlt_part() {
 		
-	TableViewSelectionModel<Parts> selectionModel = parts_table.getSelectionModel();
-	selectionModel.setSelectionMode(SelectionMode.SINGLE);
-	// ObservableList<Usermodel> selectedItems = selectionModel.getSelectedItems();
-//	System.out.println("hna fl mod " + selectionModel.getSelectedItems().get(0).id);
-	Parts part_dlt = selectionModel.getSelectedItems().get(0);
-	part = part_dlt;
 	AdminController.deletpart();
 
 		
@@ -163,5 +157,4 @@ public void dlt_part() {
 
 
 	}
-
 }

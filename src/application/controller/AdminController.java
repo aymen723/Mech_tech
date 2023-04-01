@@ -1,22 +1,12 @@
 package application.controller;
 
 import org.bson.Document;
-
-
 import org.bson.types.ObjectId;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 
 import application.Connectdatabase;
-
-import application.ViewController.Parts;
-import application.ViewController.Usermodel;
-import application.ViewController.add_employer_controller;
-//import application.Parts;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-//import application.add_employer_controller;
 import application.ViewController.Parts;
 import application.ViewController.Usermodel;
 import application.ViewController.add_employer_controller;
