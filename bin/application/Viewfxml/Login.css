@@ -1,0 +1,15 @@
+.leftbox {
+  /* -fx-background-color: "#706f6f"; */
+  /* -fx-background-color: black; */
+  -fx-background-color: "#1D1C21";
+}
+
+.rightbox {
+  /* -fx-background-color: white; */
+  -fx-background-color: "#F8F9FA";
+}
+
+.btn {
+  -fx-background-color: "#fac400";
+  -fx-color: white;
+}

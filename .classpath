@@ -6,16 +6,16 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-<<<<<<< HEAD
+
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFX">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="D:\BoUjOu\Mecha_Tech\APP/mongo-java-driver-3.12.12.jar">
-=======
+
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javaFX">
->>>>>>> origin/master
+
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
@@ -27,7 +27,7 @@
 	</classpathentry>
 
 	<classpathentry kind="lib" path="D:\univ programs\javafx-sdk-17.0.1\lib/javafx.controls.jar">
-=======
+
 	<classpathentry kind="lib" path="C:/java/resour/slf4j-simple-1.6.1.jar/slf4j-simple-1.6.1.jar">
 
 		<attributes>
@@ -36,7 +36,7 @@
 	</classpathentry>
 
 	<classpathentry kind="lib" path="D:\univ programs\javafx-sdk-17.0.1\lib/javafx.fxml.jar">
-=======
+
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/CalendarFX">
 
 		<attributes>
