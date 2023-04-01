@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -40,9 +41,9 @@ public class Main extends Application {
 //		Group root = new Group();
 		Parent fxml;
 		try {
-			fxml = FXMLLoader.load(getClass().getResource("dashbord.fxml"));
+			fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Dashbord.fxml"));
 //			fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
-
+           
 			Scene scene = new Scene(fxml);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Mecha Tech");

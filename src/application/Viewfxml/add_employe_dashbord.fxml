@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="emp_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="930.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.add_employer_controller">
+<BorderPane fx:id="emp_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="930.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.add_employer_controller">
    <top>
       <GridPane prefHeight="200.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -70,6 +70,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Button>
+                  <Button fx:id="delete_btn" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" text="delet" />
                </children>
             </Pane>
          </children>

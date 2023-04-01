@@ -1,5 +1,5 @@
 
-package application;
+package application.ViewController;
 
 public class Person {
 

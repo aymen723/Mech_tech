@@ -1,5 +1,4 @@
-package application;
-
+package application.ViewController;
 
 import java.net.URL;
 
@@ -55,7 +54,8 @@ public class add_employer_controller implements Initializable {
 	@FXML
 	private Button mod_emp;
 
-
+	@FXML
+	private Button delete_btn;
 
 	@FXML
 	private BorderPane emp_container;
@@ -63,8 +63,7 @@ public class add_employer_controller implements Initializable {
 	@FXML
 	private Button ajouter_employer;
 
-	public static Usermodel user ;
-
+	public static Usermodel user;
 
 	ObservableList<Usermodel> list = FXCollections.observableArrayList(
 			new Usermodel("1", "test", "test", "test", "test", "0011", "test", "test1", "admin"),
@@ -86,28 +85,27 @@ public class add_employer_controller implements Initializable {
 		}
 		System.out.println("test hna 3");
 
-
 	}
 
 	public void mod_emp_conatiner() {
-        System.out.println("test hna 3");
-        TableViewSelectionModel<Usermodel> selectionModel = table.getSelectionModel();
-        selectionModel.setSelectionMode(SelectionMode.SINGLE);
-        // ObservableList<Usermodel> selectedItems = selectionModel.getSelectedItems();
-        System.out.println("hna fl mod "+selectionModel.getSelectedItems().get(0).id);
-        Usermodel user_mod = selectionModel.getSelectedItems().get(0);
-        user = user_mod;
-        try {
-            Parent fxml = FXMLLoader.load(getClass().getResource("mod_employe_container.fxml"));
-            emp_container.getChildren().removeAll();
-            emp_container.getChildren().setAll(fxml);
-            System.out.println("test hna 2");
+		System.out.println("test hna 3");
+		TableViewSelectionModel<Usermodel> selectionModel = table.getSelectionModel();
+		selectionModel.setSelectionMode(SelectionMode.SINGLE);
+		// ObservableList<Usermodel> selectedItems = selectionModel.getSelectedItems();
+		System.out.println("hna fl mod " + selectionModel.getSelectedItems().get(0).id);
+		Usermodel user_mod = selectionModel.getSelectedItems().get(0);
+		user = user_mod;
+		try {
+			Parent fxml = FXMLLoader.load(getClass().getResource("mod_employe_container.fxml"));
+			emp_container.getChildren().removeAll();
+			emp_container.getChildren().setAll(fxml);
+			System.out.println("test hna 2");
 
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 
-    }
+	}
 
 //	public void return_back(javafx.event.ActionEvent event) {
 //
@@ -121,13 +119,22 @@ public class add_employer_controller implements Initializable {
 //		}
 //	}
 
-
+	public void delete_employer() {
+		System.out.println("test hna 3");
+		TableViewSelectionModel<Usermodel> selectionModel = table.getSelectionModel();
+		selectionModel.setSelectionMode(SelectionMode.SINGLE);
+		// ObservableList<Usermodel> selectedItems = selectionModel.getSelectedItems();
+		System.out.println("hna fl mod " + selectionModel.getSelectedItems().get(0).id);
+		Usermodel user_mod = selectionModel.getSelectedItems().get(0);
+		user = user_mod;
+		AdminController.deletemp();
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		System.out.println("hna list mazal");
-			list = AdminController.EmpLiist();
-		 System.out.println("hna wra list");
+		list = AdminController.EmpLiist();
+		System.out.println("hna wra list");
 
 		id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		username.setCellValueFactory(new PropertyValueFactory<>("username"));
@@ -139,8 +146,6 @@ public class add_employer_controller implements Initializable {
 		role.setCellValueFactory(new PropertyValueFactory<>("role"));
 
 		table.setItems(list);
-
-		
 
 	}
 

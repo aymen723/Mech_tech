@@ -1,4 +1,4 @@
-package application;
+package application.ViewController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -7,8 +7,11 @@ import org.bson.Document;
 
 import application.controller.AdminController;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 
 public class mod_employe_container_controller implements Initializable {
 
@@ -29,8 +32,12 @@ public class mod_employe_container_controller implements Initializable {
 
     @FXML
     private TextField username_field_mod;
+    
+    @FXML
+    private BorderPane mod_container;
 
     public void modifier_employer() {
+    	
 		Document newemp = new Document("username", username_field_mod.getText());
 		newemp.append("_id",add_employer_controller.user.id );
 		// newemp.append("nom", namefield.getText());
@@ -40,6 +47,20 @@ public class mod_employe_container_controller implements Initializable {
 		// newemp.append("email",emailfield.getText());
 		newemp.append("password",email_field_mod.getText());
 		 AdminController.UpdateEmp(newemp);
+		 
+		 
+			System.out.println("test hna1");
+
+			try {
+				Parent fxml = FXMLLoader.load(getClass().getResource("add_employe_dashbord.fxml"));
+				mod_container.getChildren().removeAll();
+				mod_container.getChildren().setAll(fxml);
+				System.out.println("test hna 2");
+
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			System.out.println("test hna 3");
 	}
 
 
