@@ -87,7 +87,7 @@ public class AdminController {
         } finally {
             cursor.close();
         }
-
+        System.out.println("exectuted partlist");
         return List;
 
     }
