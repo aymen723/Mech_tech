@@ -1,6 +1,6 @@
 package application.ViewController;
 
-import java.io.IOException;
+// import java.io.IOException;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,21 +11,21 @@ import application.controller.AdminController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+// import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+// import javafx.scene.Parent;
+// import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
+// import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.util.converter.NumberStringConverter;
+// import javafx.stage.Stage;
+// import javafx.stage.StageStyle;
+// import javafx.util.converter.NumberStringConverter;
 
 public class parts_dashbord_controller implements Initializable {
 	@FXML
@@ -122,7 +122,10 @@ public class parts_dashbord_controller implements Initializable {
 		
 		AdminController.updatepart(updatepart);
 	
-		
+		name.setText(null);
+		price.setText(null);
+		quntitie.setText(null);
+		description.setText(null);
 		System.out.println("hna list mazal");
 		list = AdminController.PartList();
 		System.out.println("hna wra list");

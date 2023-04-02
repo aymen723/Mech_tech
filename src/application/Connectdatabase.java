@@ -11,13 +11,13 @@ public class Connectdatabase {
 
 	static public String url = "mongodb://localhost:27017";
 
-	static public MongoCollection connectdb(String coll) {
+	static public  MongoCollection<Document> connectdb(String coll) {
 		MongoClientURI clineturi = new MongoClientURI(url);
-		MongoClient clinet = new MongoClient(clineturi);
-		MongoDatabase dbmongo = clinet.getDatabase("Meca_tech");
-		MongoCollection collection = dbmongo.getCollection(coll);
+		try (MongoClient clinet = new MongoClient(clineturi)) {
+			MongoDatabase dbmongo = clinet.getDatabase("Meca_tech");
+			MongoCollection<Document> collection = dbmongo.getCollection(coll);
 
-		
+			
 //         if (dbmongo.hashCode() == 0) {
 //	    	 System.out.println("null");
 //	    	 System.out.println(dbmongo.hashCode());
@@ -26,7 +26,8 @@ public class Connectdatabase {
 //	    	 System.out.println(dbmongo.hashCode());
 //	     }
 
-		return collection;
+			return collection;
+		}
 
 	}
 }
