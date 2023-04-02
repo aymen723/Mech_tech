@@ -1,4 +1,4 @@
-package application.ViewController;
+package application.models;
 
 import javafx.beans.property.SimpleStringProperty;
 

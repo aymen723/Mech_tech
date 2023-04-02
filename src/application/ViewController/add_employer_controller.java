@@ -2,9 +2,11 @@ package application.ViewController;
 
 import java.net.URL;
 
+
 import java.util.ResourceBundle;
 
 import application.controller.AdminController;
+import application.models.Usermodel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -75,7 +77,7 @@ public class add_employer_controller implements Initializable {
 		System.out.println("test hna1");
 
 		try {
-			Parent fxml = FXMLLoader.load(getClass().getResource("add_employe_container.fxml"));
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/add_employe_container.fxml"));
 			emp_container.getChildren().removeAll();
 			emp_container.getChildren().setAll(fxml);
 			System.out.println("test hna 2");
@@ -92,11 +94,11 @@ public class add_employer_controller implements Initializable {
 		TableViewSelectionModel<Usermodel> selectionModel = table.getSelectionModel();
 		selectionModel.setSelectionMode(SelectionMode.SINGLE);
 		// ObservableList<Usermodel> selectedItems = selectionModel.getSelectedItems();
-		System.out.println("hna fl mod " + selectionModel.getSelectedItems().get(0).id);
+		System.out.println("hna fl mod " + selectionModel.getSelectedItems().get(0).getId());
 		Usermodel user_mod = selectionModel.getSelectedItems().get(0);
 		user = user_mod;
 		try {
-			Parent fxml = FXMLLoader.load(getClass().getResource("mod_employe_container.fxml"));
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/mod_employe_container.fxml"));
 			emp_container.getChildren().removeAll();
 			emp_container.getChildren().setAll(fxml);
 			System.out.println("test hna 2");
@@ -124,7 +126,7 @@ public class add_employer_controller implements Initializable {
 		TableViewSelectionModel<Usermodel> selectionModel = table.getSelectionModel();
 		selectionModel.setSelectionMode(SelectionMode.SINGLE);
 		// ObservableList<Usermodel> selectedItems = selectionModel.getSelectedItems();
-		System.out.println("hna fl mod " + selectionModel.getSelectedItems().get(0).id);
+		System.out.println("hna fl mod " + selectionModel.getSelectedItems().get(0).getId());
 		Usermodel user_mod = selectionModel.getSelectedItems().get(0);
 		user = user_mod;
 		AdminController.deletemp();

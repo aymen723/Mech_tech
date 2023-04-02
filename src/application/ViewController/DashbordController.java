@@ -28,9 +28,9 @@ public class DashbordController implements Initializable {
 	Button btn5;
 	@FXML
 	BorderPane container;
-
 	@FXML
 	Button close_add;
+
 
 	public void dashbord(javafx.event.ActionEvent actione) throws IOException {
 		try {
@@ -41,6 +41,13 @@ public class DashbordController implements Initializable {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+
+		parts.getStyleClass().remove("afterpress");
+		Rendez_vous.getStyleClass().remove("afterpress");
+		btn4.getStyleClass().remove("afterpress");
+		btn5.getStyleClass().remove("afterpress");
+		dashbord_btn.getStyleClass().add("afterpress");
+
 	}
 
 	public void parts(javafx.event.ActionEvent actione) throws IOException {
@@ -53,6 +60,13 @@ public class DashbordController implements Initializable {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+
+		btn4.getStyleClass().remove("afterpress");
+		btn5.getStyleClass().remove("afterpress");
+		dashbord_btn.getStyleClass().remove("afterpress");
+		Rendez_vous.getStyleClass().remove("afterpress");
+
+		parts.getStyleClass().add("afterpress");
 
 //		Group root = new Group();
 //		Parent fxml;
@@ -88,6 +102,36 @@ public class DashbordController implements Initializable {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+
+		dashbord_btn.getStyleClass().remove("afterpress");
+		parts.getStyleClass().remove("afterpress");
+		btn4.getStyleClass().remove("afterpress");
+		btn5.getStyleClass().remove("afterpress");
+
+		Rendez_vous.getStyleClass().add("afterpress");
+
+//		Group root = new Group();
+//		Parent fxml;
+//		try {
+//			fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Rendez_vous_dashbord.fxml"));
+////			fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
+//			Stage stage = new Stage();
+//			Scene scene = new Scene(fxml);
+//			stage.setScene(scene);
+//			stage.setTitle("Mecha Tech");
+//			scene.setFill(Color.TRANSPARENT);
+//
+////			primaryStage.initStyle(StageStyle.UNDECORATED);
+////			primaryStage.initStyle(StageStyle.TRANSPARENT);
+//
+////			primaryStage.setResizable(false);
+//			stage.show();
+//
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+
 	}
 
 	public void btn4(javafx.event.ActionEvent actione) throws IOException {
@@ -101,6 +145,12 @@ public class DashbordController implements Initializable {
 			// TODO: handle exception
 		}
 
+		dashbord_btn.getStyleClass().remove("afterpress");
+		parts.getStyleClass().remove("afterpress");
+		Rendez_vous.getStyleClass().remove("afterpress");
+		btn5.getStyleClass().remove("afterpress");
+
+		btn4.getStyleClass().add("afterpress");
 	}
 
 	public void btn5(javafx.event.ActionEvent actione) throws IOException {
@@ -114,6 +164,12 @@ public class DashbordController implements Initializable {
 			// TODO: handle exception
 		}
 
+		dashbord_btn.getStyleClass().remove("afterpress");
+		parts.getStyleClass().remove("afterpress");
+		Rendez_vous.getStyleClass().remove("afterpress");
+		btn4.getStyleClass().remove("afterpress");
+
+		btn5.getStyleClass().add("afterpress");
 	}
 
 	@Override

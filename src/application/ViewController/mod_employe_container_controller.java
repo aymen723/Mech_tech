@@ -39,7 +39,7 @@ public class mod_employe_container_controller implements Initializable {
     public void modifier_employer() {
     	
 		Document newemp = new Document("username", username_field_mod.getText());
-		newemp.append("_id",add_employer_controller.user.id );
+		newemp.append("_id",add_employer_controller.user.getId() );
 		// newemp.append("nom", namefield.getText());
 		// newemp.append("prenom", prenomfield.getText());
 		// newemp.append("numero", numerofield.getText());
@@ -52,7 +52,7 @@ public class mod_employe_container_controller implements Initializable {
 			System.out.println("test hna1");
 
 			try {
-				Parent fxml = FXMLLoader.load(getClass().getResource("add_employe_dashbord.fxml"));
+				Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/add_employe_dashbord.fxml"));
 				mod_container.getChildren().removeAll();
 				mod_container.getChildren().setAll(fxml);
 				System.out.println("test hna 2");
@@ -61,6 +61,7 @@ public class mod_employe_container_controller implements Initializable {
 				// TODO: handle exception
 			}
 			System.out.println("test hna 3");
+			
 	}
 
 
