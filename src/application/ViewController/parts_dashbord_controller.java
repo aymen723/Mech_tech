@@ -98,7 +98,8 @@ public class parts_dashbord_controller implements Initializable {
 		TableViewSelectionModel<Parts> selectionModel = parts_table.getSelectionModel();
 		selectionModel.setSelectionMode(SelectionMode.SINGLE);
 		// ObservableList<Usermodel> selectedItems = selectionModel.getSelectedItems();
-//		System.out.println("hna fl mod " + selectionModel.getSelectedItems().get(0).id);
+		// System.out.println("hna fl mod " +
+		// selectionModel.getSelectedItems().get(0).id);
 		Parts part_mod = selectionModel.getSelectedItems().get(0);
 		part = selectionModel.getSelectedItems().get(0);
 		name.setText(part_mod.getName());
@@ -106,7 +107,7 @@ public class parts_dashbord_controller implements Initializable {
 		price.setText(Integer.toString(part_mod.getPrice()));
 		quntitie.setText(Integer.toString(part_mod.getQuntitie()));
 
-//		price.setText(part_mod.getPrice());
+		// price.setText(part_mod.getPrice());
 
 	}
 
@@ -130,7 +131,8 @@ public class parts_dashbord_controller implements Initializable {
 		TableViewSelectionModel<Parts> selectionModel = parts_table.getSelectionModel();
 		selectionModel.setSelectionMode(SelectionMode.SINGLE);
 		// ObservableList<Usermodel> selectedItems = selectionModel.getSelectedItems();
-//	System.out.println("hna fl mod " + selectionModel.getSelectedItems().get(0).id);
+		// System.out.println("hna fl mod " +
+		// selectionModel.getSelectedItems().get(0).id);
 		Parts part_mod = selectionModel.getSelectedItems().get(0);
 		AdminController.deletpart();
 

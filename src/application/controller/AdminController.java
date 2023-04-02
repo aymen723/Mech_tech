@@ -1,6 +1,7 @@
 package application.controller;
 
 import org.bson.Document;
+
 import org.bson.types.ObjectId;
 
 import com.mongodb.client.MongoCollection;
@@ -120,7 +121,7 @@ public class AdminController {
 		MongoCollection<Document> collection = Connectdatabase.connectdb("users");
 		ObjectId objid = new ObjectId(add_employer_controller.user.getId());
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
-        collection.deleteOne(found);
+		collection.deleteOne(found);
 	}
 
 }
