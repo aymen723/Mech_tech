@@ -149,6 +149,10 @@ public void dlt_part() {
 		System.out.println("hna list mazal");
 		list = AdminController.PartList();
 		System.out.println("hna wra list");
+		
+		
+		
+		
 
 		id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		nom_col.setCellValueFactory(new PropertyValueFactory<>("name"));

@@ -10,9 +10,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 // import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 // import javafx.scene.paint.Color;
 // import javafx.stage.Stage;
 // import javafx.stage.StageStyle;
+import javafx.stage.Stage;
 
 public class DashbordController implements Initializable {
 
@@ -76,18 +78,18 @@ public class DashbordController implements Initializable {
 // 			e.printStackTrace();
 // 		}
 
-// 	}
+	}
 
-// 	public void Rendez_vous(javafx.event.ActionEvent actione) throws IOException {
+	public void Rendez_vous(javafx.event.ActionEvent actione) throws IOException {
 
-// 		try {
-// 			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Rendez_vous_dashbord.fxml"));
-// 			container.getChildren().removeAll();
-// 			container.getChildren().setAll(fxml);
+		try {
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Rendez_vous_dashbord.fxml"));
+			container.getChildren().removeAll();
+			container.getChildren().setAll(fxml);
 
-// 		} catch (Exception e) {
-// 			// TODO: handle exception
-// 		}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	public void btn4(javafx.event.ActionEvent actione) throws IOException {

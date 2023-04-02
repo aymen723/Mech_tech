@@ -65,7 +65,7 @@ public class AdminController {
 	public static ObservableList<Parts> PartList() {
 		ObservableList<Parts> List = FXCollections.observableArrayList();
 		MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
-
+		
 		MongoCursor<Document> cursor = collection.find().iterator();
 		try {
 			while (cursor.hasNext()) {
@@ -82,6 +82,8 @@ public class AdminController {
 				List.add(part);
 
 			}
+		} catch (Exception e) {
+			System.out.println("Error retrieving documents: " + e.getMessage());
 		} finally {
 			cursor.close();
 		}
@@ -124,5 +126,7 @@ public class AdminController {
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
         collection.deleteOne(found);
 	}
+
+
 
 }
