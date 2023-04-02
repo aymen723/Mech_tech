@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import org.bson.Document;
 
 import application.controller.AdminController;
+import application.models.Parts;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -33,10 +34,10 @@ public class parts_dashbord_controller implements Initializable {
 
 	@FXML
 	private Button add_btn;
-	
+
 	@FXML
 	private Button deleter_btn;
-	
+
 	@FXML
 	private Button selec_btn;
 
@@ -48,7 +49,6 @@ public class parts_dashbord_controller implements Initializable {
 
 	@FXML
 	private TextField price;
-	
 
 	@FXML
 	private TextField quntitie;
@@ -72,7 +72,7 @@ public class parts_dashbord_controller implements Initializable {
 
 	@FXML
 	private TableView<Parts> parts_table;
-	
+
 	public static Parts part;
 
 	ObservableList<Parts> list = FXCollections.observableArrayList(new Parts("1", "part1", 5, "good", 1000),
@@ -81,35 +81,33 @@ public class parts_dashbord_controller implements Initializable {
 	public void add_parts(javafx.event.ActionEvent actione) {
 		Document newpart = new Document("name", name.getText());
 		newpart.append("price", Integer.parseInt(price.getText()));
-		newpart.append("quantity",  Integer.parseInt(quntitie.getText()));
-		newpart.append("description",description.getText());
-		 AdminController.addpart(newpart);
-		 System.out.println("hna list mazal");
-			list = AdminController.PartList();
-			System.out.println("hna wra list");
-			parts_table.setItems(list);
+		newpart.append("quantity", Integer.parseInt(quntitie.getText()));
+		newpart.append("description", description.getText());
+		AdminController.addpart(newpart);
+		System.out.println("hna list mazal");
+		list = AdminController.PartList();
+		System.out.println("hna wra list");
+		parts_table.setItems(list);
 
 	}
 
-	
-	
 	public void selection_parts(javafx.event.ActionEvent actione) {
-		
+
 		System.out.println("test add");
 
 		TableViewSelectionModel<Parts> selectionModel = parts_table.getSelectionModel();
 		selectionModel.setSelectionMode(SelectionMode.SINGLE);
 		// ObservableList<Usermodel> selectedItems = selectionModel.getSelectedItems();
-//		System.out.println("hna fl mod " + selectionModel.getSelectedItems().get(0).id);
+		// System.out.println("hna fl mod " +
+		// selectionModel.getSelectedItems().get(0).id);
 		Parts part_mod = selectionModel.getSelectedItems().get(0);
-		part=selectionModel.getSelectedItems().get(0);
+		part = selectionModel.getSelectedItems().get(0);
 		name.setText(part_mod.getName());
 		description.setText(part_mod.getDescription());
 		price.setText(Integer.toString(part_mod.getPrice()));
 		quntitie.setText(Integer.toString(part_mod.getQuntitie()));
 
-//		price.setText(part_mod.getPrice());
-		
+		// price.setText(part_mod.getPrice());
 
 	}
 
@@ -117,11 +115,11 @@ public class parts_dashbord_controller implements Initializable {
 
 		Document updatepart = new Document("name", name.getText());
 		updatepart.append("price", Integer.parseInt(price.getText()));
-		updatepart.append("quantity",  Integer.parseInt(quntitie.getText()));
-		updatepart.append("description",description.getText());
-		
+		updatepart.append("quantity", Integer.parseInt(quntitie.getText()));
+		updatepart.append("description", description.getText());
+
 		AdminController.updatepart(updatepart);
-	
+
 		name.setText(null);
 		price.setText(null);
 		quntitie.setText(null);
@@ -131,17 +129,18 @@ public class parts_dashbord_controller implements Initializable {
 		System.out.println("hna wra list");
 		parts_table.setItems(list);
 
-		}
-	
-public void dlt_part() {
-		
-	AdminController.deletpart();
-
-		
-		
 	}
-	
-	
+
+	public void dlt_part() {
+		TableViewSelectionModel<Parts> selectionModel = parts_table.getSelectionModel();
+		selectionModel.setSelectionMode(SelectionMode.SINGLE);
+		// ObservableList<Usermodel> selectedItems = selectionModel.getSelectedItems();
+		// System.out.println("hna fl mod " +
+		// selectionModel.getSelectedItems().get(0).id);
+		Parts part_mod = selectionModel.getSelectedItems().get(0);
+		AdminController.deletpart();
+
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -149,10 +148,6 @@ public void dlt_part() {
 		System.out.println("hna list mazal");
 		list = AdminController.PartList();
 		System.out.println("hna wra list");
-		
-		
-		
-		
 
 		id.setCellValueFactory(new PropertyValueFactory<>("id"));
 		nom_col.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -160,8 +155,6 @@ public void dlt_part() {
 		quntite_col.setCellValueFactory(new PropertyValueFactory<>("quntitie"));
 		desc_col.setCellValueFactory(new PropertyValueFactory<>("description"));
 		parts_table.setItems(list);
-
-
 
 	}
 }

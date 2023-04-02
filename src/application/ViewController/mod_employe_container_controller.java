@@ -32,40 +32,37 @@ public class mod_employe_container_controller implements Initializable {
 
     @FXML
     private TextField username_field_mod;
-    
+
     @FXML
     private BorderPane mod_container;
 
     public void modifier_employer() {
-    	
-		Document newemp = new Document("username", username_field_mod.getText());
-		newemp.append("_id",add_employer_controller.user.id );
-		newemp.append("nom", name_field_mod.getText());
-		newemp.append("nomutil", username_field_mod.getText());
+
+        Document newemp = new Document("username", username_field_mod.getText());
+        newemp.append("_id", add_employer_controller.user.id);
+        newemp.append("nom", name_field_mod.getText());
+        newemp.append("nomutil", username_field_mod.getText());
         newemp.append("prenom", prenom_field_mod.getText());
-		newemp.append("tel", numero_field_mod.getText());
-		newemp.append("role", role_field_mod.getText());
-		newemp.append("email",email_field_mod.getText());
-		// newemp.append("password",email_field_mod.getText());
-		 AdminController.UpdateEmp(newemp);
-		 
-		 
-			System.out.println("test hna1");
+        newemp.append("tel", numero_field_mod.getText());
+        newemp.append("role", role_field_mod.getText());
+        newemp.append("email", email_field_mod.getText());
+        // newemp.append("password",email_field_mod.getText());
+        AdminController.UpdateEmp(newemp);
 
-			try {
-				Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/add_employe_dashbord.fxml"));
-				mod_container.getChildren().removeAll();
-				mod_container.getChildren().setAll(fxml);
-				System.out.println("test hna 2");
+        System.out.println("test hna1");
 
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			System.out.println("test hna 3");
-	}
+        try {
+            Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/add_employe_dashbord.fxml"));
+            mod_container.getChildren().removeAll();
+            mod_container.getChildren().setAll(fxml);
+            System.out.println("test hna 2");
 
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        System.out.println("test hna 3");
 
-
+    }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {

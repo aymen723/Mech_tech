@@ -2,9 +2,11 @@ package application.ViewController;
 
 import java.net.URL;
 
+
 import java.util.ResourceBundle;
 
 import application.controller.AdminController;
+import application.models.Usermodel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -92,7 +94,7 @@ public class add_employer_controller implements Initializable {
 		TableViewSelectionModel<Usermodel> selectionModel = table.getSelectionModel();
 		selectionModel.setSelectionMode(SelectionMode.SINGLE);
 		// ObservableList<Usermodel> selectedItems = selectionModel.getSelectedItems();
-		System.out.println("hna fl mod " + selectionModel.getSelectedItems().get(0).id);
+		System.out.println("hna fl mod " + selectionModel.getSelectedItems().get(0).getId());
 		Usermodel user_mod = selectionModel.getSelectedItems().get(0);
 		user = user_mod;
 		try {
@@ -124,7 +126,7 @@ public class add_employer_controller implements Initializable {
 		TableViewSelectionModel<Usermodel> selectionModel = table.getSelectionModel();
 		selectionModel.setSelectionMode(SelectionMode.SINGLE);
 		// ObservableList<Usermodel> selectedItems = selectionModel.getSelectedItems();
-		System.out.println("hna fl mod " + selectionModel.getSelectedItems().get(0).id);
+		System.out.println("hna fl mod " + selectionModel.getSelectedItems().get(0).getId());
 		Usermodel user_mod = selectionModel.getSelectedItems().get(0);
 		user = user_mod;
 		AdminController.deletemp();

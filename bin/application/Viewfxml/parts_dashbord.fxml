@@ -30,8 +30,6 @@
                           <columns>
                               <TableColumn fx:id="id" prefWidth="75.0" text="Id" />
                             <TableColumn fx:id="nom_col" prefWidth="142.0" text="Nom" />
-                             <!-- <TableColumn fx:id="parts_table" prefWidth="219.0" text="Description" /> -->
- 
                               <TableColumn fx:id="quntite_col" prefWidth="88.0" text="Quntite" />
                               <TableColumn fx:id="prix_col" prefWidth="75.0" text="Prix" />
                             <TableColumn fx:id="desc_col" prefWidth="219.0" text="Description" />
@@ -166,4 +164,8 @@
          </children>
       </GridPane>
    </top>
+<<<<<<< HEAD
 </BorderPane>
+=======
+</BorderPane>
+>>>>>>> aymen

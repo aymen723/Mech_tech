@@ -1,5 +1,10 @@
 .leftmenu {
+<<<<<<< HEAD
   -fx-background-color: "#1D1C21";
+=======
+  /* -fx-background-color: "#1D1C21"; */
+  -fx-background-color: "#46494c";
+>>>>>>> aymen
 }
 
 .container {
@@ -7,19 +12,48 @@
 }
 
 .btn_leftmenu {
+<<<<<<< HEAD
   -fx-background-color: "#1D1C21";
 
   -fx-color: green;
+=======
+  /* -fx-background-color: "#1D1C21"; */
+  -fx-background-color: "#46494c";
+
+  /* -fx-color: green; */
+>>>>>>> aymen
 }
 
 .btn_leftmenu:hover {
   -fx-background-color: "#343a40";
+<<<<<<< HEAD
 -fx-border-style: hidden none none solid;
   -fx-border-color: "white";
   -fx-border-width: 2px;
     -fx-text-fill: white;
     -fx-Selection-Fill:"red"
+=======
+  -fx-border-style: hidden none none solid;
+  -fx-border-color: "white";
+  -fx-border-width: 2px;
+  -fx-text-fill: white;
+>>>>>>> aymen
 }
 .btn_leftmenu:pressed {
   -fx-background-color: "#495057";
 }
+<<<<<<< HEAD
+=======
+
+.afterpress{
+	  -fx-background-color: "#343a40";
+  -fx-border-style: hidden none none solid;
+  -fx-border-color: "white";
+  -fx-border-width: 2px;
+  -fx-text-fill: white;
+}
+
+
+
+
+>>>>>>> aymen

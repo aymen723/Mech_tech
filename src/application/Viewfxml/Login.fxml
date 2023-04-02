@@ -65,7 +65,7 @@
             <Pane prefHeight="126.0" prefWidth="400.0" />
             <HBox alignment="CENTER" prefHeight="300.0" prefWidth="200.0">
                <children>
-                  <ImageView fitHeight="218.0" fitWidth="269.0">
+                  <ImageView fitHeight="218.0" fitWidth="269.0" preserveRatio="true" smooth="false">
                      <image>
                         <Image url="@../../pics/Asset%202.png" />
                      </image>

@@ -1,4 +1,4 @@
-package application.ViewController;
+package application.models;
 
 
 public class Usermodel {

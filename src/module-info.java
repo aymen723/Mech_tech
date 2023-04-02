@@ -6,19 +6,16 @@ module mecha {
 	requires java.desktop;
 	requires mongo.java.driver;
 	requires javafx.base;
-	
 
-	
-//	requires javafx.media;
+	// requires javafx.media;
 
+	// requires de.jensd.fx.fontawesomefx.fontawesome;
+	// opens application.models;
 
-//  requires de.jensd.fx.fontawesomefx.fontawesome;
-//	opens application.models;
-
-	
-//	opens application to javafx.graphics, javafx.fxml;
+	// opens application to javafx.graphics, javafx.fxml;
 	opens application to javafx.graphics, javafx.fxml, javafx.base;
 	opens application.ViewController to javafx.graphics, javafx.fxml, javafx.base;
 	opens application.controller to javafx.graphics, javafx.fxml, javafx.base;
+	opens application.models to javafx.graphics, javafx.fxml, javafx.base;
 
 }

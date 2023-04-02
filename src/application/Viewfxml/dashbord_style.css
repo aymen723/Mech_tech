@@ -1,5 +1,6 @@
 .leftmenu {
-  -fx-background-color: "#1D1C21";
+  /* -fx-background-color: "#1D1C21"; */
+  -fx-background-color: "#46494c";
 }
 
 .container {
@@ -7,19 +8,31 @@
 }
 
 .btn_leftmenu {
-  -fx-background-color: "#1D1C21";
+  /* -fx-background-color: "#1D1C21"; */
+  -fx-background-color: "#46494c";
 
-  -fx-color: green;
+  /* -fx-color: green; */
 }
 
 .btn_leftmenu:hover {
   -fx-background-color: "#343a40";
--fx-border-style: hidden none none solid;
+  -fx-border-style: hidden none none solid;
   -fx-border-color: "white";
   -fx-border-width: 2px;
-    -fx-text-fill: white;
-    -fx-Selection-Fill:"red"
+  -fx-text-fill: white;
 }
 .btn_leftmenu:pressed {
   -fx-background-color: "#495057";
 }
+
+.afterpress{
+	  -fx-background-color: "#343a40";
+  -fx-border-style: hidden none none solid;
+  -fx-border-color: "white";
+  -fx-border-width: 2px;
+  -fx-text-fill: white;
+}
+
+
+
+

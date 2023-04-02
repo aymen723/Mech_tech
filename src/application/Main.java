@@ -2,11 +2,6 @@ package application;
 
 import java.io.IOException;
 
-
-
-
-
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -23,19 +18,14 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 
-//		Group root = new Group();
 		Parent fxml;
 		try {
 			fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Dashbord.fxml"));
-//			fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
-           
+
 			Scene scene = new Scene(fxml);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Mecha Tech");
 			scene.setFill(Color.TRANSPARENT);
-
-//			primaryStage.initStyle(StageStyle.UNDECORATED);
-//			primaryStage.initStyle(StageStyle.TRANSPARENT);
 
 			primaryStage.setResizable(false);
 			primaryStage.show();
@@ -49,9 +39,7 @@ public class Main extends Application {
 
 	public static void main(String[] args) {
 
-		
-
 		launch(args);
-		
+
 	}
 }
