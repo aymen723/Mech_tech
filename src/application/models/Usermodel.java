@@ -1,42 +1,41 @@
 package application.models;
 
-
 public class Usermodel {
 
-//	public SimpleStringProperty id = new SimpleStringProperty("");
-//	public SimpleStringProperty username = new SimpleStringProperty("");
-//	public SimpleStringProperty nom = new SimpleStringProperty("");
-//
-//	public Usermodel(String id, String username, String nom) {
-//		this.id.set(id);
-//		this.username.set(username);
-//		this.nom.set(nom);
-//
-//	}
-//
-//	public final String getusername() {
-//		return username.get();
-//	}
-//
-//	public final void setusername(String value) {
-//		username.set(value);
-//	}
-//
-//	public final void setnom(String value) {
-//		nom.set(value);
-//	}
-//
-//	public String getnom() {
-//		return nom.get();
-//	}
-//
-//	public String getid() {
-//		return id.get();
-//	}
-//
-//	public final void setuid(String value) {
-//		id.set(value);
-//	}
+	// public SimpleStringProperty id = new SimpleStringProperty("");
+	// public SimpleStringProperty username = new SimpleStringProperty("");
+	// public SimpleStringProperty nom = new SimpleStringProperty("");
+	//
+	// public Usermodel(String id, String username, String nom) {
+	// this.id.set(id);
+	// this.username.set(username);
+	// this.nom.set(nom);
+	//
+	// }
+	//
+	// public final String getusername() {
+	// return username.get();
+	// }
+	//
+	// public final void setusername(String value) {
+	// username.set(value);
+	// }
+	//
+	// public final void setnom(String value) {
+	// nom.set(value);
+	// }
+	//
+	// public String getnom() {
+	// return nom.get();
+	// }
+	//
+	// public String getid() {
+	// return id.get();
+	// }
+	//
+	// public final void setuid(String value) {
+	// id.set(value);
+	// }
 
 	public String getId() {
 		return id;

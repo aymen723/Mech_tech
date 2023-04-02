@@ -39,7 +39,7 @@ public class mod_employe_container_controller implements Initializable {
     public void modifier_employer() {
 
         Document newemp = new Document("username", username_field_mod.getText());
-        newemp.append("_id", add_employer_controller.user.id);
+        newemp.append("_id", add_employer_controller.user.getId());
         newemp.append("nom", name_field_mod.getText());
         newemp.append("nomutil", username_field_mod.getText());
         newemp.append("prenom", prenom_field_mod.getText());

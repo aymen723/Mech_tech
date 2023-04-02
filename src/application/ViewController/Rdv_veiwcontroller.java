@@ -76,7 +76,7 @@ public class Rdv_veiwcontroller implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+
 		table_list.getItems().add("rdv_days.fxml");
 		table_list.getItems().add("rdv_month.fxml");
 		table_list.getItems().add("rdv_week.fxml");

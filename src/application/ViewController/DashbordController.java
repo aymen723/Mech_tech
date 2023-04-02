@@ -8,12 +8,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-// import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-// import javafx.scene.paint.Color;
-// import javafx.stage.Stage;
-// import javafx.stage.StageStyle;
+
 import javafx.stage.Stage;
 
 public class DashbordController implements Initializable {
@@ -69,29 +66,6 @@ public class DashbordController implements Initializable {
 
 		parts.getStyleClass().add("afterpress");
 
-		// Group root = new Group();
-		// Parent fxml;
-		// try {
-		// fxml =
-		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/parts_dashbord.fxml"));
-		//// fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
-		// Stage stage = new Stage();
-		// Scene scene = new Scene(fxml);
-		// stage.setScene(scene);
-		// stage.setTitle("Mecha Tech");
-		// scene.setFill(Color.TRANSPARENT);
-		//
-		//// primaryStage.initStyle(StageStyle.UNDECORATED);
-		//// primaryStage.initStyle(StageStyle.TRANSPARENT);
-		//
-		//// primaryStage.setResizable(false);
-		// stage.show();
-		//
-		// } catch (IOException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-
 	}
 
 	public void Rendez_vous(javafx.event.ActionEvent actione) throws IOException {
@@ -112,24 +86,25 @@ public class DashbordController implements Initializable {
 
 		Rendez_vous.getStyleClass().add("afterpress");
 
-		// Group root = new Group();
+		// // Group root = new Group();
 		// Parent fxml;
 		// try {
 		// fxml =
 		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/Rendez_vous_dashbord.fxml"));
-		//// fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
+		// //
+		// fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
 		// Stage stage = new Stage();
 		// Scene scene = new Scene(fxml);
 		// stage.setScene(scene);
 		// stage.setTitle("Mecha Tech");
 		// scene.setFill(Color.TRANSPARENT);
-		//
-		//// primaryStage.initStyle(StageStyle.UNDECORATED);
-		//// primaryStage.initStyle(StageStyle.TRANSPARENT);
-		//
-		//// primaryStage.setResizable(false);
+
+		// // primaryStage.initStyle(StageStyle.UNDECORATED);
+		// // primaryStage.initStyle(StageStyle.TRANSPARENT);
+
+		// // primaryStage.setResizable(false);
 		// stage.show();
-		//
+
 		// } catch (IOException e) {
 		// // TODO Auto-generated catch block
 		// e.printStackTrace();

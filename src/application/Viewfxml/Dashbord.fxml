@@ -34,7 +34,7 @@
                <padding>
                   <Insets left="30.0" />
                </padding></Button>
-            <Button id="btn1" fx:id="Rendez_vous" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="60.0" prefWidth="170.0" styleClass="btn_leftmenu" stylesheets="@dashbord_style.css" text="Rendez-vous" textFill="#9c9c9c">
+            <Button id="btn1" fx:id="Rendez_vous" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#Rendez_vous" prefHeight="60.0" prefWidth="170.0" styleClass="btn_leftmenu" stylesheets="@dashbord_style.css" text="Rendez-vous" textFill="#9c9c9c">
                <padding>
                   <Insets left="30.0" />
                </padding></Button>
