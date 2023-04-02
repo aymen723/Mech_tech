@@ -29,7 +29,6 @@ public class AdminController {
 		MongoCollection<Document> collection = Connectdatabase.connectdb("users");
 		ObjectId objid = new ObjectId(add_employer_controller.user.getId());
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
-		System.out.println(found.get("password"));
 		Doc.append("_id", objid);
 		Document updateop = new Document("$set", Doc);
 		collection.updateOne(found, updateop);
@@ -47,9 +46,13 @@ public class AdminController {
 				Usermodel user = new Usermodel();
 
 				user.setId(doc.getObjectId("_id").toString());
-
-				user.setUsername(doc.getString("username"));
+				user.setNom(doc.getString("nom"));
+				user.setPrenom(doc.getString("prenom"));
+				user.setUsername(doc.getString("nomutil"));
+				user.setPassword(doc.getString("motdepass"));
 				user.setEmail(doc.getString("email"));
+				user.setNumero(doc.getString("tel"));
+				user.setRole(doc.getString("role"));
 
 				List.add(user);
 
