@@ -40,19 +40,20 @@ public class mod_employe_container_controller implements Initializable {
     	
 		Document newemp = new Document("username", username_field_mod.getText());
 		newemp.append("_id",add_employer_controller.user.id );
-		// newemp.append("nom", namefield.getText());
-		// newemp.append("prenom", prenomfield.getText());
-		// newemp.append("numero", numerofield.getText());
-		// newemp.append("role", rolefield.getText());
-		// newemp.append("email",emailfield.getText());
-		newemp.append("password",email_field_mod.getText());
+		newemp.append("nom", name_field_mod.getText());
+		newemp.append("nomutil", username_field_mod.getText());
+        newemp.append("prenom", prenom_field_mod.getText());
+		newemp.append("tel", numero_field_mod.getText());
+		newemp.append("role", role_field_mod.getText());
+		newemp.append("email",email_field_mod.getText());
+		// newemp.append("password",email_field_mod.getText());
 		 AdminController.UpdateEmp(newemp);
 		 
 		 
 			System.out.println("test hna1");
 
 			try {
-				Parent fxml = FXMLLoader.load(getClass().getResource("add_employe_dashbord.fxml"));
+				Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/add_employe_dashbord.fxml"));
 				mod_container.getChildren().removeAll();
 				mod_container.getChildren().setAll(fxml);
 				System.out.println("test hna 2");

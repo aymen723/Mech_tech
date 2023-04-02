@@ -37,8 +37,8 @@ public class LoginController implements Initializable {
 		String usern = username.getText();
 		Document filter = new Document("username", usern);
 		filter.append("password", password.getText());
-		Connectdatabase connecterdatabase = new Connectdatabase();
-		MongoCollection<Document> collection = connecterdatabase.connectdb("users");
+		// Connectdatabase connecterdatabase = new Connectdatabase();
+		MongoCollection<Document> collection = Connectdatabase.connectdb("users");
 		MongoCursor<Document> cursor = collection.find(filter).iterator();
 		while (cursor.hasNext()) {
 			System.out.println(cursor.next().toJson());

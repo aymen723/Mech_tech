@@ -8,11 +8,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+// import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
+// import javafx.scene.paint.Color;
+// import javafx.stage.Stage;
+// import javafx.stage.StageStyle;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class DashbordController implements Initializable {
 
@@ -54,27 +56,27 @@ public class DashbordController implements Initializable {
 			// TODO: handle exception
 		}
 
-//		Group root = new Group();
-//		Parent fxml;
-//		try {
-//			fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/parts_dashbord.fxml"));
-////			fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
-//			Stage stage = new Stage();
-//			Scene scene = new Scene(fxml);
-//			stage.setScene(scene);
-//			stage.setTitle("Mecha Tech");
-//			scene.setFill(Color.TRANSPARENT);
-//
-////			primaryStage.initStyle(StageStyle.UNDECORATED);
-////			primaryStage.initStyle(StageStyle.TRANSPARENT);
-//
-////			primaryStage.setResizable(false);
-//			stage.show();
-//
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+// 		Group root = new Group();
+// 		Parent fxml;
+// 		try {
+// 			fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/parts_dashbord.fxml"));
+// //			fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
+// 			Stage stage = new Stage();
+// 			Scene scene = new Scene(fxml);
+// 			stage.setScene(scene);
+// 			stage.setTitle("Mecha Tech");
+// 			scene.setFill(Color.TRANSPARENT);
+
+// //			primaryStage.initStyle(StageStyle.UNDECORATED);
+// //			primaryStage.initStyle(StageStyle.TRANSPARENT);
+
+// //			primaryStage.setResizable(false);
+// 			stage.show();
+
+// 		} catch (IOException e) {
+// 			// TODO Auto-generated catch block
+// 			e.printStackTrace();
+// 		}
 
 	}
 
@@ -130,11 +132,11 @@ public class DashbordController implements Initializable {
 
 	}
 
-//	public void closing_add_parts(javafx.event.ActionEvent actione) {
-//		((Node) (actione.getSource())).getScene().getWindow().hide();
-//
-//		System.out.println("quitter");
-//
-//	}
+	public void closing_add_parts(javafx.event.ActionEvent actione) {
+		((Node) (actione.getSource())).getScene().getWindow().hide();
+
+		System.out.println("quitter");
+
+	}
 
 }

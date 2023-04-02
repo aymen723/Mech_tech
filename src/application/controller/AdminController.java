@@ -2,21 +2,12 @@ package application.controller;
 
 import org.bson.Document;
 
-
 import org.bson.types.ObjectId;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 
 import application.Connectdatabase;
-
-import application.ViewController.Parts;
-import application.ViewController.Usermodel;
-import application.ViewController.add_employer_controller;
-//import application.Parts;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-//import application.add_employer_controller;
 import application.ViewController.Parts;
 import application.ViewController.Usermodel;
 import application.ViewController.add_employer_controller;
@@ -28,17 +19,16 @@ public class AdminController {
 
 	public static void AddEmp(Document Doc) {
 
-		MongoCollection collection = Connectdatabase.connectdb("users");
+		MongoCollection<Document> collection = Connectdatabase.connectdb("users");
 		collection.insertOne(Doc);
 
 	}
 
 	public static void UpdateEmp(Document Doc) {
 
-		MongoCollection collection = Connectdatabase.connectdb("users");
+		MongoCollection<Document> collection = Connectdatabase.connectdb("users");
 		ObjectId objid = new ObjectId(add_employer_controller.user.getId());
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
-		System.out.println(found.get("password"));
 		Doc.append("_id", objid);
 		Document updateop = new Document("$set", Doc);
 		collection.updateOne(found, updateop);
@@ -47,7 +37,7 @@ public class AdminController {
 
 	public static ObservableList<Usermodel> EmpLiist() {
 		ObservableList<Usermodel> List = FXCollections.observableArrayList();
-		MongoCollection collection = Connectdatabase.connectdb("users");
+		MongoCollection<Document> collection = Connectdatabase.connectdb("users");
 
 		MongoCursor<Document> cursor = collection.find().iterator();
 		try {
@@ -56,9 +46,13 @@ public class AdminController {
 				Usermodel user = new Usermodel();
 
 				user.setId(doc.getObjectId("_id").toString());
-
-				user.setUsername(doc.getString("username"));
+				user.setNom(doc.getString("nom"));
+				user.setPrenom(doc.getString("prenom"));
+				user.setUsername(doc.getString("nomutil"));
+				user.setPassword(doc.getString("motdepass"));
 				user.setEmail(doc.getString("email"));
+				user.setNumero(doc.getString("tel"));
+				user.setRole(doc.getString("role"));
 
 				List.add(user);
 
@@ -73,8 +67,8 @@ public class AdminController {
 
 	public static ObservableList<Parts> PartList() {
 		ObservableList<Parts> List = FXCollections.observableArrayList();
-		MongoCollection collection = Connectdatabase.connectdb("parts");
-
+		MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
+		
 		MongoCursor<Document> cursor = collection.find().iterator();
 		try {
 			while (cursor.hasNext()) {
@@ -91,6 +85,8 @@ public class AdminController {
 				List.add(part);
 
 			}
+		} catch (Exception e) {
+			System.out.println("Error retrieving documents: " + e.getMessage());
 		} finally {
 			cursor.close();
 		}
@@ -101,13 +97,13 @@ public class AdminController {
 
 	public static void addpart(Document Doc) {
 
-		MongoCollection collection = Connectdatabase.connectdb("parts");
+		MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
 		collection.insertOne(Doc);
 
 	}
 
 	public static void updatepart(Document Doc) {
-		MongoCollection collection = Connectdatabase.connectdb("parts");
+		MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
 		ObjectId objid = new ObjectId(parts_dashbord_controller.part.getId());
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
 		System.out.println(found.get("name"));
@@ -115,11 +111,12 @@ public class AdminController {
 		Document updateop = new Document("$set", Doc);
 		collection.updateOne(found, updateop);
 
+
 	}
 
 	public static void deletpart() {
 		
-		MongoCollection collection = Connectdatabase.connectdb("parts");
+		MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
 		ObjectId objid = new ObjectId(parts_dashbord_controller.part.getId());
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
         collection.deleteOne(found);
@@ -127,10 +124,12 @@ public class AdminController {
 	}
 
 	public static void deletemp() {
-		MongoCollection collection = Connectdatabase.connectdb("users");
+		MongoCollection<Document> collection = Connectdatabase.connectdb("users");
 		ObjectId objid = new ObjectId(add_employer_controller.user.getId());
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
         collection.deleteOne(found);
 	}
+
+
 
 }

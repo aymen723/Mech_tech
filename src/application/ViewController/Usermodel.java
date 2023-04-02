@@ -1,6 +1,5 @@
 package application.ViewController;
 
-import javafx.beans.property.SimpleStringProperty;
 
 public class Usermodel {
 
