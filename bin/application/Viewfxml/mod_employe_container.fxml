@@ -59,7 +59,7 @@
                         <Font size="16.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="username_field_mod" layoutX="90.0" layoutY="23.0" prefHeight="30.0" prefWidth="250.0" />
+                  <TextField fx:id="username_field_mod" layoutX="90.0" layoutY="23.0" prefHeight="30.0" prefWidth="250.0" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -69,7 +69,7 @@
                         <Font size="16.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="name_field_mod" layoutX="90.0" layoutY="23.0" prefHeight="30.0" prefWidth="250.0" />
+                  <TextField fx:id="name_field_mod" layoutX="90.0" layoutY="23.0" prefHeight="30.0" prefWidth="250.0" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
@@ -79,7 +79,7 @@
                         <Font size="16.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="prenom_field_mod" layoutX="90.0" layoutY="22.0" prefHeight="30.0" prefWidth="250.0" />
+                  <TextField fx:id="prenom_field_mod" layoutX="90.0" layoutY="22.0" prefHeight="30.0" prefWidth="250.0" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
@@ -89,7 +89,7 @@
                         <Font size="16.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="email_field_mod" layoutX="90.0" layoutY="23.0" prefHeight="30.0" prefWidth="250.0" />
+                  <TextField fx:id="email_field_mod" layoutX="90.0" layoutY="23.0" prefHeight="30.0" prefWidth="250.0" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
@@ -99,7 +99,7 @@
                         <Font size="16.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="numero_field_mod" layoutX="90.0" layoutY="23.0" prefHeight="30.0" prefWidth="250.0" />
+                  <TextField fx:id="numero_field_mod" layoutX="90.0" layoutY="23.0" prefHeight="30.0" prefWidth="250.0" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
@@ -109,7 +109,7 @@
                         <Font size="16.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="role_field_mod" layoutX="90.0" layoutY="23.0" prefHeight="30.0" prefWidth="250.0" />
+                  <TextField fx:id="role_field_mod" layoutX="90.0" layoutY="23.0" prefHeight="30.0" prefWidth="250.0" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">

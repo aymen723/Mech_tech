@@ -54,7 +54,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                <children>
-                  <Button fx:id="return_back_add" layoutX="86.0" layoutY="18.0" mnemonicParsing="false" onAction="#return_back" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #F8F9FA;" text="&lt;     Retour">
+                  <Button fx:id="return_back_add" layoutX="86.0" layoutY="18.0" mnemonicParsing="false" onAction="#return_back" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="&lt;     Retour">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -62,7 +62,7 @@
                </children></Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <TextField fx:id="usernamefield" layoutX="89.0" layoutY="26.0" prefWidth="220.0" />
+                  <TextField fx:id="usernamefield" layoutX="89.0" layoutY="26.0" prefWidth="220.0" styleClass="inpt" stylesheets="@inputs.css" />
                   <Text layoutX="-49.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom d'utilisateur :">
                      <font>
                         <Font size="16.0" />
@@ -72,7 +72,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <TextField fx:id="namefield" layoutX="89.0" layoutY="26.0" prefWidth="220.0" />
+                  <TextField fx:id="namefield" layoutX="89.0" layoutY="26.0" prefWidth="220.0" styleClass="inpt" stylesheets="@inputs.css" />
                   <Text layoutX="34.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :">
                      <font>
                         <Font size="16.0" />
@@ -82,7 +82,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <TextField fx:id="prenomfield" layoutX="89.0" layoutY="26.0" prefWidth="220.0" />
+                  <TextField fx:id="prenomfield" layoutX="89.0" layoutY="26.0" prefWidth="220.0" styleClass="inpt" stylesheets="@inputs.css" />
                   <Text layoutX="14.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom :">
                      <font>
                         <Font size="16.0" />
@@ -92,7 +92,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <children>
-                  <TextField fx:id="numerofield" layoutX="89.0" layoutY="26.0" prefWidth="220.0" />
+                  <TextField fx:id="numerofield" layoutX="89.0" layoutY="26.0" prefWidth="220.0" styleClass="inpt" stylesheets="@inputs.css" />
                   <Text layoutX="14.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro :">
                      <font>
                         <Font size="16.0" />
@@ -102,7 +102,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <children>
-                  <TextField fx:id="emailfield" layoutX="89.0" layoutY="26.0" prefWidth="220.0" />
+                  <TextField fx:id="emailfield" layoutX="89.0" layoutY="26.0" prefWidth="220.0" styleClass="inpt" stylesheets="@inputs.css" />
                   <Text layoutX="27.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email :">
                      <font>
                         <Font size="16.0" />
@@ -112,7 +112,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <children>
-                  <TextField fx:id="rolefield" layoutX="89.0" layoutY="26.0" prefWidth="220.0" />
+                  <TextField fx:id="rolefield" layoutX="89.0" layoutY="26.0" prefWidth="220.0" styleClass="inpt" stylesheets="@inputs.css" />
                   <Text layoutX="34.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Role :">
                      <font>
                         <Font size="16.0" />

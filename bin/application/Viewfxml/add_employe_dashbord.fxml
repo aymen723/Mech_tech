@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -44,33 +43,24 @@
                   </Text>
                </children>
             </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="add_emp" layoutX="372.0" layoutY="16.0" mnemonicParsing="false" onAction="#add_emp_conatiner" prefHeight="35.0" prefWidth="80.0" styleClass="btn_add" stylesheets="@add_employe_style.css" text="Ajouter">
-                     <effect>
-                        <DropShadow>
-                           <color>
-                              <Color red="0.8631578683853149" green="0.8631578683853149" blue="0.8631578683853149" />
-                           </color>
-                        </DropShadow>
-                     </effect>
+                  <Button fx:id="add_emp" layoutX="301.0" layoutY="18.0" mnemonicParsing="false" onAction="#add_emp_conatiner" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@add_employe_style.css" text="Ajouter">
                      <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
-                  <Button fx:id="mod_emp" layoutX="269.0" layoutY="16.0" mnemonicParsing="false" onAction="#mod_emp_conatiner" prefHeight="35.0" prefWidth="80.0" styleClass="btn_mod" stylesheets="@add_employe_style.css" text="Modifier">
-                     <effect>
-                        <DropShadow>
-                           <color>
-                              <Color red="0.6105263233184814" green="0.6105263233184814" blue="0.6105263233184814" />
-                           </color>
-                        </DropShadow>
-                     </effect>
+                  <MFXButton fx:id="delete_btn" layoutX="75.0" layoutY="18.0" prefHeight="30.0" prefWidth="100.0" styleClass="btn_mod" stylesheets="@add_employe_style.css" text="Supprime">
                      <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="System Bold" size="13.0" />
                      </font>
-                  </Button>
-                  <Button fx:id="delete_btn" layoutX="14.0" layoutY="21.0" mnemonicParsing="false" text="delet" />
+                  </MFXButton>
+                  <MFXButton fx:id="mod_emp" layoutX="188.0" layoutY="18.0" onAction="#mod_emp_conatiner" prefHeight="30.0" prefWidth="100.0" styleClass="btn_mod" stylesheets="@add_employe_style.css" text="Modifier">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </MFXButton>
                </children>
             </Pane>
          </children>

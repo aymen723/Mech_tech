@@ -6,6 +6,8 @@ module mecha {
 	requires java.desktop;
 	requires mongo.java.driver;
 	requires javafx.base;
+	// requires com.jfoenix;
+	requires MaterialFX;
 
 	// requires javafx.media;
 
