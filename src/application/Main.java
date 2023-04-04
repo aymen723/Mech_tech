@@ -44,7 +44,6 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Mecha Tech");
 			scene.setFill(Color.TRANSPARENT);
-
 			primaryStage.setResizable(false);
 			primaryStage.show();
 

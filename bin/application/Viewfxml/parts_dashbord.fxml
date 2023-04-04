@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -22,26 +21,23 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="390.0" prefWidth="930.0" BorderPane.alignment="CENTER">
          <children>
-            <ScrollPane prefHeight="390.0" prefWidth="850.0" stylesheets="@tablestyle.css">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="390.0" prefWidth="850.0" style="-fx-border-width: 0; -fx-border-color: transparent;">
-                     <children>
-                        <TableView fx:id="parts_table" prefHeight="390.0" prefWidth="850.0" stylesheets="@tablestyle.css">
-                          <columns>
-                              <TableColumn fx:id="id" prefWidth="75.0" text="Id" />
-                            <TableColumn fx:id="nom_col" prefWidth="142.0" text="Nom" />
-<!--                              <TableColumn fx:id="parts_table" prefWidth="219.0" text="Description" />
- --> 
-                              <TableColumn fx:id="quntite_col" prefWidth="88.0" text="Quntite" />
-                              <TableColumn fx:id="prix_col" prefWidth="75.0" text="Prix" />
-                            <TableColumn fx:id="desc_col" prefWidth="219.0" text="Description" />
-                              <TableColumn prefWidth="169.0" text="Action" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-              </content>
-            </ScrollPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="390.0" prefWidth="850.0" style="-fx-border-width: 0; -fx-border-color: transparent; -fx-background-color: transparent;">
+               <children>
+                  <TableView fx:id="parts_table" prefHeight="390.0" prefWidth="853.0" stylesheets="@tablestyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                        <TableColumn fx:id="id" minWidth="-Infinity" prefWidth="65.0" resizable="false" text="Id" />
+                      <TableColumn fx:id="nom_col" minWidth="200.0" prefWidth="204.0" text="Nom" />
+                      <TableColumn fx:id="desc_col" minWidth="230.0" prefWidth="232.0" text="Description" />
+              
+
+                              <TableColumn fx:id="prix_col" minWidth="120.0" prefWidth="123.0" text="Prix" />
+
+                              <TableColumn fx:id="quntite_col" minWidth="80.0" prefWidth="82.0" text="Quntite" />
+                        <TableColumn fx:id="actionsColumn" minWidth="120.0" prefWidth="128.0" text="Action" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
          </children>
       </HBox>
    </bottom>
@@ -60,30 +56,10 @@
         </rowConstraints>
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
-               <children>
-                  <Button fx:id="selec_btn" layoutX="112.0" layoutY="18.0" mnemonicParsing="false" onAction="#selection_parts" prefHeight="30.0" prefWidth="106.0" styleClass="btn_mod" stylesheets="@part_style.css" text="Sélection">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <effect>
-                        <DropShadow>
-                           <color>
-                              <Color red="0.6105263233184814" green="0.6105263233184814" blue="0.6105263233184814" />
-                           </color>
-                        </DropShadow>
-                     </effect>
-                  </Button>
-                  <Button fx:id="deleter_btn" layoutX="8.0" layoutY="21.0" mnemonicParsing="false" onAction="#dlt_part" text="Deleter" />
-               </children></Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <children>
-                  <TextField fx:id="price" layoutX="71.0" layoutY="18.0" />
-                  <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix :" wrappingWidth="40.030338287353516">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
+                  <TextField fx:id="price" layoutX="16.0" layoutY="20.0" prefWidth="200.0" promptText="Prix" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0">
@@ -102,67 +78,46 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                <children>
-                  <TextField fx:id="reserch_field" layoutX="14.0" layoutY="15.0" prefHeight="30.0" prefWidth="206.0" promptText="Recherche" />
+                  <TextField fx:id="reserch_field" layoutX="43.0" layoutY="18.0" prefHeight="27.0" prefWidth="200.0" promptText="Recherche" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
-                  <TextField fx:id="name" layoutX="71.0" layoutY="18.0" />
-                  <Text layoutX="14.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
+                  <TextField fx:id="name" layoutX="17.0" layoutY="20.0" onInputMethodTextChanged="#name_field" prefWidth="200.0" promptText="Nom" style="-fx-background-radius: 10px;" styleClass="inpt" stylesheets="@inputs.css">
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.8684210777282715" green="0.8684210777282715" blue="0.8684210777282715" />
+                           </color>
+                        </DropShadow>
+                     </effect></TextField>
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <TextField fx:id="description" layoutX="71.0" layoutY="18.0" />
-                  <Text layoutX="7.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="description :" wrappingWidth="46.430423736572266">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
+                  <TextField fx:id="description" layoutX="17.0" layoutY="20.0" prefHeight="27.0" prefWidth="200.0" promptText="description " styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
-                  <TextField fx:id="quntitie" layoutX="71.0" layoutY="18.0" />
-                  <Text layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quntite :" wrappingWidth="60.830387115478516">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Text>
+                  <TextField fx:id="quntitie" layoutX="16.0" layoutY="20.0" prefWidth="200.0" promptText="Quantité" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="add_btn" layoutX="118.0" layoutY="18.0" mnemonicParsing="false" onAction="#add_parts" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@part_style.css" text="Ajouter">
+                  <Button fx:id="add_btn" layoutX="125.0" layoutY="18.0" mnemonicParsing="false" onAction="#add_parts" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@part_style.css" text="Ajouter">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
-                     <effect>
-                        <DropShadow>
-                           <color>
-                              <Color red="0.6105263233184814" green="0.6105263233184814" blue="0.6105263233184814" />
-                           </color>
-                        </DropShadow>
-                     </effect>
                   </Button>
                   <Button fx:id="mod_btn" layoutX="7.0" layoutY="18.0" mnemonicParsing="false" onAction="#mod_parts" prefHeight="30.0" prefWidth="100.0" styleClass="btn_mod" stylesheets="@part_style.css" text="Modifier">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
-                     <effect>
-                        <DropShadow>
-                           <color>
-                              <Color red="0.6105263233184814" green="0.6105263233184814" blue="0.6105263233184814" />
-                           </color>
-                        </DropShadow>
-                     </effect>
                   </Button>
                </children>
             </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </top>

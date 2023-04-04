@@ -1,7 +1,5 @@
 package application.ViewController;
 
-
-
 import org.bson.Document;
 
 import application.controller.AdminController;
@@ -12,10 +10,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
-public class Add_employe_container_controller{
+public class Add_employe_container_controller {
 
 	@FXML
-	private  TextField emailfield;
+	private TextField emailfield;
 
 	@FXML
 	private TextField namefield;
@@ -24,40 +22,40 @@ public class Add_employe_container_controller{
 	private TextField numerofield;
 
 	@FXML
-	private  TextField prenomfield;
+	private TextField prenomfield;
 
 	@FXML
-	private  TextField rolefield;
+	private TextField rolefield;
 
 	@FXML
-	private  TextField usernamefield;
+	private TextField usernamefield;
 
 	@FXML
-	private  TextField email_field_mod;
+	private TextField email_field_mod;
 
 	@FXML
-	private  TextField name_field_mod;
+	private TextField name_field_mod;
 
 	@FXML
-	private  TextField numero_field_mod;
+	private TextField numero_field_mod;
 
 	@FXML
-	private  TextField prenom_field_mod;
+	private TextField prenom_field_mod;
 
 	@FXML
-	private  TextField role_field_mod;
+	private TextField role_field_mod;
 
 	@FXML
-	private  TextField username_field_mod;
+	private TextField username_field_mod;
 
 	@FXML
-	private  Button ajouter_employe;
+	private Button ajouter_employe;
 
 	@FXML
-	private  Button return_back_add;
+	private Button return_back_add;
 
 	@FXML
-	private  BorderPane add_container;
+	private BorderPane add_container;
 
 	public void return_back() {
 		System.out.println("azda");
@@ -73,35 +71,29 @@ public class Add_employe_container_controller{
 	}
 
 	public void ajouter_employer() {
-		
+
 		Document newemp = new Document("username", usernamefield.getText());
 		// newemp.append("nom", namefield.getText());
 		// newemp.append("prenom", prenomfield.getText());
 		// newemp.append("numero", numerofield.getText());
 		// newemp.append("role", rolefield.getText());
-		// newemp.append("email",emailfield.getText());
-		newemp.append("password",emailfield.getText());
-		 AdminController.AddEmp(newemp);
-		 
-			System.out.println("test hna1");
+		// newemp.append("email", emailfield.getText());
+		// newemp.append("password", emailfield.getText());
+		AdminController.AddEmp(newemp);
 
-			try {
-				Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/add_employe_dashbord.fxml"));
-				add_container.getChildren().removeAll();
-				add_container.getChildren().setAll(fxml);
-				System.out.println("test hna 2");
+		System.out.println("test hna1");
 
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			System.out.println("test hna 3");
+		try {
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/add_employe_dashbord.fxml"));
+			add_container.getChildren().removeAll();
+			add_container.getChildren().setAll(fxml);
+			System.out.println("test hna 2");
 
-		 
-		 
-	}
-
-	
-
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		System.out.println("test hna 3");
 
 	}
 
+}

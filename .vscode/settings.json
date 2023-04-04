@@ -1,14 +1,19 @@
 {
   "java.dependency.packagePresentation": "flat",
-  "java.project.referencedLibraries": [
-    "lib/**/*.jar",
-    "c:\\java\\javafx\\javafx-sdk-19.0.2.1\\lib\\javafx.base.jar",
-    "c:\\java\\javafx\\javafx-sdk-19.0.2.1\\lib\\javafx.controls.jar",
-    "c:\\java\\javafx\\javafx-sdk-19.0.2.1\\lib\\javafx.fxml.jar",
-    "c:\\java\\javafx\\javafx-sdk-19.0.2.1\\lib\\javafx.graphics.jar",
-    "c:\\java\\javafx\\javafx-sdk-19.0.2.1\\lib\\javafx.media.jar",
-    "c:\\java\\javafx\\javafx-sdk-19.0.2.1\\lib\\javafx.swing.jar",
-    "c:\\java\\javafx\\javafx-sdk-19.0.2.1\\lib\\javafx.web.jar",
-    "c:\\java\\javafx\\javafx-sdk-19.0.2.1\\lib\\javafx-swt.jar"
-  ]
+  "java.project.referencedLibraries": {
+    "include": [
+      "lib/**/*.jar",
+      "c:\\java\\javafx\\javafx-sdk-19.0.2.1\\lib\\javafx.base.jar",
+      "c:\\java\\javafx\\javafx-sdk-19.0.2.1\\lib\\javafx.controls.jar",
+      "c:\\java\\javafx\\javafx-sdk-19.0.2.1\\lib\\javafx.fxml.jar",
+      "c:\\java\\javafx\\javafx-sdk-19.0.2.1\\lib\\javafx.graphics.jar",
+      "c:\\java\\javafx\\javafx-sdk-19.0.2.1\\lib\\javafx.media.jar",
+      "c:\\java\\javafx\\javafx-sdk-19.0.2.1\\lib\\javafx.swing.jar",
+      "c:\\java\\javafx\\javafx-sdk-19.0.2.1\\lib\\javafx.web.jar",
+      "c:\\java\\javafx\\javafx-sdk-19.0.2.1\\lib\\javafx-swt.jar"
+    ],
+    "exclude": [
+      "c:\\java\\resour\\jfoenix\\jfoenix-8.0.10.jar"
+    ]
+  }
 }
