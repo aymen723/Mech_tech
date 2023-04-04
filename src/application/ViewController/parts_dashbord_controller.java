@@ -137,7 +137,7 @@ public class parts_dashbord_controller implements Initializable {
 		// ObservableList<Usermodel> selectedItems = selectionModel.getSelectedItems();
 		// System.out.println("hna fl mod " +
 		// selectionModel.getSelectedItems().get(0).id);
-		Parts part_mod = selectionModel.getSelectedItems().get(0);
+		// Parts part_mod = selectionModel.getSelectedItems().get(0);
 		AdminController.deletpart();
 
 	}
