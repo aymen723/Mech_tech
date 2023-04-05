@@ -3,37 +3,38 @@ package application.ViewController;
 // import java.io.IOException;
 
 import java.net.URL;
-import java.util.Iterator;
+// import java.util.Iterator;
 import java.util.ResourceBundle;
-import java.util.jar.Attributes.Name;
+// import java.util.jar.Attributes.Name;
 
 import org.bson.Document;
 
 import application.controller.AdminController;
 import application.models.Parts;
-import javafx.beans.binding.Bindings;
-import javafx.beans.value.ObservableValue;
+// import javafx.beans.binding.Bindings;
+// import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+// import javafx.event.ActionEvent;
+// import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 // import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 // import javafx.scene.Parent;
 // import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Control;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.SelectionMode;
+// import javafx.scene.control.ContextMenu;
+// import javafx.scene.control.Control;
+// import javafx.scene.control.MenuItem;
+// import javafx.scene.control.ScrollPane;
+// import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TableView.TableViewSelectionModel;
+// import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -147,14 +148,14 @@ public class parts_dashbord_controller implements Initializable {
 		if ((name.getText().trim().isEmpty() == false ) &&
 		(description.getText().trim().isEmpty() == false ) &&
 		(price.getText().trim().isEmpty() == false ) &&
-		(quntitie.getText().trim().isEmpty() == false )) {
+		(quntitie.getText().trim().isEmpty() == false ) && part != null) {
 			Document updatepart = new Document("name", name.getText());
 			updatepart.append("price", Integer.parseInt(price.getText()));
 			updatepart.append("quantity", Integer.parseInt(quntitie.getText()));
 			updatepart.append("description", description.getText());
 	
 			AdminController.updatepart(updatepart, part);
-
+			part = null ;
 			name.setText("");
 			price.setText("");
 			quntitie.setText("");
@@ -309,7 +310,8 @@ public class parts_dashbord_controller implements Initializable {
 						setGraphic(null);
 					} else {
 						HBox buttonsBox = new HBox(10, editButton, deleteButton, copybutton);
-						buttonsBox.setAlignment(getAlignment().CENTER);
+						getAlignment();
+						buttonsBox.setAlignment(Pos.CENTER);
 						setGraphic(buttonsBox);
 					}
 				}
