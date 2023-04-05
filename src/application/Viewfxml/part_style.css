@@ -23,3 +23,37 @@
   -fx-border-color: #454545;
   -fx-border-width: 1.5px;
 }
+
+.alert {
+  -fx-border-color: "#3C4048";
+  -fx-text-fill: black;
+  -fx-border-radius: 20px;
+  -fx-background-radius: 20px;
+}
+
+.dialog-pane {
+  -fx-border-color: black;
+  -fx-border-width: 2px;
+}
+
+.dialog-pane > .button-bar > .container {
+}
+
+.dialog-pane > .content.label {
+  -fx-text-fill: black;
+  -fx-font-size: 15px;
+}
+
+.dialog-pane:header .header-panel {
+}
+
+.dialog-pane:header .header-panel .label {
+  -fx-text-fill: black;
+  -fx-font-size: 15px;
+}
+
+.dialog-pane .button {
+  -fx-text-fill: black;
+  -fx-wrap-text: true;
+  -fx-cursor: hand;
+}
