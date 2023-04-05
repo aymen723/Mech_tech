@@ -68,8 +68,6 @@ public class DashbordController implements Initializable {
 
 		parts.getStyleClass().add("afterpress");
 
-		
-
 	}
 
 	public void Rendez_vous(javafx.event.ActionEvent actione) throws IOException {
@@ -135,17 +133,16 @@ public class DashbordController implements Initializable {
 		btn4.getStyleClass().add("afterpress");
 	}
 
-	
-
 	public void btn5(javafx.event.ActionEvent actione) throws IOException {
 
 		// try {
-		// 	Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/btn5_dashbord.fxml"));
-		// 	container.getChildren().removeAll();
-		// 	container.getChildren().setAll(fxml);
+		// Parent fxml =
+		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/btn5_dashbord.fxml"));
+		// container.getChildren().removeAll();
+		// container.getChildren().setAll(fxml);
 
 		// } catch (Exception e) {
-		// 	// TODO: handle exception
+		// // TODO: handle exception
 		// }
 
 		dashbord_btn.getStyleClass().remove("afterpress");
@@ -155,9 +152,6 @@ public class DashbordController implements Initializable {
 
 		btn5.getStyleClass().add("afterpress");
 
-		
-
-		
 	}
 
 	@Override
