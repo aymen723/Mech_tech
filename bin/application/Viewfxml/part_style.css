@@ -24,12 +24,12 @@
   -fx-border-width: 1.5px;
 }
 
-.alert {
+/* .alert {
   -fx-border-color: "#3C4048";
   -fx-text-fill: black;
   -fx-border-radius: 20px;
   -fx-background-radius: 20px;
-}
+} */
 
 .dialog-pane {
   -fx-border-color: black;
@@ -53,7 +53,18 @@
 }
 
 .dialog-pane .button {
-  -fx-text-fill: black;
   -fx-wrap-text: true;
   -fx-cursor: hand;
+  -fx-background-raduis: 10px;
+  -fx-border-radius: 10px;
+}
+
+.cancel_btn {
+  -fx-background-color: "#3c4048";
+  -fx-text-fill: white;
+}
+
+.delet_btn {
+  -fx-background-color: "#fc5a5a";
+  -fx-text-fill: white;
 }

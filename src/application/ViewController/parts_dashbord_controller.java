@@ -27,6 +27,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Control;
@@ -276,6 +277,13 @@ public class parts_dashbord_controller implements Initializable {
 
 						alert.setContentText("cette action ne peut pas être inversé !");
 
+						ButtonBar buttonBar = (ButtonBar) alert.getDialogPane().lookup(".button-bar");
+						Button cancelButton = (Button) buttonBar.getButtons().get(1);
+						Button deleteButton = (Button) buttonBar.getButtons().get(0);
+						cancelButton.getStyleClass().add("cancel_btn");
+						deleteButton.getStyleClass().add("delet_btn");
+						cancelButton.setText("Annuler");
+						deleteButton.setText("Supprimer");
 						Optional<ButtonType> result = alert.showAndWait();
 						if (result.get() == ButtonType.OK) {
 							Parts part = getTableView().getItems().get(getIndex());
