@@ -3,24 +3,25 @@ package application.ViewController;
 // import java.io.IOException;
 
 import java.net.URL;
-import java.util.Iterator;
 import java.util.Optional;
+// import java.util.Iterator;
 import java.util.ResourceBundle;
-import java.util.jar.Attributes.Name;
+// import java.util.jar.Attributes.Name;
 
 import org.bson.Document;
 
 import application.controller.AdminController;
 import application.models.Parts;
-import javafx.beans.binding.Bindings;
-import javafx.beans.value.ObservableValue;
+// import javafx.beans.binding.Bindings;
+// import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+// import javafx.event.ActionEvent;
+// import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 // import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -122,7 +123,6 @@ public class parts_dashbord_controller implements Initializable {
 			price.setText("");
 			quntitie.setText("");
 			description.setText("");
-
 			System.out.println("hna list mazal");
 			list = AdminController.PartList();
 			System.out.println("hna wra list");
@@ -157,22 +157,46 @@ public class parts_dashbord_controller implements Initializable {
 
 	public void mod_parts(javafx.event.ActionEvent actione) {
 
-		Document updatepart = new Document("name", name.getText());
-		updatepart.append("price", Integer.parseInt(price.getText()));
-		updatepart.append("quantity", Integer.parseInt(quntitie.getText()));
-		updatepart.append("description", description.getText());
+		if ((name.getText().trim().isEmpty() == false ) &&
+		(description.getText().trim().isEmpty() == false ) &&
+		(price.getText().trim().isEmpty() == false ) &&
+		(quntitie.getText().trim().isEmpty() == false ) && part != null) {
+			Document updatepart = new Document("name", name.getText());
+			updatepart.append("price", Integer.parseInt(price.getText()));
+			updatepart.append("quantity", Integer.parseInt(quntitie.getText()));
+			updatepart.append("description", description.getText());
+	
+			AdminController.updatepart(updatepart, part);
+			part = null ;
+			name.setText("");
+			price.setText("");
+			quntitie.setText("");
+			description.setText("");
+			System.out.println("hna list mazal");
+			list = AdminController.PartList();
+			System.out.println("hna wra list");
+			parts_table.setItems(list);
+		} else {
+			if (name.getText().trim().isEmpty() == true) {
 
-		AdminController.updatepart(updatepart, part);
+				name.getStyleClass().add("inptempty");
+			}
+			if (description.getText().trim().isEmpty() == true) {
 
-		name.setText("");
-		price.setText("");
-		quntitie.setText("");
-		description.setText("");
+				description.getStyleClass().add("inptempty");
+			}
+			if (quntitie.getText().trim().isEmpty() == true) {
 
-		System.out.println("hna list mazal");
-		list = AdminController.PartList();
-		System.out.println("hna wra list");
-		parts_table.setItems(list);
+				quntitie.getStyleClass().add("inptempty");
+			}
+
+			if (price.getText().trim().isEmpty() == true) {
+
+				price.getStyleClass().add("inptempty");
+			}
+
+		}
+
 
 	}
 
@@ -326,7 +350,8 @@ public class parts_dashbord_controller implements Initializable {
 						setGraphic(null);
 					} else {
 						HBox buttonsBox = new HBox(10, editButton, deleteButton, copybutton);
-						buttonsBox.setAlignment(getAlignment().CENTER);
+						getAlignment();
+						buttonsBox.setAlignment(Pos.CENTER);
 						setGraphic(buttonsBox);
 					}
 				}

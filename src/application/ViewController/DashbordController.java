@@ -9,9 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
+// import javafx.scene.paint.Color;
 
-import javafx.stage.Stage;
+// import javafx.stage.Stage;
 
 public class DashbordController implements Initializable {
 
@@ -66,29 +66,7 @@ public class DashbordController implements Initializable {
 
 		parts.getStyleClass().add("afterpress");
 
-		// // Group root = new Group();
-		// Parent fxml;
-		// try {
-		// fxml =
-		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/parts_dashbord.fxml"));
-		// //
-		// fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
-		// Stage stage = new Stage();
-		// Scene scene = new Scene(fxml);
-		// stage.setScene(scene);
-		// stage.setTitle("Mecha Tech");
-		// scene.setFill(Color.TRANSPARENT);
-
-		// // primaryStage.initStyle(StageStyle.UNDECORATED);
-		// // primaryStage.initStyle(StageStyle.TRANSPARENT);
-
-		// // primaryStage.setResizable(false);
-		// stage.show();
-
-		// } catch (IOException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
+		
 
 	}
 
@@ -155,6 +133,8 @@ public class DashbordController implements Initializable {
 		btn4.getStyleClass().add("afterpress");
 	}
 
+	
+
 	public void btn5(javafx.event.ActionEvent actione) throws IOException {
 
 		try {
@@ -172,6 +152,8 @@ public class DashbordController implements Initializable {
 		btn4.getStyleClass().remove("afterpress");
 
 		btn5.getStyleClass().add("afterpress");
+
+		
 	}
 
 	@Override
