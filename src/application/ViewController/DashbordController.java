@@ -9,7 +9,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 // import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 // import javafx.stage.Stage;
 
@@ -137,14 +139,14 @@ public class DashbordController implements Initializable {
 
 	public void btn5(javafx.event.ActionEvent actione) throws IOException {
 
-		try {
-			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/btn5_dashbord.fxml"));
-			container.getChildren().removeAll();
-			container.getChildren().setAll(fxml);
+		// try {
+		// 	Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/btn5_dashbord.fxml"));
+		// 	container.getChildren().removeAll();
+		// 	container.getChildren().setAll(fxml);
 
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+		// } catch (Exception e) {
+		// 	// TODO: handle exception
+		// }
 
 		dashbord_btn.getStyleClass().remove("afterpress");
 		parts.getStyleClass().remove("afterpress");
@@ -152,6 +154,8 @@ public class DashbordController implements Initializable {
 		btn4.getStyleClass().remove("afterpress");
 
 		btn5.getStyleClass().add("afterpress");
+
+		
 
 		
 	}

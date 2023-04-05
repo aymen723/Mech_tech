@@ -15,7 +15,10 @@ import application.models.Parts;
 // import javafx.beans.binding.Bindings;
 // import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 // import javafx.event.ActionEvent;
 // import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -66,6 +69,9 @@ public class parts_dashbord_controller implements Initializable {
 	private Button add_btn;
 
 	@FXML
+	private Button annl_btn;
+
+	@FXML
 	private TextField description;
 
 	@FXML
@@ -104,8 +110,12 @@ public class parts_dashbord_controller implements Initializable {
 
 	private Text txt;
 
+	
+
 	ObservableList<Parts> list = FXCollections.observableArrayList(new Parts("1", "part1", 5, "good", 1000),
 			new Parts("2", "part2", 6, "bad", 300));
+
+			FilteredList<Parts> filteredList = new FilteredList<>(list, b -> true);
 
 	public void add_parts(javafx.event.ActionEvent actione) {
 		// System.out.println(name.getText().trim().isEmpty());
@@ -127,6 +137,8 @@ public class parts_dashbord_controller implements Initializable {
 			list = AdminController.PartList();
 			System.out.println("hna wra list");
 			parts_table.setItems(list);
+			// filteredList = new FilteredList<>(list, b -> true);
+			parts_table.refresh();
 		} else {
 			if (name.getText().trim().isEmpty() == true) {
 
@@ -155,6 +167,24 @@ public class parts_dashbord_controller implements Initializable {
 
 	}
 
+	public void annl_mod(){
+
+		
+
+		name.setText("");
+			price.setText("");
+			quntitie.setText("");
+			description.setText("");
+
+			part = null ;
+
+			mod_btn.setDisable(true);
+			add_btn.setDisable(false);
+			annl_btn.setDisable(true);
+			annl_btn.setVisible(false);
+
+	}
+
 	public void mod_parts(javafx.event.ActionEvent actione) {
 
 		if ((name.getText().trim().isEmpty() == false ) &&
@@ -167,6 +197,13 @@ public class parts_dashbord_controller implements Initializable {
 			updatepart.append("description", description.getText());
 	
 			AdminController.updatepart(updatepart, part);
+
+			add_btn.setDisable(false);
+			mod_btn.setDisable(true);
+			annl_btn.setDisable(true);
+			annl_btn.setVisible(false);
+
+
 			part = null ;
 			name.setText("");
 			price.setText("");
@@ -202,6 +239,10 @@ public class parts_dashbord_controller implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+
+		annl_btn.setDisable(true);
+		annl_btn.setVisible(false);
+		mod_btn.setDisable(true);
 
 		System.out.println("hna list mazal");
 		list = AdminController.PartList();
@@ -284,6 +325,12 @@ public class parts_dashbord_controller implements Initializable {
 						description.setText(Part_edit.getDescription());
 						price.setText(Integer.toString(Part_edit.getPrice()));
 						quntitie.setText(Integer.toString(Part_edit.getQuntitie()));
+
+						mod_btn.setDisable(false);
+						add_btn.setDisable(true);
+						annl_btn.setDisable(false);
+						annl_btn.setVisible(true);
+
 					});
 
 					deleteButton.setOnAction(event -> {
@@ -359,6 +406,41 @@ public class parts_dashbord_controller implements Initializable {
 		});
 
 		parts_table.setItems(list);
+
+		filteredList = new FilteredList<>(list, b -> true);
+
+		// Set the filter Predicate whenever the search text changes
+		reserch_field.textProperty().addListener((observable, oldValue, newValue) -> {
+			FilteredList<Parts> filteredList = new FilteredList<>(list, data -> true);
+			filteredList.setPredicate(data -> {
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+				String lowerCaseFilter = newValue.toLowerCase();
+				if (data.getName().toLowerCase().contains(lowerCaseFilter)) {
+					return true;
+				} else if (data.getDescription().toLowerCase().contains(lowerCaseFilter)) {
+					return true;
+				}else if (String.valueOf(data.getQuntitie()).contains(lowerCaseFilter)) {
+					return true;
+				}else if (String.valueOf(data.getPrice()).contains(lowerCaseFilter)) {
+					return true;
+				}
+				parts_table.refresh();
+				return false;
+			});
+			SortedList<Parts> sortedList = new SortedList<>(filteredList);
+			sortedList.comparatorProperty().bind(parts_table.comparatorProperty());
+			parts_table.setItems(sortedList);
+		});
+
+		
+		// Wrap the filtered list in a sorted list
+		SortedList<Parts> sortedList = new SortedList<>(filteredList);
+		
+		// Bind the sorted list to the table
+		parts_table.setItems(sortedList);
+
 
 		parts_table.setRowFactory(tv -> {
 			TableRow<Parts> row = new TableRow<>();
