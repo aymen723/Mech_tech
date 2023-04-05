@@ -9,7 +9,6 @@ import com.mongodb.client.MongoCursor;
 
 import application.Connectdatabase;
 import application.ViewController.add_employer_controller;
-import application.ViewController.parts_dashbord_controller;
 import application.models.Parts;
 import application.models.Usermodel;
 import javafx.collections.FXCollections;
@@ -101,9 +100,9 @@ public class AdminController {
 
 	}
 
-	public static void updatepart(Document Doc) {
+	public static void updatepart(Document Doc, Parts part) {
 		MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
-		ObjectId objid = new ObjectId(parts_dashbord_controller.part.getId());
+		ObjectId objid = new ObjectId(part.getId());
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
 		System.out.println(found.get("name"));
 		Doc.append("_id", objid);
@@ -112,9 +111,11 @@ public class AdminController {
 
 	}
 
-	public static void deletpart() {
+	public static void deletpart(Parts part) {
+
 		MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
-		ObjectId objid = new ObjectId(parts_dashbord_controller.part.getId());
+		// ObjectId objid = new ObjectId(parts_dashbord_controller.part.getId());
+		ObjectId objid = new ObjectId(part.getId());
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
 		collection.deleteOne(found);
 

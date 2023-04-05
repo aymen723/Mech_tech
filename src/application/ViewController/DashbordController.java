@@ -66,6 +66,30 @@ public class DashbordController implements Initializable {
 
 		parts.getStyleClass().add("afterpress");
 
+		// // Group root = new Group();
+		// Parent fxml;
+		// try {
+		// fxml =
+		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/parts_dashbord.fxml"));
+		// //
+		// fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
+		// Stage stage = new Stage();
+		// Scene scene = new Scene(fxml);
+		// stage.setScene(scene);
+		// stage.setTitle("Mecha Tech");
+		// scene.setFill(Color.TRANSPARENT);
+
+		// // primaryStage.initStyle(StageStyle.UNDECORATED);
+		// // primaryStage.initStyle(StageStyle.TRANSPARENT);
+
+		// // primaryStage.setResizable(false);
+		// stage.show();
+
+		// } catch (IOException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+
 	}
 
 	public void Rendez_vous(javafx.event.ActionEvent actione) throws IOException {
@@ -86,7 +110,7 @@ public class DashbordController implements Initializable {
 
 		Rendez_vous.getStyleClass().add("afterpress");
 
-		// // Group root = new Group();
+		// Group root = new Group();
 		// Parent fxml;
 		// try {
 		// fxml =
@@ -164,11 +188,11 @@ public class DashbordController implements Initializable {
 
 	}
 
-	public void closing_add_parts(javafx.event.ActionEvent actione) {
-		((Node) (actione.getSource())).getScene().getWindow().hide();
-
-		System.out.println("quitter");
-
-	}
+	// public void closing_add_parts(javafx.event.ActionEvent actione) {
+	// ((Node) (actione.getSource())).getScene().getWindow().hide();
+	//
+	// System.out.println("quitter");
+	//
+	// }
 
 }

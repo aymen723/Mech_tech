@@ -3,30 +3,47 @@ package application.ViewController;
 // import java.io.IOException;
 
 import java.net.URL;
+import java.util.Iterator;
 import java.util.ResourceBundle;
+import java.util.jar.Attributes.Name;
 
 import org.bson.Document;
 
 import application.controller.AdminController;
 import application.models.Parts;
+import javafx.beans.binding.Bindings;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 // import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 // import javafx.scene.Parent;
 // import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Control;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-// import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
-// import javafx.stage.Stage;
-// import javafx.stage.StageStyle;
-// import javafx.util.converter.NumberStringConverter;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.InputMethodEvent;
+import javafx.scene.layout.HBox;
+
+import javafx.util.Callback;
+import javafx.scene.text.Text;
 
 public class parts_dashbord_controller implements Initializable {
 	@FXML
@@ -34,12 +51,6 @@ public class parts_dashbord_controller implements Initializable {
 
 	@FXML
 	private Button add_btn;
-
-	@FXML
-	private Button deleter_btn;
-
-	@FXML
-	private Button selec_btn;
 
 	@FXML
 	private TextField description;
@@ -73,72 +84,106 @@ public class parts_dashbord_controller implements Initializable {
 	@FXML
 	private TableView<Parts> parts_table;
 
+	@FXML
+	private TableColumn<Parts, Void> actionsColumn;
+
 	public static Parts part;
+
+	private Text txt;
 
 	ObservableList<Parts> list = FXCollections.observableArrayList(new Parts("1", "part1", 5, "good", 1000),
 			new Parts("2", "part2", 6, "bad", 300));
 
 	public void add_parts(javafx.event.ActionEvent actione) {
-		Document newpart = new Document("name", name.getText());
-		newpart.append("price", Integer.parseInt(price.getText()));
-		newpart.append("quantity", Integer.parseInt(quntitie.getText()));
-		newpart.append("description", description.getText());
-		AdminController.addpart(newpart);
-		System.out.println("hna list mazal");
-		list = AdminController.PartList();
-		System.out.println("hna wra list");
-		parts_table.setItems(list);
+		
+		if ((name.getText().trim().isEmpty() == false ) &&
+		(description.getText().trim().isEmpty() == false ) &&
+		(price.getText().trim().isEmpty() == false ) &&
+		(quntitie.getText().trim().isEmpty() == false )) {
+			Document newpart = new Document("name", name.getText());
+			newpart.append("price", Integer.parseInt(price.getText()));
+			newpart.append("quantity", Integer.parseInt(quntitie.getText()));
+			newpart.append("description", description.getText());
+			AdminController.addpart(newpart);
+
+			name.setText("");
+			price.setText("");
+			quntitie.setText("");
+			description.setText("");
+			System.out.println("hna list mazal");
+			list = AdminController.PartList();
+			System.out.println("hna wra list");
+			parts_table.setItems(list);
+		} else {
+			if (name.getText().trim().isEmpty() == true) {
+
+				name.getStyleClass().add("inptempty");
+			}
+			if (description.getText().trim().isEmpty() == true) {
+
+				description.getStyleClass().add("inptempty");
+			}
+			if (quntitie.getText().trim().isEmpty() == true) {
+
+				quntitie.getStyleClass().add("inptempty");
+			}
+
+			if (price.getText().trim().isEmpty() == true) {
+
+				price.getStyleClass().add("inptempty");
+			}
+
+		}
 
 	}
 
-	public void selection_parts(javafx.event.ActionEvent actione) {
-
-		System.out.println("test add");
-
-		TableViewSelectionModel<Parts> selectionModel = parts_table.getSelectionModel();
-		selectionModel.setSelectionMode(SelectionMode.SINGLE);
-		// ObservableList<Usermodel> selectedItems = selectionModel.getSelectedItems();
-		// System.out.println("hna fl mod " +
-		// selectionModel.getSelectedItems().get(0).id);
-		Parts part_mod = selectionModel.getSelectedItems().get(0);
-		part = selectionModel.getSelectedItems().get(0);
-		name.setText(part_mod.getName());
-		description.setText(part_mod.getDescription());
-		price.setText(Integer.toString(part_mod.getPrice()));
-		quntitie.setText(Integer.toString(part_mod.getQuntitie()));
-
-		// price.setText(part_mod.getPrice());
+	public void name_field(InputMethodEvent ev) {
+		System.out.println("test hna fi name");
 
 	}
 
 	public void mod_parts(javafx.event.ActionEvent actione) {
 
-		Document updatepart = new Document("name", name.getText());
-		updatepart.append("price", Integer.parseInt(price.getText()));
-		updatepart.append("quantity", Integer.parseInt(quntitie.getText()));
-		updatepart.append("description", description.getText());
+		if ((name.getText().trim().isEmpty() == false ) &&
+		(description.getText().trim().isEmpty() == false ) &&
+		(price.getText().trim().isEmpty() == false ) &&
+		(quntitie.getText().trim().isEmpty() == false )) {
+			Document updatepart = new Document("name", name.getText());
+			updatepart.append("price", Integer.parseInt(price.getText()));
+			updatepart.append("quantity", Integer.parseInt(quntitie.getText()));
+			updatepart.append("description", description.getText());
+	
+			AdminController.updatepart(updatepart, part);
 
-		AdminController.updatepart(updatepart);
+			name.setText("");
+			price.setText("");
+			quntitie.setText("");
+			description.setText("");
+			System.out.println("hna list mazal");
+			list = AdminController.PartList();
+			System.out.println("hna wra list");
+			parts_table.setItems(list);
+		} else {
+			if (name.getText().trim().isEmpty() == true) {
 
-		name.setText(null);
-		price.setText(null);
-		quntitie.setText(null);
-		description.setText(null);
-		System.out.println("hna list mazal");
-		list = AdminController.PartList();
-		System.out.println("hna wra list");
-		parts_table.setItems(list);
+				name.getStyleClass().add("inptempty");
+			}
+			if (description.getText().trim().isEmpty() == true) {
 
-	}
+				description.getStyleClass().add("inptempty");
+			}
+			if (quntitie.getText().trim().isEmpty() == true) {
 
-	public void dlt_part() {
-		TableViewSelectionModel<Parts> selectionModel = parts_table.getSelectionModel();
-		selectionModel.setSelectionMode(SelectionMode.SINGLE);
-		// ObservableList<Usermodel> selectedItems = selectionModel.getSelectedItems();
-		// System.out.println("hna fl mod " +
-		// selectionModel.getSelectedItems().get(0).id);
-		// Parts part_mod = selectionModel.getSelectedItems().get(0);
-		AdminController.deletpart();
+				quntitie.getStyleClass().add("inptempty");
+			}
+
+			if (price.getText().trim().isEmpty() == true) {
+
+				price.getStyleClass().add("inptempty");
+			}
+
+		}
+
 
 	}
 
@@ -153,8 +198,174 @@ public class parts_dashbord_controller implements Initializable {
 		nom_col.setCellValueFactory(new PropertyValueFactory<>("name"));
 		prix_col.setCellValueFactory(new PropertyValueFactory<>("price"));
 		quntite_col.setCellValueFactory(new PropertyValueFactory<>("quntitie"));
+
 		desc_col.setCellValueFactory(new PropertyValueFactory<>("description"));
+
+		desc_col.setCellFactory(new Callback<TableColumn<Parts, String>, TableCell<Parts, String>>() {
+			@Override
+			public TableCell<Parts, String> call(TableColumn<Parts, String> param) {
+				final TableCell<Parts, String> cell = new TableCell<Parts, String>() {
+					private Text text;
+
+					@Override
+					public void updateItem(String item, boolean empty) {
+						super.updateItem(item, empty);
+						if (item != null && !empty) {
+							setText(item);
+							text = new Text(item.toString());
+							txt = text;
+							text.setWrappingWidth(desc_col.getWidth());
+							setGraphic(text);
+
+						} else {
+							setText(null);
+						}
+					}
+				};
+				return cell;
+			}
+		});
+
+		actionsColumn.setCellFactory(column -> {
+
+			return new TableCell<Parts, Void>() {
+
+				private final Button editButton = new Button("");
+				private final Button deleteButton = new Button("");
+				private final Button copybutton = new Button("");
+
+				{
+
+					// deleteButton.getStylesheets()
+					// .add(getClass().getResource("/application/Viewfxml/button_table.css").toExternalForm());
+					// deleteButton.getStyleClass().add("delete");
+					deleteButton.setStyle(
+							"-fx-background-radius: 5em; -fx-min-width: 25px; -fx-min-height: 25px; -fx-max-width: 25px; -fx-max-height: 25px; -fx-background-color: transparent; -fx-alignment:CENTER;");
+					Image image = new Image(getClass().getResourceAsStream("Delete.png"));
+					ImageView img = new ImageView(image);
+					img.setFitHeight(25);
+					img.setFitWidth(25);
+					deleteButton.setGraphic(img);
+
+					editButton.setStyle(
+							"-fx-background-radius: 5em; -fx-min-width: 25px; -fx-min-height: 25px; -fx-max-width: 25px; -fx-max-height: 25px; -fx-background-color: transparent; -fx-alignment:CENTER;");
+					Image image_edit = new Image(getClass().getResourceAsStream("Edit.png"));
+					ImageView img_edit = new ImageView(image_edit);
+					img_edit.setFitHeight(25);
+					img_edit.setFitWidth(25);
+					editButton.setGraphic(img_edit);
+
+					copybutton.setStyle(
+							"-fx-background-radius: 5em; -fx-min-width: 25px; -fx-min-height: 25px; -fx-max-width: 25px; -fx-max-height: 25px; -fx-background-color: transparent; -fx-alignment:CENTER;");
+
+					Image image_copy = new Image(getClass().getResourceAsStream("copy.png"));
+					ImageView img_copy = new ImageView(image_copy);
+					img_copy.setFitHeight(25);
+					img_copy.setFitWidth(25);
+					copybutton.setGraphic(img_copy);
+
+					editButton.setOnAction(event -> {
+						Parts Part_edit = getTableView().getItems().get(getIndex());
+						part = Part_edit;
+						name.setText(Part_edit.getName());
+						description.setText(Part_edit.getDescription());
+						price.setText(Integer.toString(Part_edit.getPrice()));
+						quntitie.setText(Integer.toString(Part_edit.getQuntitie()));
+					});
+
+					deleteButton.setOnAction(event -> {
+						Parts part = getTableView().getItems().get(getIndex());
+						AdminController.deletpart(part);
+						list = AdminController.PartList();
+						parts_table.setItems(list);
+						parts_table.refresh();
+
+					});
+
+					copybutton.setOnAction(event -> {
+						// ObservableList<Parts> selectedItems =
+						// parts_table.getSelectionModel().getSelectedItems();
+
+						Parts part = getTableView().getItems().get(getIndex());
+
+						StringBuilder sb = new StringBuilder();
+
+						sb.append(part.getDescription()).append("," + "\n");
+						sb.append(part.getPrice()).append("," + "\n");
+						sb.append(part.getQuntitie()).append("," + "\n");
+						sb.append(part.getName()).append("\n");
+
+						ClipboardContent content = new ClipboardContent();
+						content.putString(sb.toString());
+						Clipboard.getSystemClipboard().setContent(content);
+					});
+				}
+
+				@Override
+				protected void updateItem(Void item, boolean empty) {
+					super.updateItem(item, empty);
+
+					if (empty) {
+						setGraphic(null);
+					} else {
+						HBox buttonsBox = new HBox(10, editButton, deleteButton, copybutton);
+						buttonsBox.setAlignment(getAlignment().CENTER);
+						setGraphic(buttonsBox);
+					}
+				}
+			};
+		});
+
 		parts_table.setItems(list);
+
+		parts_table.setRowFactory(tv -> {
+			TableRow<Parts> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (!row.isEmpty() && event.getClickCount() == 2) {
+					Parts rowData = row.getItem();
+					System.out.println("Double clicked on: " + rowData);
+				}
+			});
+			row.heightProperty().addListener((obs, oldHeight, newHeight) -> {
+				if (newHeight.doubleValue() > oldHeight.doubleValue()) {
+					row.setMinHeight(newHeight.doubleValue());
+					row.setMinHeight(txt.getLayoutBounds().getHeight());
+					// row.setMinHeight(100);
+				}
+			});
+			return row;
+		});
+		name.textProperty().addListener((observable, oldValue, newValue) -> {
+			// Your code here to handle the text field value change
+			System.out.println("Text changed from " + oldValue + " to " + newValue);
+			if (name.getText().trim().isEmpty() == false) {
+				name.getStyleClass().remove("inptempty");
+			}
+
+		});
+		description.textProperty().addListener((observable, oldValue, newValue) -> {
+			// Your code here to handle the text field value change
+			System.out.println("Text changed from " + oldValue + " to " + newValue);
+			if (description.getText().trim().isEmpty() == false) {
+				description.getStyleClass().remove("inptempty");
+			}
+
+		});
+		quntitie.textProperty().addListener((observable, oldValue, newValue) -> {
+			// Your code here to handle the text field value change
+			System.out.println("Text changed from " + oldValue + " to " + newValue);
+			if (quntitie.getText().trim().isEmpty() == false) {
+				quntitie.getStyleClass().remove("inptempty");
+			}
+
+		});
+		price.textProperty().addListener((observable, oldValue, newValue) -> {
+			// Your code here to handle the text field value change
+			System.out.println("Text changed from " + oldValue + " to " + newValue);
+			if (price.getText().trim().isEmpty() == false) {
+				price.getStyleClass().remove("inptempty");
+			}
+		});
 
 	}
 }

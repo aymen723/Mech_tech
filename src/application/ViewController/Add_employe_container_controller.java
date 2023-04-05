@@ -77,8 +77,8 @@ public class Add_employe_container_controller {
 		// newemp.append("prenom", prenomfield.getText());
 		// newemp.append("numero", numerofield.getText());
 		// newemp.append("role", rolefield.getText());
-		// newemp.append("email",emailfield.getText());
-		newemp.append("password", emailfield.getText());
+		// newemp.append("email", emailfield.getText());
+		// newemp.append("password", emailfield.getText());
 		AdminController.AddEmp(newemp);
 
 		System.out.println("test hna1");
