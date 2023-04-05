@@ -3,6 +3,7 @@ package application.ViewController;
 // import java.io.IOException;
 
 import java.net.URL;
+import java.util.Optional;
 // import java.util.Iterator;
 import java.util.ResourceBundle;
 // import java.util.jar.Attributes.Name;
@@ -21,30 +22,41 @@ import javafx.fxml.FXML;
 // import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-// import javafx.scene.Parent;
-// import javafx.scene.Scene;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-// import javafx.scene.control.ContextMenu;
-// import javafx.scene.control.Control;
-// import javafx.scene.control.MenuItem;
-// import javafx.scene.control.ScrollPane;
-// import javafx.scene.control.SelectionMode;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Control;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-// import javafx.scene.control.TableView.TableViewSelectionModel;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.InputMethodEvent;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
-
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import javafx.util.Callback;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class parts_dashbord_controller implements Initializable {
 	@FXML
@@ -96,11 +108,11 @@ public class parts_dashbord_controller implements Initializable {
 			new Parts("2", "part2", 6, "bad", 300));
 
 	public void add_parts(javafx.event.ActionEvent actione) {
-		
-		if ((name.getText().trim().isEmpty() == false ) &&
-		(description.getText().trim().isEmpty() == false ) &&
-		(price.getText().trim().isEmpty() == false ) &&
-		(quntitie.getText().trim().isEmpty() == false )) {
+		// System.out.println(name.getText().trim().isEmpty());
+		if (name.getText().trim().isEmpty() == false &&
+				description.getText().trim().isEmpty() == false &&
+				quntitie.getText().trim().isEmpty() == false &&
+				price.getText().trim().isEmpty() == false) {
 			Document newpart = new Document("name", name.getText());
 			newpart.append("price", Integer.parseInt(price.getText()));
 			newpart.append("quantity", Integer.parseInt(quntitie.getText()));
@@ -275,11 +287,39 @@ public class parts_dashbord_controller implements Initializable {
 					});
 
 					deleteButton.setOnAction(event -> {
-						Parts part = getTableView().getItems().get(getIndex());
-						AdminController.deletpart(part);
-						list = AdminController.PartList();
-						parts_table.setItems(list);
-						parts_table.refresh();
+
+						Alert alert = new Alert(AlertType.CONFIRMATION);
+						alert.setTitle("Confirmation de suppression");
+						DialogPane dialogPane = alert.getDialogPane();
+						dialogPane.setGraphic(null);
+
+						dialogPane.getStylesheets()
+								.add(getClass().getResource("/application/Viewfxml/part_style.css").toExternalForm());
+						dialogPane.getStyleClass().add("dialog-pane ");
+
+						alert.initStyle(StageStyle.UNDECORATED);
+
+						alert.setContentText("cette action ne peut pas être inversé !");
+
+						ButtonBar buttonBar = (ButtonBar) alert.getDialogPane().lookup(".button-bar");
+						Button cancelButton = (Button) buttonBar.getButtons().get(1);
+						Button deleteButton = (Button) buttonBar.getButtons().get(0);
+						cancelButton.getStyleClass().add("cancel_btn");
+						deleteButton.getStyleClass().add("delet_btn");
+						cancelButton.setText("Annuler");
+						deleteButton.setText("Supprimer");
+						Optional<ButtonType> result = alert.showAndWait();
+						if (result.get() == ButtonType.OK) {
+							Parts part = getTableView().getItems().get(getIndex());
+							AdminController.deletpart(part);
+							list = AdminController.PartList();
+							parts_table.setItems(list);
+							parts_table.refresh();
+							// User clicked OK
+						} else {
+							// User clicked Cancel or closed the dialog
+
+						}
 
 					});
 
