@@ -24,9 +24,9 @@ public class DashbordController implements Initializable {
 	@FXML
 	Button Rendez_vous;
 	@FXML
-	Button btn4;
+	Button Employés;
 	@FXML
-	Button btn5;
+	Button Clients;
 	@FXML
 	BorderPane container;
 	@FXML
@@ -44,8 +44,8 @@ public class DashbordController implements Initializable {
 
 		parts.getStyleClass().remove("afterpress");
 		Rendez_vous.getStyleClass().remove("afterpress");
-		btn4.getStyleClass().remove("afterpress");
-		btn5.getStyleClass().remove("afterpress");
+		Employés.getStyleClass().remove("afterpress");
+		Clients.getStyleClass().remove("afterpress");
 		dashbord_btn.getStyleClass().add("afterpress");
 
 	}
@@ -61,8 +61,8 @@ public class DashbordController implements Initializable {
 			// TODO: handle exception
 		}
 
-		btn4.getStyleClass().remove("afterpress");
-		btn5.getStyleClass().remove("afterpress");
+		Employés.getStyleClass().remove("afterpress");
+		Clients.getStyleClass().remove("afterpress");
 		dashbord_btn.getStyleClass().remove("afterpress");
 		Rendez_vous.getStyleClass().remove("afterpress");
 
@@ -83,12 +83,12 @@ public class DashbordController implements Initializable {
 
 		dashbord_btn.getStyleClass().remove("afterpress");
 		parts.getStyleClass().remove("afterpress");
-		btn4.getStyleClass().remove("afterpress");
-		btn5.getStyleClass().remove("afterpress");
+		Employés.getStyleClass().remove("afterpress");
+		Clients.getStyleClass().remove("afterpress");
 
 		Rendez_vous.getStyleClass().add("afterpress");
 
-		// Group root = new Group();
+		// // Group root = new Group();
 		// Parent fxml;
 		// try {
 		// fxml =
@@ -114,7 +114,7 @@ public class DashbordController implements Initializable {
 
 	}
 
-	public void btn4(javafx.event.ActionEvent actione) throws IOException {
+	public void Employés(javafx.event.ActionEvent actione) throws IOException {
 
 		try {
 			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/add_employe_dashbord.fxml"));
@@ -128,29 +128,28 @@ public class DashbordController implements Initializable {
 		dashbord_btn.getStyleClass().remove("afterpress");
 		parts.getStyleClass().remove("afterpress");
 		Rendez_vous.getStyleClass().remove("afterpress");
-		btn5.getStyleClass().remove("afterpress");
+		Clients.getStyleClass().remove("afterpress");
 
-		btn4.getStyleClass().add("afterpress");
+		Employés.getStyleClass().add("afterpress");
 	}
 
-	public void btn5(javafx.event.ActionEvent actione) throws IOException {
+	public void Clients(javafx.event.ActionEvent actione) throws IOException {
 
-		// try {
-		// Parent fxml =
-		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/btn5_dashbord.fxml"));
-		// container.getChildren().removeAll();
-		// container.getChildren().setAll(fxml);
+		try {
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Client_dashbord.fxml"));
+			container.getChildren().removeAll();
+			container.getChildren().setAll(fxml);
 
-		// } catch (Exception e) {
-		// // TODO: handle exception
-		// }
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 
 		dashbord_btn.getStyleClass().remove("afterpress");
 		parts.getStyleClass().remove("afterpress");
 		Rendez_vous.getStyleClass().remove("afterpress");
-		btn4.getStyleClass().remove("afterpress");
+		Employés.getStyleClass().remove("afterpress");
 
-		btn5.getStyleClass().add("afterpress");
+		Clients.getStyleClass().add("afterpress");
 
 	}
 
