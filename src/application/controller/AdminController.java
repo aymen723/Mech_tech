@@ -8,7 +8,9 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 
 import application.Connectdatabase;
+import application.ViewController.Client_dashbord;
 import application.ViewController.add_employer_controller;
+import application.models.Clientmodel;
 import application.models.Parts;
 import application.models.Usermodel;
 import javafx.collections.FXCollections;
@@ -125,6 +127,76 @@ public class AdminController {
 		ObjectId objid = new ObjectId(add_employer_controller.user.getId());
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
 		collection.deleteOne(found);
+	}
+
+	public static void AddClient(Document Doc) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("clients");
+		collection.insertOne(Doc);
+
+	}
+
+	public static void UpdateClient(Document Doc) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("clients");
+		ObjectId objid = new ObjectId(Client_dashbord.client.getId());
+		Document found = (Document) collection.find(new Document("_id", objid)).first();
+		Doc.append("_id", objid);
+		Document updated = new Document("$set", Doc);
+		collection.updateOne(found, updated);
+
+	}
+
+	public static void deletClient(Clientmodel client) {
+		MongoCollection<Document> collection = Connectdatabase.connectdb("clients");
+		// ObjectId objid = new ObjectId(add_employer_controller.user.getId());
+		ObjectId objid = new ObjectId(client.getId());
+		Document found = (Document) collection.find(new Document("_id", objid)).first();
+		collection.deleteOne(found);
+	}
+
+	public static ObservableList<Clientmodel> EmpClients() {
+		ObservableList<Clientmodel> List = FXCollections.observableArrayList();
+		MongoCollection<Document> collection = Connectdatabase.connectdb("clients");
+
+		MongoCursor<Document> cursor = collection.find().iterator();
+		try {
+			while (cursor.hasNext()) {
+				Document doc = cursor.next();
+				Clientmodel client = new Clientmodel();
+
+				client.setId(doc.getObjectId("_id").toString());
+				client.setNom(doc.getString("nom"));
+				client.setPrenom(doc.getString("prenom"));
+				client.setEmail(doc.getString("email"));
+				client.setNumero(doc.getString("tel"));
+				client.setAddresse(doc.getString("adresse"));
+
+				List.add(client);
+
+			}
+		} finally {
+			cursor.close();
+		}
+
+		return List;
+
+	}
+
+	public static void addrdv(Document Doc) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
+		collection.insertOne(Doc);
+
+	}
+
+	public static void findclientbyid(String id) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("clients");
+
+		Document doc = new Document();
+		// Document document = collection.find(eq("_id", new ObjectId(id))).first();
+
 	}
 
 }

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="mod_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDetected="#return_back" prefHeight="600.0" prefWidth="930.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.modifier_client">
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="346.60003662109375" minWidth="10.0" prefWidth="287.2" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="600.0" minWidth="10.0" prefWidth="400.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="253.5999755859375" minWidth="10.0" prefWidth="253.5999755859375" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Text fill="#a1a1a1" layoutX="14.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin &gt;">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#a1a1a1" layoutX="122.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les Clients &gt;">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <Text layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier Client">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+               <children>
+                  <Button fx:id="return_back" layoutX="86.0" layoutY="18.0" mnemonicParsing="false" onAction="#return_back" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: transparent;" text="&lt;     Retour">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Button>
+               </children></Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <TextField fx:id="name_field" layoutX="73.0" layoutY="24.0" prefWidth="250.0" promptText="Nom" styleClass="inpt" stylesheets="@inputs.css" />
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <TextField fx:id="pernom_field" layoutX="73.0" layoutY="24.0" prefWidth="250.0" promptText="Prenom" styleClass="inpt" stylesheets="@inputs.css" />
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <TextField fx:id="numero_field" layoutX="73.0" layoutY="24.0" prefWidth="250.0" promptText="Numéro" styleClass="inpt" stylesheets="@inputs.css" />
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <children>
+                  <TextField fx:id="email_field" layoutX="73.0" layoutY="24.0" prefWidth="250.0" promptText="Email" styleClass="inpt" stylesheets="@inputs.css" />
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <children>
+                  <TextField fx:id="address_field" layoutX="73.0" layoutY="24.0" prefWidth="250.0" promptText="Address" styleClass="inpt" stylesheets="@inputs.css" />
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+               <children>
+                  <Button fx:id="modifier_client" layoutX="148.0" layoutY="20.0" mnemonicParsing="false" onAction="#modifier_client" prefHeight="35.0" prefWidth="100.0" text="Modifier">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children></Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <children>
+                  <Text layoutX="227.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <children>
+                  <Text layoutX="207.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom :">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+               <children>
+                  <Text layoutX="204.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro :">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+               <children>
+                  <Text layoutX="224.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email :">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
+               <children>
+                  <Text layoutX="205.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address :">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6" />
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7" />
+         </children>
+      </GridPane>
+   </center>
+</BorderPane>

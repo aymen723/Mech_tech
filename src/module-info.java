@@ -8,13 +8,6 @@ module mecha {
 	requires javafx.base;
 	// requires com.jfoenix;
 
-
-	// requires javafx.media;
-
-	// requires de.jensd.fx.fontawesomefx.fontawesome;
-	// opens application.models;
-
-	// opens application to javafx.graphics, javafx.fxml;
 	opens application to javafx.graphics, javafx.fxml, javafx.base;
 	opens application.ViewController to javafx.graphics, javafx.fxml, javafx.base;
 	opens application.controller to javafx.graphics, javafx.fxml, javafx.base;
