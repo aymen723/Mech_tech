@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import application.controller.AdminController;
 import application.models.Clientmodel;
@@ -101,7 +102,7 @@ public class Ajouter_rdv implements Initializable {
         } else {
             newclient = new Clientmodel(client_golbal.getId(), client_golbal.getNom(), client_golbal.getPrenom(),
                     client_golbal.getEmail(), client_golbal.getAddresse(), client_golbal.getNumero());
-            clientrdv = new Document("id", newclient.getId());
+            clientrdv = new Document("_id", new ObjectId(newclient.getId()));
             clientrdv.append("nom", newclient.getNom());
             clientrdv.append("prenom", newclient.getPrenom());
             clientrdv.append("tel", newclient.getNumero());

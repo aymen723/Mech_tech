@@ -2,6 +2,7 @@ package application.controller;
 
 import org.bson.Document;
 
+
 import org.bson.types.ObjectId;
 
 import com.mongodb.client.MongoCollection;
@@ -12,6 +13,7 @@ import application.ViewController.Client_dashbord;
 import application.ViewController.add_employer_controller;
 import application.models.Clientmodel;
 import application.models.Parts;
+import application.models.Rendez_vous;
 import application.models.Usermodel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -196,6 +198,41 @@ public class AdminController {
 
 		Document doc = new Document();
 		// Document document = collection.find(eq("_id", new ObjectId(id))).first();
+
+	}
+
+	public static ObservableList<Rendez_vous> ListRdv() {
+		ObservableList<Rendez_vous> List = FXCollections.observableArrayList();
+		MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
+
+		MongoCursor<Document> cursor = collection.find().iterator();
+		try {
+			while (cursor.hasNext()) {
+				Document doc = cursor.next();
+				Rendez_vous rdv = new Rendez_vous();
+
+				rdv.setId(doc.getObjectId("_id").toString());
+
+				Document clientdoc = doc.get("client", Document.class);
+				Clientmodel client = new Clientmodel();
+
+				client.setId(clientdoc.getObjectId("_id").toString());
+				client.setNom(clientdoc.getString("nom"));
+				client.setPrenom(clientdoc.getString("prenom"));
+				client.setEmail(clientdoc.getString("email"));
+				client.setNumero(clientdoc.getString("tel"));
+				client.setAddresse(clientdoc.getString("adresse"));
+
+				rdv.setClient_rdv(client);
+
+				List.add(rdv);
+
+			}
+		} finally {
+			cursor.close();
+		}
+
+		return List;
 
 	}
 
