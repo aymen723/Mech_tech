@@ -4,6 +4,9 @@ package application.ViewController;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import application.controller.AdminController;
+import application.models.Rendez_vous;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -82,6 +85,11 @@ public class Rdv_veiwcontroller implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
+		ObservableList<Rendez_vous> list = AdminController.ListRdv();
+		if (list.get(0).getClient_rdv() != null){
+			System.out.println("not null");
+		System.out.println(list.get(0).getClient_rdv().getNom());
+		}
 		table_list.getItems().add("rdv_days.fxml");
 		table_list.getItems().add("rdv_month.fxml");
 		table_list.getItems().add("rdv_week.fxml");

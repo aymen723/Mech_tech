@@ -128,7 +128,6 @@ public class Usermodel {
 	}
 
 	String id;
-
 	String username;
 	String password;
 	String nom;
