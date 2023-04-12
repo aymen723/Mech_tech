@@ -1,21 +1,19 @@
-#btn1 {
- -fx-background-color:  #adb5bd;
+.btn_add {
+  -fx-background-color: "#fac400";
+  -fx-text-fill: White;
+  -fx-background-radius: 8px;
+  -fx-background-radius: 8px;
 }
 
+.btn_mod {
+  -fx-background-color: transparent;
+  -fx-text-fill: #454545;
+  -fx-border-radius: 8px;
+  -fx-background-radius: 8px;
+  -fx-border-color: #454545;
+  -fx-border-width: 1.5px;
+}
 
-#btn1:hover{
- -fx-background-color: #dee2e6;
-}
-#btn2 {
-  background-color: aqua;
-}
-
-#btn3 {
-  background-color: aqua;
-}
-#btn4 {
-  background-color: aqua;
-}
-#btn5 {
-  background-color: aqua;
+.btn_return {
+  -fx-background-color: transparent;
 }
