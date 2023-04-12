@@ -1,19 +1,20 @@
 package application.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bson.Document;
+
 
 import org.bson.types.ObjectId;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 
 import application.Connectdatabase;
 import application.ViewController.Client_dashbord;
 import application.ViewController.add_employer_controller;
-import application.models.Clientmodel;
 import application.models.Clientmodel;
 import application.models.Parts;
 import application.models.Rendez_vous;
@@ -27,6 +28,7 @@ public class AdminController {
 
 		MongoCollection<Document> collection = Connectdatabase.connectdb("users");
 		collection.insertOne(Doc);
+		Connectdatabase.closeconndb();
 
 	}
 
@@ -38,6 +40,8 @@ public class AdminController {
 		Doc.append("_id", objid);
 		Document updateop = new Document("$set", Doc);
 		collection.updateOne(found, updateop);
+		Connectdatabase.closeconndb();
+
 
 	}
 
@@ -46,6 +50,8 @@ public class AdminController {
 		ObjectId objid = new ObjectId(add_employer_controller.user.getId());
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
 		collection.deleteOne(found);
+		Connectdatabase.closeconndb();
+
 	}
 
 	public static ObservableList<Usermodel> EmpLiist() {
@@ -68,10 +74,13 @@ public class AdminController {
 				user.setRole(doc.getString("role"));
 
 				List.add(user);
+			
 
 			}
 		} finally {
 			cursor.close();
+			Connectdatabase.closeconndb();
+
 		}
 
 		return List;
@@ -82,6 +91,8 @@ public class AdminController {
 
 		MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
 		collection.insertOne(Doc);
+		Connectdatabase.closeconndb();
+
 
 	}
 
@@ -93,6 +104,8 @@ public class AdminController {
 		Doc.append("_id", objid);
 		Document updateop = new Document("$set", Doc);
 		collection.updateOne(found, updateop);
+		Connectdatabase.closeconndb();
+
 
 	}
 
@@ -102,6 +115,8 @@ public class AdminController {
 		ObjectId objid = new ObjectId(part.getId());
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
 		collection.deleteOne(found);
+		Connectdatabase.closeconndb();
+
 
 	}
 
@@ -128,6 +143,8 @@ public class AdminController {
 			System.out.println("Error retrieving documents: " + e.getMessage());
 		} finally {
 			cursor.close();
+			Connectdatabase.closeconndb();
+
 		}
 
 		return List;
@@ -145,6 +162,8 @@ public class AdminController {
 
 		MongoCollection<Document> collection = Connectdatabase.connectdb("clients");
 		collection.insertOne(Doc);
+		Connectdatabase.closeconndb();
+
 
 	}
 
@@ -156,6 +175,8 @@ public class AdminController {
 		Doc.append("_id", objid);
 		Document updated = new Document("$set", Doc);
 		collection.updateOne(found, updated);
+		Connectdatabase.closeconndb();
+
 
 	}
 
@@ -165,6 +186,8 @@ public class AdminController {
 		ObjectId objid = new ObjectId(client.getId());
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
 		collection.deleteOne(found);
+		Connectdatabase.closeconndb();
+
 	}
 
 	public static ObservableList<Clientmodel> ListClient() {
@@ -189,6 +212,8 @@ public class AdminController {
 			}
 		} finally {
 			cursor.close();
+			Connectdatabase.closeconndb();
+
 		}
 
 		return List;
@@ -205,6 +230,8 @@ public class AdminController {
     query.put("_id", new ObjectId(id));
 
     doc = collection.find(query).first();
+	Connectdatabase.closeconndb();
+
 
 		return doc;
 	}
@@ -213,6 +240,8 @@ public class AdminController {
 
 		MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
 		collection.insertOne(Doc);
+		Connectdatabase.closeconndb();
+
 
 	}
 
@@ -224,8 +253,46 @@ public class AdminController {
 		Doc.append("_id", objid);
 		Document updated = new Document("$set", Doc);
 		collection.updateOne(found, updated);
+		Connectdatabase.closeconndb();
+
 
 	}
+
+	// public static ObservableList<Rendez_vous> ListRdv() {
+	// 	ObservableList<Rendez_vous> List = FXCollections.observableArrayList();
+	// 	MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
+
+	// 	MongoCursor<Document> cursor = collection.find().iterator();
+	// 	try {
+	// 		while (cursor.hasNext()) {
+	// 			Document doc = cursor.next();
+	// 			Rendez_vous rdv = new Rendez_vous();
+
+	// 			rdv.setId(doc.getObjectId("_id").toString());
+				
+
+	// 			Document clientdoc = doc.get("client", Document.class);
+	// 			Clientmodel client = new Clientmodel();
+
+	// 			client.setId(clientdoc.getObjectId("_id").toString());
+	// 			client.setNom(clientdoc.getString("nom"));
+	// 			client.setPrenom(clientdoc.getString("prenom"));
+	// 			client.setEmail(clientdoc.getString("email"));
+	// 			client.setNumero(clientdoc.getString("tel"));
+	// 			client.setAddresse(clientdoc.getString("adresse"));
+
+	// 			rdv.setClient_rdv(client);
+
+	// 			List.add(rdv);
+
+	// 		}
+	// 	} finally {
+	// 		cursor.close();
+	// 	}
+
+	// 	return List;
+
+	// }
 
 	public static ObservableList<Rendez_vous> ListRdv() {
 		ObservableList<Rendez_vous> List = FXCollections.observableArrayList();
@@ -238,7 +305,6 @@ public class AdminController {
 				Rendez_vous rdv = new Rendez_vous();
 
 				rdv.setId(doc.getObjectId("_id").toString());
-				
 
 				Document clientdoc = doc.get("client", Document.class);
 				Clientmodel client = new Clientmodel();
@@ -252,11 +318,31 @@ public class AdminController {
 
 				rdv.setClient_rdv(client);
 
+				ArrayList<Document> parlistdoc = (ArrayList<Document>) doc.get("parts");
+				ArrayList<Parts> partlist = new ArrayList<Parts>();
+				for (Document pardoc : parlistdoc){
+					Parts part = new Parts();
+
+					part.setId(doc.getObjectId("_id").toString());
+
+				part.setName(pardoc.getString("name"));
+				part.setDescription(pardoc.getString("description"));
+				part.setQuntitie(pardoc.getInteger("quantity"));
+				part.setPrice(pardoc.getInteger("price"));
+
+				partlist.add(part);
+
+
+				}
+				rdv.setParts(partlist);
+
 				List.add(rdv);
 
 			}
 		} finally {
 			cursor.close();
+			Connectdatabase.closeconndb();
+
 		}
 
 		return List;

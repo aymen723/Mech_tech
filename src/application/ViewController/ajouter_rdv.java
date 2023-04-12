@@ -1,6 +1,7 @@
 package application.ViewController;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import org.bson.Document;
@@ -8,6 +9,7 @@ import org.bson.types.ObjectId;
 
 import application.controller.AdminController;
 import application.models.Clientmodel;
+import application.models.Parts;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -87,10 +89,12 @@ public class Ajouter_rdv implements Initializable {
         Document clientrdv = new Document();
 
         Document newrdv = new Document("date_debut", datedebut.getValue());
+        
         newrdv.append("date_fin", date_fin_rdv.getValue());
         newrdv.append("description", description.getText());
         newrdv.append("car model", car_model.getText());
         newrdv.append("prix", prix.getText());
+        
         if (invite_check.isSelected() == true) {
 
             newclient = new Clientmodel(nom_client.getText(), prenom_client.getText(), numero_client.getText());
@@ -101,7 +105,6 @@ public class Ajouter_rdv implements Initializable {
         } else {
             newclient = new Clientmodel(client_golbal.getId(), client_golbal.getNom(), client_golbal.getPrenom(),
                     client_golbal.getEmail(), client_golbal.getAddresse(), client_golbal.getNumero());
-                    
             clientrdv = new Document("_id", new ObjectId(newclient.getId()));
             clientrdv.append("nom", newclient.getNom());
             clientrdv.append("prenom", newclient.getPrenom());
@@ -113,6 +116,7 @@ public class Ajouter_rdv implements Initializable {
 
         }
         newrdv.append("client", clientrdv);
+        newrdv.append("parts", new ArrayList<Parts>());
         AdminController.addrdv(newrdv);
         System.out.println(newrdv);
 
