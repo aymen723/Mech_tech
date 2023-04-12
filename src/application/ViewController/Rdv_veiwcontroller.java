@@ -171,7 +171,7 @@ public class Rdv_veiwcontroller implements Initializable {
 				cellData -> new SimpleStringProperty(cellData.getValue().getClient_rdv().getNumero()));
 		voiture_model_col.setCellValueFactory(new PropertyValueFactory<>("car_model"));
 
-		desc_col.setCellValueFactory(new PropertyValueFactory<>("decription"));
+		desc_col.setCellValueFactory(new PropertyValueFactory<>("descrption_in"));
 		date_deut_col.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
 		date_fin_col.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
 
@@ -218,23 +218,23 @@ public class Rdv_veiwcontroller implements Initializable {
 
 						// try {
 
-						// 	FXMLLoader loader = new FXMLLoader(
-						// 			getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
-						// 	Parent root = loader.load();
+						// FXMLLoader loader = new FXMLLoader(
+						// getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
+						// Parent root = loader.load();
 
-						// 	Rdv_details rdv_details_con = loader.getController();
-						// 	System.out.println(rdv_details_con);
+						// Rdv_details rdv_details_con = loader.getController();
+						// System.out.println(rdv_details_con);
 
-						// 	rdv_details_con.getrdv(rdv);
-						// 	Stage stage = new Stage();
-						// 	Scene scene = new Scene(root);
-						// 	stage.setScene(scene);
-						// 	stage.setTitle("Mecha Tech");
+						// rdv_details_con.getrdv(rdv);
+						// Stage stage = new Stage();
+						// Scene scene = new Scene(root);
+						// stage.setScene(scene);
+						// stage.setTitle("Mecha Tech");
 
-						// 	stage.show();
+						// stage.show();
 
 						// } catch (IOException e) {
-						// 	e.printStackTrace();
+						// e.printStackTrace();
 						// }
 
 					});

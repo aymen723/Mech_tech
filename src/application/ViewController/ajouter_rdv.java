@@ -36,13 +36,16 @@ public class Ajouter_rdv implements Initializable {
     private TextField car_model;
 
     @FXML
+    private TextField service_field;
+
+    @FXML
     private ComboBox<Clientmodel> comobbox;
 
     @FXML
     private CheckBox invite_check;
 
     @FXML
-    private TextArea description;
+    private TextArea description_in;
 
     @FXML
     private TextField nom_client;
@@ -91,7 +94,10 @@ public class Ajouter_rdv implements Initializable {
         Document newrdv = new Document("date_debut", datedebut.getValue());
         
         newrdv.append("date_fin", date_fin_rdv.getValue());
-        newrdv.append("description", description.getText());
+        newrdv.append("descrption_in", description_in.getText());
+        newrdv.append("descrption_out", null);
+        newrdv.append("service", service_field.getText());
+
         newrdv.append("car model", car_model.getText());
         newrdv.append("prix", prix.getText());
         

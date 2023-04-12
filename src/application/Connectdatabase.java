@@ -18,6 +18,8 @@ public class Connectdatabase {
 	public static MongoCollection<Document> connectdb(String collectionName) {
 		mongoClient = MongoClients.create("mongodb://localhost:27017");
 		database = mongoClient.getDatabase("Meca_tech");
+		mongoClient = MongoClients.create("mongodb://localhost:27017");
+		database = mongoClient.getDatabase("Meca_tech");
 		MongoCollection<Document> collection = database.getCollection(collectionName);
 		return collection;
 	}

@@ -2,6 +2,17 @@ package application.models;
 
 public class Usermodel {
 
+	String id;
+
+	String username;
+	String password;
+	String nom;
+	String prenom;
+	String numero;
+	String address;
+	String email;
+	String role;
+
 	// public SimpleStringProperty id = new SimpleStringProperty("");
 	// public SimpleStringProperty username = new SimpleStringProperty("");
 	// public SimpleStringProperty nom = new SimpleStringProperty("");
@@ -126,15 +137,5 @@ public class Usermodel {
 	public Usermodel() {
 		super();
 	}
-
-	String id;
-	String username;
-	String password;
-	String nom;
-	String prenom;
-	String numero;
-	String address;
-	String email;
-	String role;
 
 }

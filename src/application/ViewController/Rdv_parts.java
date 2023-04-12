@@ -74,6 +74,8 @@ public class Rdv_parts implements Initializable {
     @FXML
     private BorderPane rdv_parts_container;
 
+    private ArrayList<Parts> parts_list;
+
     private Rendez_vous rdv_local;
 
     ObservableList<Parts> list = FXCollections.observableArrayList(new Parts("1", "part1", 5, "good", 1000),
@@ -81,14 +83,8 @@ public class Rdv_parts implements Initializable {
 
     FilteredList<Parts> filteredList = new FilteredList<>(list, b -> true);
 
-    public void setrdv(Rendez_vous rdv){
-        this.rdv_local = rdv;
-
-    }
-
     public void add_parts() {
-        // System.out.println("executing add part rdvparts");
-        
+
         TableViewSelectionModel<Parts> selectionModel = parts_table.getSelectionModel();
         selectionModel.setSelectionMode(SelectionMode.SINGLE);
 
@@ -98,8 +94,6 @@ public class Rdv_parts implements Initializable {
         System.out.println(part.getName() + " is added");
 
         rdv_local.getParts().add(part);
-
-        
     }
 
     public void annl_mod() {
@@ -114,12 +108,14 @@ public class Rdv_parts implements Initializable {
 
     }
 
-    // public void getlist(ArrayList<Parts> list) {
-    // parts = list;
-    // }
+    public void setrdv(Rendez_vous rdv) {
+        this.rdv_local = rdv;
+
+    }
 
     @FXML
     void conferm() {
+
         try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
@@ -131,7 +127,7 @@ public class Rdv_parts implements Initializable {
             rdv_parts_container.getChildren().removeAll();
             rdv_parts_container.getChildren().setAll(root);
             rdv_details_con.setContent(root);
-            
+
         } catch (Exception e) {
             // TODO: handle exception
         }
@@ -166,8 +162,8 @@ public class Rdv_parts implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
 
-        annl_btn.setDisable(true);
-        annl_btn.setVisible(false);
+        // annl_btn.setDisable(true);
+        // annl_btn.setVisible(false);
 
         System.out.println("hna list mazal");
         list = AdminController.PartList();

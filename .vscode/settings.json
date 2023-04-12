@@ -10,10 +10,9 @@
       "c:\\java\\javafx\\javafx-sdk-19.0.2.1\\lib\\javafx.media.jar",
       "c:\\java\\javafx\\javafx-sdk-19.0.2.1\\lib\\javafx.swing.jar",
       "c:\\java\\javafx\\javafx-sdk-19.0.2.1\\lib\\javafx.web.jar",
-      "c:\\java\\javafx\\javafx-sdk-19.0.2.1\\lib\\javafx-swt.jar"
+      "c:\\java\\javafx\\javafx-sdk-19.0.2.1\\lib\\javafx-swt.jar",
+      "c:\\java\\resour\\tilesfx\\countries-17.0.23.jar"
     ],
-    "exclude": [
-      "c:\\java\\resour\\jfoenix\\jfoenix-8.0.10.jar"
-    ]
+    "exclude": ["c:\\java\\resour\\jfoenix\\jfoenix-8.0.10.jar"]
   }
 }

@@ -1,16 +1,21 @@
 package application.ViewController;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import org.bson.Document;
 
 import application.controller.AdminController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 
-public class Add_employe_container_controller {
+public class Add_employe_container_controller implements Initializable {
 
 	@FXML
 	private TextField emailfield;
@@ -25,7 +30,7 @@ public class Add_employe_container_controller {
 	private TextField prenomfield;
 
 	@FXML
-	private TextField rolefield;
+	private TextField passworField;
 
 	@FXML
 	private TextField usernamefield;
@@ -57,6 +62,9 @@ public class Add_employe_container_controller {
 	@FXML
 	private BorderPane add_container;
 
+	@FXML
+	private ChoiceBox<String> role;
+
 	public void return_back() {
 		System.out.println("azda");
 		try {
@@ -72,13 +80,13 @@ public class Add_employe_container_controller {
 
 	public void ajouter_employer() {
 
-		Document newemp = new Document("username", usernamefield.getText());
-		// newemp.append("nom", namefield.getText());
-		// newemp.append("prenom", prenomfield.getText());
-		// newemp.append("numero", numerofield.getText());
-		// newemp.append("role", rolefield.getText());
-		// newemp.append("email", emailfield.getText());
-		// newemp.append("password", emailfield.getText());
+		Document newemp = new Document("nomutil", usernamefield.getText());
+		newemp.append("nom", namefield.getText());
+		newemp.append("prenom", prenomfield.getText());
+		newemp.append("tel", numerofield.getText());
+		newemp.append("role", role.getValue());
+		newemp.append("email", emailfield.getText());
+		newemp.append("motdepass", passworField.getText());
 		AdminController.AddEmp(newemp);
 
 		System.out.println("test hna1");
@@ -93,6 +101,16 @@ public class Add_employe_container_controller {
 			// TODO: handle exception
 		}
 		System.out.println("test hna 3");
+
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+
+		role.getItems().add("Admin");
+		role.getItems().add("Caissier");
+		role.getItems().add("technicien");
 
 	}
 

@@ -1,10 +1,12 @@
 package application.controller;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 import org.bson.Document;
-
 
 import org.bson.types.ObjectId;
 
@@ -42,16 +44,6 @@ public class AdminController {
 		collection.updateOne(found, updateop);
 		Connectdatabase.closeconndb();
 
-
-	}
-
-	public static void deletemp() {
-		MongoCollection<Document> collection = Connectdatabase.connectdb("users");
-		ObjectId objid = new ObjectId(add_employer_controller.user.getId());
-		Document found = (Document) collection.find(new Document("_id", objid)).first();
-		collection.deleteOne(found);
-		Connectdatabase.closeconndb();
-
 	}
 
 	public static ObservableList<Usermodel> EmpLiist() {
@@ -80,34 +72,33 @@ public class AdminController {
 		} finally {
 			cursor.close();
 			Connectdatabase.closeconndb();
-
 		}
 
 		return List;
 
 	}
 
-	public static void addpart(Document Doc) {
+	// public static void addpart(Document Doc) {
 
-		MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
-		collection.insertOne(Doc);
-		Connectdatabase.closeconndb();
-
-
-	}
-
-	public static void updatepart(Document Doc, Parts part) {
-		MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
-		ObjectId objid = new ObjectId(part.getId());
-		Document found = (Document) collection.find(new Document("_id", objid)).first();
-		System.out.println(found.get("name"));
-		Doc.append("_id", objid);
-		Document updateop = new Document("$set", Doc);
-		collection.updateOne(found, updateop);
-		Connectdatabase.closeconndb();
+	// 	MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
+	// 	collection.insertOne(Doc);
+	// 	Connectdatabase.closeconndb();
 
 
-	}
+	// }
+
+	// public static void updatepart(Document Doc, Parts part) {
+	// 	MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
+	// 	ObjectId objid = new ObjectId(part.getId());
+	// 	Document found = (Document) collection.find(new Document("_id", objid)).first();
+	// 	System.out.println(found.get("name"));
+	// 	Doc.append("_id", objid);
+	// 	Document updateop = new Document("$set", Doc);
+	// 	collection.updateOne(found, updateop);
+	// 	Connectdatabase.closeconndb();
+
+
+	// }
 
 	public static void deletpart(Parts part) {
 
@@ -151,19 +142,43 @@ public class AdminController {
 
 	}
 
-	
+	public static void addpart(Document Doc) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
+		collection.insertOne(Doc);
+		Connectdatabase.closeconndb();
+
+	}
+
+	public static void updatepart(Document Doc, Parts part) {
+		MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
+		ObjectId objid = new ObjectId(part.getId());
+		Document found = (Document) collection.find(new Document("_id", objid)).first();
+		System.out.println(found.get("name"));
+		Doc.append("_id", objid);
+		Document updateop = new Document("$set", Doc);
+		collection.updateOne(found, updateop);
+		Connectdatabase.closeconndb();
 
 
 
+	}
 
 
+	public static void deletemp(Usermodel user) {
+		MongoCollection<Document> collection = Connectdatabase.connectdb("users");
+		ObjectId objid = new ObjectId(user.getId());
+		Document found = (Document) collection.find(new Document("_id", objid)).first();
+		collection.deleteOne(found);
+		Connectdatabase.closeconndb();
+
+	}
 
 	public static void AddClient(Document Doc) {
 
 		MongoCollection<Document> collection = Connectdatabase.connectdb("clients");
 		collection.insertOne(Doc);
 		Connectdatabase.closeconndb();
-
 
 	}
 
@@ -176,7 +191,6 @@ public class AdminController {
 		Document updated = new Document("$set", Doc);
 		collection.updateOne(found, updated);
 		Connectdatabase.closeconndb();
-
 
 	}
 
@@ -242,21 +256,23 @@ public class AdminController {
 		collection.insertOne(Doc);
 		Connectdatabase.closeconndb();
 
-
 	}
 
-	public static void UpdateRdv(Document Doc , Rendez_vous rdv) {
+	// public static void UpdateRdv(Document Doc , Rendez_vous rdv) {
 
-		MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
-		ObjectId objid = new ObjectId(rdv.getId());
-		Document found = (Document) collection.find(new Document("_id", objid)).first();
-		Doc.append("_id", objid);
-		Document updated = new Document("$set", Doc);
-		collection.updateOne(found, updated);
-		Connectdatabase.closeconndb();
+	// 	MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
+	// 	ObjectId objid = new ObjectId(rdv.getId());
+	// 	Document found = (Document) collection.find(new Document("_id", objid)).first();
+	// 	Doc.append("_id", objid);
+	// 	Document updated = new Document("$set", Doc);
+	// 	collection.updateOne(found, updated);
+	// 	Connectdatabase.closeconndb();
 
+	// 	Document doc = new Document();
+	// 	// Document document = collection.find(eq("_id", new ObjectId(id))).first();
+	// 	Connectdatabase.closeconndb();
 
-	}
+	// }
 
 	// public static ObservableList<Rendez_vous> ListRdv() {
 	// 	ObservableList<Rendez_vous> List = FXCollections.observableArrayList();
@@ -305,6 +321,13 @@ public class AdminController {
 				Rendez_vous rdv = new Rendez_vous();
 
 				rdv.setId(doc.getObjectId("_id").toString());
+				rdv.setCar_model(doc.getString("car model"));
+				SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
+				rdv.setDate_debut(doc.getDate("date_debut"));
+				rdv.setDate_fin(doc.getDate("date_fin"));
+				rdv.setDescrption_in(doc.getString("descrption_in"));
+				rdv.setDescrption_out(doc.getString("descrption_out"));
 
 				Document clientdoc = doc.get("client", Document.class);
 				Clientmodel client = new Clientmodel();
@@ -320,18 +343,17 @@ public class AdminController {
 
 				ArrayList<Document> parlistdoc = (ArrayList<Document>) doc.get("parts");
 				ArrayList<Parts> partlist = new ArrayList<Parts>();
-				for (Document pardoc : parlistdoc){
+				for (Document pardoc : parlistdoc) {
 					Parts part = new Parts();
 
 					part.setId(doc.getObjectId("_id").toString());
 
-				part.setName(pardoc.getString("name"));
-				part.setDescription(pardoc.getString("description"));
-				part.setQuntitie(pardoc.getInteger("quantity"));
-				part.setPrice(pardoc.getInteger("price"));
+					part.setName(pardoc.getString("name"));
+					part.setDescription(pardoc.getString("description"));
+					part.setQuntitie(pardoc.getInteger("quantity"));
+					part.setPrice(pardoc.getInteger("price"));
 
-				partlist.add(part);
-
+					partlist.add(part);
 
 				}
 				rdv.setParts(partlist);
@@ -346,6 +368,29 @@ public class AdminController {
 		}
 
 		return List;
+
+	}
+
+	public static void UpdateRdv(Document Doc, Rendez_vous rdv) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
+		ObjectId objid = new ObjectId(rdv.getId());
+		Document found = (Document) collection.find(new Document("_id", objid)).first();
+		Doc.append("_id", objid);
+		Document updated = new Document("$set", Doc);
+		collection.updateOne(found, updated);
+		Connectdatabase.closeconndb();
+
+	}
+
+	public static void deletrdv(Rendez_vous rdv) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
+		ObjectId objid = new ObjectId(rdv.getId());
+		Document found = (Document) collection.find(new Document("_id", objid)).first();
+		collection.deleteOne(found);
+
+		Connectdatabase.closeconndb();
 
 	}
 
