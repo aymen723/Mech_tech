@@ -88,13 +88,10 @@ public class DashbordController implements Initializable {
 
 		Rendez_vous.getStyleClass().add("afterpress");
 
-		// // Group root = new Group();
 		// Parent fxml;
 		// try {
 		// fxml =
 		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/Rendez_vous_dashbord.fxml"));
-		// //
-		// fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
 		// Stage stage = new Stage();
 		// Scene scene = new Scene(fxml);
 		// stage.setScene(scene);

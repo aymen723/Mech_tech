@@ -2,6 +2,7 @@ package application.models;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Rendez_vous {
 
@@ -15,19 +16,37 @@ public class Rendez_vous {
 
     private ArrayList<Parts> parts;
 
-    private LocalDate date_debut;
+    private Date date_debut;
 
-    private LocalDate date_fin;
-
-    private String decription;
+    private Date date_fin;
 
     private Clientmodel client_rdv;
+
+    private String descrption_in;
+
+    private String descrption_out;
 
     public Rendez_vous() {
     }
 
+    // public Rendez_vous(String id, String car_model, String etat, String service,
+    // ArrayList<Parts> parts,
+    // LocalDate date_debut, LocalDate date_fin, String decription, Clientmodel
+    // client_rdv) {
+    // this.id = id;
+    // this.car_model = car_model;
+    // this.etat = etat;
+    // this.service = service;
+    // this.parts = parts;
+    // this.date_debut = date_debut;
+    // this.date_fin = date_fin;
+    // this.decription = decription;
+    // this.client_rdv = client_rdv;
+    // }
+
     public Rendez_vous(String id, String car_model, String etat, String service, ArrayList<Parts> parts,
-            LocalDate date_debut, LocalDate date_fin, String decription, Clientmodel client_rdv) {
+            Date date_debut, Date date_fin, Clientmodel client_rdv, String descrption_in,
+            String descrption_out) {
         this.id = id;
         this.car_model = car_model;
         this.etat = etat;
@@ -35,8 +54,25 @@ public class Rendez_vous {
         this.parts = parts;
         this.date_debut = date_debut;
         this.date_fin = date_fin;
-        this.decription = decription;
         this.client_rdv = client_rdv;
+        this.descrption_in = descrption_in;
+        this.descrption_out = descrption_out;
+    }
+
+    public String getDescrption_in() {
+        return descrption_in;
+    }
+
+    public void setDescrption_in(String descrptionin) {
+        this.descrption_in = descrptionin;
+    }
+
+    public String getDescrption_out() {
+        return descrption_out;
+    }
+
+    public void setDescrption_out(String descrptionout) {
+        this.descrption_out = descrptionout;
     }
 
     public String getId() {
@@ -79,28 +115,20 @@ public class Rendez_vous {
         this.parts = parts;
     }
 
-    public LocalDate getDate_debut() {
+    public Date getDate_debut() {
         return date_debut;
     }
 
-    public void setDate_debut(LocalDate date_debut) {
+    public void setDate_debut(Date date_debut) {
         this.date_debut = date_debut;
     }
 
-    public LocalDate getDate_fin() {
+    public Date getDate_fin() {
         return date_fin;
     }
 
-    public void setDate_fin(LocalDate date_fin) {
+    public void setDate_fin(Date date_fin) {
         this.date_fin = date_fin;
-    }
-
-    public String getDecription() {
-        return decription;
-    }
-
-    public void setDecription(String decription) {
-        this.decription = decription;
     }
 
     public Clientmodel getClient_rdv() {

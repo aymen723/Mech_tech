@@ -1,6 +1,7 @@
 package application.ViewController;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import org.bson.Document;
@@ -8,6 +9,7 @@ import org.bson.types.ObjectId;
 
 import application.controller.AdminController;
 import application.models.Clientmodel;
+import application.models.Parts;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,7 +43,7 @@ public class Ajouter_rdv implements Initializable {
     private CheckBox invite_check;
 
     @FXML
-    private TextArea description;
+    private TextArea description_in;
 
     @FXML
     private TextField nom_client;
@@ -89,7 +91,10 @@ public class Ajouter_rdv implements Initializable {
 
         Document newrdv = new Document("date_debut", datedebut.getValue());
         newrdv.append("date_fin", date_fin_rdv.getValue());
-        newrdv.append("description", description.getText());
+        newrdv.append("descrption_in", description_in.getText());
+        newrdv.append("descrption_out", null);
+        newrdv.append("service", null);
+
         newrdv.append("car model", car_model.getText());
         newrdv.append("prix", prix.getText());
         if (invite_check.isSelected() == true) {
@@ -111,6 +116,7 @@ public class Ajouter_rdv implements Initializable {
 
         }
         newrdv.append("client", clientrdv);
+        newrdv.append("parts", new ArrayList<Parts>());
         AdminController.addrdv(newrdv);
         System.out.println(newrdv);
 

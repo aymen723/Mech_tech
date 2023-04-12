@@ -74,7 +74,7 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="add_btn" layoutX="124.0" layoutY="19.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@part_style.css" text="Ajouter">
+                  <Button fx:id="add_btn" layoutX="124.0" layoutY="19.0" mnemonicParsing="false" onAction="#add_parts" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@part_style.css" text="Ajouter">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

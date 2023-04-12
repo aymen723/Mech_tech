@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import application.controller.AdminController;
 import application.models.Parts;
+import application.models.Rendez_vous;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -71,12 +72,14 @@ public class Rdv_parts implements Initializable {
 
     private ArrayList<Parts> parts_list;
 
+    private Rendez_vous rdv_local;
+
     ObservableList<Parts> list = FXCollections.observableArrayList(new Parts("1", "part1", 5, "good", 1000),
             new Parts("2", "part2", 6, "bad", 300));
 
     FilteredList<Parts> filteredList = new FilteredList<>(list, b -> true);
 
-    public void add_parts(ArrayList<Parts> list) {
+    public void add_parts() {
 
         TableViewSelectionModel<Parts> selectionModel = parts_table.getSelectionModel();
         selectionModel.setSelectionMode(SelectionMode.SINGLE);
@@ -84,10 +87,9 @@ public class Rdv_parts implements Initializable {
         Parts part = selectionModel.getSelectedItems().get(0);
 
         part.setQuntitie(Integer.parseInt(quntitie.getText()));
+        System.out.println(part.getName() + " is added");
 
-        list.add(part);
-
-        parts_list = list;
+        rdv_local.getParts().add(part);
     }
 
     public void annl_mod() {
@@ -102,21 +104,26 @@ public class Rdv_parts implements Initializable {
 
     }
 
-    // public void getlist(ArrayList<Parts> list) {
-    // parts = list;
-    // }
+    public void setrdv(Rendez_vous rdv) {
+        this.rdv_local = rdv;
+
+    }
 
     @FXML
     void conferm() {
+
         try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
             Parent root = loader.load();
-
+            System.out.println(rdv_local.getClient_rdv().getNom() + " is the one to be sent");
             Rdv_details rdv_details_con = loader.getController();
-            rdv_details_con.setlistpart(parts_list);
+            rdv_details_con.getrdv(rdv_local);
+            System.out.println(rdv_local.getClient_rdv().getNom() + " is the one sent");
             rdv_parts_container.getChildren().removeAll();
             rdv_parts_container.getChildren().setAll(root);
+            rdv_details_con.setContent(root);
+
         } catch (Exception e) {
             // TODO: handle exception
         }
@@ -126,8 +133,8 @@ public class Rdv_parts implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
 
-        annl_btn.setDisable(true);
-        annl_btn.setVisible(false);
+        // annl_btn.setDisable(true);
+        // annl_btn.setVisible(false);
 
         System.out.println("hna list mazal");
         list = AdminController.PartList();
