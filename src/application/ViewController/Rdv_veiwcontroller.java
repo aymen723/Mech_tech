@@ -3,7 +3,9 @@ package application.ViewController;
 import java.io.IOException;
 // import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import application.controller.AdminController;
@@ -39,10 +41,10 @@ import javafx.stage.Stage;
 public class Rdv_veiwcontroller implements Initializable {
 
 	@FXML
-	private TableColumn<Rendez_vous, LocalDate> date_deut_col;
+	private TableColumn<Rendez_vous, String> date_deut_col;
 
 	@FXML
-	private TableColumn<Rendez_vous, LocalDate> date_fin_col;
+	private TableColumn<Rendez_vous, String> date_fin_col;
 
 	@FXML
 	private TableColumn<Rendez_vous, String> desc_col;
@@ -172,8 +174,12 @@ public class Rdv_veiwcontroller implements Initializable {
 		voiture_model_col.setCellValueFactory(new PropertyValueFactory<>("car_model"));
 
 		desc_col.setCellValueFactory(new PropertyValueFactory<>("descrption_in"));
-		date_deut_col.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
-		date_fin_col.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
+		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
+		
+		// date_deut_col.setCellValueFactory( new PropertyValueFactory<>("date_debut"));
+		date_deut_col.setCellValueFactory(cellData -> new SimpleStringProperty(DATE_FORMAT.format(cellData.getValue().getDate_debut())));
+	
+		date_fin_col.setCellValueFactory(cellData -> new SimpleStringProperty(DATE_FORMAT.format(cellData.getValue().getDate_fin())));
 
 		action.setCellFactory(column -> {
 
