@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 // import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -44,8 +45,8 @@ public class Rdv_veiwcontroller implements Initializable {
 	@FXML
 	private TableColumn<Rendez_vous, LocalDate> date_fin_col;
 
-	@FXML
-	private TableColumn<Rendez_vous, String> desc_col;
+	// @FXML
+	// private TableColumn<Rendez_vous, String> desc_col;
 
 	@FXML
 	private TableColumn<Rendez_vous, Void> action;
@@ -61,6 +62,9 @@ public class Rdv_veiwcontroller implements Initializable {
 
 	@FXML
 	private TableColumn<Rendez_vous, String> voiture_model_col;
+
+	@FXML
+	private TableColumn<Rendez_vous, String> etat_col;
 
 	@FXML
 	private TableView<Rendez_vous> rdv_table;
@@ -87,6 +91,7 @@ public class Rdv_veiwcontroller implements Initializable {
 	private Button modifier_btn;
 
 	private Rendez_vous rdv_global;
+
 	// Arraylist<Parts> list =
 
 	LocalDate date = LocalDate.now();
@@ -171,9 +176,9 @@ public class Rdv_veiwcontroller implements Initializable {
 				cellData -> new SimpleStringProperty(cellData.getValue().getClient_rdv().getNumero()));
 		voiture_model_col.setCellValueFactory(new PropertyValueFactory<>("car_model"));
 
-		desc_col.setCellValueFactory(new PropertyValueFactory<>("descrption_in"));
 		date_deut_col.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
 		date_fin_col.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
+		etat_col.setCellValueFactory(new PropertyValueFactory<>("etat"));
 
 		action.setCellFactory(column -> {
 
@@ -208,6 +213,7 @@ public class Rdv_veiwcontroller implements Initializable {
 							Rdv_details rdv_details_con = loader.getController();
 							System.out.println(rdv_details_con);
 
+							System.out.println(rdv.getDescrption_in());
 							rdv_details_con.getrdv(rdv);
 							rdv_container.getChildren().removeAll();
 							rdv_container.getChildren().setAll(root);
@@ -216,26 +222,26 @@ public class Rdv_veiwcontroller implements Initializable {
 							// TODO: handle exception
 						}
 
-						// try {
+						try {
 
-						// FXMLLoader loader = new FXMLLoader(
-						// getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
-						// Parent root = loader.load();
+							FXMLLoader loader = new FXMLLoader(
+									getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
+							Parent root = loader.load();
 
-						// Rdv_details rdv_details_con = loader.getController();
-						// System.out.println(rdv_details_con);
+							Rdv_details rdv_details_con = loader.getController();
+							System.out.println(rdv_details_con);
 
-						// rdv_details_con.getrdv(rdv);
-						// Stage stage = new Stage();
-						// Scene scene = new Scene(root);
-						// stage.setScene(scene);
-						// stage.setTitle("Mecha Tech");
+							rdv_details_con.getrdv(rdv);
+							Stage stage = new Stage();
+							Scene scene = new Scene(root);
+							stage.setScene(scene);
+							stage.setTitle("Mecha Tech");
 
-						// stage.show();
+							stage.show();
 
-						// } catch (IOException e) {
-						// e.printStackTrace();
-						// }
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 
 					});
 				}

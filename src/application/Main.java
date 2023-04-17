@@ -20,7 +20,7 @@ public class Main extends Application {
 
 		Parent fxml;
 		try {
-			fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Dashbord.fxml"));
+			fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Login.fxml"));
 
 			Scene scene = new Scene(fxml);
 			primaryStage.setScene(scene);

@@ -2,6 +2,7 @@ package application.ViewController;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +32,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -43,6 +45,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -109,6 +112,9 @@ public class Rdv_details {
     @FXML
     private TableColumn<Parts, Integer> quantite_part_col;
 
+    @FXML
+    private Text etat_label;
+
     ObservableList<Parts> list = FXCollections.observableArrayList();
 
     @FXML
@@ -138,13 +144,24 @@ public class Rdv_details {
 
         rdv_local = rdv;
 
+        System.out.println(rdv.getDescrption_in());
         nom_client.setText(rdv.getClient_rdv().getNom());
+        date_debut_rdv.setValue(rdv.getDate_debut().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        date_fin_rdv.setValue(rdv.getDate_fin().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        car_model.setText(rdv.getCar_model());
+        prix.setText(Integer.toString(rdv.getPrix()));
+        service.setText(rdv.getService());
+        prenom_client.setText(rdv.getClient_rdv().getPrenom());
+        numero_client.setText(rdv.getClient_rdv().getNumero());
+        description_in.setText(rdv.getDescrption_in());
+        description_out.setText(rdv.getDescrption_out());
+        etat_label.setText(rdv.getEtat());
 
         if (rdv.getParts() != null) {
             list = FXCollections.observableArrayList(rdv_local.getParts());
 
             nom_part_col.setCellValueFactory(new PropertyValueFactory<>("name"));
-            prix_col.setCellValueFactory(new PropertyValueFactory<>("price"));
+            prix_col.setCellValueFactory(new PropertyValueFactory<>("prix"));
             quantite_part_col.setCellValueFactory(new PropertyValueFactory<>("quntitie"));
 
             action_col.setCellFactory(column -> {

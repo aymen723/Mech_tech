@@ -26,27 +26,11 @@ public class Rendez_vous {
 
     private String descrption_out;
 
-    public Rendez_vous() {
-    }
-
-    // public Rendez_vous(String id, String car_model, String etat, String service,
-    // ArrayList<Parts> parts,
-    // LocalDate date_debut, LocalDate date_fin, String decription, Clientmodel
-    // client_rdv) {
-    // this.id = id;
-    // this.car_model = car_model;
-    // this.etat = etat;
-    // this.service = service;
-    // this.parts = parts;
-    // this.date_debut = date_debut;
-    // this.date_fin = date_fin;
-    // this.decription = decription;
-    // this.client_rdv = client_rdv;
-    // }
+    private int prix;
 
     public Rendez_vous(String id, String car_model, String etat, String service, ArrayList<Parts> parts,
-            Date date_debut, Date date_fin, Clientmodel client_rdv, String descrption_in,
-            String descrption_out) {
+            Date date_debut, Date date_fin, Clientmodel client_rdv, String descrption_in, String descrption_out,
+            int prix) {
         this.id = id;
         this.car_model = car_model;
         this.etat = etat;
@@ -57,22 +41,7 @@ public class Rendez_vous {
         this.client_rdv = client_rdv;
         this.descrption_in = descrption_in;
         this.descrption_out = descrption_out;
-    }
-
-    public String getDescrption_in() {
-        return descrption_in;
-    }
-
-    public void setDescrption_in(String descrptionin) {
-        this.descrption_in = descrptionin;
-    }
-
-    public String getDescrption_out() {
-        return descrption_out;
-    }
-
-    public void setDescrption_out(String descrptionout) {
-        this.descrption_out = descrptionout;
+        this.prix = prix;
     }
 
     public String getId() {
@@ -138,5 +107,47 @@ public class Rendez_vous {
     public void setClient_rdv(Clientmodel client_rdv) {
         this.client_rdv = client_rdv;
     }
+
+    public String getDescrption_in() {
+        return descrption_in;
+    }
+
+    public void setDescrption_in(String descrption_in) {
+        this.descrption_in = descrption_in;
+    }
+
+    public String getDescrption_out() {
+        return descrption_out;
+    }
+
+    public void setDescrption_out(String descrption_out) {
+        this.descrption_out = descrption_out;
+    }
+
+    public int getPrix() {
+        return prix;
+    }
+
+    public void setPrix(int prix) {
+        this.prix = prix;
+    }
+
+    public Rendez_vous() {
+    }
+
+    // public Rendez_vous(String id, String car_model, String etat, String service,
+    // ArrayList<Parts> parts,
+    // LocalDate date_debut, LocalDate date_fin, String decription, Clientmodel
+    // client_rdv) {
+    // this.id = id;
+    // this.car_model = car_model;
+    // this.etat = etat;
+    // this.service = service;
+    // this.parts = parts;
+    // this.date_debut = date_debut;
+    // this.date_fin = date_fin;
+    // this.decription = decription;
+    // this.client_rdv = client_rdv;
+    // }
 
 }

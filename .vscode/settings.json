@@ -14,5 +14,6 @@
       "c:\\java\\resour\\tilesfx\\countries-17.0.23.jar"
     ],
     "exclude": ["c:\\java\\resour\\jfoenix\\jfoenix-8.0.10.jar"]
-  }
+  },
+  "java.debug.settings.onBuildFailureProceed": true
 }

@@ -240,8 +240,10 @@ public class AdminController {
 
 				rdv.setDate_debut(doc.getDate("date_debut"));
 				rdv.setDate_fin(doc.getDate("date_fin"));
+				rdv.setPrix(doc.getInteger("prix"));
 				rdv.setDescrption_in(doc.getString("descrption_in"));
 				rdv.setDescrption_out(doc.getString("descrption_out"));
+				rdv.setEtat(doc.getString("etat"));
 
 				Document clientdoc = doc.get("client", Document.class);
 				Clientmodel client = new Clientmodel();
