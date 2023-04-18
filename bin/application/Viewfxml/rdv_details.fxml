@@ -11,6 +11,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
@@ -118,7 +119,11 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8" />
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Text fx:id="etat_label" layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="etat" />
+                  <HBox fx:id="etat_box" alignment="CENTER" layoutX="14.0" layoutY="19.0" prefHeight="30.0" prefWidth="150.0" styleClass="state" stylesheets="@application.css">
+                     <children>
+                        <Text fx:id="etat_label" strokeType="OUTSIDE" strokeWidth="0.0" text="etat" />
+                     </children>
+                  </HBox>
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">

@@ -1,13 +1,12 @@
 package application.ViewController;
 
-import java.io.IOException;
 // import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import application.controller.AdminController;
-import application.models.Clientmodel;
 import application.models.Rendez_vous;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -17,11 +16,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 // import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -32,18 +29,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 // import javafx.scene.paint.Color;
 // import javafx.stage.Stage;
-import javafx.stage.Stage;
 
 public class Rdv_veiwcontroller implements Initializable {
 
 	@FXML
-	private TableColumn<Rendez_vous, LocalDate> date_deut_col;
+	private TableColumn<Rendez_vous, String> date_deut_col;
 
 	@FXML
-	private TableColumn<Rendez_vous, LocalDate> date_fin_col;
+	private TableColumn<Rendez_vous, String> date_fin_col;
 
 	// @FXML
 	// private TableColumn<Rendez_vous, String> desc_col;
@@ -175,9 +170,18 @@ public class Rdv_veiwcontroller implements Initializable {
 
 				cellData -> new SimpleStringProperty(cellData.getValue().getClient_rdv().getNumero()));
 		voiture_model_col.setCellValueFactory(new PropertyValueFactory<>("car_model"));
+		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
 
-		date_deut_col.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
-		date_fin_col.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
+		date_deut_col.setCellValueFactory(
+
+				cellData -> new SimpleStringProperty(DATE_FORMAT.format(cellData.getValue().getDate_debut())));
+
+		date_fin_col.setCellValueFactory(
+
+				cellData -> new SimpleStringProperty(DATE_FORMAT.format(cellData.getValue().getDate_fin())));
+
+		// date_deut_col.setCellValueFactory(new PropertyValueFactory<>("date_debut"));
+		// date_fin_col.setCellValueFactory(new PropertyValueFactory<>("date_fin"));
 		etat_col.setCellValueFactory(new PropertyValueFactory<>("etat"));
 
 		action.setCellFactory(column -> {
@@ -222,26 +226,26 @@ public class Rdv_veiwcontroller implements Initializable {
 							// TODO: handle exception
 						}
 
-						try {
+						// try {
 
-							FXMLLoader loader = new FXMLLoader(
-									getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
-							Parent root = loader.load();
+						// FXMLLoader loader = new FXMLLoader(
+						// getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
+						// Parent root = loader.load();
 
-							Rdv_details rdv_details_con = loader.getController();
-							System.out.println(rdv_details_con);
+						// Rdv_details rdv_details_con = loader.getController();
+						// System.out.println(rdv_details_con);
 
-							rdv_details_con.getrdv(rdv);
-							Stage stage = new Stage();
-							Scene scene = new Scene(root);
-							stage.setScene(scene);
-							stage.setTitle("Mecha Tech");
+						// rdv_details_con.getrdv(rdv);
+						// Stage stage = new Stage();
+						// Scene scene = new Scene(root);
+						// stage.setScene(scene);
+						// stage.setTitle("Mecha Tech");
 
-							stage.show();
+						// stage.show();
 
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+						// } catch (IOException e) {
+						// e.printStackTrace();
+						// }
 
 					});
 				}

@@ -45,6 +45,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -118,6 +120,9 @@ public class Rdv_details {
     ObservableList<Parts> list = FXCollections.observableArrayList();
 
     @FXML
+    private HBox etat_box;
+
+    @FXML
     void add_parts_rdv(ActionEvent event) {
 
         try {
@@ -137,6 +142,7 @@ public class Rdv_details {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+
         }
     }
 
@@ -157,11 +163,19 @@ public class Rdv_details {
         description_out.setText(rdv.getDescrption_out());
         etat_label.setText(rdv.getEtat());
 
+        if (rdv.getEtat().equals("en attente")) {
+            etat_box.setStyle("-fx-background-color: #D8D8D8");
+        } else if (rdv.getEtat().equals("terminé")) {
+            etat_box.setStyle("-fx-background-color: #98D8AA");
+        } else if (rdv.getEtat().equals("en cours")) {
+            etat_box.setStyle("-fx-background-color: #F3E99F");
+        }
+
         if (rdv.getParts() != null) {
             list = FXCollections.observableArrayList(rdv_local.getParts());
 
             nom_part_col.setCellValueFactory(new PropertyValueFactory<>("name"));
-            prix_col.setCellValueFactory(new PropertyValueFactory<>("prix"));
+            prix_col.setCellValueFactory(new PropertyValueFactory<>("price"));
             quantite_part_col.setCellValueFactory(new PropertyValueFactory<>("quntitie"));
 
             action_col.setCellFactory(column -> {
@@ -325,6 +339,27 @@ public class Rdv_details {
     @FXML
     void factur(ActionEvent event) {
 
+        try {
+
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/application/Viewfxml/facture.fxml"));
+            Parent root = loader.load();
+
+            facture factur_con = loader.getController();
+            System.out.println(factur_con);
+            factur_con.Gettrdv(rdv_local);
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.setTitle("Mecha Tech");
+
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

@@ -30,16 +30,25 @@ import java.util.ResourceBundle;
 public class LoginController implements Initializable {
 
 	@FXML
-	TextField username;
+	private TextField username;
 	@FXML
-	TextField password;
+	private TextField password;
 	@FXML
-	Button loginbtn;
+	private Button loginbtn;
+
 	@FXML
-	Text serverstats;
+	private TextField datebase_string;
+
+	@FXML
+	private Button btn_enre_database;
+
+	@FXML
+	private Button btn_mod_database;
 
 	@FXML
 	BorderPane login_container;
+
+	String dbstring;
 
 	public void connect(ActionEvent event) {
 
@@ -110,17 +119,27 @@ public class LoginController implements Initializable {
 
 	}
 
+	@FXML
+	void enregistre_database(ActionEvent event) {
+
+		Connectdatabase.Getstringdb(datebase_string.getText());
+
+		datebase_string.setDisable(true);
+		btn_enre_database.setDisable(true);
+	}
+
+	@FXML
+	void mod_database(ActionEvent event) {
+		datebase_string.setDisable(false);
+		btn_enre_database.setDisable(false);
+
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		if (Connectdatabase.connectdb("users") != null) {
-			serverstats.setText("Server is up");
-			serverstats.setFill(Color.GREEN);
-		} else {
-			serverstats.setText("Server is Down");
-			serverstats.setFill(Color.RED);
-
-		}
+		datebase_string.setDisable(true);
+		btn_enre_database.setDisable(true);
 
 	}
 

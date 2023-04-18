@@ -244,6 +244,7 @@ public class AdminController {
 				rdv.setDescrption_in(doc.getString("descrption_in"));
 				rdv.setDescrption_out(doc.getString("descrption_out"));
 				rdv.setEtat(doc.getString("etat"));
+				rdv.setService(doc.getString("service"));
 
 				Document clientdoc = doc.get("client", Document.class);
 				Clientmodel client = new Clientmodel();
