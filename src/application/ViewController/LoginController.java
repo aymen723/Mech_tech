@@ -23,6 +23,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.SocketException;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.ResourceBundle;
@@ -120,9 +121,11 @@ public class LoginController implements Initializable {
 	}
 
 	@FXML
-	void enregistre_database(ActionEvent event) {
+	void enregistre_database(ActionEvent event) throws SocketException {
 
 		Connectdatabase.Getstringdb(datebase_string.getText());
+
+		Connectdatabase.testdb();
 
 		datebase_string.setDisable(true);
 		btn_enre_database.setDisable(true);

@@ -1,5 +1,9 @@
 package application;
 
+import java.io.IOException;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
+
 import org.bson.Document;
 
 import com.mongodb.MongoClientException;
@@ -28,7 +32,7 @@ public class Connectdatabase {
 		// database = mongoClient.getDatabase("Meca_tech");
 		// collection = database.getCollection(collectionName);
 		// } catch (Exception e) {
-		// System.out.println(e);
+		// System.out.println(e);t
 		// }
 
 		// if (mongoClient == null) {
@@ -50,6 +54,16 @@ public class Connectdatabase {
 
 	public static void closeconndb() {
 		mongoClient.close();
+	}
+
+	public static void testdb() throws SocketException {
+		try {
+			mongoClient = MongoClients.create(url);
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
 	}
 
 	public static void Getstringdb(String Stringdb) {

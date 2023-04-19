@@ -88,24 +88,25 @@ public class DashbordController implements Initializable {
 
 		Rendez_vous.getStyleClass().add("afterpress");
 
-		try {
-			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Rendez_vous_dashbord.fxml"));
-			Stage stage = new Stage();
-			Scene scene = new Scene(fxml);
-			stage.setScene(scene);
-			stage.setTitle("Mecha Tech");
-			scene.setFill(Color.TRANSPARENT);
+		// try {
+		// Parent fxml =
+		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/Rendez_vous_dashbord.fxml"));
+		// Stage stage = new Stage();
+		// Scene scene = new Scene(fxml);
+		// stage.setScene(scene);
+		// stage.setTitle("Mecha Tech");
+		// scene.setFill(Color.TRANSPARENT);
 
-			// primaryStage.initStyle(StageStyle.UNDECORATED);
-			// primaryStage.initStyle(StageStyle.TRANSPARENT);
+		// // primaryStage.initStyle(StageStyle.UNDECORATED);
+		// // primaryStage.initStyle(StageStyle.TRANSPARENT);
 
-			// primaryStage.setResizable(false);
-			stage.show();
+		// // primaryStage.setResizable(false);
+		// stage.show();
 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// } catch (IOException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 
 	}
 

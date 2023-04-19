@@ -22,6 +22,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -86,6 +87,9 @@ public class Rdv_veiwcontroller implements Initializable {
 	private Button modifier_btn;
 
 	private Rendez_vous rdv_global;
+
+	@FXML
+	private TextField search_rdv;
 
 	// Arraylist<Parts> list =
 
