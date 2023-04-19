@@ -86,10 +86,10 @@
                             <TableColumn fx:id="prenom_client_col" minWidth="110.0" prefWidth="120.0" text="Prenom client" />
                               <TableColumn fx:id="num_client_col" minWidth="90.0" prefWidth="110.0" text="Numéro client" />
                               <TableColumn fx:id="voiture_model_col" minWidth="90.0" prefWidth="100.0" text="voiture model" />
-                              <TableColumn fx:id="desc_col" prefWidth="200.0" text="description" />
-                              <TableColumn fx:id="date_deut_col" prefWidth="96.0" text="Date Debut" />
-                              <TableColumn fx:id="date_fin_col" prefWidth="98.0" text="Date Fin" />
-                              <TableColumn fx:id="action" prefWidth="75.0" text="Action" />
+                              <TableColumn fx:id="date_deut_col" prefWidth="77.60003662109375" text="Date Debut" />
+                              <TableColumn fx:id="date_fin_col" prefWidth="166.39996337890625" text="Date Fin" />
+                              <TableColumn fx:id="etat_col" prefWidth="127.2000732421875" text="Etat" />
+                              <TableColumn fx:id="action" prefWidth="97.60009765625" text="Action" />
                           </columns>
                         </TableView>
                      </children>

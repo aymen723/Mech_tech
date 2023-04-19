@@ -118,7 +118,7 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8" />
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Text layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="etat" />
+                  <Text fx:id="etat_label" layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="etat" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">

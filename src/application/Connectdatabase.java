@@ -4,10 +4,11 @@ import org.bson.Document;
 
 //import com.mongodb.MongoClient;
 // import com.mongodb.MongoClientURI;
-import com.mongodb.client.MongoClient;
+// import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.connection.ClusterDescription;
 
 public class Connectdatabase {
 	private static com.mongodb.client.MongoClient mongoClient;
@@ -21,11 +22,17 @@ public class Connectdatabase {
 		mongoClient = MongoClients.create("mongodb://localhost:27017");
 		database = mongoClient.getDatabase("Meca_tech");
 		MongoCollection<Document> collection = database.getCollection(collectionName);
+
+		ClusterDescription clusterDescription = mongoClient.getClusterDescription();
+        // boolean isConnected = clusterDescription.getStates();
+		
+
 		return collection;
 	}
 
 	public static void closeconndb() {
         mongoClient.close();
     }
+
 
 }

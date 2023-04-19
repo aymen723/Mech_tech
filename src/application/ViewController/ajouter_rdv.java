@@ -97,10 +97,10 @@ public class Ajouter_rdv implements Initializable {
         newrdv.append("descrption_in", description_in.getText());
         newrdv.append("descrption_out", null);
         newrdv.append("service", service_field.getText());
+        newrdv.append("etat", "en attente");
 
         newrdv.append("car model", car_model.getText());
-        newrdv.append("prix", prix.getText());
-        
+        newrdv.append("prix", Integer.parseInt(prix.getText()));
         if (invite_check.isSelected() == true) {
 
             newclient = new Clientmodel(nom_client.getText(), prenom_client.getText(), numero_client.getText());
