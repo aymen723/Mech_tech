@@ -28,6 +28,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.Pane;
 
 public class Ajouter_rdv implements Initializable {
@@ -78,6 +79,8 @@ public class Ajouter_rdv implements Initializable {
     private Button btn_rdv;
 
     Clientmodel client_golbal;
+
+    final int max = 500;
 
     @FXML
     void date_dd(ActionEvent event) {
@@ -174,6 +177,9 @@ public class Ajouter_rdv implements Initializable {
         nom_client.setEditable(false);
         prenom_client.setEditable(false);
         numero_client.setEditable(false);
+
+        description_in.setTextFormatter(
+                new TextFormatter<String>(change -> change.getControlNewText().length() <= max ? change : null));
 
         serch.textProperty().addListener((observable, oldValue, newValue) -> {
 

@@ -39,6 +39,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -122,6 +123,8 @@ public class Rdv_details {
     @FXML
     private HBox etat_box;
 
+    final int max = 500;
+
     @FXML
     void add_parts_rdv(ActionEvent event) {
 
@@ -162,6 +165,12 @@ public class Rdv_details {
         description_in.setText(rdv.getDescrption_in());
         description_out.setText(rdv.getDescrption_out());
         etat_label.setText(rdv.getEtat());
+
+        description_in.setTextFormatter(
+                new TextFormatter<String>(change -> change.getControlNewText().length() <= max ? change : null));
+
+        description_out.setTextFormatter(
+                new TextFormatter<String>(change -> change.getControlNewText().length() <= max ? change : null));
 
         if (rdv.getEtat().equals("en attente")) {
             etat_box.setStyle("-fx-background-color: #D8D8D8");
@@ -286,9 +295,11 @@ public class Rdv_details {
 
         Document newrdv = new Document("date_debut", date_debut_rdv.getValue());
         newrdv.append("date_fin", date_fin_rdv.getValue());
-        // newrdv.append("description", description.getText());
+        newrdv.append("descrption_in", description_in.getText());
+        newrdv.append("descrption_out", description_out.getText());
+
         newrdv.append("car model", car_model.getText());
-        newrdv.append("prix", prix.getText());
+        newrdv.append("prix", Integer.parseInt(prix.getText()));
 
         if (rdv_local.getClient_rdv().getEmail() != null) {
             newclient = new Clientmodel(rdv_local.getClient_rdv().getId(), rdv_local.getClient_rdv().getNom(),
