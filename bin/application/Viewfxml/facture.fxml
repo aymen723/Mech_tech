@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<<<<<<< HEAD
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -68,3 +69,180 @@
 </GridPane>
 </children>
 </AnchorPane>
+=======
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="826.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.facture">
+   <content>
+      <GridPane fx:id="grid" prefHeight="1169.0" prefWidth="826.0" style="-fx-background-color: white;">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="329.8000091552734" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="400.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="477.6000030517578" minHeight="0.0" prefHeight="300.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="920.7999938964842" minHeight="10.0" prefHeight="656.5999755859375" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="130.5999511718751" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Text layoutX="9.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client :">
+                     <font>
+                        <Font name="Dubai Regular" size="20.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="9.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="modèle de voiture :">
+                     <font>
+                        <Font name="Dubai Regular" size="19.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="nom_fact" layoutX="80.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
+                     <font>
+                        <Font name="Dubai Regular" size="19.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="prenom_fact" layoutX="154.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
+                     <font>
+                        <Font name="Dubai Regular" size="19.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="car_fact" layoutX="162.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
+                     <font>
+                        <Font name="Dubai Regular" size="19.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <Text layoutX="69.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email :">
+                     <font>
+                        <Font name="Dubai Regular" size="20.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="69.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero :">
+                     <font>
+                        <Font name="Dubai Regular" size="20.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="144.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MECA-TEC@outlook.com">
+                     <font>
+                        <Font name="Dubai Regular" size="20.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="152.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0555247862">
+                     <font>
+                        <Font name="Dubai Regular" size="20.0" />
+                     </font>
+                  </Text>
+               </children></Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4" />
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <HBox layoutX="66.0" layoutY="86.0" />
+                  <Text layoutX="14.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description Out :">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="controdu_fact" layoutX="14.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="371.73670959472656" />
+               </children>
+            </Pane>
+            <Pane prefHeight="172.0" prefWidth="414.0" GridPane.rowIndex="2">
+               <children>
+                  <Text layoutX="7.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description In :">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="descrp_fact" layoutX="14.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="371.73670959472656" />
+               </children></Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <children>
+                  <Text layoutX="8.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de Rendez-vous :">
+                     <font>
+                        <Font name="Dubai Regular" size="20.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="date_debut_fact" layoutX="213.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
+                     <font>
+                        <Font name="Dubai Regular" size="19.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="date_fin_fact" layoutX="344.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
+                     <font>
+                        <Font name="Dubai Regular" size="19.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="8.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type de Service :">
+                     <font>
+                        <Font name="Dubai Regular" size="20.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="service_fact" layoutX="158.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
+                     <font>
+                        <Font name="Dubai Regular" size="19.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="321.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+               <children>
+                  <TableView fx:id="table_facture" layoutX="164.0" layoutY="99.0" prefWidth="500.0">
+                    <columns>
+                      <TableColumn fx:id="nom_part_fact" prefWidth="247.19998168945312" text="Nom" />
+                      <TableColumn fx:id="quant_part_fact" minWidth="0.0" prefWidth="128.800048828125" text="Quantité " />
+                        <TableColumn fx:id="prix_part_fact" minWidth="0.0" prefWidth="123.20001220703125" text="Prix" />
+                    </columns>
+                  </TableView>
+                  <Text layoutX="162.0" layoutY="536.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix total des pices :">
+                     <font>
+                        <Font name="Dubai Regular" size="19.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="162.0" layoutY="580.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix Total :">
+                     <font>
+                        <Font name="Dubai Regular" size="19.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="parts_price" layoutX="334.0" layoutY="536.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
+                     <font>
+                        <Font name="Dubai Regular" size="20.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="prix_fact" layoutX="263.0" layoutY="580.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
+                     <font>
+                        <Font name="Dubai Regular" size="20.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Pane prefHeight="1169.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <Button fx:id="btn_save" layoutX="29.0" layoutY="529.0" mnemonicParsing="false" onAction="#save" text="Sauvgarde" />
+                  <Button fx:id="btn_print" layoutX="326.0" layoutY="529.0" mnemonicParsing="false" onAction="#print" text="Imprimer" />
+               </children></Pane>
+         </children>
+      </GridPane>
+   </content>
+</ScrollPane>
+>>>>>>> f7c926b0feee803ff4df2192b90debcbd69388ea

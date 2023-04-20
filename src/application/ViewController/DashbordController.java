@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 // import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -88,7 +89,7 @@ public class DashbordController implements Initializable {
 		Rendez_vous.getStyleClass().add("afterpress");
 
 		// try {
-		// fxml =
+		// Parent fxml =
 		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/Rendez_vous_dashbord.fxml"));
 		// Stage stage = new Stage();
 		// Scene scene = new Scene(fxml);

@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
-<?import javafx.scene.text.Text?>
 
 <BorderPane fx:id="login_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@Login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.LoginController">
    <right>
@@ -53,8 +52,9 @@
             </HBox>
             <Pane prefHeight="121.0" prefWidth="400.0">
                <children>
-                  <Text fx:id="serverstats" layoutX="162.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Server is good" />
-                  <Button layoutX="14.0" layoutY="30.0" mnemonicParsing="false" onAction="#testquery" prefHeight="25.0" prefWidth="97.0" text="test" />
+                  <TextField fx:id="datebase_string" layoutX="75.0" layoutY="30.0" prefWidth="250.0" promptText="DataBase" />
+                  <Button fx:id="btn_mod_database" layoutX="75.0" layoutY="71.0" mnemonicParsing="false" onAction="#mod_database" prefHeight="25.0" prefWidth="80.0" styleClass="btn_mod" stylesheets="@btn.css" text="Modifier" />
+                  <Button fx:id="btn_enre_database" layoutX="245.0" layoutY="71.0" mnemonicParsing="false" onAction="#enregistre_database" prefHeight="25.0" prefWidth="80.0" styleClass="btn_mod" stylesheets="@btn.css" text="Enregistre" />
                </children></Pane>
          </children>
       </VBox>
@@ -67,7 +67,7 @@
                <children>
                   <ImageView fitHeight="218.0" fitWidth="269.0" preserveRatio="true" smooth="false">
                      <image>
-                        <Image url="@../../pics/Asset%202.png" />
+                        <Image url="@../../pics/Asset%201.png" />
                      </image>
                   </ImageView>
                </children>

@@ -14,8 +14,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Side;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -125,6 +127,20 @@ public class Ajouter_rdv implements Initializable {
         newrdv.append("parts", new ArrayList<Parts>());
         AdminController.addrdv(newrdv);
         System.out.println(newrdv);
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/application/Viewfxml/Rendez_vous_dashbord.fxml"));
+
+            Parent root = loader.load();
+
+            add_container.getChildren().removeAll();
+            add_container.getChildren().setAll(root);
+
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
 
     }
 
