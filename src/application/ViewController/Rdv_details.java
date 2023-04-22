@@ -33,6 +33,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.PasswordField;
 // import javafx.scene.control.Label;
 // import javafx.scene.control.ListView;
 import javafx.scene.control.TableCell;
@@ -57,6 +58,9 @@ public class Rdv_details {
 
     @FXML
     private DatePicker date_fin_rdv;
+
+    @FXML
+    private PasswordField ps ;
 
     @FXML
     private DatePicker date_debut_rdv;

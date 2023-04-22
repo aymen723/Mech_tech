@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 // import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -87,6 +88,7 @@ public class Rdv_parts implements Initializable {
 
         TableViewSelectionModel<Parts> selectionModel = parts_table.getSelectionModel();
         selectionModel.setSelectionMode(SelectionMode.SINGLE);
+       
 
         Parts part = selectionModel.getSelectedItems().get(0);
 
