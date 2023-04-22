@@ -256,7 +256,19 @@ public class AdminController {
 				client.setNumero(clientdoc.getString("tel"));
 				client.setAddresse(clientdoc.getString("adresse"));
 
+				Document techniciendoc = doc.get("technicien", Document.class);
+				Usermodel technicien = new Usermodel();
+
+				technicien.setId(techniciendoc.getObjectId("_id").toString());
+				technicien.setNom(techniciendoc.getString("nom"));
+				technicien.setPrenom(techniciendoc.getString("prenom"));
+				technicien.setEmail(techniciendoc.getString("email"));
+				technicien.setNumero(techniciendoc.getString("tel"));
+				technicien.setRole(techniciendoc.getString("role"));
+				technicien.setUsername(techniciendoc.getString("nomutil"));
+
 				rdv.setClient_rdv(client);
+				rdv.settechnicien_rdv(technicien);
 
 				ArrayList<Document> parlistdoc = (ArrayList<Document>) doc.get("parts");
 				ArrayList<Parts> partlist = new ArrayList<Parts>();

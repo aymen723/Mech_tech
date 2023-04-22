@@ -32,12 +32,7 @@
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Text fill="#a1a1a1" layoutX="14.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin &gt;">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Text>
-                  <Text fill="#a1a1a1" layoutX="111.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les employes &gt;">
+                  <Text fill="#a1a1a1" layoutX="14.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les employes &gt;">
                      <font>
                         <Font size="25.0" />
                      </font>
@@ -46,7 +41,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <Text layoutX="14.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier employes">
+                  <Text layoutX="-80.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier employes">
                      <font>
                         <Font name="System Bold" size="25.0" />
                      </font>
@@ -99,9 +94,9 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7" />
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                <children>
-                  <Button fx:id="retour_btn" layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onAction="#retour" prefHeight="30.0" prefWidth="125.0" style="-fx-background-color: transparent;" text="&lt; Retour">
+                  <Button fx:id="retour_btn" layoutX="87.0" layoutY="16.0" mnemonicParsing="false" onAction="#retour" prefHeight="44.0" prefWidth="125.0" style="-fx-background-color: transparent;" text="&lt; Retour">
                      <font>
-                        <Font name="System Bold" size="13.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
                </children>

@@ -32,12 +32,7 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Text fill="#a1a1a1" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin &gt;">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="119.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les employés">
+                  <Text layoutX="14.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les employés">
                      <font>
                         <Font size="25.0" />
                      </font>

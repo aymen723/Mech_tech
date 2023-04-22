@@ -16,6 +16,7 @@ import application.controller.AdminController;
 import application.models.Clientmodel;
 import application.models.Parts;
 import application.models.Rendez_vous;
+import application.models.Usermodel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,6 +31,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
@@ -51,6 +53,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.StringConverter;
 
 public class Rdv_details {
 
@@ -123,7 +126,13 @@ public class Rdv_details {
     @FXML
     private HBox etat_box;
 
+    @FXML
+    private ChoiceBox<Usermodel> tech_choice;
+
     final int max = 500;
+
+    ObservableList<Usermodel> list_tech = FXCollections.observableArrayList();
+    ObservableList<Usermodel> filtered = FXCollections.observableArrayList();
 
     @FXML
     void add_parts_rdv(ActionEvent event) {
@@ -153,6 +162,8 @@ public class Rdv_details {
 
         rdv_local = rdv;
 
+        list_tech = AdminController.EmpLiist();
+
         System.out.println(rdv.getDescrption_in());
         nom_client.setText(rdv.getClient_rdv().getNom());
         date_debut_rdv.setValue(rdv.getDate_debut().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
@@ -165,6 +176,7 @@ public class Rdv_details {
         description_in.setText(rdv.getDescrption_in());
         description_out.setText(rdv.getDescrption_out());
         etat_label.setText(rdv.getEtat());
+        tech_choice.setValue(rdv.gettechnicien_rdv());
 
         description_in.setTextFormatter(
                 new TextFormatter<String>(change -> change.getControlNewText().length() <= max ? change : null));
@@ -276,6 +288,27 @@ public class Rdv_details {
         } else {
             // System.out.println("is null");
         }
+
+        for (int i = 0; i < list_tech.size(); i++) {
+            if (list_tech.get(i).getRole().equals("technicien") == true) {
+                filtered.add(list_tech.get(i));
+            }
+        }
+
+        tech_choice.setItems(filtered);
+
+        tech_choice.setConverter(new StringConverter<Usermodel>() {
+
+            @Override
+            public String toString(Usermodel user) {
+                return (user == null) ? "" : user.getNom() + " " + user.getPrenom();
+            }
+
+            @Override
+            public Usermodel fromString(String string) {
+                return null; // not needed in this case
+            }
+        });
 
     }
 
