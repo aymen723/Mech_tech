@@ -216,17 +216,6 @@ public class LoginController implements Initializable {
 
 	}
 
-	public void testquery(ActionEvent e) {
-
-		MongoCollection<Document> collection = Connectdatabase.connectdb("users");
-		FindIterable<Document> iterDoc = collection.find();
-		Iterator<Document> it = iterDoc.iterator();
-		while (it.hasNext()) {
-			System.out.println(it.next());
-		}
-
-	}
-
 	@FXML
 	void enregistre_database(ActionEvent event) throws SocketException {
 

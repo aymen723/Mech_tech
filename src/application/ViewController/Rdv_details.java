@@ -31,6 +31,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.DialogPane;
@@ -127,6 +128,9 @@ public class Rdv_details {
     private HBox etat_box;
 
     @FXML
+    private CheckBox check_modifier;
+
+    @FXML
     private ChoiceBox<Usermodel> tech_choice;
 
     final int max = 500;
@@ -159,6 +163,14 @@ public class Rdv_details {
     }
 
     public void getrdv(Rendez_vous rdv) {
+
+        date_debut_rdv.setDisable(true);
+        date_fin_rdv.setDisable(true);
+        car_model.setDisable(true);
+        prix.setDisable(true);
+        service.setDisable(true);
+        description_in.setDisable(true);
+        description_out.setDisable(true);
 
         rdv_local = rdv;
 
@@ -308,6 +320,7 @@ public class Rdv_details {
             public Usermodel fromString(String string) {
                 return null; // not needed in this case
             }
+
         });
 
     }
@@ -318,6 +331,30 @@ public class Rdv_details {
         rdv_container.getChildren().setAll(node);
 
         System.out.println("setcontent is executed after");
+    }
+
+    @FXML
+    void modifier(ActionEvent event) {
+
+        if (check_modifier.isSelected() == true) {
+
+            date_debut_rdv.setDisable(false);
+            date_fin_rdv.setDisable(false);
+            car_model.setDisable(false);
+            prix.setDisable(false);
+            service.setDisable(false);
+            description_in.setDisable(false);
+            description_out.setDisable(false);
+
+        } else {
+            date_debut_rdv.setDisable(true);
+            date_fin_rdv.setDisable(true);
+            car_model.setDisable(true);
+            prix.setDisable(true);
+            service.setDisable(true);
+            description_in.setDisable(true);
+            description_out.setDisable(true);
+        }
     }
 
     @FXML
