@@ -95,11 +95,11 @@ public class Connectdatabase {
 
 		}
 
-		if (!databaseNames.isEmpty()) {
-			System.out.println("Connected to MongoDB successfully.");
-		} else {
-			System.out.println("Unable to connect to MongoDB.");
-		}
+		// if (!databaseNames.isEmpty()) {
+		// System.out.println("Connected to MongoDB successfully.");
+		// } else {
+		// System.out.println("Unable to connect to MongoDB.");
+		// }
 
 	}
 

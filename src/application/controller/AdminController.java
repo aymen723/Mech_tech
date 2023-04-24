@@ -224,8 +224,8 @@ public class AdminController {
 
 	}
 
-	public static ObservableList<Rendez_vous> ListRdv() {
-		ObservableList<Rendez_vous> List = FXCollections.observableArrayList();
+	public static ArrayList<Rendez_vous> ListRdv() {
+		ArrayList<Rendez_vous> List = new ArrayList<>();
 		MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
 
 		MongoCursor<Document> cursor = collection.find().iterator();
@@ -236,7 +236,7 @@ public class AdminController {
 
 				rdv.setId(doc.getObjectId("_id").toString());
 				rdv.setCar_model(doc.getString("car model"));
-				SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+				// SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
 				rdv.setDate_debut(doc.getDate("date_debut"));
 				rdv.setDate_fin(doc.getDate("date_fin"));

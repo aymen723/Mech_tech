@@ -17,3 +17,17 @@
 .btn_return {
   -fx-background-color: transparent;
 }
+
+.btn_delet {
+  -fx-background-color: rgb(255, 67, 67);
+  -fx-text-fill: White;
+  -fx-background-radius: 8px;
+  -fx-background-radius: 8px;
+}
+
+.btn_terminer {
+  -fx-background-color: rgb(93, 204, 93);
+  -fx-text-fill: White;
+  -fx-background-radius: 8px;
+  -fx-background-radius: 8px;
+}

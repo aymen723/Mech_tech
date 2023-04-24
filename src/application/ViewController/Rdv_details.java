@@ -139,6 +139,9 @@ public class Rdv_details {
     ObservableList<Usermodel> filtered = FXCollections.observableArrayList();
 
     @FXML
+    private Button btn_finish;
+
+    @FXML
     void add_parts_rdv(ActionEvent event) {
 
         try {
@@ -367,6 +370,7 @@ public class Rdv_details {
         newrdv.append("date_fin", date_fin_rdv.getValue());
         newrdv.append("descrption_in", description_in.getText());
         newrdv.append("descrption_out", description_out.getText());
+        newrdv.append("service", service.getText());
 
         newrdv.append("car model", car_model.getText());
         newrdv.append("prix", Integer.parseInt(prix.getText()));
@@ -490,6 +494,68 @@ public class Rdv_details {
             // User clicked Cancel or closed the dialog
 
         }
+
+    }
+
+    @FXML
+    void finish(ActionEvent event) {
+
+        Clientmodel newclient = rdv_local.getClient_rdv();
+        Document clientrdv;
+
+        Document newrdv = new Document("date_debut", date_debut_rdv.getValue());
+        newrdv.append("date_fin", date_fin_rdv.getValue());
+        newrdv.append("descrption_in", description_in.getText());
+        newrdv.append("descrption_out", description_out.getText());
+        newrdv.append("service", service.getText());
+        newrdv.append("etat", "terminé");
+
+        newrdv.append("car model", car_model.getText());
+        newrdv.append("prix", Integer.parseInt(prix.getText()));
+
+        if (rdv_local.getClient_rdv().getEmail() != null) {
+            newclient = new Clientmodel(rdv_local.getClient_rdv().getId(), rdv_local.getClient_rdv().getNom(),
+                    rdv_local.getClient_rdv().getPrenom(),
+                    rdv_local.getClient_rdv().getEmail(), rdv_local.getClient_rdv().getAddresse(),
+                    rdv_local.getClient_rdv().getNumero());
+            clientrdv = new Document("_id", new ObjectId(newclient.getId()));
+            clientrdv.append("nom", newclient.getNom());
+            clientrdv.append("prenom", newclient.getPrenom());
+            clientrdv.append("tel", newclient.getNumero());
+            clientrdv.append("email", newclient.getEmail());
+            clientrdv.append("addresse", newclient.getAddresse());
+        } else {
+            newclient = new Clientmodel(nom_client.getText(), prenom_client.getText(), numero_client.getText());
+            clientrdv = new Document("nom", newclient.getNom());
+            clientrdv.append("prenom", newclient.getPrenom());
+            clientrdv.append("numero", newclient.getNumero());
+        }
+
+        clientrdv.append("client", clientrdv);
+
+        int i = 0;
+        // for (i = 0; i < rdv_local.getParts().size(); i++) {
+        // System.out.println("this is parts");
+
+        // System.out.println(rdv_local.getParts().get(i).getName());
+        // }
+
+        // clientrdv.append("parts", rdv_local.getParts());
+
+        List<Document> myDocuments = new ArrayList<Document>();
+        for (i = 0; i < rdv_local.getParts().size(); i++) {
+            Parts part = rdv_local.getParts().get(i);
+            Document addpart = new Document("_id", new ObjectId(part.getId()));
+            addpart.append("name", part.getName());
+            addpart.append("price", part.getPrice());
+            addpart.append("quantity", part.getQuntitie());
+            // addpart.append("description", part.getDescription());
+            myDocuments.add(addpart);
+
+            System.out.println(myDocuments.get(i));
+        }
+        newrdv.append("parts", myDocuments);
+        AdminController.UpdateRdv(newrdv, rdv_local);
 
     }
 

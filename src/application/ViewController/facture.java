@@ -17,12 +17,14 @@ import javafx.print.Paper;
 import javafx.print.Printer;
 import javafx.print.PrinterJob;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 public class facture {
 
@@ -82,6 +84,9 @@ public class facture {
     private AnchorPane pane;
 
     @FXML
+    private Pane factpane;
+
+    @FXML
     private Text controdu_fact;
 
     public void Gettrdv(Rendez_vous rdv) {
@@ -109,7 +114,10 @@ public class facture {
         }
 
         parts_price.setText(Integer.toString(sum));
+        table_facture.setFixedCellSize(25);
         table_facture.setItems(list);
+
+        table_facture.setPrefHeight(table_facture.getFixedCellSize() * rdv_local.getParts().size() + 47);
 
     }
 
@@ -137,7 +145,7 @@ public class facture {
         if (job != null) {
             // set the content to be printed
 
-            job.printPage(pane);
+            job.printPage(grid);
             job.endJob();
         }
     }

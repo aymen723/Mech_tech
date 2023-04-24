@@ -34,3 +34,21 @@
   -fx-border-width: 2px;
   -fx-text-fill: white;
 }
+
+.containers {
+  -fx-background-color: #dee2e6;
+  -fx-background-radius: 15;
+  -fx-border-radius: 15;
+}
+
+.container-encour {
+  -fx-background-color: #f0eb8d;
+  -fx-background-radius: 15;
+  -fx-border-radius: 15;
+}
+
+.container-terminer {
+  -fx-background-color: #98d8aa;
+  -fx-background-radius: 15;
+  -fx-border-radius: 15;
+}
