@@ -148,19 +148,5 @@ public class Rendez_vous {
     public Rendez_vous() {
     }
 
-    // public Rendez_vous(String id, String car_model, String etat, String service,
-    // ArrayList<Parts> parts,
-    // LocalDate date_debut, LocalDate date_fin, String decription, Clientmodel
-    // client_rdv) {
-    // this.id = id;
-    // this.car_model = car_model;
-    // this.etat = etat;
-    // this.service = service;
-    // this.parts = parts;
-    // this.date_debut = date_debut;
-    // this.date_fin = date_fin;
-    // this.decription = decription;
-    // this.client_rdv = client_rdv;
-    // }
 
 }
