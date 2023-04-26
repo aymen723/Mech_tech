@@ -121,11 +121,6 @@ public class facture {
 
         table_facture.setPrefHeight(table_facture.getFixedCellSize() * rdv_local.getParts().size() + 47);
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 47a0f099e52fdaf6e170fafafa475033c96337e1
     }
 
     @FXML

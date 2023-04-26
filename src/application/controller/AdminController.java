@@ -274,45 +274,6 @@ public class AdminController {
 
 	// }
 
-<<<<<<< HEAD
-	// public static ObservableList<Rendez_vous> ListRdv() {
-	// 	ObservableList<Rendez_vous> List = FXCollections.observableArrayList();
-	// 	MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
-
-	// 	MongoCursor<Document> cursor = collection.find().iterator();
-	// 	try {
-	// 		while (cursor.hasNext()) {
-	// 			Document doc = cursor.next();
-	// 			Rendez_vous rdv = new Rendez_vous();
-
-	// 			rdv.setId(doc.getObjectId("_id").toString());
-				
-
-	// 			Document clientdoc = doc.get("client", Document.class);
-	// 			Clientmodel client = new Clientmodel();
-
-	// 			client.setId(clientdoc.getObjectId("_id").toString());
-	// 			client.setNom(clientdoc.getString("nom"));
-	// 			client.setPrenom(clientdoc.getString("prenom"));
-	// 			client.setEmail(clientdoc.getString("email"));
-	// 			client.setNumero(clientdoc.getString("tel"));
-	// 			client.setAddresse(clientdoc.getString("adresse"));
-
-	// 			rdv.setClient_rdv(client);
-
-	// 			List.add(rdv);
-
-	// 		}
-	// 	} finally {
-	// 		cursor.close();
-	// 	}
-
-	// 	return List;
-
-	// }
-
-=======
->>>>>>> 47a0f099e52fdaf6e170fafafa475033c96337e1
 	public static ArrayList<Rendez_vous> ListRdv() {
 		ArrayList<Rendez_vous> List = new ArrayList<>();
 		MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
