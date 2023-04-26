@@ -1,7 +1,8 @@
 package application.ViewController;
 
+// import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import application.controller.AdminController;
@@ -11,12 +12,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
+// import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+// import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -26,7 +29,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+// import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+// import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class Rdv_parts implements Initializable {
@@ -70,7 +75,7 @@ public class Rdv_parts implements Initializable {
     @FXML
     private BorderPane rdv_parts_container;
 
-    private ArrayList<Parts> parts_list;
+    // private ArrayList<Parts> parts_list;
 
     private Rendez_vous rdv_local;
 
@@ -83,6 +88,7 @@ public class Rdv_parts implements Initializable {
 
         TableViewSelectionModel<Parts> selectionModel = parts_table.getSelectionModel();
         selectionModel.setSelectionMode(SelectionMode.SINGLE);
+       
 
         Parts part = selectionModel.getSelectedItems().get(0);
 
@@ -127,6 +133,31 @@ public class Rdv_parts implements Initializable {
         } catch (Exception e) {
             // TODO: handle exception
         }
+
+        // Parent fxml;
+		// try {
+		// // fxml =
+		// // FXMLLoader.load(getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
+        // FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
+        // Parent root = loader.load();
+        // System.out.println(rdv_local.getClient_rdv().getNom() + " is the one to be sent");
+        // Rdv_details rdv_details_con = loader.getController();
+        // rdv_details_con.getrdv(rdv_local);
+        // System.out.println(rdv_local.getClient_rdv().getNom() + " is the one sent");
+		
+		// Stage stage = new Stage();
+		// Scene scene = new Scene(root);
+		// stage.setScene(scene);
+		// stage.setTitle("Mecha Tech");
+		// scene.setFill(Color.TRANSPARENT);
+
+		
+		// stage.show();
+
+		// } catch (IOException e) {
+		
+		// e.printStackTrace();
+		// }
     }
 
     @Override

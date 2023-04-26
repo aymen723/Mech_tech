@@ -17,10 +17,11 @@ import com.mongodb.ServerAddress;
 import com.mongodb.MongoClientOptions.Builder;
 //import com.mongodb.MongoClient;
 // import com.mongodb.MongoClientURI;
-import com.mongodb.client.MongoClient;
+// import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.connection.ClusterDescription;
 
 public class Connectdatabase {
 	private static com.mongodb.client.MongoClient mongoClient;
@@ -60,8 +61,8 @@ public class Connectdatabase {
 	}
 
 	public static void closeconndb() {
-		mongoClient.close();
-	}
+        mongoClient.close();
+    }
 
 	public static void testdb() throws SocketException {
 		// System.out.println(mongoClient);

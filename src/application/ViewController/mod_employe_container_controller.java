@@ -83,7 +83,7 @@ public class mod_employe_container_controller {
         newemp.append("role", role_select.getValue());
         newemp.append("email", email_field_mod.getText());
         // newemp.append("password",email_field_mod.getText());
-        AdminController.UpdateEmp(newemp);
+        AdminController.UpdateEmp(newemp,user_local);
 
         System.out.println("test hna1");
 

@@ -54,14 +54,14 @@
                   <Button fx:id="parts_rdv" layoutX="224.0" layoutY="24.0" mnemonicParsing="false" onAction="#add_parts_rdv" prefHeight="30.0" prefWidth="60.0" styleClass="btn_mod" stylesheets="@btn.css" text="Piece" />
                </children></Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+            <Pane prefHeight="68.0" prefWidth="679.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                <children>
-                  <TableView fx:id="listview_part" layoutX="-284.0" layoutY="-67.0" prefHeight="180.0" prefWidth="567.0">
+                  <TableView fx:id="listview_part" layoutX="-284.0" layoutY="-67.0" prefHeight="139.0" prefWidth="572.0">
                     <columns>
                       <TableColumn fx:id="nom_part_col" minWidth="105.5999755859375" prefWidth="351.1999816894531" text="Nom" />
                         <TableColumn fx:id="prix_col" minWidth="40.79998779296875" prefWidth="76.0" text="Prix" />
-                      <TableColumn fx:id="quantite_part_col" minWidth="64.0" prefWidth="83.19998168945312" text="Quantité " />
-                        <TableColumn fx:id="action_col" minWidth="40.0" prefWidth="56.799957275390625" text="Action" />
+                      <TableColumn fx:id="quantite_part_col" minWidth="47.0" prefWidth="69.0" text="Quantité " />
+                        <TableColumn fx:id="action_col" minWidth="40.0" prefWidth="72.0" text="Action" />
                     </columns>
                   </TableView>
                </children></Pane>

@@ -25,8 +25,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -129,6 +128,7 @@ public class Ajouter_rdv implements Initializable {
         Usermodel newtechnicien = techni_choice.getValue();
 
         Document newrdv = new Document("date_debut", datedebut.getValue());
+        
         newrdv.append("date_fin", date_fin_rdv.getValue());
         newrdv.append("descrption_in", description_in.getText());
         newrdv.append("descrption_out", null);
@@ -153,6 +153,8 @@ public class Ajouter_rdv implements Initializable {
             clientrdv.append("tel", newclient.getNumero());
             clientrdv.append("email", newclient.getEmail());
             clientrdv.append("addresse", newclient.getAddresse());
+
+            // clientrdv = AdminController.findclientbyid(newclient.getId());
 
         }
         Document technicienrdv = new Document("_id", new ObjectId(newtechnicien.getId()));
@@ -220,7 +222,7 @@ public class Ajouter_rdv implements Initializable {
         // TODO Auto-generated method stub
         // throw new UnsupportedOperationException("Unimplemented method 'initialize'");
 
-        list = AdminController.EmpClients();
+        list = AdminController.ListClient();
         list_tech = AdminController.EmpLiist();
 
         ObservableList<Usermodel> filtered = FXCollections.observableArrayList();
@@ -280,7 +282,9 @@ public class Ajouter_rdv implements Initializable {
         });
 
         serch.setOnMouseClicked(e -> {
-            context.show(serch, Side.BOTTOM, 0, 0);
+            if(serch.getText().trim() != null ){
+                
+            context.show(serch, Side.BOTTOM, 0, 0);}
         });
 
         // Hide context menu when search field loses focus

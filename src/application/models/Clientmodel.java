@@ -2,12 +2,12 @@ package application.models;
 
 public class Clientmodel {
 
-    String id;
-    String nom;
-    String prenom;
-    String numero;
-    String addresse;
-    String email;
+    private String id;
+    private String nom;
+    private String prenom;
+    private String numero;
+    private String addresse;
+    private String email;
 
     public Clientmodel(String id, String nom, String prenom, String numero, String addresse, String email) {
         this.id = id;

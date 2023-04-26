@@ -10,12 +10,13 @@ import org.bson.Document;
 
 import org.bson.types.ObjectId;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 
 import application.Connectdatabase;
 import application.ViewController.Client_dashbord;
-import application.ViewController.add_employer_controller;
+// import application.ViewController.add_employer_controller;<
 import application.models.Clientmodel;
 import application.models.Parts;
 import application.models.Rendez_vous;
@@ -33,10 +34,10 @@ public class AdminController {
 
 	}
 
-	public static void UpdateEmp(Document Doc) {
+	public static void UpdateEmp(Document Doc, Usermodel user) {
 
 		MongoCollection<Document> collection = Connectdatabase.connectdb("users");
-		ObjectId objid = new ObjectId(add_employer_controller.user.getId());
+		ObjectId objid = new ObjectId(user.getId());
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
 		Doc.append("_id", objid);
 		Document updateop = new Document("$set", Doc);
@@ -65,6 +66,7 @@ public class AdminController {
 				user.setRole(doc.getString("role"));
 
 				List.add(user);
+			
 
 			}
 		} finally {
@@ -73,6 +75,39 @@ public class AdminController {
 		}
 
 		return List;
+
+	}
+
+	// public static void addpart(Document Doc) {
+
+	// 	MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
+	// 	collection.insertOne(Doc);
+	// 	Connectdatabase.closeconndb();
+
+
+	// }
+
+	// public static void updatepart(Document Doc, Parts part) {
+	// 	MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
+	// 	ObjectId objid = new ObjectId(part.getId());
+	// 	Document found = (Document) collection.find(new Document("_id", objid)).first();
+	// 	System.out.println(found.get("name"));
+	// 	Doc.append("_id", objid);
+	// 	Document updateop = new Document("$set", Doc);
+	// 	collection.updateOne(found, updateop);
+	// 	Connectdatabase.closeconndb();
+
+
+	// }
+
+	public static void deletpart(Parts part) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
+		ObjectId objid = new ObjectId(part.getId());
+		Document found = (Document) collection.find(new Document("_id", objid)).first();
+		collection.deleteOne(found);
+		Connectdatabase.closeconndb();
+
 
 	}
 
@@ -125,17 +160,10 @@ public class AdminController {
 		collection.updateOne(found, updateop);
 		Connectdatabase.closeconndb();
 
-	}
 
-	public static void deletpart(Parts part) {
-
-		MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
-		ObjectId objid = new ObjectId(part.getId());
-		Document found = (Document) collection.find(new Document("_id", objid)).first();
-		collection.deleteOne(found);
-		Connectdatabase.closeconndb();
 
 	}
+
 
 	public static void deletemp(Usermodel user) {
 		MongoCollection<Document> collection = Connectdatabase.connectdb("users");
@@ -176,7 +204,7 @@ public class AdminController {
 
 	}
 
-	public static ObservableList<Clientmodel> EmpClients() {
+	public static ObservableList<Clientmodel> ListClient() {
 		ObservableList<Clientmodel> List = FXCollections.observableArrayList();
 		MongoCollection<Document> collection = Connectdatabase.connectdb("clients");
 
@@ -206,6 +234,22 @@ public class AdminController {
 
 	}
 
+	public static Document findclientbyid(String id) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("clients");
+
+		Document doc = new Document();
+		// Document document = collection.find(eq("_id", new ObjectId(id))).first();
+		BasicDBObject query = new BasicDBObject();
+    query.put("_id", new ObjectId(id));
+
+    doc = collection.find(query).first();
+	Connectdatabase.closeconndb();
+
+
+		return doc;
+	}
+
 	public static void addrdv(Document Doc) {
 
 		MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
@@ -214,15 +258,21 @@ public class AdminController {
 
 	}
 
-	public static void findclientbyid(String id) {
+	// public static void UpdateRdv(Document Doc , Rendez_vous rdv) {
 
-		MongoCollection<Document> collection = Connectdatabase.connectdb("clients");
+	// 	MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
+	// 	ObjectId objid = new ObjectId(rdv.getId());
+	// 	Document found = (Document) collection.find(new Document("_id", objid)).first();
+	// 	Doc.append("_id", objid);
+	// 	Document updated = new Document("$set", Doc);
+	// 	collection.updateOne(found, updated);
+	// 	Connectdatabase.closeconndb();
 
-		Document doc = new Document();
-		// Document document = collection.find(eq("_id", new ObjectId(id))).first();
-		Connectdatabase.closeconndb();
+	// 	Document doc = new Document();
+	// 	// Document document = collection.find(eq("_id", new ObjectId(id))).first();
+	// 	Connectdatabase.closeconndb();
 
-	}
+	// }
 
 	public static ArrayList<Rendez_vous> ListRdv() {
 		ArrayList<Rendez_vous> List = new ArrayList<>();

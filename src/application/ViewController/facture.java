@@ -108,6 +108,8 @@ public class facture {
         prix_part_fact.setCellValueFactory(new PropertyValueFactory<>("price"));
         quant_part_fact.setCellValueFactory(new PropertyValueFactory<>("quntitie"));
 
+
+
         for (int i = 0; i < rdv_local.getParts().size(); i++) {
 
             sum = (rdv_local.getParts().get(i).getPrice() * rdv_local.getParts().get(i).getQuntitie()) + sum;

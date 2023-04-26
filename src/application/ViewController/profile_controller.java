@@ -76,7 +76,7 @@ public class profile_controller {
     public void modifier_employer() {
 
         Document newemp = new Document("username", username_field_mod.getText());
-        newemp.append("_id", user_local.getId());
+        newemp.append("_id", user.getId());
         newemp.append("nom", name_field_mod.getText());
         newemp.append("nomutil", username_field_mod.getText());
         newemp.append("prenom", prenom_field_mod.getText());
@@ -85,20 +85,9 @@ public class profile_controller {
         newemp.append("role", role_select.getValue());
         newemp.append("email", email_field_mod.getText());
         // newemp.append("password",email_field_mod.getText());
-        AdminController.UpdateEmp(newemp);
+        AdminController.UpdateEmp(newemp,user);
 
         System.out.println("test hna1");
 
-        try {
-            Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/add_employe_dashbord.fxml"));
-            mod_container.getChildren().removeAll();
-            mod_container.getChildren().setAll(fxml);
-            System.out.println("test hna 2");
 
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
-        System.out.println("test hna 3");
-
-    }
-}
+}}

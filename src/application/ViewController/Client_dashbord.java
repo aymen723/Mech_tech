@@ -105,7 +105,7 @@ public class Client_dashbord implements Initializable {
         // TODO Auto-generated method stub
         // throw new UnsupportedOperationException("Unimplemented method 'initialize'");
 
-        list = AdminController.EmpClients();
+        list = AdminController.ListClient();
 
         nom_col.setCellValueFactory(new PropertyValueFactory<>("Nom"));
         pernom_col.setCellValueFactory(new PropertyValueFactory<>("Prenom"));
@@ -174,7 +174,7 @@ public class Client_dashbord implements Initializable {
                         if (result.get() == ButtonType.OK) {
                             Clientmodel client = getTableView().getItems().get(getIndex());
                             AdminController.deletClient(client);
-                            list = AdminController.EmpClients();
+                            list = AdminController.ListClient();
                             client_table.setItems(list);
                             client_table.refresh();
                             // User clicked OK
