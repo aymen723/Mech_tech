@@ -76,42 +76,7 @@
 		</attributes>
 	</classpathentry>
 
-	
-			<classpathentry kind="lib" path="C:\java\resour\swingfx/javafx-swing-20.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	
-			<classpathentry kind="lib" path="C:\java\resour\swingfx/javafx-graphics-20-linux.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	
-			<classpathentry kind="lib" path="C:\java\resour\swingfx/javafx-graphics-20.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	
-			<classpathentry kind="lib" path="C:\java\resour\swingfx/javafx-graphics-20-linux.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	
-			<classpathentry kind="lib" path="C:\java\resour\swingfx/javafx-swing-20.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 
-			<classpathentry kind="lib" path="C:\java\resour\swingfx/javafx-swing-20-linux.jarr">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 
 	<classpathentry kind="output" path="bin"/> -->
 </classpath>

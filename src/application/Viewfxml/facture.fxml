@@ -1,248 +1,225 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<<<<<<< HEAD
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="842.0" prefWidth="595.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ReportController">
-   <children>
-      <GridPane hgap="10.0" vgap="10.0" layoutX="40.0" layoutY="60.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="100.0" prefWidth="200.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="100.0" prefWidth="200.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="250.0" minWidth="100.0" prefWidth="200.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="150.0" minHeight="150.0" prefHeight="150.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="300.0" minHeight="300.0" prefHeight="300.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <children>
-            <Label text="Report" GridPane.columnSpan="3">
-               <font>
-                  <Font name="Arial Black" size="24.0" />
-               </font>
-            </Label>
-            <Label text="Client Information" GridPane.rowIndex="1">
-               <font>
-                  <Font name="Arial" size="14.0" />
-               </font>
-            </Label>
-            <Label text="First Name:" GridPane.rowIndex="2" />
-            <Label text="Last Name:" GridPane.rowIndex="2" GridPane.columnIndex="1" />
-            <Label text="Appointment Information" GridPane.rowIndex="3">
-               <font>
-                  <Font name="Arial" size="14.0" />
-               </font>
-            </Label>
-            <Label text="Start Date:" GridPane.rowIndex="4" />
-            <Label text="End Date:" GridPane.rowIndex="4" GridPane.columnIndex="1" />
-            <Label text="Parts Used" GridPane.rowIndex="5">
-               <font>
-                  <Font name="Arial" size="14.0" />
-               </font>
-            </Label>
-            <Label text="Description of Car" GridPane.columnIndex="2">
-            <font>
-                  <Font name="Arial" size="14.0" />
-               </font>
-            </Label>
-
-               <TextArea GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="2" />
-<Label text="Repairs Made" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-<TextArea GridPane.columnIndex="2" GridPane.rowIndex="4" GridPane.rowSpan="2" />
-<Label text="Price:" GridPane.rowIndex="6" />
-<Label fx:id="priceLabel" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-<HBox GridPane.columnSpan="3" GridPane.rowIndex="7" spacing="10.0">
-<Button fx:id="pdfButton" mnemonicParsing="false" text="Save as PDF" />
-<Button fx:id="printButton" mnemonicParsing="false" text="Print" />
-</HBox>
-</children>
-</GridPane>
-</children>
-</AnchorPane>
-=======
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="826.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.facture">
-   <content>
-      <GridPane fx:id="grid" prefHeight="1169.0" prefWidth="826.0" style="-fx-background-color: white;">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints maxHeight="329.8000091552734" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="400.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="477.6000030517578" minHeight="0.0" prefHeight="300.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="920.7999938964842" minHeight="10.0" prefHeight="656.5999755859375" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="130.5999511718751" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+<AnchorPane fx:id="pane" prefHeight="849.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.facture">
+   <children>
+      <Pane fx:id="factpane" prefHeight="849.0" prefWidth="600.0">
          <children>
-            <Pane prefHeight="200.0" prefWidth="200.0">
+            <GridPane fx:id="grid" prefHeight="849.0" prefWidth="600.0" style="-fx-background-color: white; -fx-border-color: black;">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="329.8000091552734" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="329.8000091552734" minHeight="10.0" prefHeight="91.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="400.0" minHeight="10.0" prefHeight="88.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="477.6000030517578" minHeight="0.0" prefHeight="130.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="477.6000030517578" minHeight="10.0" prefHeight="130.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="920.7999938964842" minHeight="10.0" prefHeight="410.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="130.5999511718751" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+              </rowConstraints>
                <children>
-                  <Text layoutX="9.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client :">
-                     <font>
-                        <Font name="Dubai Regular" size="20.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="9.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="modèle de voiture :">
-                     <font>
-                        <Font name="Dubai Regular" size="19.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="nom_fact" layoutX="80.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
-                     <font>
-                        <Font name="Dubai Regular" size="19.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="prenom_fact" layoutX="154.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
-                     <font>
-                        <Font name="Dubai Regular" size="19.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="car_fact" layoutX="162.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
-                     <font>
-                        <Font name="Dubai Regular" size="19.0" />
-                     </font>
-                  </Text>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Text layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Client :">
+                           <font>
+                              <Font name="Yu Gothic Bold" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="14.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="modèle de voiture :">
+                           <font>
+                              <Font name="Yu Gothic Bold" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="nom_fact" layoutX="74.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
+                           <font>
+                              <Font name="Yu Gothic Regular" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="prenom_fact" layoutX="161.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
+                           <font>
+                              <Font name="Yu Gothic Regular" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="car_fact" layoutX="175.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
+                           <font>
+                              <Font name="Yu Gothic Regular" size="16.0" />
+                           </font>
+                        </Text>
+                        <Line endX="503.0" layoutX="95.0" layoutY="83.0" startX="-100.0" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Text layoutX="25.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email :">
+                           <font>
+                              <Font name="Yu Gothic Bold" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="25.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero :">
+                           <font>
+                              <Font name="Yu Gothic Bold" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="84.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MECA-TEC@outlook.com">
+                           <font>
+                              <Font name="Yu Gothic Regular" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="104.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0555247862">
+                           <font>
+                              <Font name="Yu Gothic Regular" size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <Pane GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Pane GridPane.rowIndex="3">
+                     <children>
+                        <Text layoutX="16.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description In :">
+                           <font>
+                              <Font name="Yu Gothic Bold" size="16.0" />
+                           </font>
+                        </Text>
+                        <Line endX="385.0" endY="1.0" layoutX="213.0" layoutY="-2.0" startX="-214.0" startY="1.0" />
+                        <Text fx:id="descrp_fact" layoutX="16.0" layoutY="36.0" lineSpacing="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="567.0">
+                           <font>
+                              <Font name="Wingdings" size="12.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                     <children>
+                        <Text layoutX="14.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de Rendez-vous :">
+                           <font>
+                              <Font name="Yu Gothic Bold" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="date_debut_fact" layoutX="199.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
+                           <font>
+                              <Font name="Yu Gothic Regular" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="14.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type de Service :">
+                           <font>
+                              <Font name="Yu Gothic Bold" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="service_fact" layoutX="161.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
+                           <font>
+                              <Font name="Yu Gothic Regular" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="290.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/">
+                           <font>
+                              <Font name="Yu Gothic Regular" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="date_fin_fact" layoutX="300.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
+                           <font>
+                              <Font name="Yu Gothic Regular" size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
+                     <children>
+                        <Text layoutX="42.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix total des pices :">
+                           <font>
+                              <Font name="Yu Gothic Bold" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="42.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix Total :">
+                           <font>
+                              <Font name="Yu Gothic Bold" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="parts_price" layoutX="216.0" layoutY="359.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
+                           <font>
+                              <Font name="Yu Gothic Regular" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="prix_fact" layoutX="147.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
+                           <font>
+                              <Font name="Yu Gothic Regular" size="16.0" />
+                           </font>
+                        </Text>
+                        <TableView fx:id="table_facture" layoutX="38.0" layoutY="14.0" maxHeight="317.0" prefHeight="317.0" prefWidth="503.0" stylesheets="@tablestyle.css">
+                          <columns>
+                            <TableColumn fx:id="nom_part_fact" prefWidth="247.19998168945312" text="Nom" />
+                            <TableColumn fx:id="quant_part_fact" minWidth="0.0" prefWidth="128.800048828125" text="Quantité " />
+                              <TableColumn fx:id="prix_part_fact" minWidth="0.0" prefWidth="123.20001220703125" text="Prix" />
+                          </columns>
+                        </TableView>
+                        <Line endX="499.0" layoutX="99.0" layoutY="333.0" startX="-100.0" />
+                        <Line endX="753.0" layoutX="-155.0" layoutY="-1.0" startX="154.0" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="67.0" prefWidth="292.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Pane prefHeight="1169.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <children>
+                        <Button fx:id="btn_print" layoutX="183.0" layoutY="355.0" mnemonicParsing="false" onAction="#print" styleClass="btn_mod" stylesheets="@btn.css" text="Imprimer" textFill="WHITE" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                     <children>
+                        <Text layoutX="14.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description Out :">
+                           <font>
+                              <Font name="Yu Gothic Bold" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="controdu_fact" layoutX="14.0" layoutY="37.0" lineSpacing="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="567.0">
+                           <font>
+                              <Font name="Wingdings" size="12.0" />
+                           </font>
+                        </Text>
+                        <Line endX="661.0" layoutX="-63.0" layoutY="-1.0" startX="62.0" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Pane prefHeight="60.0" prefWidth="576.0" style="-fx-background-color: #3c4048;">
+                     <children>
+                        <Text fill="WHITE" layoutX="14.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MECA-TECH">
+                           <font>
+                              <Font name="Calibri" size="30.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="58.0" prefWidth="307.0" style="-fx-background-color: #3c4048;" GridPane.columnIndex="1">
+                     <children>
+                        <Text fill="WHITE" layoutX="-49.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Facture">
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Text>
+                        <ImageView fitHeight="52.0" fitWidth="70.0" layoutX="201.0" layoutY="4.0">
+                           <image>
+                              <Image url="@../../pics/Asset%201.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
                </children>
-            </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-               <children>
-                  <Text layoutX="69.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email :">
-                     <font>
-                        <Font name="Dubai Regular" size="20.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="69.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero :">
-                     <font>
-                        <Font name="Dubai Regular" size="20.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="144.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MECA-TEC@outlook.com">
-                     <font>
-                        <Font name="Dubai Regular" size="20.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="152.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0555247862">
-                     <font>
-                        <Font name="Dubai Regular" size="20.0" />
-                     </font>
-                  </Text>
-               </children></Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4" />
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <children>
-                  <HBox layoutX="66.0" layoutY="86.0" />
-                  <Text layoutX="14.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description Out :">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="controdu_fact" layoutX="14.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="371.73670959472656" />
-               </children>
-            </Pane>
-            <Pane prefHeight="172.0" prefWidth="414.0" GridPane.rowIndex="2">
-               <children>
-                  <Text layoutX="7.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description In :">
-                     <font>
-                        <Font size="19.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="descrp_fact" layoutX="14.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="371.73670959472656" />
-               </children></Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-               <children>
-                  <Text layoutX="8.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de Rendez-vous :">
-                     <font>
-                        <Font name="Dubai Regular" size="20.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="date_debut_fact" layoutX="213.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
-                     <font>
-                        <Font name="Dubai Regular" size="19.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="date_fin_fact" layoutX="344.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
-                     <font>
-                        <Font name="Dubai Regular" size="19.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="8.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type de Service :">
-                     <font>
-                        <Font name="Dubai Regular" size="20.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="service_fact" layoutX="158.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
-                     <font>
-                        <Font name="Dubai Regular" size="19.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="321.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="/">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
-               <children>
-                  <TableView fx:id="table_facture" layoutX="164.0" layoutY="99.0" prefWidth="500.0">
-                    <columns>
-                      <TableColumn fx:id="nom_part_fact" prefWidth="247.19998168945312" text="Nom" />
-                      <TableColumn fx:id="quant_part_fact" minWidth="0.0" prefWidth="128.800048828125" text="Quantité " />
-                        <TableColumn fx:id="prix_part_fact" minWidth="0.0" prefWidth="123.20001220703125" text="Prix" />
-                    </columns>
-                  </TableView>
-                  <Text layoutX="162.0" layoutY="536.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix total des pices :">
-                     <font>
-                        <Font name="Dubai Regular" size="19.0" />
-                     </font>
-                  </Text>
-                  <Text layoutX="162.0" layoutY="580.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix Total :">
-                     <font>
-                        <Font name="Dubai Regular" size="19.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="parts_price" layoutX="334.0" layoutY="536.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
-                     <font>
-                        <Font name="Dubai Regular" size="20.0" />
-                     </font>
-                  </Text>
-                  <Text fx:id="prix_fact" layoutX="263.0" layoutY="580.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
-                     <font>
-                        <Font name="Dubai Regular" size="20.0" />
-                     </font>
-                  </Text>
-               </children>
-            </Pane>
-            <Pane prefHeight="1169.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <children>
-                  <Button fx:id="btn_save" layoutX="29.0" layoutY="529.0" mnemonicParsing="false" onAction="#save" text="Sauvgarde" />
-                  <Button fx:id="btn_print" layoutX="326.0" layoutY="529.0" mnemonicParsing="false" onAction="#print" text="Imprimer" />
-               </children></Pane>
+            </GridPane>
          </children>
-      </GridPane>
-   </content>
-</ScrollPane>
->>>>>>> f7c926b0feee803ff4df2192b90debcbd69388ea
+      </Pane>
+   </children>
+</AnchorPane>

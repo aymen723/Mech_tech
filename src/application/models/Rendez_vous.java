@@ -28,9 +28,11 @@ public class Rendez_vous {
 
     private int prix;
 
+    private Usermodel technicien_rdv;
+
     public Rendez_vous(String id, String car_model, String etat, String service, ArrayList<Parts> parts,
             Date date_debut, Date date_fin, Clientmodel client_rdv, String descrption_in, String descrption_out,
-            int prix) {
+            int prix, Usermodel technicien_rdv) {
         this.id = id;
         this.car_model = car_model;
         this.etat = etat;
@@ -42,6 +44,7 @@ public class Rendez_vous {
         this.descrption_in = descrption_in;
         this.descrption_out = descrption_out;
         this.prix = prix;
+        this.technicien_rdv = technicien_rdv;
     }
 
     public String getId() {
@@ -130,6 +133,16 @@ public class Rendez_vous {
 
     public void setPrix(int prix) {
         this.prix = prix;
+    }
+
+    public Usermodel gettechnicien_rdv() {
+
+        return technicien_rdv;
+    }
+
+    public void settechnicien_rdv(Usermodel user) {
+        this.technicien_rdv = user;
+
     }
 
     public Rendez_vous() {

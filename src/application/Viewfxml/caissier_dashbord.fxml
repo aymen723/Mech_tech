@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" style="-fx-border-radius: 30; -fx-background-radius: 30;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.DashbordController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" style="-fx-border-radius: 30; -fx-background-radius: 30;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.caissier_dashbordcontroller">
    <left>
       <VBox prefHeight="200.0" prefWidth="170.0" style="-fx-background-radius: 10px;" styleClass="leftmenu" stylesheets="@dashbord_style.css" BorderPane.alignment="CENTER">
          <children>
@@ -38,15 +38,23 @@
                <padding>
                   <Insets left="30.0" />
                </padding></Button>
-            <Button id="btn1" fx:id="Employés" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#Employés" prefHeight="60.0" prefWidth="170.0" styleClass="btn_leftmenu" stylesheets="@dashbord_style.css" text="Mes employés" textFill="#9c9c9c">
-               <padding>
-                  <Insets left="30.0" />
-               </padding></Button>
             <Button id="btn1" fx:id="Clients" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#Clients" prefHeight="60.0" prefWidth="170.0" styleClass="btn_leftmenu" stylesheets="@dashbord_style.css" text="Mes Clients" textFill="#9c9c9c">
                <padding>
                   <Insets left="30.0" />
                </padding></Button>
-            <VBox prefHeight="155.0" prefWidth="100.0" />
+            <VBox alignment="BOTTOM_CENTER" prefHeight="213.0" prefWidth="170.0">
+               <children>
+                  <Button fx:id="btn_profile" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#profile" prefHeight="60.0" prefWidth="170.0" styleClass="btn_leftmenu" stylesheets="@dashbord_style.css" text="Profile" textFill="#9c9c9c">
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="btn_logout" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#logout" prefHeight="60.0" prefWidth="170.0" styleClass="btn_leftmenu" stylesheets="@dashbord_style.css" text="Logout" textFill="#9c9c9c">
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                  </Button>
+               </children></VBox>
          </children>
       </VBox>
    </left>

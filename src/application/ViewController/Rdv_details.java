@@ -202,12 +202,6 @@ public class Rdv_details {
                         deletebutton.setGraphic(img_copy);
 
                         deletebutton.setOnAction(event -> {
-                            // ObservableList<Parts> selectedItems =
-                            // parts_table.getSelectionModel().getSelectedItems();
-
-                        });
-
-                        deletebutton.setOnAction(event -> {
 
                             Alert alert = new Alert(AlertType.CONFIRMATION);
                             alert.setTitle("Confirmation de suppression");
@@ -292,9 +286,11 @@ public class Rdv_details {
 
         Document newrdv = new Document("date_debut", date_debut_rdv.getValue());
         newrdv.append("date_fin", date_fin_rdv.getValue());
-        // newrdv.append("description", description.getText());
+        newrdv.append("descrption_in", description_in.getText());
+        newrdv.append("descrption_out", description_out.getText());
+
         newrdv.append("car model", car_model.getText());
-        newrdv.append("prix", prix.getText());
+        newrdv.append("prix", Integer.parseInt(prix.getText()));
 
         if (rdv_local.getClient_rdv().getEmail() != null) {
             newclient = new Clientmodel(rdv_local.getClient_rdv().getId(), rdv_local.getClient_rdv().getNom(),

@@ -310,8 +310,8 @@ public class AdminController {
 
 	// }
 
-	public static ObservableList<Rendez_vous> ListRdv() {
-		ObservableList<Rendez_vous> List = FXCollections.observableArrayList();
+	public static ArrayList<Rendez_vous> ListRdv() {
+		ArrayList<Rendez_vous> List = new ArrayList<>();
 		MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
 
 		MongoCursor<Document> cursor = collection.find().iterator();
@@ -322,7 +322,7 @@ public class AdminController {
 
 				rdv.setId(doc.getObjectId("_id").toString());
 				rdv.setCar_model(doc.getString("car model"));
-				SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+				// SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
 				rdv.setDate_debut(doc.getDate("date_debut"));
 				rdv.setDate_fin(doc.getDate("date_fin"));
@@ -342,7 +342,19 @@ public class AdminController {
 				client.setNumero(clientdoc.getString("tel"));
 				client.setAddresse(clientdoc.getString("adresse"));
 
+				Document techniciendoc = doc.get("technicien", Document.class);
+				Usermodel technicien = new Usermodel();
+
+				technicien.setId(techniciendoc.getObjectId("_id").toString());
+				technicien.setNom(techniciendoc.getString("nom"));
+				technicien.setPrenom(techniciendoc.getString("prenom"));
+				technicien.setEmail(techniciendoc.getString("email"));
+				technicien.setNumero(techniciendoc.getString("tel"));
+				technicien.setRole(techniciendoc.getString("role"));
+				technicien.setUsername(techniciendoc.getString("nomutil"));
+
 				rdv.setClient_rdv(client);
+				rdv.settechnicien_rdv(technicien);
 
 				ArrayList<Document> parlistdoc = (ArrayList<Document>) doc.get("parts");
 				ArrayList<Parts> partlist = new ArrayList<Parts>();

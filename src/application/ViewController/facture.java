@@ -4,24 +4,27 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 // import com.itextpdf.text.DocumentException;
-// import com.itextpdf.layout.element;
+
 import application.models.Parts;
 import application.models.Rendez_vous;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.print.PageLayout;
+import javafx.print.PageOrientation;
+import javafx.print.Paper;
+import javafx.print.Printer;
+import javafx.print.PrinterJob;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-
-
-
-import java.io.IOException;
+import javafx.scene.layout.Pane;
 
 public class facture {
 
@@ -71,11 +74,20 @@ public class facture {
     @FXML
     private Button btn_print;
 
-    @FXML
-    private Button btn_save;
+    // @FXML
+    // private Button btn_save;
 
     @FXML
     private GridPane grid;
+
+    @FXML
+    private AnchorPane pane;
+
+    @FXML
+    private Pane factpane;
+
+    @FXML
+    private Text controdu_fact;
 
     public void Gettrdv(Rendez_vous rdv) {
 
@@ -87,6 +99,7 @@ public class facture {
         car_fact.setText(rdv_local.getCar_model());
         descrp_fact.setText(rdv_local.getDescrption_in());
 
+        controdu_fact.setText(rdv_local.getDescrption_out());
         date_debut_fact.setText(DATE_FORMAT.format(rdv_local.getDate_debut()));
         date_fin_fact.setText(DATE_FORMAT.format(rdv_local.getDate_fin()));
         service_fact.setText(rdv_local.getService());
@@ -95,30 +108,81 @@ public class facture {
         prix_part_fact.setCellValueFactory(new PropertyValueFactory<>("price"));
         quant_part_fact.setCellValueFactory(new PropertyValueFactory<>("quntitie"));
 
+
+
         for (int i = 0; i < rdv_local.getParts().size(); i++) {
 
             sum = (rdv_local.getParts().get(i).getPrice() * rdv_local.getParts().get(i).getQuntitie()) + sum;
         }
 
         parts_price.setText(Integer.toString(sum));
+        table_facture.setFixedCellSize(25);
         table_facture.setItems(list);
+
+        table_facture.setPrefHeight(table_facture.getFixedCellSize() * rdv_local.getParts().size() + 47);
+
+
 
     }
 
     @FXML
     void print(ActionEvent event) {
-        javafx.print.Printer printer = javafx.print.Printer.getDefaultPrinter();
-        javafx.print.PrinterJob job = javafx.print.PrinterJob.createPrinterJob(printer);
+        // // Print the report using the default printer
+        // javafx.print.Printer printer = javafx.print.Printer.getDefaultPrinter();
+        // javafx.print.PrinterJob job =
+        // javafx.print.PrinterJob.createPrinterJob(printer);
+        // if (job != null) {
+        // // grid.setPrefWidth("");
+        // job.printPage(grid);
+        // job.endJob();
+        // }
+
+        Printer printer = Printer.getDefaultPrinter();
+        PageLayout pageLayout = printer.createPageLayout(Paper.A4, PageOrientation.PORTRAIT,
+                Printer.MarginType.HARDWARE_MINIMUM);
+
+        // create a job and set the page layout
+        PrinterJob job = PrinterJob.createPrinterJob(printer);
+        job.getJobSettings().setPageLayout(pageLayout);
+
+        // check if the job was created successfully
         if (job != null) {
+            // set the content to be printed
+
             job.printPage(grid);
             job.endJob();
         }
     }
 
-    @FXML
-    void save(ActionEvent event)  {
+    // @FXML
+    // void save(ActionEvent event) throws IOException {
 
-    }
+    // // Use a FileChooser to prompt the user for the save location
+    // // FileChooser fileChooser = new FileChooser();
+    // // fileChooser.setTitle("Save Report As PDF");
+    // // File file = fileChooser.showSaveDialog(nom_fact.getScene().getWindow());
+    // // if (file != null) {
+    // // // Create a new PDF document and writer
+    // // Document document = new Document();
+    // // try {
+    // // PdfWriter.getInstance(document, new FileOutputStream(file));
+    // // } catch (FileNotFoundException e) {
+    // // // TODO Auto-generated catch block
+    // // e.printStackTrace();
+    // // } catch (DocumentException e) {
+    // // // TODO Auto-generated catch block
+    // // e.printStackTrace();
+    // // }
 
- 
+    // // // Open the document and add the report text as a paragraph
+    // // document.open();
+    // // document.add(new Paragraph(nom_fact.getText()));
+
+    // // // Close the document
+    // // document.close();
+    // // }
+    // // facture.saveAsPDF(grid, "test.pdf");
+
+    // }
+
 }
