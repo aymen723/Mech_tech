@@ -84,6 +84,9 @@ public class Ajouter_rdv implements Initializable {
     @FXML
     private ChoiceBox<Usermodel> techni_choice;
 
+    @FXML
+    private Button btn_return;
+
     Clientmodel client_golbal;
 
     final int max = 500;
@@ -97,6 +100,24 @@ public class Ajouter_rdv implements Initializable {
     @FXML
     void date(ActionEvent event) {
         System.out.println(date_fin_rdv.getValue());
+    }
+
+    @FXML
+    void retour(ActionEvent event) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/application/Viewfxml/Rendez_vous_dashbord.fxml"));
+
+            Parent root = loader.load();
+
+            add_container.getChildren().removeAll();
+            add_container.getChildren().setAll(root);
+
+        } catch (Exception e) {
+            // TODO: handle exceptionttett
+        }
+
     }
 
     @FXML

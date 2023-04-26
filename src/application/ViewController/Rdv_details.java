@@ -1,13 +1,13 @@
 package application.ViewController;
 
 import java.io.IOException;
-// import java.net.URL;
+import java.net.URL;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-// import java.util.ResourceBundle;
-// import java.util.function.Consumer;
+import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -16,31 +16,33 @@ import application.controller.AdminController;
 import application.models.Clientmodel;
 import application.models.Parts;
 import application.models.Rendez_vous;
+import application.models.Usermodel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-// import javafx.fxml.Initializable;
+import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-// import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.DialogPane;
-import javafx.scene.control.PasswordField;
-// import javafx.scene.control.Label;
-// import javafx.scene.control.ListView;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -51,16 +53,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-// import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.StringConverter;
 
 public class Rdv_details {
 
     @FXML
     private DatePicker date_fin_rdv;
-
-    @FXML
-    private PasswordField ps ;
 
     @FXML
     private DatePicker date_debut_rdv;
@@ -129,6 +128,20 @@ public class Rdv_details {
     private HBox etat_box;
 
     @FXML
+    private CheckBox check_modifier;
+
+    @FXML
+    private ChoiceBox<Usermodel> tech_choice;
+
+    final int max = 500;
+
+    ObservableList<Usermodel> list_tech = FXCollections.observableArrayList();
+    ObservableList<Usermodel> filtered = FXCollections.observableArrayList();
+
+    @FXML
+    private Button btn_finish;
+
+    @FXML
     void add_parts_rdv(ActionEvent event) {
 
         try {
@@ -154,7 +167,17 @@ public class Rdv_details {
 
     public void getrdv(Rendez_vous rdv) {
 
+        date_debut_rdv.setDisable(true);
+        date_fin_rdv.setDisable(true);
+        car_model.setDisable(true);
+        prix.setDisable(true);
+        service.setDisable(true);
+        description_in.setDisable(true);
+        description_out.setDisable(true);
+
         rdv_local = rdv;
+
+        list_tech = AdminController.EmpLiist();
 
         System.out.println(rdv.getDescrption_in());
         nom_client.setText(rdv.getClient_rdv().getNom());
@@ -168,6 +191,13 @@ public class Rdv_details {
         description_in.setText(rdv.getDescrption_in());
         description_out.setText(rdv.getDescrption_out());
         etat_label.setText(rdv.getEtat());
+        tech_choice.setValue(rdv.gettechnicien_rdv());
+
+        description_in.setTextFormatter(
+                new TextFormatter<String>(change -> change.getControlNewText().length() <= max ? change : null));
+
+        description_out.setTextFormatter(
+                new TextFormatter<String>(change -> change.getControlNewText().length() <= max ? change : null));
 
         if (rdv.getEtat().equals("en attente")) {
             etat_box.setStyle("-fx-background-color: #D8D8D8");
@@ -200,6 +230,12 @@ public class Rdv_details {
                         img_copy.setFitHeight(25);
                         img_copy.setFitWidth(25);
                         deletebutton.setGraphic(img_copy);
+
+                        deletebutton.setOnAction(event -> {
+                            // ObservableList<Parts> selectedItems =
+                            // parts_table.getSelectionModel().getSelectedItems();
+
+                        });
 
                         deletebutton.setOnAction(event -> {
 
@@ -268,6 +304,28 @@ public class Rdv_details {
             // System.out.println("is null");
         }
 
+        for (int i = 0; i < list_tech.size(); i++) {
+            if (list_tech.get(i).getRole().equals("technicien") == true) {
+                filtered.add(list_tech.get(i));
+            }
+        }
+
+        tech_choice.setItems(filtered);
+
+        tech_choice.setConverter(new StringConverter<Usermodel>() {
+
+            @Override
+            public String toString(Usermodel user) {
+                return (user == null) ? "" : user.getNom() + " " + user.getPrenom();
+            }
+
+            @Override
+            public Usermodel fromString(String string) {
+                return null; // not needed in this case
+            }
+
+        });
+
     }
 
     public void setContent(Node node) throws IOException {
@@ -276,6 +334,30 @@ public class Rdv_details {
         rdv_container.getChildren().setAll(node);
 
         System.out.println("setcontent is executed after");
+    }
+
+    @FXML
+    void modifier(ActionEvent event) {
+
+        if (check_modifier.isSelected() == true) {
+
+            date_debut_rdv.setDisable(false);
+            date_fin_rdv.setDisable(false);
+            car_model.setDisable(false);
+            prix.setDisable(false);
+            service.setDisable(false);
+            description_in.setDisable(false);
+            description_out.setDisable(false);
+
+        } else {
+            date_debut_rdv.setDisable(true);
+            date_fin_rdv.setDisable(true);
+            car_model.setDisable(true);
+            prix.setDisable(true);
+            service.setDisable(true);
+            description_in.setDisable(true);
+            description_out.setDisable(true);
+        }
     }
 
     @FXML
@@ -288,6 +370,7 @@ public class Rdv_details {
         newrdv.append("date_fin", date_fin_rdv.getValue());
         newrdv.append("descrption_in", description_in.getText());
         newrdv.append("descrption_out", description_out.getText());
+        newrdv.append("service", service.getText());
 
         newrdv.append("car model", car_model.getText());
         newrdv.append("prix", Integer.parseInt(prix.getText()));
@@ -411,6 +494,68 @@ public class Rdv_details {
             // User clicked Cancel or closed the dialog
 
         }
+
+    }
+
+    @FXML
+    void finish(ActionEvent event) {
+
+        Clientmodel newclient = rdv_local.getClient_rdv();
+        Document clientrdv;
+
+        Document newrdv = new Document("date_debut", date_debut_rdv.getValue());
+        newrdv.append("date_fin", date_fin_rdv.getValue());
+        newrdv.append("descrption_in", description_in.getText());
+        newrdv.append("descrption_out", description_out.getText());
+        newrdv.append("service", service.getText());
+        newrdv.append("etat", "terminé");
+
+        newrdv.append("car model", car_model.getText());
+        newrdv.append("prix", Integer.parseInt(prix.getText()));
+
+        if (rdv_local.getClient_rdv().getEmail() != null) {
+            newclient = new Clientmodel(rdv_local.getClient_rdv().getId(), rdv_local.getClient_rdv().getNom(),
+                    rdv_local.getClient_rdv().getPrenom(),
+                    rdv_local.getClient_rdv().getEmail(), rdv_local.getClient_rdv().getAddresse(),
+                    rdv_local.getClient_rdv().getNumero());
+            clientrdv = new Document("_id", new ObjectId(newclient.getId()));
+            clientrdv.append("nom", newclient.getNom());
+            clientrdv.append("prenom", newclient.getPrenom());
+            clientrdv.append("tel", newclient.getNumero());
+            clientrdv.append("email", newclient.getEmail());
+            clientrdv.append("addresse", newclient.getAddresse());
+        } else {
+            newclient = new Clientmodel(nom_client.getText(), prenom_client.getText(), numero_client.getText());
+            clientrdv = new Document("nom", newclient.getNom());
+            clientrdv.append("prenom", newclient.getPrenom());
+            clientrdv.append("numero", newclient.getNumero());
+        }
+
+        clientrdv.append("client", clientrdv);
+
+        int i = 0;
+        // for (i = 0; i < rdv_local.getParts().size(); i++) {
+        // System.out.println("this is parts");
+
+        // System.out.println(rdv_local.getParts().get(i).getName());
+        // }
+
+        // clientrdv.append("parts", rdv_local.getParts());
+
+        List<Document> myDocuments = new ArrayList<Document>();
+        for (i = 0; i < rdv_local.getParts().size(); i++) {
+            Parts part = rdv_local.getParts().get(i);
+            Document addpart = new Document("_id", new ObjectId(part.getId()));
+            addpart.append("name", part.getName());
+            addpart.append("price", part.getPrice());
+            addpart.append("quantity", part.getQuntitie());
+            // addpart.append("description", part.getDescription());
+            myDocuments.add(addpart);
+
+            System.out.println(myDocuments.get(i));
+        }
+        newrdv.append("parts", myDocuments);
+        AdminController.UpdateRdv(newrdv, rdv_local);
 
     }
 

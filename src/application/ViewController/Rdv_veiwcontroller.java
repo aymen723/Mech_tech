@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
-
 import application.controller.AdminController;
 import application.models.Rendez_vous;
 import javafx.beans.property.SimpleStringProperty;
@@ -97,19 +96,18 @@ public class Rdv_veiwcontroller implements Initializable {
 	private TextField search_rdv;
 
 	@FXML
-    private Button All_btn;
+	private Button All_btn;
 
 	@FXML
-    private Button month_btn;
+	private Button month_btn;
 
 	@FXML
-    private Button week_btn;
+	private Button week_btn;
 
-    @FXML
-    private Button year_btn;
+	@FXML
+	private Button year_btn;
 
-
-	private ArrayList<Rendez_vous> listrdv= AdminController.ListRdv();
+	private ArrayList<Rendez_vous> listrdv = AdminController.ListRdv();
 	// private FilteredList<Rendez_vous> filteredRendezVousList;
 	// Arraylist<Parts> list =
 
@@ -143,73 +141,74 @@ public class Rdv_veiwcontroller implements Initializable {
 	}
 
 	@FXML
-    void All(ActionEvent event) {
+	void All(ActionEvent event) {
 		rdv_table.setItems(list);
-    }
+	}
 
-    @FXML
-    void this_month(ActionEvent event) {
-		
-	ObservableList<Rendez_vous> rdvs = rdv_table.getItems();
-    LocalDate currentDate = LocalDate.now();
-    int currentMonth = currentDate.getMonthValue();
-    Predicate<Rendez_vous> monthFilter = item -> (item.getDate_debut().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getMonthValue() == currentMonth) || (item.getDate_fin().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getMonthValue() == currentMonth);
-	List<Rendez_vous> filtered = rdvs.stream().filter(monthFilter).toList();		
+	@FXML
+	void this_month(ActionEvent event) {
+
+		ObservableList<Rendez_vous> rdvs = rdv_table.getItems();
+		LocalDate currentDate = LocalDate.now();
+		int currentMonth = currentDate.getMonthValue();
+		Predicate<Rendez_vous> monthFilter = item -> (item.getDate_debut().toInstant().atZone(ZoneId.systemDefault())
+				.toLocalDate().getMonthValue() == currentMonth)
+				|| (item.getDate_fin().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+						.getMonthValue() == currentMonth);
+		List<Rendez_vous> filtered = rdvs.stream().filter(monthFilter).toList();
 		rdvs = FXCollections.observableList(filtered);
 		rdv_table.setItems(rdvs);
 
-    }
+	}
 
-    @FXML
-    void this_week(ActionEvent event) {
+	@FXML
+	void this_week(ActionEvent event) {
 		ObservableList<Rendez_vous> rdvs = rdv_table.getItems();
 		LocalDate currentDate = LocalDate.now();
 		LocalDate startOfWeek = currentDate.with(DayOfWeek.MONDAY);
-   		LocalDate endOfWeek = startOfWeek.plusDays(6);
-    Predicate<Rendez_vous> weekFilter = item -> {
-        LocalDate itemDatedebut = item.getDate_debut().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		LocalDate itemDatefin = item.getDate_fin().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate endOfWeek = startOfWeek.plusDays(6);
+		Predicate<Rendez_vous> weekFilter = item -> {
+			LocalDate itemDatedebut = item.getDate_debut().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+			LocalDate itemDatefin = item.getDate_fin().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-        return (!itemDatedebut.isBefore(startOfWeek) && !itemDatedebut.isAfter(endOfWeek)) || (!itemDatefin.isBefore(startOfWeek) && !itemDatefin.isAfter(endOfWeek));
-    };
-	List<Rendez_vous> filtered = rdvs.stream().filter(weekFilter).toList();		
+			return (!itemDatedebut.isBefore(startOfWeek) && !itemDatedebut.isAfter(endOfWeek))
+					|| (!itemDatefin.isBefore(startOfWeek) && !itemDatefin.isAfter(endOfWeek));
+		};
+		List<Rendez_vous> filtered = rdvs.stream().filter(weekFilter).toList();
 		rdvs = FXCollections.observableList(filtered);
 		rdv_table.setItems(rdvs);
-    }
+	}
 
-    @FXML
-    void this_year(ActionEvent event) {
-		
-	ObservableList<Rendez_vous> rdvs = rdv_table.getItems();
-    LocalDate currentDate = LocalDate.now();
-    int currentYear = currentDate.getYear();
-    Predicate<Rendez_vous> yearFilter = item -> (item.getDate_debut().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getYear() == currentYear) 
-	|| (item.getDate_fin().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getYear() == currentYear);
-    // rdvs.setAll(data.filter(yearFilter));
-	List<Rendez_vous> filtered = rdvs.stream().filter(yearFilter).toList();		
+	@FXML
+	void this_year(ActionEvent event) {
+
+		ObservableList<Rendez_vous> rdvs = rdv_table.getItems();
+		LocalDate currentDate = LocalDate.now();
+		int currentYear = currentDate.getYear();
+		Predicate<Rendez_vous> yearFilter = item -> (item.getDate_debut().toInstant().atZone(ZoneId.systemDefault())
+				.toLocalDate().getYear() == currentYear)
+				|| (item.getDate_fin().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+						.getYear() == currentYear);
+		// rdvs.setAll(data.filter(yearFilter));
+		List<Rendez_vous> filtered = rdvs.stream().filter(yearFilter).toList();
 		rdvs = FXCollections.observableList(filtered);
 		rdv_table.setItems(rdvs);
 
+	}
 
-	  }
-    
 	// year_btn.setOnAction(event -> {
-	// 	ObservableList<Rendez_vous> rdvs = rdv_table.getItems();
-    // LocalDate currentDate = LocalDate.now();
-    // int currentYear = currentDate.getYear();
-    // Predicate<Rendez_vous> yearFilter = item -> item.getDate_debut().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getYear() == currentYear;
-    // rdvs.setAll(data.filter(yearFilter));
+	// ObservableList<Rendez_vous> rdvs = rdv_table.getItems();
+	// LocalDate currentDate = LocalDate.now();
+	// int currentYear = currentDate.getYear();
+	// Predicate<Rendez_vous> yearFilter = item ->
+	// item.getDate_debut().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getYear()
+	// == currentYear;
+	// rdvs.setAll(data.filter(yearFilter));
 	// });
-
-
-
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
-		
-
-        
 		nom_client_col.setCellValueFactory(
 				cellData -> new SimpleStringProperty(cellData.getValue().getClient_rdv().getNom()));
 
@@ -317,6 +316,5 @@ public class Rdv_veiwcontroller implements Initializable {
 
 		rdv_table.setItems(list);
 
-	}}
-
-
+	}
+}

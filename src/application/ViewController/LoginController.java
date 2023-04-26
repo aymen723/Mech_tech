@@ -143,53 +143,23 @@ public class LoginController implements Initializable {
 				user.setEmail(curruser.getString("email"));
 				user.setNumero(curruser.getString("tel"));
 				user.setRole(curruser.getString("role"));
-				// Parent fxml;
-				// try {
-				// fxml =
-				// FXMLLoader.load(getClass().getResource("/application/Viewfxml/caissier_dashbord.fxml"));
-				// Stage stage = new Stage();
-				// Scene scene = new Scene(fxml);
-				// stage.setScene(scene);
-				// stage.setTitle("Mecha Tech");
-				// scene.setFill(Color.TRANSPARENT);
-
-				// Stage stage_login = (Stage) login_container.getScene().getWindow();
-
-				// stage_login.close();
-
-				// stage.show();
-
-				// } catch (IOException e) {
-				// e.printStackTrace();
-				// }
-
+				Parent fxml;
 				try {
-
-					System.out.println("berfore loading");
-
-					FXMLLoader loader = new FXMLLoader(
-							getClass().getResource("/application/Viewfxml/Dashbord.fxml"));
-
-					Parent root = loader.load();
-					DashbordController dashbord_con = loader.getController();
-					System.out.println("berfong func");
-
-					dashbord_con.setuser(user);
-					System.out.println(user.getEmail());
+					fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/caissier_dashbord.fxml"));
+					Stage stage = new Stage();
+					Scene scene = new Scene(fxml);
+					stage.setScene(scene);
+					stage.setTitle("Mecha Tech");
+					scene.setFill(Color.TRANSPARENT);
 
 					Stage stage_login = (Stage) login_container.getScene().getWindow();
 
-					System.out.println("after loading");
-
-					Stage stage = new Stage();
-					Scene scene = new Scene(root);
-					stage.setScene(scene);
 					stage_login.close();
 
 					stage.show();
 
-				} catch (Exception e) {
-					// TODO: handle exception
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
 
 			}
@@ -212,17 +182,6 @@ public class LoginController implements Initializable {
 			tltip.setText("");
 			tltip.hide();
 
-		}
-
-	}
-
-	public void testquery(ActionEvent e) {
-
-		MongoCollection<Document> collection = Connectdatabase.connectdb("users");
-		FindIterable<Document> iterDoc = collection.find();
-		Iterator<Document> it = iterDoc.iterator();
-		while (it.hasNext()) {
-			System.out.println(it.next());
 		}
 
 	}

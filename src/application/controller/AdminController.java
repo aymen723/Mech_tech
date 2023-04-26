@@ -274,6 +274,7 @@ public class AdminController {
 
 	// }
 
+<<<<<<< HEAD
 	// public static ObservableList<Rendez_vous> ListRdv() {
 	// 	ObservableList<Rendez_vous> List = FXCollections.observableArrayList();
 	// 	MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
@@ -310,6 +311,8 @@ public class AdminController {
 
 	// }
 
+=======
+>>>>>>> 47a0f099e52fdaf6e170fafafa475033c96337e1
 	public static ArrayList<Rendez_vous> ListRdv() {
 		ArrayList<Rendez_vous> List = new ArrayList<>();
 		MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
