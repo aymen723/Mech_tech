@@ -4,49 +4,16 @@ public class Usermodel {
 
 	String id;
 
-	String username;
-	String password;
-	String nom;
-	String prenom;
-	String numero;
-	String address;
-	String email;
-	String role;
+	private String username;
+	private String password;
+	private String nom;
+	private String prenom;
+	private String numero;
+	private String address;
+	private String email;
+	private String role;
 
-	// public SimpleStringProperty id = new SimpleStringProperty("");
-	// public SimpleStringProperty username = new SimpleStringProperty("");
-	// public SimpleStringProperty nom = new SimpleStringProperty("");
-	//
-	// public Usermodel(String id, String username, String nom) {
-	// this.id.set(id);
-	// this.username.set(username);
-	// this.nom.set(nom);
-	//
-	// }
-	//
-	// public final String getusername() {
-	// return username.get();
-	// }
-	//
-	// public final void setusername(String value) {
-	// username.set(value);
-	// }
-	//
-	// public final void setnom(String value) {
-	// nom.set(value);
-	// }
-	//
-	// public String getnom() {
-	// return nom.get();
-	// }
-	//
-	// public String getid() {
-	// return id.get();
-	// }
-	//
-	// public final void setuid(String value) {
-	// id.set(value);
-	// }
+	
 
 	public String getId() {
 		return id;
