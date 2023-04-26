@@ -284,9 +284,7 @@ public class parts_dashbord_controller implements Initializable {
 
 				{
 
-					// deleteButton.getStylesheets()
-					// .add(getClass().getResource("/application/Viewfxml/button_table.css").toExternalForm());
-					// deleteButton.getStyleClass().add("delete");
+					
 					deleteButton.setStyle(
 							"-fx-background-radius: 5em; -fx-min-width: 25px; -fx-min-height: 25px; -fx-max-width: 25px; -fx-max-height: 25px; -fx-background-color: transparent; -fx-alignment:CENTER;");
 					Image image = new Image(getClass().getResourceAsStream("Delete.png"));

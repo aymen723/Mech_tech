@@ -3,17 +3,18 @@ package application.ViewController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import application.models.Usermodel;
 import javafx.scene.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
-// import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-// import javafx.stage.Stage;
 
 public class DashbordController implements Initializable {
 
@@ -31,6 +32,17 @@ public class DashbordController implements Initializable {
 	BorderPane container;
 	@FXML
 	Button close_add;
+
+	@FXML
+	private Button btn_profile;
+
+	@FXML
+	private Button btn_logout;
+
+	private Usermodel user = new Usermodel();
+
+	@FXML
+	private Text test;
 
 	public void dashbord(javafx.event.ActionEvent actione) throws IOException {
 		try {
@@ -88,13 +100,9 @@ public class DashbordController implements Initializable {
 
 		Rendez_vous.getStyleClass().add("afterpress");
 
-		// // Group root = new Group();
-		// Parent fxml;
 		// try {
-		// fxml =
+		// Parent fxml =
 		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/Rendez_vous_dashbord.fxml"));
-		// //
-		// fxml.getStylesheets().add(getClass().getResource("Login.css").toExternalForm());
 		// Stage stage = new Stage();
 		// Scene scene = new Scene(fxml);
 		// stage.setScene(scene);
@@ -151,6 +159,83 @@ public class DashbordController implements Initializable {
 
 		Clients.getStyleClass().add("afterpress");
 
+	}
+
+	@FXML
+	void logout(ActionEvent event) {
+
+		Parent fxml;
+		try {
+			fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Login.fxml"));
+			Stage stage = new Stage();
+			Scene scene = new Scene(fxml);
+			stage.setScene(scene);
+			stage.setTitle("Mecha Tech");
+			scene.setFill(Color.TRANSPARENT);
+
+			Stage stage_login = (Stage) container.getScene().getWindow();
+
+			stage_login.close();
+
+			stage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@FXML
+	void profile(ActionEvent event) {
+
+		try {
+
+			FXMLLoader loader = new FXMLLoader(
+					getClass().getResource("/application/Viewfxml/profile.fxml"));
+
+			Parent root = loader.load();
+			profile_controller profile_con = loader.getController();
+
+			profile_con.setUser(user);
+			container.getChildren().removeAll();
+			container.getChildren().setAll(root);
+
+		} catch (Exception e) {
+			// TODO: handle exceptionttett
+		}
+
+		// try {
+		// Parent fxml =
+		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/profile.fxml"));
+		// Stage stage = new Stage();
+		// Scene scene = new Scene(fxml);
+		// stage.setScene(scene);
+		// stage.setTitle("Mecha Tech");
+		// scene.setFill(Color.TRANSPARENT);
+
+		// // primaryStage.initStyle(StageStyle.UNDECORATED);
+		// // primaryStage.initStyle(StageStyle.TRANSPARENT);
+
+		// // primaryStage.setResizable(false);
+		// stage.show();
+
+		// } catch (IOException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+
+	}
+
+	public void setuser(Usermodel userr) {
+
+		this.user = userr;
+
+		btn_profile.setText(user.getNom() + " " + user.getPrenom());
+
+	}
+
+	public Usermodel getuser() {
+		return user;
 	}
 
 	@Override

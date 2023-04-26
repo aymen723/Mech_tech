@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -15,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="rdv_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="930.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/17.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.Rdv_veiwcontroller">
+<BorderPane fx:id="rdv_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="930.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.Rdv_veiwcontroller">
    <top>
       <GridPane prefHeight="120.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -30,11 +29,7 @@
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <Text fill="#a1a1a1" layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin &gt;">
-                     <font>
-                        <Font size="25.0" />
-                     </font></Text>
-                  <Text layoutX="111.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les Rendez-Vous">
+                  <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les Rendez-Vous">
                      <font>
                         <Font name="System Bold" size="25.0" />
                      </font>
@@ -43,28 +38,24 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                <children>
-                  <ChoiceBox fx:id="table_list" layoutX="14.0" layoutY="8.0" onMouseReleased="#selected_table" prefWidth="150.0" />
-                  <Button fx:id="select_btn" layoutX="181.0" layoutY="8.0" mnemonicParsing="false" onAction="#selected_table" prefHeight="25.0" prefWidth="130.0" text="Selected" />
+                  <Button fx:id="All_btn" layoutX="34.0" layoutY="2.0" mnemonicParsing="false" onAction="#All" text="All" />
+                  <Button fx:id="year_btn" layoutX="64.0" layoutY="2.0" mnemonicParsing="false" onAction="#this_year" text="This year" />
+                  <Button fx:id="month_btn" layoutX="127.0" layoutY="2.0" mnemonicParsing="false" onAction="#this_month" text="This month" />
+                  <Button fx:id="week_btn" layoutX="197.0" layoutY="2.0" mnemonicParsing="false" onAction="#this_week" text="This Week" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <Button fx:id="ajouter_btn" layoutX="351.0" layoutY="6.0" mnemonicParsing="false" onAction="#rdv_ajouter" prefHeight="30.0" prefWidth="100.0" text="Ajouter">
+                  <Button fx:id="ajouter_btn" layoutX="351.0" layoutY="6.0" mnemonicParsing="false" onAction="#rdv_ajouter" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@btn.css" text="Ajouter">
                      <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="mod_btn" layoutX="233.0" layoutY="6.0" mnemonicParsing="false" onAction="#rdv_modifier" prefHeight="30.0" prefWidth="100.0" text="Modifier">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="System Bold" size="13.0" />
                      </font>
                   </Button>
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <TextField layoutX="251.0" layoutY="8.0" prefHeight="25.0" prefWidth="200.0" promptText="Recherche" />
-                  <Button layoutX="143.0" layoutY="8.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="90.0" text="Button" />
+                  <TextField fx:id="search_rdv" layoutX="202.0" layoutY="8.0" prefHeight="25.0" prefWidth="250.0" promptText="Recherche" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
@@ -79,14 +70,22 @@
          <children>
             <Pane fx:id="table_container" prefHeight="200.0" prefWidth="900.0">
                <children>
-                  <ScrollPane prefHeight="480.0" prefWidth="900.0">
-                    <content>
-                      <AnchorPane fx:id="tables" minHeight="0.0" minWidth="0.0" prefHeight="480.0" prefWidth="900.0">
-                           <children>
-                              
-                           </children></AnchorPane>
-                    </content>
-                  </ScrollPane>
+                <AnchorPane fx:id="tables" minHeight="0.0" minWidth="0.0" prefHeight="480.0" prefWidth="900.0">
+                     <children>
+                        <TableView fx:id="rdv_table" prefHeight="480.0" prefWidth="900.0" stylesheets="@tablestyle.css">
+                          <columns>
+                            <TableColumn fx:id="nom_client_col" minWidth="90.0" prefWidth="100.0" text="Nom client" />
+                            <TableColumn fx:id="prenom_client_col" minWidth="110.0" prefWidth="120.0" text="Prenom client" />
+                              <TableColumn fx:id="num_client_col" minWidth="90.0" prefWidth="110.0" text="Numéro client" />
+                              <TableColumn fx:id="voiture_model_col" minWidth="90.0" prefWidth="100.0" text="voiture model" />
+                              <TableColumn fx:id="date_deut_col" prefWidth="77.60003662109375" text="Date Debut" />
+                              <TableColumn fx:id="date_fin_col" prefWidth="166.39996337890625" text="Date Fin" />
+                              <TableColumn fx:id="etat_col" prefWidth="127.2000732421875" text="Etat" />
+                              <TableColumn fx:id="action" prefWidth="97.60009765625" text="Action" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
                </children></Pane>
          </children>
       </HBox>

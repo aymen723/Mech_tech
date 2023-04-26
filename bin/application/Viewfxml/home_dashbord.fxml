@@ -1,19 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import io.github.palexdev.materialfx.controls.legacy.MFXLegacyTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="930.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="930.0" style="-fx-background-color: transpaert;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.home_controller">
    <center>
 
 
    </center>
    <center>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
          <children>
-            <MFXLegacyTableView layoutX="14.0" layoutY="7.0" prefHeight="400.0" prefWidth="630.0" />
+            <ScrollPane layoutY="35.0" prefHeight="220.0" prefWidth="930.0" style="-fx-background-color: transparent;" vbarPolicy="NEVER">
+               <content>
+                  <HBox fx:id="rdv_scroll" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="220.0" prefWidth="200.0" spacing="20.0" style="-fx-background-color: transparent;">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding></HBox>
+               </content>
+            </ScrollPane>
          </children>
       </Pane>
    </center>
+   <top>
+      <Pane prefHeight="150.0" prefWidth="930.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
+         <children>
+            <ScrollPane prefHeight="150.0" prefWidth="930.0" vbarPolicy="NEVER">
+               <content>
+                  <HBox fx:id="part_scroll" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="150.0" prefWidth="200.0" spacing="20.0">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </content>
+            </ScrollPane>
+         </children></Pane>
+   </top>
 </BorderPane>
