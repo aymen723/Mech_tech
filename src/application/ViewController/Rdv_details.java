@@ -70,15 +70,6 @@ public class Rdv_details {
     private TextField car_model;
 
     @FXML
-    private TextField nom_client;
-
-    @FXML
-    private TextField numero_client;
-
-    @FXML
-    private TextField prenom_client;
-
-    @FXML
     private TextField prix;
 
     @FXML
@@ -135,6 +126,24 @@ public class Rdv_details {
 
     final int max = 500;
 
+    @FXML
+    private Text txt_matri;
+
+    @FXML
+    private Text txt_model;
+
+    @FXML
+    private Text txt_nom;
+
+    @FXML
+    private Text txt_numero;
+
+    @FXML
+    private Text txt_prenom;
+
+    @FXML
+    private Pane txt_vin;
+
     ObservableList<Usermodel> list_tech = FXCollections.observableArrayList();
     ObservableList<Usermodel> filtered = FXCollections.observableArrayList();
 
@@ -180,18 +189,20 @@ public class Rdv_details {
         list_tech = AdminController.EmpLiist();
 
         System.out.println(rdv.getDescrption_in());
-        nom_client.setText(rdv.getClient_rdv().getNom());
+
+        txt_nom.setText(rdv.getClient_rdv().getNom());
         date_debut_rdv.setValue(rdv.getDate_debut().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         date_fin_rdv.setValue(rdv.getDate_fin().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        car_model.setText(rdv.getCar_model());
+        // car_model.setText(rdv.getCar_model());
         prix.setText(Integer.toString(rdv.getPrix()));
         service.setText(rdv.getService());
-        prenom_client.setText(rdv.getClient_rdv().getPrenom());
-        numero_client.setText(rdv.getClient_rdv().getNumero());
+        txt_prenom.setText(rdv.getClient_rdv().getPrenom());
+        txt_numero.setText(rdv.getClient_rdv().getNumero());
+        txt_model.setText(rdv.getCar_rdv().getModele());
         description_in.setText(rdv.getDescrption_in());
         description_out.setText(rdv.getDescrption_out());
         etat_label.setText(rdv.getEtat());
-        tech_choice.setValue(rdv.gettechnicien_rdv());
+        tech_choice.setValue(rdv.getTechnicien_rdv());
 
         description_in.setTextFormatter(
                 new TextFormatter<String>(change -> change.getControlNewText().length() <= max ? change : null));
@@ -387,13 +398,20 @@ public class Rdv_details {
             clientrdv.append("email", newclient.getEmail());
             clientrdv.append("addresse", newclient.getAddresse());
         } else {
-            newclient = new Clientmodel(nom_client.getText(), prenom_client.getText(), numero_client.getText());
+            newclient = new Clientmodel(txt_nom.getText(), txt_prenom.getText(), txt_numero.getText());
             clientrdv = new Document("nom", newclient.getNom());
             clientrdv.append("prenom", newclient.getPrenom());
             clientrdv.append("numero", newclient.getNumero());
         }
 
         clientrdv.append("client", clientrdv);
+
+        // carrdv = new Document("_id", new ObjectId(car_model.getId()));
+        // carrdv.append("marque", car_local.getMarque());
+        // carrdv.append("modele", car_local.getModele());
+        // carrdv.append("couleur", car_local.getCouleur());
+        // carrdv.append("matricule", car_local.getMatricule());
+        // carrdv.append("vin", car_local.getVin());
 
         int i = 0;
         // for (i = 0; i < rdv_local.getParts().size(); i++) {
@@ -525,7 +543,7 @@ public class Rdv_details {
             clientrdv.append("email", newclient.getEmail());
             clientrdv.append("addresse", newclient.getAddresse());
         } else {
-            newclient = new Clientmodel(nom_client.getText(), prenom_client.getText(), numero_client.getText());
+            newclient = new Clientmodel(txt_nom.getText(), txt_prenom.getText(), txt_numero.getText());
             clientrdv = new Document("nom", newclient.getNom());
             clientrdv.append("prenom", newclient.getPrenom());
             clientrdv.append("numero", newclient.getNumero());

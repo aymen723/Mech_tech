@@ -8,6 +8,7 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 
 import application.controller.AdminController;
+import application.models.Car;
 import application.models.Clientmodel;
 import application.models.Parts;
 import application.models.Usermodel;
@@ -73,6 +74,9 @@ public class Ajouter_rdv implements Initializable {
     private ContextMenu context;
 
     @FXML
+    private ContextMenu context_car;
+
+    @FXML
     private DatePicker date_fin_rdv;
 
     @FXML
@@ -88,6 +92,8 @@ public class Ajouter_rdv implements Initializable {
     private Button btn_return;
 
     Clientmodel client_golbal;
+
+    Car car_local;
 
     final int max = 500;
 
@@ -121,14 +127,20 @@ public class Ajouter_rdv implements Initializable {
     }
 
     @FXML
+    void add_car(ActionEvent event) {
+
+    }
+
+    @FXML
     void add_rdv(ActionEvent event) {
 
         Clientmodel newclient;
         Document clientrdv;
+        Document carrdv;
         Usermodel newtechnicien = techni_choice.getValue();
 
         Document newrdv = new Document("date_debut", datedebut.getValue());
-        
+
         newrdv.append("date_fin", date_fin_rdv.getValue());
         newrdv.append("descrption_in", description_in.getText());
         newrdv.append("descrption_out", null);
@@ -165,9 +177,18 @@ public class Ajouter_rdv implements Initializable {
         technicienrdv.append("role", newtechnicien.getRole());
         technicienrdv.append("email", newtechnicien.getEmail());
 
+        carrdv = new Document("_id", new ObjectId(car_local.getId()));
+        carrdv.append("marque", car_local.getMarque());
+        carrdv.append("modele", car_local.getModele());
+        carrdv.append("couleur", car_local.getCouleur());
+        carrdv.append("matricule", car_local.getMatricule());
+        carrdv.append("vin", car_local.getVin());
+
         newrdv.append("client", clientrdv);
         newrdv.append("parts", new ArrayList<Parts>());
+        newrdv.append("Car", carrdv);
         newrdv.append("technicien", technicienrdv);
+
         AdminController.addrdv(newrdv);
         System.out.println(newrdv);
 
@@ -192,6 +213,8 @@ public class Ajouter_rdv implements Initializable {
             new Clientmodel("2", "client2", "cleint2", "5555", "address", "email"));
 
     ObservableList<Usermodel> list_tech = FXCollections.observableArrayList();
+
+    ObservableList<Car> list_car = FXCollections.observableArrayList();
 
     @FXML
     void invite_check(ActionEvent event) {
@@ -224,6 +247,7 @@ public class Ajouter_rdv implements Initializable {
 
         list = AdminController.ListClient();
         list_tech = AdminController.EmpLiist();
+        list_car = AdminController.CarLiist();
 
         ObservableList<Usermodel> filtered = FXCollections.observableArrayList();
 
@@ -260,6 +284,26 @@ public class Ajouter_rdv implements Initializable {
 
         });
 
+        car_model.textProperty().addListener((observable, oldValue, newValue) -> {
+            context_car.getItems().clear();
+            for (Car car : list_car) {
+                if (car.getVin().toLowerCase().contains(newValue.toLowerCase())) {
+                    MenuItem item = new MenuItem(car.getVin() + " " + car.getMarque() + " " + car.getModele());
+                    item.setOnAction(e -> {
+                        // do something with selected client
+                        System.out.println(car.toString());
+                        car_local = car;
+
+                    });
+
+                    context_car.getItems().add(item);
+
+                }
+
+            }
+
+        });
+
         for (int i = 0; i < list_tech.size(); i++) {
             if (list_tech.get(i).getRole().equals("technicien") == true) {
                 filtered.add(list_tech.get(i));
@@ -281,16 +325,31 @@ public class Ajouter_rdv implements Initializable {
             }
         });
 
-        serch.setOnMouseClicked(e -> {
-            if(serch.getText().trim() != null ){
-                
-            context.show(serch, Side.BOTTOM, 0, 0);}
+        serch.setOnKeyTyped(e -> {
+            if (serch.getText().trim() != null) {
+
+                context.show(serch, Side.BOTTOM, 0, 0);
+            }
         });
 
         // Hide context menu when search field loses focus
         serch.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
                 context.hide();
+            }
+        });
+
+        car_model.setOnKeyTyped(e -> {
+            if (car_model.getText().trim() != null) {
+
+                context_car.show(car_model, Side.BOTTOM, 0, 0);
+            }
+        });
+
+        // Hide context menu when search field loses focus
+        car_model.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                context_car.hide();
             }
         });
 

@@ -64,7 +64,15 @@
                </children></Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                <children>
-                  <TextField fx:id="car_model" layoutX="108.0" layoutY="21.0" prefHeight="25.0" prefWidth="250.0" promptText="car model" styleClass="inpt" stylesheets="@inputs.css" />
+                  <TextField fx:id="car_model" layoutX="108.0" layoutY="21.0" prefHeight="25.0" prefWidth="250.0" promptText="car model" styleClass="inpt" stylesheets="@inputs.css">
+                     <contextMenu>
+                        <ContextMenu fx:id="context_car">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                          </items>
+                        </ContextMenu>
+                     </contextMenu></TextField>
+                  <Button fx:id="btn_add_car" layoutX="397.0" layoutY="22.0" mnemonicParsing="false" onAction="#add_car" text="Ajouter" />
                </children></Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
                <children>

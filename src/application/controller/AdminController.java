@@ -16,6 +16,7 @@ import com.mongodb.client.MongoCursor;
 
 import application.Connectdatabase;
 import application.ViewController.Client_dashbord;
+import application.models.Car;
 // import application.ViewController.add_employer_controller;<
 import application.models.Clientmodel;
 import application.models.Parts;
@@ -66,7 +67,6 @@ public class AdminController {
 				user.setRole(doc.getString("role"));
 
 				List.add(user);
-			
 
 			}
 		} finally {
@@ -80,23 +80,22 @@ public class AdminController {
 
 	// public static void addpart(Document Doc) {
 
-	// 	MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
-	// 	collection.insertOne(Doc);
-	// 	Connectdatabase.closeconndb();
-
+	// MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
+	// collection.insertOne(Doc);
+	// Connectdatabase.closeconndb();
 
 	// }
 
 	// public static void updatepart(Document Doc, Parts part) {
-	// 	MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
-	// 	ObjectId objid = new ObjectId(part.getId());
-	// 	Document found = (Document) collection.find(new Document("_id", objid)).first();
-	// 	System.out.println(found.get("name"));
-	// 	Doc.append("_id", objid);
-	// 	Document updateop = new Document("$set", Doc);
-	// 	collection.updateOne(found, updateop);
-	// 	Connectdatabase.closeconndb();
-
+	// MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
+	// ObjectId objid = new ObjectId(part.getId());
+	// Document found = (Document) collection.find(new Document("_id",
+	// objid)).first();
+	// System.out.println(found.get("name"));
+	// Doc.append("_id", objid);
+	// Document updateop = new Document("$set", Doc);
+	// collection.updateOne(found, updateop);
+	// Connectdatabase.closeconndb();
 
 	// }
 
@@ -107,7 +106,6 @@ public class AdminController {
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
 		collection.deleteOne(found);
 		Connectdatabase.closeconndb();
-
 
 	}
 
@@ -160,10 +158,7 @@ public class AdminController {
 		collection.updateOne(found, updateop);
 		Connectdatabase.closeconndb();
 
-
-
 	}
-
 
 	public static void deletemp(Usermodel user) {
 		MongoCollection<Document> collection = Connectdatabase.connectdb("users");
@@ -241,11 +236,10 @@ public class AdminController {
 		Document doc = new Document();
 		// Document document = collection.find(eq("_id", new ObjectId(id))).first();
 		BasicDBObject query = new BasicDBObject();
-    query.put("_id", new ObjectId(id));
+		query.put("_id", new ObjectId(id));
 
-    doc = collection.find(query).first();
-	Connectdatabase.closeconndb();
-
+		doc = collection.find(query).first();
+		Connectdatabase.closeconndb();
 
 		return doc;
 	}
@@ -260,17 +254,19 @@ public class AdminController {
 
 	// public static void UpdateRdv(Document Doc , Rendez_vous rdv) {
 
-	// 	MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
-	// 	ObjectId objid = new ObjectId(rdv.getId());
-	// 	Document found = (Document) collection.find(new Document("_id", objid)).first();
-	// 	Doc.append("_id", objid);
-	// 	Document updated = new Document("$set", Doc);
-	// 	collection.updateOne(found, updated);
-	// 	Connectdatabase.closeconndb();
+	// MongoCollection<Document> collection =
+	// Connectdatabase.connectdb("Rendez_vous");
+	// ObjectId objid = new ObjectId(rdv.getId());
+	// Document found = (Document) collection.find(new Document("_id",
+	// objid)).first();
+	// Doc.append("_id", objid);
+	// Document updated = new Document("$set", Doc);
+	// collection.updateOne(found, updated);
+	// Connectdatabase.closeconndb();
 
-	// 	Document doc = new Document();
-	// 	// Document document = collection.find(eq("_id", new ObjectId(id))).first();
-	// 	Connectdatabase.closeconndb();
+	// Document doc = new Document();
+	// // Document document = collection.find(eq("_id", new ObjectId(id))).first();
+	// Connectdatabase.closeconndb();
 
 	// }
 
@@ -317,8 +313,18 @@ public class AdminController {
 				technicien.setRole(techniciendoc.getString("role"));
 				technicien.setUsername(techniciendoc.getString("nomutil"));
 
+				Document cardoc = doc.get("Car", Document.class);
+
+				Car car = new Car();
+				car.setId(cardoc.getObjectId("_id").toString());
+				car.setMarque(cardoc.getString("marque"));
+				car.setModele(cardoc.getString("modele"));
+				car.setCouleur(cardoc.getString("couleur"));
+				car.setMatricule(cardoc.getString("matricule"));
+				car.setVin(cardoc.getString("vin"));
+
 				rdv.setClient_rdv(client);
-				rdv.settechnicien_rdv(technicien);
+				rdv.setTechnicien_rdv(technicien);
 
 				ArrayList<Document> parlistdoc = (ArrayList<Document>) doc.get("parts");
 				ArrayList<Parts> partlist = new ArrayList<Parts>();
@@ -369,6 +375,65 @@ public class AdminController {
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
 		collection.deleteOne(found);
 
+		Connectdatabase.closeconndb();
+
+	}
+
+	public static void AddCar(Document Doc) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("cars");
+		collection.insertOne(Doc);
+		Connectdatabase.closeconndb();
+
+	}
+
+	public static void UpdateCar(Document Doc, Car car) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("cars");
+		ObjectId objid = new ObjectId(car.getId());
+		Document found = (Document) collection.find(new Document("_id", objid)).first();
+		Doc.append("_id", objid);
+		Document updateop = new Document("$set", Doc);
+		collection.updateOne(found, updateop);
+		Connectdatabase.closeconndb();
+
+	}
+
+	public static ObservableList<Car> CarLiist() {
+		ObservableList<Car> List = FXCollections.observableArrayList();
+		MongoCollection<Document> collection = Connectdatabase.connectdb("cars");
+
+		MongoCursor<Document> cursor = collection.find().iterator();
+		try {
+			while (cursor.hasNext()) {
+				Document doc = cursor.next();
+				Car car = new Car();
+
+				car.setId(doc.getObjectId("_id").toString());
+				car.setMarque(doc.getString("marque"));
+				car.setModele(doc.getString("modele"));
+				car.setCouleur(doc.getString("couleur"));
+				car.setMatricule(doc.getString("matricule"));
+				car.setVin(doc.getString("vin"));
+
+				List.add(car);
+
+			}
+		} finally {
+			cursor.close();
+			Connectdatabase.closeconndb();
+		}
+
+		return List;
+
+	}
+
+	public static void deletpCar(Car car) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("cars");
+		ObjectId objid = new ObjectId(car.getId());
+		Document found = (Document) collection.find(new Document("_id", objid)).first();
+		collection.deleteOne(found);
 		Connectdatabase.closeconndb();
 
 	}
