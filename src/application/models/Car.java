@@ -1,10 +1,10 @@
 package application.models;
 
 public class Car {
-    
+    private String id;
     private String marque;
     private String modele;
-    private String color;
+    private String couleur;
     private int matricule;
     private String vin;
 
@@ -13,13 +13,16 @@ public class Car {
     
     public Car() {
     }
-    public Car(String marque, String modele, String color, int matricule, String vin) {
+    public Car(String id, String marque, String modele, String couleur, int matricule, String vin) {
+        this.id = id;
         this.marque = marque;
         this.modele = modele;
-        this.color = color;
+        this.couleur = couleur;
         this.matricule = matricule;
         this.vin = vin;
     }
+
+    
     public String getMarque() {
         return marque;
     }
@@ -32,11 +35,11 @@ public class Car {
     public void setModele(String modele) {
         this.modele = modele;
     }
-    public String getColor() {
-        return color;
+    public String getCouleur() {
+        return couleur;
     }
-    public void setColor(String color) {
-        this.color = color;
+    public void setCouleur(String color) {
+        this.couleur = color;
     }
     public int getMatricule() {
         return matricule;
@@ -49,6 +52,12 @@ public class Car {
     }
     public void setVin(String vin) {
         this.vin = vin;
+    }
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
     }
 
 

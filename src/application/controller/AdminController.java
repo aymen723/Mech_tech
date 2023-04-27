@@ -16,6 +16,7 @@ import com.mongodb.client.MongoCursor;
 
 import application.Connectdatabase;
 import application.ViewController.Client_dashbord;
+import application.models.Car;
 // import application.ViewController.add_employer_controller;<
 import application.models.Clientmodel;
 import application.models.Parts;
@@ -372,5 +373,68 @@ public class AdminController {
 		Connectdatabase.closeconndb();
 
 	}
+
+	public static void AddCar(Document Doc) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("cars");
+		collection.insertOne(Doc);
+		Connectdatabase.closeconndb();
+
+	}
+
+	public static void UpdateCar(Document Doc, Car car) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("cars");
+		ObjectId objid = new ObjectId(car.getId());
+		Document found = (Document) collection.find(new Document("_id", objid)).first();
+		Doc.append("_id", objid);
+		Document updateop = new Document("$set", Doc);
+		collection.updateOne(found, updateop);
+		Connectdatabase.closeconndb();
+
+	}
+
+	public static ObservableList<Car> CarLiist() {
+		ObservableList<Car> List = FXCollections.observableArrayList();
+		MongoCollection<Document> collection = Connectdatabase.connectdb("cars");
+
+		MongoCursor<Document> cursor = collection.find().iterator();
+		try {
+			while (cursor.hasNext()) {
+				Document doc = cursor.next();
+				Car car = new Car();
+
+				car.setId(doc.getObjectId("_id").toString());
+				car.setMarque(doc.getString("marque"));
+				car.setModele(doc.getString("modele"));
+				car.setCouleur(doc.getString("couleur"));
+				car.setMatricule(doc.getInteger("matricule"));
+				car.setVin(doc.getString("vin"));
+
+
+				List.add(car);
+			
+
+			}
+		} finally {
+			cursor.close();
+			Connectdatabase.closeconndb();
+		}
+
+		return List;
+
+	}
+
+	public static void deletpCar(Car car) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
+		ObjectId objid = new ObjectId(car.getId());
+		Document found = (Document) collection.find(new Document("_id", objid)).first();
+		collection.deleteOne(found);
+		Connectdatabase.closeconndb();
+
+
+	}
+
 
 }
