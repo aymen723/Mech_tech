@@ -278,6 +278,8 @@ public class Rdv_veiwcontroller implements Initializable {
 						Rendez_vous rdv = getTableView().getItems().get(getIndex());
 						// rdv_global = getTableView().getItems().get(getIndex());
 
+						System.out.println(rdv.getCar_rdv().getModele());
+
 						try {
 
 							FXMLLoader loader = new FXMLLoader(

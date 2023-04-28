@@ -198,7 +198,7 @@ public class Rdv_details {
         service.setText(rdv.getService());
         txt_prenom.setText(rdv.getClient_rdv().getPrenom());
         txt_numero.setText(rdv.getClient_rdv().getNumero());
-        txt_model.setText(rdv.getCar_rdv().getModele());
+        // txt_model.setText(rdv.getCar_rdv().getModele());
         description_in.setText(rdv.getDescrption_in());
         description_out.setText(rdv.getDescrption_out());
         etat_label.setText(rdv.getEtat());

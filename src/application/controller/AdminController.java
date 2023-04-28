@@ -13,6 +13,7 @@ import org.bson.types.ObjectId;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
+import com.mongodb.client.model.Filters;
 
 import application.Connectdatabase;
 import application.ViewController.Client_dashbord;
@@ -314,17 +315,14 @@ public class AdminController {
 				technicien.setUsername(techniciendoc.getString("nomutil"));
 
 				Document cardoc = doc.get("Car", Document.class);
-
 				Car car = new Car();
+
 				car.setId(cardoc.getObjectId("_id").toString());
 				car.setMarque(cardoc.getString("marque"));
 				car.setModele(cardoc.getString("modele"));
 				car.setCouleur(cardoc.getString("couleur"));
 				car.setMatricule(cardoc.getString("matricule"));
 				car.setVin(cardoc.getString("vin"));
-
-				rdv.setClient_rdv(client);
-				rdv.setTechnicien_rdv(technicien);
 
 				ArrayList<Document> parlistdoc = (ArrayList<Document>) doc.get("parts");
 				ArrayList<Parts> partlist = new ArrayList<Parts>();
@@ -342,7 +340,9 @@ public class AdminController {
 
 				}
 				rdv.setParts(partlist);
-
+				rdv.setClient_rdv(client);
+				rdv.setTechnicien_rdv(technicien);
+				rdv.setCar_rdv(car);
 				List.add(rdv);
 
 			}
@@ -435,6 +435,91 @@ public class AdminController {
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
 		collection.deleteOne(found);
 		Connectdatabase.closeconndb();
+
+	}
+
+	public static ArrayList<Rendez_vous> RdvListCar(String vin) {
+		MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
+		ArrayList<Rendez_vous> List = new ArrayList<>();
+		MongoCursor<Document> cursor = collection.find(Filters.in("Car.vin", vin)).iterator();
+		try {
+			while (cursor.hasNext()) {
+				Document doc = cursor.next();
+				Rendez_vous rdv = new Rendez_vous();
+
+				rdv.setId(doc.getObjectId("_id").toString());
+				rdv.setCar_model(doc.getString("car model"));
+				// SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
+				rdv.setDate_debut(doc.getDate("date_debut"));
+				rdv.setDate_fin(doc.getDate("date_fin"));
+				rdv.setPrix(doc.getInteger("prix"));
+				rdv.setDescrption_in(doc.getString("descrption_in"));
+				rdv.setDescrption_out(doc.getString("descrption_out"));
+				rdv.setEtat(doc.getString("etat"));
+				rdv.setService(doc.getString("service"));
+
+				Document clientdoc = doc.get("client", Document.class);
+				Clientmodel client = new Clientmodel();
+
+				client.setId(clientdoc.getObjectId("_id").toString());
+				client.setNom(clientdoc.getString("nom"));
+				client.setPrenom(clientdoc.getString("prenom"));
+				client.setEmail(clientdoc.getString("email"));
+				client.setNumero(clientdoc.getString("tel"));
+				client.setAddresse(clientdoc.getString("adresse"));
+
+				Document techniciendoc = doc.get("technicien", Document.class);
+				Usermodel technicien = new Usermodel();
+
+				technicien.setId(techniciendoc.getObjectId("_id").toString());
+				technicien.setNom(techniciendoc.getString("nom"));
+				technicien.setPrenom(techniciendoc.getString("prenom"));
+				technicien.setEmail(techniciendoc.getString("email"));
+				technicien.setNumero(techniciendoc.getString("tel"));
+				technicien.setRole(techniciendoc.getString("role"));
+				technicien.setUsername(techniciendoc.getString("nomutil"));
+
+				Document cardoc = doc.get("Car", Document.class);
+				Car car = new Car();
+
+				car.setId(cardoc.getObjectId("_id").toString());
+				car.setMarque(cardoc.getString("marque"));
+				car.setModele(cardoc.getString("modele"));
+				car.setCouleur(cardoc.getString("couleur"));
+				car.setMatricule(cardoc.getString("matricule"));
+				car.setVin(cardoc.getString("vin"));
+
+				ArrayList<Document> parlistdoc = (ArrayList<Document>) doc.get("parts");
+				ArrayList<Parts> partlist = new ArrayList<Parts>();
+				for (Document pardoc : parlistdoc) {
+					Parts part = new Parts();
+
+					part.setId(doc.getObjectId("_id").toString());
+
+					part.setName(pardoc.getString("name"));
+					part.setDescription(pardoc.getString("description"));
+					part.setQuntitie(pardoc.getInteger("quantity"));
+					part.setPrice(pardoc.getInteger("price"));
+
+					partlist.add(part);
+
+				}
+				rdv.setParts(partlist);
+				rdv.setClient_rdv(client);
+				rdv.setTechnicien_rdv(technicien);
+				rdv.setCar_rdv(car);
+				List.add(rdv);
+
+			}
+		} finally {
+			cursor.close();
+			Connectdatabase.closeconndb();
+
+		}
+		System.out.println("this is the size of list rdv of cars " + List.size());
+
+		return List;
 
 	}
 

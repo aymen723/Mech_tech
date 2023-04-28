@@ -15,9 +15,10 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -34,6 +35,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
 import javafx.scene.text.Text;
@@ -83,6 +85,9 @@ public class car_dashbord_controller implements Initializable {
 
     @FXML
     private TableColumn<Car, Void> actionsColumn;
+
+    @FXML
+    private BorderPane car_container;
 
     public static Car car;
 
@@ -234,7 +239,6 @@ public class car_dashbord_controller implements Initializable {
         marque_col.setCellValueFactory(new PropertyValueFactory<>("marque"));
         modele_col.setCellValueFactory(new PropertyValueFactory<>("modele"));
         couleur_col.setCellValueFactory(new PropertyValueFactory<>("couleur"));
-
         matricule_col.setCellValueFactory(new PropertyValueFactory<>("matricule"));
         vin_col.setCellValueFactory(new PropertyValueFactory<>("vin"));
 
@@ -243,20 +247,8 @@ public class car_dashbord_controller implements Initializable {
             return new TableCell<Car, Void>() {
 
                 private final Button editButton = new Button("");
-                private final Button deleteButton = new Button("");
-                private final Button copybutton = new Button("");
 
                 {
-
-                    deleteButton.setStyle(
-                            "-fx-background-radius: 5em; -fx-min-width: 25px; -fx-min-height: 25px;" +
-                                    "-fx-max-width: 25px; -fx-max-height: 25px; -fx-background-color: transparent;" +
-                                    "-fx-alignment:CENTER;");
-                    Image image = new Image(getClass().getResourceAsStream("Delete.png"));
-                    ImageView img = new ImageView(image);
-                    img.setFitHeight(25);
-                    img.setFitWidth(25);
-                    deleteButton.setGraphic(img);
 
                     editButton.setStyle(
                             "-fx-background-radius: 5em; -fx-min-width: 25px; -fx-min-height: 25px;" +
@@ -268,87 +260,30 @@ public class car_dashbord_controller implements Initializable {
                     img_edit.setFitWidth(25);
                     editButton.setGraphic(img_edit);
 
-                    copybutton.setStyle(
-                            "-fx-background-radius: 5em; -fx-min-width: 25px; -fx-min-height: 25px; " +
-                                    "-fx-max-width: 25px; -fx-max-height: 25px; -fx-background-color: transparent;" +
-                                    "-fx-alignment:CENTER;");
-
-                    Image image_copy = new Image(getClass().getResourceAsStream("copy.png"));
-                    ImageView img_copy = new ImageView(image_copy);
-                    img_copy.setFitHeight(25);
-                    img_copy.setFitWidth(25);
-                    copybutton.setGraphic(img_copy);
-
                     editButton.setOnAction(event -> {
                         Car car_edit = getTableView().getItems().get(getIndex());
                         car = car_edit;
-                        marque.setText(car_edit.getMarque());
-                        couleur.setText(car_edit.getCouleur());
-                        matricule.setText(car_edit.getMatricule());
-                        modele.setText(car_edit.getModele());
-                        vin.setText(car_edit.getVin());
 
-                        mod_btn.setDisable(false);
-                        add_btn.setDisable(true);
-                        annl_btn.setDisable(false);
-                        annl_btn.setVisible(true);
+                        try {
 
-                    });
+                            FXMLLoader loader = new FXMLLoader(
+                                    getClass().getResource("/application/Viewfxml/car_details.fxml"));
 
-                    deleteButton.setOnAction(event -> {
+                            Parent root = loader.load();
+                            Car_details car_con = loader.getController();
+                            // System.out.println(rdv_details_con);
 
-                        Alert alert = new Alert(AlertType.CONFIRMATION);
-                        alert.setTitle("Confirmation de suppression");
-                        DialogPane dialogPane = alert.getDialogPane();
-                        dialogPane.setGraphic(null);
+                            // System.out.println(rdv.getDescrption_in());
+                            car_con.getcar(car_edit);
+                            car_container.getChildren().removeAll();
+                            car_container.getChildren().setAll(root);
 
-                        dialogPane.getStylesheets()
-                                .add(getClass().getResource("/application/Viewfxml/part_style.css").toExternalForm());
-                        dialogPane.getStyleClass().add("dialog-pane ");
-
-                        alert.initStyle(StageStyle.UNDECORATED);
-
-                        alert.setContentText("cette action ne peut pas être inversé !");
-
-                        ButtonBar buttonBar = (ButtonBar) alert.getDialogPane().lookup(".button-bar");
-                        Button cancelButton = (Button) buttonBar.getButtons().get(1);
-                        Button deleteButton = (Button) buttonBar.getButtons().get(0);
-                        cancelButton.getStyleClass().add("cancel_btn");
-                        deleteButton.getStyleClass().add("delet_btn");
-                        cancelButton.setText("Annuler");
-                        deleteButton.setText("Supprimer");
-                        Optional<ButtonType> result = alert.showAndWait();
-                        if (result.get() == ButtonType.OK) {
-                            Car car = getTableView().getItems().get(getIndex());
-                            AdminController.deletpCar(car);
-                            list = AdminController.CarLiist();
-                            car_table.setItems(list);
-                            car_table.refresh();
-                            // User clicked OK
-                        } else {
-                            // User clicked Cancel or closed the dialog
-
+                        } catch (Exception e) {
+                            // TODO: handle exception
                         }
 
                     });
 
-                    copybutton.setOnAction(event -> {
-                        ObservableList<Car> selectedItems = car_table.getSelectionModel().getSelectedItems();
-
-                        Car car = getTableView().getItems().get(getIndex());
-
-                        StringBuilder sb = new StringBuilder();
-
-                        sb.append(car.getMarque()).append("," + "\n");
-                        sb.append(car.getModele()).append("," + "\n");
-                        sb.append(car.getMatricule()).append("," + "\n");
-                        sb.append(car.getVin()).append("\n");
-                        sb.append(car.getCouleur()).append("\n");
-
-                        ClipboardContent content = new ClipboardContent();
-                        content.putString(sb.toString());
-                        Clipboard.getSystemClipboard().setContent(content);
-                    });
                 }
 
                 @Override
@@ -358,7 +293,7 @@ public class car_dashbord_controller implements Initializable {
                     if (empty) {
                         setGraphic(null);
                     } else {
-                        HBox buttonsBox = new HBox(10, editButton, deleteButton, copybutton);
+                        HBox buttonsBox = new HBox(10, editButton);
                         getAlignment();
                         buttonsBox.setAlignment(Pos.CENTER);
                         setGraphic(buttonsBox);
