@@ -127,6 +127,7 @@ public class LoginController implements Initializable {
 					Scene scene = new Scene(root);
 					stage.setScene(scene);
 					stage_login.close();
+					stage.setResizable(false);
 
 					stage.show();
 
@@ -155,6 +156,7 @@ public class LoginController implements Initializable {
 					Stage stage_login = (Stage) login_container.getScene().getWindow();
 
 					stage_login.close();
+					stage.setResizable(false);
 
 					stage.show();
 

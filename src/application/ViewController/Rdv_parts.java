@@ -79,8 +79,7 @@ public class Rdv_parts implements Initializable {
 
     private Rendez_vous rdv_local;
 
-    ObservableList<Parts> list = FXCollections.observableArrayList(new Parts("1", "part1", 5, "good", 1000),
-            new Parts("2", "part2", 6, "bad", 300));
+    ObservableList<Parts> list = FXCollections.observableArrayList();
 
     FilteredList<Parts> filteredList = new FilteredList<>(list, b -> true);
 
@@ -88,7 +87,6 @@ public class Rdv_parts implements Initializable {
 
         TableViewSelectionModel<Parts> selectionModel = parts_table.getSelectionModel();
         selectionModel.setSelectionMode(SelectionMode.SINGLE);
-       
 
         Parts part = selectionModel.getSelectedItems().get(0);
 
@@ -135,29 +133,31 @@ public class Rdv_parts implements Initializable {
         }
 
         // Parent fxml;
-		// try {
-		// // fxml =
-		// // FXMLLoader.load(getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
-        // FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
+        // try {
+        // // fxml =
+        // //
+        // FXMLLoader.load(getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
+        // FXMLLoader loader = new
+        // FXMLLoader(getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
         // Parent root = loader.load();
-        // System.out.println(rdv_local.getClient_rdv().getNom() + " is the one to be sent");
+        // System.out.println(rdv_local.getClient_rdv().getNom() + " is the one to be
+        // sent");
         // Rdv_details rdv_details_con = loader.getController();
         // rdv_details_con.getrdv(rdv_local);
         // System.out.println(rdv_local.getClient_rdv().getNom() + " is the one sent");
-		
-		// Stage stage = new Stage();
-		// Scene scene = new Scene(root);
-		// stage.setScene(scene);
-		// stage.setTitle("Mecha Tech");
-		// scene.setFill(Color.TRANSPARENT);
 
-		
-		// stage.show();
+        // Stage stage = new Stage();
+        // Scene scene = new Scene(root);
+        // stage.setScene(scene);
+        // stage.setTitle("Mecha Tech");
+        // scene.setFill(Color.TRANSPARENT);
 
-		// } catch (IOException e) {
-		
-		// e.printStackTrace();
-		// }
+        // stage.show();
+
+        // } catch (IOException e) {
+
+        // e.printStackTrace();
+        // }
     }
 
     @Override

@@ -7,21 +7,25 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.bson.Document;
-
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
+import com.mongodb.client.result.UpdateResult;
 
 import application.Connectdatabase;
 import application.ViewController.Client_dashbord;
 import application.models.Car;
 // import application.ViewController.add_employer_controller;<
 import application.models.Clientmodel;
+import application.models.Fournisseur;
 import application.models.Parts;
 import application.models.Rendez_vous;
+import application.models.Transaction;
 import application.models.Usermodel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -521,6 +525,106 @@ public class AdminController {
 
 		return List;
 
+	}
+
+	public static void AddFournisseur(Document Doc) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("fournisseurs");
+		collection.insertOne(Doc);
+		Connectdatabase.closeconndb();
+
+	}
+
+	public static void UpdateFournisseur(Document Doc, Fournisseur fournisseur) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("fournisseurs");
+		ObjectId objid = new ObjectId(fournisseur.getId());
+		Document found = (Document) collection.find(new Document("_id", objid)).first();
+		Doc.append("_id", objid);
+		Document updateop = new Document("$set", Doc);
+		collection.updateOne(found, updateop);
+		Connectdatabase.closeconndb();
+
+	}
+
+	public static ArrayList<Fournisseur> ListFournisseur() {
+		ArrayList<Fournisseur> List = new ArrayList<Fournisseur>();
+		MongoCollection<Document> collection = Connectdatabase.connectdb("fournisseurs");
+
+		MongoCursor<Document> cursor = collection.find().iterator();
+		try {
+			while (cursor.hasNext()) {
+				Document doc = cursor.next();
+				Fournisseur fournisseur = new Fournisseur();
+
+				fournisseur.setId(doc.getObjectId("_id").toString());
+				fournisseur.setName(doc.getString("nom"));
+				// SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
+				fournisseur.setAddress(doc.getString("adresse"));
+				fournisseur.setPhone(doc.getString("numero"));
+				fournisseur.setEmail(doc.getString("email"));
+				fournisseur.setBalance(doc.getInteger("balance"));
+
+				ArrayList<Document> transactions_doc_list = (ArrayList<Document>) doc.get("Transactions");
+				ArrayList<Transaction> tansactions = new ArrayList<Transaction>();
+				for (Document tansaction_doc : transactions_doc_list) {
+					Transaction transaction = new Transaction();
+
+					transaction.setDate_de_transaction(tansaction_doc.getDate("date_de_transaction"));
+					transaction.setSomme_payee(tansaction_doc.getInteger("somme_payee"));
+					transaction.setSomme_de_transaction(tansaction_doc.getInteger("somme_de_transaction"));
+
+					tansactions.add(transaction);
+
+				}
+				fournisseur.setTransactions(tansactions);
+				List.add(fournisseur);
+
+			}
+		} finally {
+			cursor.close();
+			Connectdatabase.closeconndb();
+
+		}
+
+		return List;
+
+	}
+
+	public static void deleteFournisseur(Fournisseur fournisseur) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("cars");
+		ObjectId objid = new ObjectId(fournisseur.getId());
+		Document found = (Document) collection.find(new Document("_id", objid)).first();
+		collection.deleteOne(found);
+		Connectdatabase.closeconndb();
+
+	}
+
+	public static void addTransaction(Document transaction, Fournisseur fournisseur) {
+		// MongoCollection<Document> collection =
+		// Connectdatabase.connectdb("fournisseurs");
+		// System.out.println(fournisseur.getId());
+		// Document doc = new Document("_id", new ObjectId(fournisseur.getId()));
+		// doc.append("balance", fournisseur.getBalance() +
+		// transaction.getInteger("somme_payee") - transaction
+		// .getInteger("somme_de_transaction"));
+		// Bson update = Updates.push("Transactions", transaction);
+		// UpdateResult UR = collection.updateOne(doc, update);
+		// System.out.println(UR);
+		// Connectdatabase.closeconndb();
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("fournisseurs");
+		Bson filter = Filters.eq("_id", new ObjectId(fournisseur.getId()));
+		// Document doc = new Document();
+		// doc.append("balance", fournisseur.getBalance() +
+		// transaction.getInteger("somme_payee") - transaction
+		// .getInteger("somme_de_transaction"));
+		Bson update = Updates.addToSet("Transactions", transaction);
+		UpdateResult UR = collection.updateOne(filter, update);
+		System.out.println(UR);
+		Connectdatabase.closeconndb();
 	}
 
 }

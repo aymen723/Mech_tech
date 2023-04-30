@@ -13,8 +13,6 @@ public class Usermodel {
 	private String email;
 	private String role;
 
-	
-
 	public String getId() {
 		return id;
 	}

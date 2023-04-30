@@ -298,26 +298,26 @@ public class Rdv_veiwcontroller implements Initializable {
 							// TODO: handle exception
 						}
 
-						// try {
+						try {
 
-						// FXMLLoader loader = new FXMLLoader(
-						// getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
-						// Parent root = loader.load();
+							FXMLLoader loader = new FXMLLoader(
+									getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
+							Parent root = loader.load();
 
-						// Rdv_details rdv_details_con = loader.getController();
-						// System.out.println(rdv_details_con);
+							Rdv_details rdv_details_con = loader.getController();
+							System.out.println(rdv_details_con);
 
-						// rdv_details_con.getrdv(rdv);
-						// Stage stage = new Stage();
-						// Scene scene = new Scene(root);
-						// stage.setScene(scene);
-						// stage.setTitle("Mecha Tech");
+							rdv_details_con.getrdv(rdv);
+							Stage stage = new Stage();
+							Scene scene = new Scene(root);
+							stage.setScene(scene);
+							stage.setTitle("Mecha Tech");
 
-						// stage.show();
+							stage.show();
 
-						// } catch (IOException e) {
-						// e.printStackTrace();
-						// }
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 
 					});
 				}

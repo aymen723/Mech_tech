@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="emp_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="930.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.add_employer_controller">
+<BorderPane fx:id="emp_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1030.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.add_employer_controller">
    <top>
       <GridPane prefHeight="200.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -34,7 +34,7 @@
                <children>
                   <Text layoutX="14.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les employés">
                      <font>
-                        <Font size="25.0" />
+                        <Font name="System Bold" size="25.0" />
                      </font>
                   </Text>
                </children>
@@ -42,7 +42,7 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="add_emp" layoutX="352.0" layoutY="18.0" mnemonicParsing="false" onAction="#add_emp_conatiner" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@add_employe_style.css" text="Ajouter">
+                  <Button fx:id="add_emp" layoutX="401.0" layoutY="18.0" mnemonicParsing="false" onAction="#add_emp_conatiner" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@add_employe_style.css" text="Ajouter">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -61,18 +61,18 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                <children>
-                  <TextField fx:id="search_field" layoutX="14.0" layoutY="21.0" prefHeight="25.0" prefWidth="250.0" promptText="Recherche" styleClass="inpt" stylesheets="@inputs.css" />
+                  <TextField fx:id="search_field" layoutX="14.0" layoutY="20.0" prefHeight="25.0" prefWidth="250.0" promptText="Recherche" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
          </children>
       </GridPane>
    </top>
    <bottom>
-      <HBox alignment="CENTER" prefHeight="400.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="556.0" prefWidth="1030.0" BorderPane.alignment="CENTER">
          <children>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="900.0">
                <children>
-                  <TableView fx:id="table" prefHeight="400.0" prefWidth="900.0" style="-fx-background-color: white;" stylesheets="@tablestyle.css">
+                  <TableView fx:id="table" prefHeight="499.0" prefWidth="900.0" style="-fx-background-color: white;" stylesheets="@tablestyle.css">
                     <columns>
                       <TableColumn fx:id="username" prefWidth="132.00000876188278" style="-fx-background-color: transparent;" text="nom d'utilisateur" />
                         <TableColumn fx:id="nom" prefWidth="133.59996032714844" style="-fx-background-color: transparent;" text="Nom" />

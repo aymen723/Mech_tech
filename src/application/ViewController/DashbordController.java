@@ -227,6 +227,40 @@ public class DashbordController implements Initializable {
 	}
 
 	@FXML
+	void Fournisseur(ActionEvent event) {
+
+		try {
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Fournisseur_dashboard.fxml"));
+			container.getChildren().removeAll();
+			container.getChildren().setAll(fxml);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		// Parent fxml;
+		// try {
+		// fxml =
+		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/Fournisseur_dashboard.fxml"));
+		// Stage stage = new Stage();
+		// Scene scene = new Scene(fxml);
+		// stage.setScene(scene);
+		// stage.setTitle("Mecha Tech");
+		// scene.setFill(Color.TRANSPARENT);
+
+		// Stage stage_login = (Stage) container.getScene().getWindow();
+
+		// stage_login.close();
+
+		// stage.show();
+
+		// } catch (IOException e) {
+		// e.printStackTrace();
+		// }
+
+	}
+
+	@FXML
 	void profile(ActionEvent event) {
 
 		try {
