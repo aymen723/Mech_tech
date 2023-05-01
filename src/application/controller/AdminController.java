@@ -674,4 +674,36 @@ public class AdminController {
 
 		return fournisseur;
 	}
+
+	public static void deleteTransaction(Transaction transaction, Fournisseur fournisseur) {
+
+		// MongoCollection<Document> collection =
+		// Connectdatabase.connectdb("fournisseurs");
+		// Bson filter = Filters.eq("_id", new ObjectId(fournisseur.getId()));
+
+		// Bson update = Updates.pull("Transactions", new Document("_id", new
+		// ObjectId(fournisseur.getId())));
+		// Bson updatebalance = Updates.set("balance",
+		// fournisseur.getBalance() - transaction.getSomme_payee() + transaction
+		// .getSomme_de_transaction());
+		// UpdateResult URbalance = collection.updateOne(filter, updatebalance);
+		// System.out.println(URbalance);
+		// UpdateResult UR = collection.updateOne(filter, update);
+		// System.out.println(UR);
+		// Connectdatabase.closeconndb();
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("fournisseurs");
+		Bson filter = Filters.eq("_id", new ObjectId(fournisseur.getId()));
+
+		Bson update = Updates.pull("Transactions", new Document("_id", new ObjectId(transaction.getId())));
+		Bson updatebalance = Updates.set("balance",
+				fournisseur.getBalance() - transaction.getSomme_payee() + transaction
+						.getSomme_de_transaction());
+		UpdateResult UR = collection.updateMany(filter, update);
+		System.out.println(UR);
+		UpdateResult URbalance = collection.updateOne(filter, updatebalance);
+		System.out.println(URbalance);
+
+		Connectdatabase.closeconndb();
+	}
 }

@@ -160,8 +160,10 @@ public class fournisseur_details {
                         Optional<ButtonType> result = alert.showAndWait();
                         if (result.get() == ButtonType.OK) {
                             Transaction transaction = getTableView().getItems().get(getIndex());
-                            // AdminController.deletpart(part);
-                            // list = AdminController.PartList();
+
+                            AdminController.deleteTransaction(transaction, fournisseur_local);
+                            getfournisseur(AdminController.findFournisseurbyid(fournisseur_local.getId()));
+                            // list = AdminController.fourn();
                             // parts_table.setItems(list);
                             // parts_table.refresh();
                             // User clicked OK
