@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -571,6 +572,7 @@ public class AdminController {
 				for (Document tansaction_doc : transactions_doc_list) {
 					Transaction transaction = new Transaction();
 
+					transaction.setId(tansaction_doc.getObjectId("_id").toString());
 					transaction.setDate_de_transaction(tansaction_doc.getDate("date_de_transaction"));
 					transaction.setSomme_payee(tansaction_doc.getInteger("somme_payee"));
 					transaction.setSomme_de_transaction(tansaction_doc.getInteger("somme_de_transaction"));
@@ -622,9 +624,54 @@ public class AdminController {
 		// transaction.getInteger("somme_payee") - transaction
 		// .getInteger("somme_de_transaction"));
 		Bson update = Updates.addToSet("Transactions", transaction);
+		Bson updatebalance = Updates.set("balance",
+				fournisseur.getBalance() + transaction.getInteger("somme_payee") - transaction
+						.getInteger("somme_de_transaction"));
+		UpdateResult URbalance = collection.updateOne(filter, updatebalance);
+		System.out.println(URbalance);
 		UpdateResult UR = collection.updateOne(filter, update);
 		System.out.println(UR);
 		Connectdatabase.closeconndb();
 	}
 
+	public static Fournisseur findFournisseurbyid(String id) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("fournisseurs");
+
+		Document doc = new Document();
+		// Document document = collection.find(eq("_id", new ObjectId(id))).first();
+		BasicDBObject query = new BasicDBObject();
+		query.put("_id", new ObjectId(id));
+
+		doc = collection.find(query).first();
+
+		Fournisseur fournisseur = new Fournisseur();
+
+		fournisseur.setId(doc.getObjectId("_id").toString());
+		fournisseur.setName(doc.getString("nom"));
+		// SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
+		fournisseur.setAddress(doc.getString("adresse"));
+		fournisseur.setPhone(doc.getString("numero"));
+		fournisseur.setEmail(doc.getString("email"));
+		fournisseur.setBalance(doc.getInteger("balance"));
+
+		List<Document> transactions_doc_list = doc.getList("Transactions", Document.class);
+		ArrayList<Transaction> tansactions = new ArrayList<Transaction>();
+		for (Document tansaction_doc : transactions_doc_list) {
+			Transaction transaction = new Transaction();
+			transaction.setId(tansaction_doc.getObjectId("_id").toString());
+			transaction.setDate_de_transaction(tansaction_doc.getDate("date_de_transaction"));
+			transaction.setSomme_payee(tansaction_doc.getInteger("somme_payee"));
+			transaction.setSomme_de_transaction(tansaction_doc.getInteger("somme_de_transaction"));
+
+			tansactions.add(transaction);
+
+		}
+		fournisseur.setTransactions(tansactions);
+
+		Connectdatabase.closeconndb();
+
+		return fournisseur;
+	}
 }

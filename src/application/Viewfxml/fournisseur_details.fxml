@@ -69,33 +69,35 @@
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
-                        <TextField fx:id="nom" layoutX="14.0" layoutY="21.0" prefHeight="30.0" prefWidth="200.0" />
+                        <TextField fx:id="nom" layoutX="14.0" layoutY="21.0" prefHeight="30.0" prefWidth="230.0" styleClass="inpt" stylesheets="@inputs.css" />
                         <Text layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom" />
                      </children>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <TextField fx:id="address" layoutX="14.0" layoutY="21.0" prefHeight="30.0" prefWidth="200.0" />
-                        <Text layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" />
+                        <TextField fx:id="address" layoutX="19.0" layoutY="21.0" prefHeight="30.0" prefWidth="230.0" styleClass="inpt" stylesheets="@inputs.css" />
+                        <Text layoutX="19.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" />
                      </children>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
-                        <TextField fx:id="numero" layoutX="14.0" layoutY="21.0" prefHeight="30.0" prefWidth="200.0" />
+                        <TextField fx:id="numero" layoutX="14.0" layoutY="21.0" prefHeight="30.0" prefWidth="230.0" styleClass="inpt" stylesheets="@inputs.css" />
                         <Text layoutX="14.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numéro" />
                      </children>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                      <children>
-                        <TextField fx:id="email" layoutX="14.0" layoutY="21.0" prefHeight="30.0" prefWidth="200.0" />
+                        <TextField fx:id="email" layoutX="14.0" layoutY="21.0" prefHeight="30.0" prefWidth="230.0" styleClass="inpt" stylesheets="@inputs.css" />
                         <Text layoutX="14.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
                      </children>
                   </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <children>
+                        <Button fx:id="btn_annuler_fournisseur" layoutX="178.0" layoutY="18.0" mnemonicParsing="false" onAction="#annuler_founrisseur" prefHeight="30.0" prefWidth="120.0" text="Annuler" />
+                     </children></Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                      <children>
-                        <Button fx:id="btn_save_fournisseur" layoutX="144.0" layoutY="18.0" mnemonicParsing="false" onAction="#save_fournisseur" prefHeight="30.0" prefWidth="100.0" text="Enregistre" />
-                        <Button fx:id="btn_annuler_fournisseur" layoutX="10.0" layoutY="22.0" mnemonicParsing="false" onAction="#annuler_founrisseur" prefHeight="30.0" prefWidth="100.0" text="Annuler" />
+                        <Button fx:id="btn_save_fournisseur" layoutX="124.0" layoutY="18.0" mnemonicParsing="false" onAction="#save_fournisseur" prefHeight="30.0" prefWidth="120.0" text="Enregistre" />
                      </children>
                   </Pane>
                </children>
@@ -124,31 +126,32 @@
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
-                        <TextField fx:id="somme_payee" layoutX="14.0" layoutY="10.0" prefHeight="30.0" prefWidth="230.0" />
+                        <TextField fx:id="somme_payee" layoutX="14.0" layoutY="10.0" prefHeight="30.0" prefWidth="230.0" styleClass="inpt" stylesheets="@inputs.css" />
                         <Text layoutX="14.0" layoutY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="La somme payée" />
                      </children>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <TextField fx:id="somme_transaction" layoutX="26.0" layoutY="13.0" prefHeight="30.0" prefWidth="230.0" />
+                        <TextField fx:id="somme_transaction" layoutX="26.0" layoutY="13.0" prefHeight="30.0" prefWidth="230.0" styleClass="inpt" stylesheets="@inputs.css" />
                         <Text layoutX="26.0" layoutY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="La somme du transcation" />
                      </children>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
-                        <Button fx:id="btn_save_trans" layoutX="232.0" layoutY="10.0" mnemonicParsing="false" onAction="#save_transaction" prefHeight="30.0" prefWidth="100.0" text="Enregistre" />
-                        <Button fx:id="btn_annuler_trans" layoutX="102.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="Annuler" />
+                        <Button fx:id="btn_save_trans" layoutX="212.0" layoutY="10.0" mnemonicParsing="false" onAction="#save_transaction" prefHeight="30.0" prefWidth="120.0" text="Enregistre" />
+                        <Button fx:id="btn_annuler_trans" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Annuler" />
                      </children>
                   </Pane>
                </children>
             </GridPane>
             <HBox alignment="CENTER" prefHeight="400.0" prefWidth="895.0" GridPane.rowIndex="2">
                <children>
-                  <TableView fx:id="table_transaction" prefHeight="400.0" prefWidth="600.0">
+                  <TableView fx:id="table_transaction" prefHeight="400.0" prefWidth="700.0" stylesheets="@tablestyle.css">
                     <columns>
                       <TableColumn fx:id="date_trans_col" prefWidth="296.79994505643845" text="Date de transaction" />
                       <TableColumn fx:id="somme_payee_coll" minWidth="0.0" prefWidth="145.60000610351562" text="la somme payée" />
                         <TableColumn fx:id="somme_transaction_col" minWidth="0.0" prefWidth="156.79998779296875" text="la somme du transaction" />
+                        <TableColumn fx:id="action_col" minWidth="0.0" prefWidth="99.199951171875" text="Action" />
                     </columns>
                   </TableView>
                </children>
