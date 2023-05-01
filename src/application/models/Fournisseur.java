@@ -1,25 +1,39 @@
 package application.models;
 
-public class Fournissseur {
+import java.util.ArrayList;
 
+public class Fournisseur {
+private String id;
 private String name;
 private String address;
 private String phone;
 private String email;
 private int balance;
+private ArrayList<Transaction> transactions;
 
 
-public Fournissseur() {
-}
 
-public Fournissseur(String name, String address, String phone, String email, int balance) {
+
+public Fournisseur(String id, String name, String address, String phone, String email, int balance,
+        ArrayList<Transaction> transactions) {
+    this.id = id;
     this.name = name;
     this.address = address;
     this.phone = phone;
     this.email = email;
     this.balance = balance;
+    this.transactions = transactions;
 }
 
+public Fournisseur() {
+}
+
+public String getId() {
+    return id;
+}
+public void setId(String id) {
+    this.id = id;
+}
 public String getName() {
     return name;
 }
@@ -50,6 +64,16 @@ public int getBalance() {
 public void setBalance(int balance) {
     this.balance = balance;
 }
+public ArrayList<Transaction> getTransactions() {
+    return transactions;
+}
+public void setTransactions(ArrayList<Transaction> transactions) {
+    this.transactions = transactions;
+}
+
+
+
+
 
    
 }

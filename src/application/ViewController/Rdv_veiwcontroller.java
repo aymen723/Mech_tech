@@ -1,5 +1,6 @@
 package application.ViewController;
 
+import java.io.IOException;
 // import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -23,6 +24,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 // import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -39,6 +41,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 // import javafx.scene.paint.Color;
 // import javafx.stage.Stage;
+import javafx.stage.Stage;
 
 public class Rdv_veiwcontroller implements Initializable {
 
@@ -118,6 +121,24 @@ public class Rdv_veiwcontroller implements Initializable {
 	ObservableList<Rendez_vous> list = FXCollections.observableArrayList(listrdv);
 
 	public void rdv_ajouter() {
+
+		try {
+
+			FXMLLoader loader = new FXMLLoader(
+					getClass().getResource("/application/Viewfxml/ajouter_rdv.fxml"));
+			Parent root = loader.load();
+
+			Stage stage = new Stage();
+			Scene scene = new Scene(root);
+			stage.setScene(scene);
+			stage.setTitle("Mecha Tech");
+
+			stage.show();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		try {
 			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/ajouter_rdv.fxml"));
 			rdv_container.getChildren().removeAll();
@@ -126,6 +147,7 @@ public class Rdv_veiwcontroller implements Initializable {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+
 	}
 
 	public void rdv_modifier() {
@@ -217,7 +239,9 @@ public class Rdv_veiwcontroller implements Initializable {
 		num_client_col.setCellValueFactory(
 
 				cellData -> new SimpleStringProperty(cellData.getValue().getClient_rdv().getNumero()));
-		voiture_model_col.setCellValueFactory(new PropertyValueFactory<>("car_model"));
+		voiture_model_col.setCellValueFactory(
+
+				cellData -> new SimpleStringProperty(cellData.getValue().getCar_rdv().getVin()));
 		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
 
 		date_deut_col.setCellValueFactory(
@@ -243,7 +267,7 @@ public class Rdv_veiwcontroller implements Initializable {
 					copybutton.setStyle(
 							"-fx-background-radius: 5em; -fx-min-width: 25px; -fx-min-height: 25px; -fx-max-width: 25px; -fx-max-height: 25px; -fx-background-color: transparent; -fx-alignment:CENTER;");
 
-					Image image_copy = new Image(getClass().getResourceAsStream("copy.png"));
+					Image image_copy = new Image(getClass().getResourceAsStream("menu.png"));
 					ImageView img_copy = new ImageView(image_copy);
 					img_copy.setFitHeight(25);
 					img_copy.setFitWidth(25);

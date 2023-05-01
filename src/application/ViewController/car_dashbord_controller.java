@@ -1,5 +1,6 @@
 package application.ViewController;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -15,9 +16,11 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -34,9 +37,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class car_dashbord_controller implements Initializable {
@@ -73,7 +78,7 @@ public class car_dashbord_controller implements Initializable {
     @FXML
     private TableColumn<Car, String> couleur_col;
     @FXML
-    private TableColumn<Car, Integer> matricule_col;
+    private TableColumn<Car, String> matricule_col;
 
     @FXML
     private TableColumn<Car, String> vin_col;
@@ -83,6 +88,9 @@ public class car_dashbord_controller implements Initializable {
 
     @FXML
     private TableColumn<Car, Void> actionsColumn;
+
+    @FXML
+    private BorderPane car_container;
 
     public static Car car;
 
@@ -98,13 +106,13 @@ public class car_dashbord_controller implements Initializable {
                 couleur.getText().trim().isEmpty() == false &&
                 vin.getText().trim().isEmpty() == false &&
                 matricule.getText().trim().isEmpty() == false) {
-            Document newcar = new Document("name", marque.getText());
-            newcar.append("matricule", Integer.parseInt(matricule.getText()));
-            newcar.append("color", couleur.getText());
+            Document newcar = new Document("marque", marque.getText());
+            newcar.append("matricule", matricule.getText());
+            newcar.append("couleur", couleur.getText());
             newcar.append("modele", modele.getText());
             newcar.append("vin", vin.getText());
 
-            AdminController.addpart(newcar);
+            AdminController.AddCar(newcar);
 
             marque.setText("");
             matricule.setText("");
@@ -112,10 +120,10 @@ public class car_dashbord_controller implements Initializable {
             modele.setText("");
             vin.setText("");
             System.out.println("hna list mazal");
-            // list = AdminController.PartList();
+            list = AdminController.CarLiist();
             System.out.println("hna wra list");
             car_table.setItems(list);
-            // filteredList = new FilteredList<>(list, b -> true);
+            filteredList = new FilteredList<>(list, b -> true);
             car_table.refresh();
         } else {
             if (marque.getText().trim().isEmpty() == true) {
@@ -170,12 +178,12 @@ public class car_dashbord_controller implements Initializable {
                 (modele.getText().trim().isEmpty() == false) &&
                 (vin.getText().trim().isEmpty() == false) && car != null) {
             Document updatecar = new Document("name", marque.getText());
-            updatecar.append("matricule", Integer.parseInt(matricule.getText()));
-            updatecar.append("color", couleur.getText());
+            updatecar.append("matricule", matricule.getText());
+            updatecar.append("couleur", couleur.getText());
             updatecar.append("modele", modele.getText());
             updatecar.append("vin", vin.getText());
 
-            // AdminController.updatepart(updatecar, car);
+            AdminController.UpdateCar(updatecar, car);
 
             add_btn.setDisable(false);
             mod_btn.setDisable(true);
@@ -190,7 +198,7 @@ public class car_dashbord_controller implements Initializable {
             vin.setText("");
 
             System.out.println("hna list mazal");
-            // list = AdminController.PartList();
+            list = AdminController.CarLiist();
             System.out.println("hna wra list");
             car_table.setItems(list);
         } else {
@@ -228,13 +236,12 @@ public class car_dashbord_controller implements Initializable {
         mod_btn.setDisable(true);
 
         System.out.println("hna list mazal");
-        // list = AdminController.PartList();
+        list = AdminController.CarLiist();
         System.out.println("hna wra list");
 
         marque_col.setCellValueFactory(new PropertyValueFactory<>("marque"));
         modele_col.setCellValueFactory(new PropertyValueFactory<>("modele"));
-        couleur_col.setCellValueFactory(new PropertyValueFactory<>("color"));
-
+        couleur_col.setCellValueFactory(new PropertyValueFactory<>("couleur"));
         matricule_col.setCellValueFactory(new PropertyValueFactory<>("matricule"));
         vin_col.setCellValueFactory(new PropertyValueFactory<>("vin"));
 
@@ -243,107 +250,70 @@ public class car_dashbord_controller implements Initializable {
             return new TableCell<Car, Void>() {
 
                 private final Button editButton = new Button("");
-                private final Button deleteButton = new Button("");
-                private final Button copybutton = new Button("");
 
                 {
 
-                    deleteButton.setStyle(
-                            "-fx-background-radius: 5em; -fx-min-width: 25px; -fx-min-height: 25px; -fx-max-width: 25px; -fx-max-height: 25px; -fx-background-color: transparent; -fx-alignment:CENTER;");
-                    Image image = new Image(getClass().getResourceAsStream("Delete.png"));
-                    ImageView img = new ImageView(image);
-                    img.setFitHeight(25);
-                    img.setFitWidth(25);
-                    deleteButton.setGraphic(img);
-
                     editButton.setStyle(
-                            "-fx-background-radius: 5em; -fx-min-width: 25px; -fx-min-height: 25px; -fx-max-width: 25px; -fx-max-height: 25px; -fx-background-color: transparent; -fx-alignment:CENTER;");
-                    Image image_edit = new Image(getClass().getResourceAsStream("Edit.png"));
+                            "-fx-background-radius: 5em; -fx-min-width: 25px; -fx-min-height: 25px;" +
+                                    "-fx-max-width: 25px; -fx-max-height: 25px; -fx-background-color: transparent;" +
+                                    "-fx-alignment:CENTER;");
+                    Image image_edit = new Image(getClass().getResourceAsStream("menu.png"));
                     ImageView img_edit = new ImageView(image_edit);
                     img_edit.setFitHeight(25);
                     img_edit.setFitWidth(25);
                     editButton.setGraphic(img_edit);
 
-                    copybutton.setStyle(
-                            "-fx-background-radius: 5em; -fx-min-width: 25px; -fx-min-height: 25px; -fx-max-width: 25px; -fx-max-height: 25px; -fx-background-color: transparent; -fx-alignment:CENTER;");
-
-                    Image image_copy = new Image(getClass().getResourceAsStream("copy.png"));
-                    ImageView img_copy = new ImageView(image_copy);
-                    img_copy.setFitHeight(25);
-                    img_copy.setFitWidth(25);
-                    copybutton.setGraphic(img_copy);
-
                     editButton.setOnAction(event -> {
                         Car car_edit = getTableView().getItems().get(getIndex());
                         car = car_edit;
-                        marque.setText(car_edit.getMarque());
-                        couleur.setText(car_edit.getCouleur());
-                        matricule.setText(Integer.toString(car_edit.getMatricule()));
-                        modele.setText(car_edit.getModele());
-                        vin.setText(car_edit.getVin());
 
-                        mod_btn.setDisable(false);
-                        add_btn.setDisable(true);
-                        annl_btn.setDisable(false);
-                        annl_btn.setVisible(true);
+                        try {
 
-                    });
+                            FXMLLoader loader = new FXMLLoader(
+                                    getClass().getResource("/application/Viewfxml/car_details.fxml"));
 
-                    deleteButton.setOnAction(event -> {
+                            Parent root = loader.load();
+                            Car_details car_con = loader.getController();
+                            // System.out.println(rdv_details_con);
 
-                        Alert alert = new Alert(AlertType.CONFIRMATION);
-                        alert.setTitle("Confirmation de suppression");
-                        DialogPane dialogPane = alert.getDialogPane();
-                        dialogPane.setGraphic(null);
+                            // System.out.println(rdv.getDescrption_in());
+                            car_con.getcar(car_edit);
+                            car_container.getChildren().removeAll();
+                            car_container.getChildren().setAll(root);
 
-                        dialogPane.getStylesheets()
-                                .add(getClass().getResource("/application/Viewfxml/part_style.css").toExternalForm());
-                        dialogPane.getStyleClass().add("dialog-pane ");
-
-                        alert.initStyle(StageStyle.UNDECORATED);
-
-                        alert.setContentText("cette action ne peut pas être inversé !");
-
-                        ButtonBar buttonBar = (ButtonBar) alert.getDialogPane().lookup(".button-bar");
-                        Button cancelButton = (Button) buttonBar.getButtons().get(1);
-                        Button deleteButton = (Button) buttonBar.getButtons().get(0);
-                        cancelButton.getStyleClass().add("cancel_btn");
-                        deleteButton.getStyleClass().add("delet_btn");
-                        cancelButton.setText("Annuler");
-                        deleteButton.setText("Supprimer");
-                        Optional<ButtonType> result = alert.showAndWait();
-                        if (result.get() == ButtonType.OK) {
-                            Car part = getTableView().getItems().get(getIndex());
-                            // AdminController.deletpart(part);
-                            // list = AdminController.PartList();
-                            car_table.setItems(list);
-                            car_table.refresh();
-                            // User clicked OK
-                        } else {
-                            // User clicked Cancel or closed the dialog
-
+                        } catch (Exception e) {
+                            // TODO: handle exception
                         }
 
+                        		// try {
+                                //     FXMLLoader loader = new FXMLLoader(
+                                //         getClass().getResource("/application/Viewfxml/car_details.fxml"));
+    
+                                // Parent root = loader.load();
+                                // Car_details car_con = loader.getController();
+                                // // System.out.println(rdv_details_con);
+    
+                                // // System.out.println(rdv.getDescrption_in());
+                                // car_con.getcar(car_edit);
+                                //     Stage stage = new Stage();
+                                //     Scene scene = new Scene(root);
+                                //     stage.setScene(scene);
+                                //     stage.setTitle("Mecha Tech");
+                                //     scene.setFill(Color.TRANSPARENT);
+
+                                //     // primaryStage.initStyle(StageStyle.UNDECORATED);
+                                //     // primaryStage.initStyle(StageStyle.TRANSPARENT);
+
+                                //     // primaryStage.setResizable(false);
+                                //     stage.show();
+
+                                //     } catch (IOException e) {
+                                //     // TODO Auto-generated catch block
+                                //     e.printStackTrace();
+                                //     }
+
                     });
 
-                    copybutton.setOnAction(event -> {
-                        // ObservableList<Parts> selectedItems =
-                        // parts_table.getSelectionModel().getSelectedItems();
-
-                        Car car = getTableView().getItems().get(getIndex());
-
-                        StringBuilder sb = new StringBuilder();
-
-                        sb.append(car.getMarque()).append("," + "\n");
-                        sb.append(car.getModele()).append("," + "\n");
-                        sb.append(car.getMatricule()).append("," + "\n");
-                        sb.append(car.getVin()).append("\n");
-                        sb.append(car.getCouleur()).append("\n");
-
-                        ClipboardContent content = new ClipboardContent();
-                        content.putString(sb.toString());
-                        Clipboard.getSystemClipboard().setContent(content);
-                    });
                 }
 
                 @Override
@@ -353,7 +323,7 @@ public class car_dashbord_controller implements Initializable {
                     if (empty) {
                         setGraphic(null);
                     } else {
-                        HBox buttonsBox = new HBox(10, editButton, deleteButton, copybutton);
+                        HBox buttonsBox = new HBox(10, editButton);
                         getAlignment();
                         buttonsBox.setAlignment(Pos.CENTER);
                         setGraphic(buttonsBox);
@@ -362,7 +332,7 @@ public class car_dashbord_controller implements Initializable {
             };
         });
 
-        // car_table.setItems(list);
+        car_table.setItems(list);
 
         filteredList = new FilteredList<>(list, b -> true);
 
@@ -400,23 +370,23 @@ public class car_dashbord_controller implements Initializable {
         // Bind the sorted list to the table
         car_table.setItems(sortedList);
 
-        car_table.setRowFactory(tv -> {
-            TableRow<Car> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (!row.isEmpty() && event.getClickCount() == 2) {
-                    Car rowData = row.getItem();
-                    System.out.println("Double clicked on: " + rowData);
-                }
-            });
-            row.heightProperty().addListener((obs, oldHeight, newHeight) -> {
-                if (newHeight.doubleValue() > oldHeight.doubleValue()) {
-                    row.setMinHeight(newHeight.doubleValue());
-                    row.setMinHeight(txt.getLayoutBounds().getHeight());
-                    // row.setMinHeight(100);
-                }
-            });
-            return row;
-        });
+        // car_table.setRowFactory(tv -> {
+        // TableRow<Car> row = new TableRow<>();
+        // row.setOnMouseClicked(event -> {
+        // if (!row.isEmpty() && event.getClickCount() == 2) {
+        // Car rowData = row.getItem();
+        // System.out.println("Double clicked on: " + rowData);
+        // }
+        // });
+        // row.heightProperty().addListener((obs, oldHeight, newHeight) -> {
+        // if (newHeight.doubleValue() > oldHeight.doubleValue()) {
+        // row.setMinHeight(newHeight.doubleValue());
+        // row.setMinHeight(txt.getLayoutBounds().getHeight());
+        // // row.setMinHeight(100);
+        // }
+        // });
+        // return row;
+        // });
         marque.textProperty().addListener((observable, oldValue, newValue) -> {
             // Your code here to handle the text field value change
             System.out.println("Text changed from " + oldValue + " to " + newValue);

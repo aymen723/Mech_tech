@@ -93,7 +93,7 @@ public class Rdv_parts implements Initializable {
         Parts part = selectionModel.getSelectedItems().get(0);
 
         part.setQuntitie(Integer.parseInt(quntitie.getText()));
-        System.out.println(part.getName() + " is added");
+        System.out.println(part.getId() + " is added");
 
         rdv_local.getParts().add(part);
     }
@@ -122,10 +122,9 @@ public class Rdv_parts implements Initializable {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
             Parent root = loader.load();
-            System.out.println(rdv_local.getClient_rdv().getNom() + " is the one to be sent");
             Rdv_details rdv_details_con = loader.getController();
             rdv_details_con.getrdv(rdv_local);
-            System.out.println(rdv_local.getClient_rdv().getNom() + " is the one sent");
+
             rdv_parts_container.getChildren().removeAll();
             rdv_parts_container.getChildren().setAll(root);
             rdv_details_con.setContent(root);

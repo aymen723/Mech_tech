@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="930.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.car_dashbord_controller">
+<BorderPane fx:id="car_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="930.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.car_dashbord_controller">
 
    <bottom>
       <HBox alignment="CENTER" prefHeight="390.0" prefWidth="930.0" BorderPane.alignment="CENTER">
@@ -60,7 +60,7 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <children>
-                  <TextField fx:id="mlatricule" layoutX="16.0" layoutY="20.0" prefWidth="150.0" promptText="Matricule" styleClass="inpt" stylesheets="@inputs.css" />
+                  <TextField fx:id="matricule" layoutX="16.0" layoutY="20.0" prefWidth="150.0" promptText="Matricule" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0">
@@ -79,7 +79,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
-                  <TextField fx:id="marque" layoutX="17.0" layoutY="20.0" onInputMethodTextChanged="#name_field" prefWidth="150.0" promptText="Marque" style="-fx-background-radius: 10px;" styleClass="inpt" stylesheets="@inputs.css">
+                  <TextField fx:id="marque" layoutX="17.0" layoutY="20.0" prefWidth="150.0" promptText="Marque" style="-fx-background-radius: 10px;" styleClass="inpt" stylesheets="@inputs.css">
                      <effect>
                         <DropShadow>
                            <color>

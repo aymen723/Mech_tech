@@ -19,19 +19,23 @@ import javafx.stage.Stage;
 public class DashbordController implements Initializable {
 
 	@FXML
-	Button dashbord_btn;
+	private Button dashbord_btn;
 	@FXML
-	Button parts;
+	private Button parts;
 	@FXML
-	Button Rendez_vous;
+	private Button Rendez_vous;
 	@FXML
-	Button Employés;
+	private Button Employés;
 	@FXML
-	Button Clients;
+	private Button Clients;
 	@FXML
-	BorderPane container;
+	private Button btn_car;
 	@FXML
-	Button close_add;
+	private Button btn_stats;
+	@FXML
+	private BorderPane container;
+	@FXML
+	private Button close_add;
 
 	@FXML
 	private Button btn_profile;
@@ -182,6 +186,43 @@ public class DashbordController implements Initializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+	}
+
+	@FXML
+	void car(ActionEvent event) {
+		try {
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Car_dashboard.fxml"));
+			container.getChildren().removeAll();
+			container.getChildren().setAll(fxml);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		// try {
+		// Parent fxml =
+		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/Car_dashboard.fxml"));
+		// Stage stage = new Stage();
+		// Scene scene = new Scene(fxml);
+		// stage.setScene(scene);
+		// // stage.setTitle("Mecha Tech");
+		// // scene.setFill(Color.TRANSPARENT);
+
+		// // primaryStage.initStyle(StageStyle.UNDECORATED);
+		// // primaryStage.initStyle(StageStyle.TRANSPARENT);
+
+		// // primaryStage.setResizable(false);
+		// stage.show();
+
+		// } catch (IOException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+	}
+
+	@FXML
+	void stats(ActionEvent event) {
 
 	}
 

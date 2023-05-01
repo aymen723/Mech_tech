@@ -75,9 +75,5 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-
-
-
 	<classpathentry kind="output" path="bin"/> -->
 </classpath>
-
