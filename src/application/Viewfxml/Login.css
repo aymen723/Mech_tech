@@ -1,15 +1,17 @@
 .leftbox {
   /* -fx-background-color: "#706f6f"; */
   /* -fx-background-color: black; */
-  -fx-background-color: "#1D1C21";
+  -fx-background-color: #3c4048;
 }
 
 .rightbox {
   /* -fx-background-color: white; */
-  -fx-background-color: "#F8F9FA";
+  -fx-background-color: #F8F9FA;
+  -fx-border-radius: 0 30 30 0;
+  -fx-background-radius: 0 30 30 0;
 }
 
 .btn {
-  -fx-background-color: "#fac400";
+  -fx-background-color: #fac400;
   -fx-color: white;
 }

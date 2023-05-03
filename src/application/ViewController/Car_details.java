@@ -1,5 +1,6 @@
 package application.ViewController;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -13,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -23,6 +25,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Car_details {
@@ -132,44 +135,44 @@ public class Car_details {
 
                         System.out.println(rdv.getCar_rdv().getModele());
 
-                        try {
-
-                            FXMLLoader loader = new FXMLLoader(
-                                    getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
-
-                            Parent root = loader.load();
-                            Rdv_details rdv_details_con = loader.getController();
-                            System.out.println(rdv_details_con);
-
-                            System.out.println(rdv.getDescrption_in());
-                            rdv_details_con.getrdv(rdv);
-                            rdv_container.getChildren().removeAll();
-                            rdv_container.getChildren().setAll(root);
-
-                        } catch (Exception e) {
-                            // TODO: handle exception
-                        }
-
                         // try {
 
                         // FXMLLoader loader = new FXMLLoader(
                         // getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
-                        // Parent root = loader.load();
 
+                        // Parent root = loader.load();
                         // Rdv_details rdv_details_con = loader.getController();
                         // System.out.println(rdv_details_con);
 
+                        // System.out.println(rdv.getDescrption_in());
                         // rdv_details_con.getrdv(rdv);
-                        // Stage stage = new Stage();
-                        // Scene scene = new Scene(root);
-                        // stage.setScene(scene);
-                        // stage.setTitle("Mecha Tech");
+                        // rdv_container.getChildren().removeAll();
+                        // rdv_container.getChildren().setAll(root);
 
-                        // stage.show();
-
-                        // } catch (IOException e) {
-                        // e.printStackTrace();
+                        // } catch (Exception e) {
+                        // // TODO: handle exception
                         // }
+
+                        try {
+
+                            FXMLLoader loader = new FXMLLoader(
+                                    getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
+                            Parent root = loader.load();
+
+                            Rdv_details rdv_details_con = loader.getController();
+                            System.out.println(rdv_details_con);
+
+                            rdv_details_con.getrdv(rdv);
+                            Stage stage = new Stage();
+                            Scene scene = new Scene(root);
+                            stage.setScene(scene);
+                            stage.setTitle("Mecha Tech");
+
+                            stage.show();
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 
                     });
                 }
@@ -210,3 +213,4 @@ public class Car_details {
     }
 
 }
+

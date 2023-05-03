@@ -2,11 +2,13 @@ package application.ViewController;
 
 import org.bson.Document;
 
-import com.mongodb.client.FindIterable;
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.MongoException;
+import com.mongodb.MongoSocketOpenException;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
-import com.mongodb.client.model.Collation;
-
 import application.Connectdatabase;
 import application.models.Usermodel;
 import javafx.event.ActionEvent;
@@ -14,26 +16,34 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.SocketException;
 import java.net.URL;
-import java.util.Iterator;
+import java.util.Properties;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
-public class LoginController implements Initializable {
+public class LoginController {
 
 	@FXML
 	private TextField username;
@@ -43,24 +53,17 @@ public class LoginController implements Initializable {
 	private Button loginbtn;
 
 	@FXML
-	private TextField datebase_string;
-
-	@FXML
-	private Button btn_enre_database;
-
-	@FXML
-	private Button btn_mod_database;
-
-	@FXML
 	BorderPane login_container;
 
-	String dbstring;
+
 
 	@FXML
-	private CheckBox passwordvue;
+	private Button close_button;
+
+
 
 	@FXML
-	private Tooltip tltip;
+	private Pane tool_bar;
 
 	private Usermodel user = new Usermodel();
 
@@ -114,19 +117,30 @@ public class LoginController implements Initializable {
 
 					Parent root = loader.load();
 					DashbordController dashbord_con = loader.getController();
-					System.out.println("berfong func");
+					
 
 					dashbord_con.setuser(user);
 					System.out.println(user.getEmail());
 
 					Stage stage_login = (Stage) login_container.getScene().getWindow();
 
-					System.out.println("after loading");
+
+					
 
 					Stage stage = new Stage();
+					Rectangle shape = new Rectangle(1200, 700);
+					shape.setArcWidth(20);
+					shape.setArcHeight(20);
+
+					// Set the shape as the custom shape for the stage
+					stage.initStyle(StageStyle.UNDECORATED);
+					stage.initStyle(StageStyle.TRANSPARENT);
 					Scene scene = new Scene(root);
 					stage.setScene(scene);
+					scene.setFill(Color.TRANSPARENT);
+					stage.getScene().getRoot().setClip(shape);
 					stage_login.close();
+					stage.setResizable(false);
 
 					stage.show();
 
@@ -155,6 +169,7 @@ public class LoginController implements Initializable {
 					Stage stage_login = (Stage) login_container.getScene().getWindow();
 
 					stage_login.close();
+					stage.setResizable(false);
 
 					stage.show();
 
@@ -168,59 +183,17 @@ public class LoginController implements Initializable {
 	}
 
 	@FXML
-	void showpassword(ActionEvent event) {
-		if (passwordvue.isSelected() == true) {
-
-			Point2D p = password.localToScene(password.getBoundsInLocal().getMaxX(),
-					password.getBoundsInLocal().getMaxY());
-			tltip.setText(password.getText());
-			tltip.show(password,
-					p.getX() + login_container.getScene().getX()
-							+ 120,
-					p.getY() + login_container.getScene().getY() + 120);
-		} else if (passwordvue.isSelected() == false) {
-			tltip.setText("");
-			tltip.hide();
-
-		}
+	void close_window(ActionEvent event) {
+		Stage stage = (Stage) close_button.getScene().getWindow();
+		stage.close();
 
 	}
 
-	@FXML
-	void enregistre_database(ActionEvent event) throws SocketException {
+	
 
-		Connectdatabase.Getstringdb(datebase_string.getText());
 
-		Connectdatabase.testdb();
+	
 
-		datebase_string.setDisable(true);
-		btn_enre_database.setDisable(true);
-	}
-
-	@FXML
-	void mod_database(ActionEvent event) {
-		datebase_string.setDisable(false);
-		btn_enre_database.setDisable(false);
-
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-
-		datebase_string.setDisable(true);
-		btn_enre_database.setDisable(true);
-
-		password.setOnKeyTyped(e -> {
-			if (passwordvue.isSelected() == true) {
-				Point2D p = password.localToScene(password.getBoundsInLocal().getMaxX(),
-						password.getBoundsInLocal().getMaxY());
-				tltip.setText(password.getText());
-				tltip.show(password,
-						p.getX() + login_container.getScene().getX() + 120,
-						p.getY() + login_container.getScene().getY() + 120);
-			}
-		});
-
-	}
+	
 
 }

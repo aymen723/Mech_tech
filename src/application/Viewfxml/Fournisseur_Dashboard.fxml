@@ -16,14 +16,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="930.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.parts_dashbord_controller">
+<BorderPane fx:id="fournisseur_con" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1030.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.Fournisseur_Dashboard_controller">
 
    <bottom>
-      <HBox alignment="CENTER" prefHeight="390.0" prefWidth="930.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="578.0" prefWidth="1030.0" BorderPane.alignment="CENTER">
          <children>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="390.0" prefWidth="850.0" style="-fx-border-width: 0; -fx-border-color: transparent; -fx-background-color: transparent;">
                <children>
-                  <TableView fx:id="parts_table" prefHeight="390.0" prefWidth="853.0" stylesheets="@tablestyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="fournisseur_table" prefHeight="390.0" prefWidth="853.0" stylesheets="@tablestyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="nom_col" minWidth="163.0" prefWidth="163.0" text="Nom" />
                       <TableColumn fx:id="adresse_col" minWidth="184.0" prefWidth="191.0" text="Adresse" />
@@ -31,8 +31,8 @@
 
                               <TableColumn fx:id="numero_col" minWidth="120.0" prefWidth="128.0" text="Numéro" />
 
-                              <TableColumn fx:id="email_col" minWidth="80.0" prefWidth="203.0" text="Email" />
-                        <TableColumn fx:id="balance_col" minWidth="-Infinity" prefWidth="83.0" resizable="false" text="Balance" />
+                              <TableColumn fx:id="email_col" minWidth="80.0" prefWidth="185.5999755859375" text="Email" />
+                        <TableColumn fx:id="balance_col" minWidth="-Infinity" prefWidth="100.79998779296875" resizable="false" text="Balance" />
                         <TableColumn fx:id="actionsColumn" minWidth="64.0" text="Action" />
                     </columns>
                   </TableView>
@@ -66,7 +66,7 @@
                </children></Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <children>
-                  <TextField fx:id="price" layoutX="16.0" layoutY="20.0" prefWidth="200.0" promptText="Email" styleClass="inpt" stylesheets="@inputs.css" />
+                  <TextField fx:id="email" layoutX="16.0" layoutY="20.0" prefWidth="200.0" promptText="Email" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0">
@@ -97,17 +97,17 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <TextField fx:id="description" layoutX="17.0" layoutY="20.0" prefHeight="27.0" prefWidth="200.0" promptText="Adresse" styleClass="inpt" stylesheets="@inputs.css" />
+                  <TextField fx:id="address" layoutX="17.0" layoutY="20.0" prefHeight="27.0" prefWidth="200.0" promptText="Adresse" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <children>
-                  <TextField fx:id="quntitie" layoutX="16.0" layoutY="20.0" prefWidth="200.0" promptText="Numéro" styleClass="inpt" stylesheets="@inputs.css" />
+                  <TextField fx:id="numero" layoutX="16.0" layoutY="20.0" prefWidth="200.0" promptText="Numéro" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="add_btn" layoutX="124.0" layoutY="19.0" mnemonicParsing="false" onAction="#add_parts" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@part_style.css" text="Ajouter">
+                  <Button fx:id="add_btn" layoutX="124.0" layoutY="19.0" mnemonicParsing="false" onAction="#add_fournisseur" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@part_style.css" text="Ajouter">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

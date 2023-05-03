@@ -35,6 +35,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Control;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
@@ -87,6 +88,17 @@ public class parts_dashbord_controller implements Initializable {
 	private TextField reserch_field;
 
 	@FXML
+	private TextField prixdachat;
+
+	@FXML
+	private DatePicker date;
+	@FXML
+	private TextField fournisseur;
+
+	@FXML
+	private ContextMenu list_fornisseur;
+
+	@FXML
 	private TableColumn<Parts, Integer> prix_col;
 
 	@FXML
@@ -110,8 +122,7 @@ public class parts_dashbord_controller implements Initializable {
 
 	private Text txt;
 
-	ObservableList<Parts> list = FXCollections.observableArrayList(new Parts("1", "part1", 5, "good", 1000),
-			new Parts("2", "part2", 6, "bad", 300));
+	ObservableList<Parts> list = FXCollections.observableArrayList();
 
 	FilteredList<Parts> filteredList = new FilteredList<>(list, b -> true);
 
@@ -284,7 +295,6 @@ public class parts_dashbord_controller implements Initializable {
 
 				{
 
-					
 					deleteButton.setStyle(
 							"-fx-background-radius: 5em; -fx-min-width: 25px; -fx-min-height: 25px; -fx-max-width: 25px; -fx-max-height: 25px; -fx-background-color: transparent; -fx-alignment:CENTER;");
 					Image image = new Image(getClass().getResourceAsStream("Delete.png"));

@@ -104,9 +104,14 @@ public class Connectdatabase {
 
 	}
 
-	public static void Getstringdb(String Stringdb) {
+	public static void setstringdb(String Stringdb) {
 		url = "mongodb://" + Stringdb;
 		url2 = Stringdb;
 	}
+
+	public static String getstringdb() {
+		return url;
+	}
+
 
 }

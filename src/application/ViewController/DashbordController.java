@@ -12,9 +12,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class DashbordController implements Initializable {
 
@@ -43,10 +46,27 @@ public class DashbordController implements Initializable {
 	@FXML
 	private Button btn_logout;
 
+	@FXML
+	private Button close_button;
+
+	@FXML
+	private Pane tool_bar;
+
 	private Usermodel user = new Usermodel();
 
 	@FXML
 	private Text test;
+
+	private double xOffset = 0;
+	private double yOffset = 0;
+
+	@FXML
+	void close_window(ActionEvent event) {
+		Stage stage = (Stage) close_button.getScene().getWindow();
+		stage.close();
+	}
+
+	
 
 	public void dashbord(javafx.event.ActionEvent actione) throws IOException {
 		try {
@@ -72,6 +92,7 @@ public class DashbordController implements Initializable {
 			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/parts_dashbord.fxml"));
 			container.getChildren().removeAll();
 			container.getChildren().setAll(fxml);
+			System.out.println("container height " +container.getHeight() + " container width " + container.getWidth());
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -173,13 +194,23 @@ public class DashbordController implements Initializable {
 			fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Login.fxml"));
 			Stage stage = new Stage();
 			Scene scene = new Scene(fxml);
-			stage.setScene(scene);
-			stage.setTitle("Mecha Tech");
+			Rectangle shape = new Rectangle(800, 500);
+			shape.setArcWidth(20);
+			shape.setArcHeight(20);
+
+			// Set the shape as the custom shape for the stage
+			stage.initStyle(StageStyle.UNDECORATED);
+			stage.initStyle(StageStyle.TRANSPARENT);
 			scene.setFill(Color.TRANSPARENT);
+			stage.setScene(scene);
+			stage.getScene().setFill(Color.TRANSPARENT);
+			stage.getScene().getRoot().setClip(shape);
+			stage.setResizable(false);
+			stage.show();
 
-			Stage stage_login = (Stage) container.getScene().getWindow();
+			Stage dashboard_stage = (Stage) container.getScene().getWindow();
 
-			stage_login.close();
+			dashboard_stage.close();
 
 			stage.show();
 
@@ -223,6 +254,40 @@ public class DashbordController implements Initializable {
 
 	@FXML
 	void stats(ActionEvent event) {
+
+	}
+
+	@FXML
+	void Fournisseur(ActionEvent event) {
+
+		try {
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Fournisseur_dashboard.fxml"));
+			container.getChildren().removeAll();
+			container.getChildren().setAll(fxml);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		// Parent fxml;
+		// try {
+		// fxml =
+		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/Fournisseur_dashboard.fxml"));
+		// Stage stage = new Stage();
+		// Scene scene = new Scene(fxml);
+		// stage.setScene(scene);
+		// stage.setTitle("Mecha Tech");
+		// scene.setFill(Color.TRANSPARENT);
+
+		// Stage stage_login = (Stage) container.getScene().getWindow();
+
+		// stage_login.close();
+
+		// stage.show();
+
+		// } catch (IOException e) {
+		// e.printStackTrace();
+		// }
 
 	}
 
@@ -290,6 +355,19 @@ public class DashbordController implements Initializable {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+
+		tool_bar.setOnMousePressed(event ->
+
+		{
+			xOffset = event.getSceneX();
+			yOffset = event.getSceneY();
+		});
+
+		tool_bar.setOnMouseDragged(event -> {
+			Stage stage = (Stage) close_button.getScene().getWindow();
+			stage.setX(event.getScreenX() - xOffset);
+			stage.setY(event.getScreenY() - yOffset);
+		});
 
 	}
 

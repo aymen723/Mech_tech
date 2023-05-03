@@ -53,6 +53,9 @@ inpt-focused {
   -fx-text-fill: #495057;
   -fx-prompt-text-fill: #868e96;
   /* -fx-padding: 10px; */
+
+  /* -fx-pref-height: 30;
+  -fx-pref-width: 250; */
 }
 
 .inpt:focused {

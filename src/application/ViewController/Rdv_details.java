@@ -138,7 +138,7 @@ public class Rdv_details {
     ObservableList<Usermodel> list_tech = FXCollections.observableArrayList();
     ObservableList<Usermodel> filtered = FXCollections.observableArrayList();
     ObservableList<Parts> list = FXCollections.observableArrayList();
-    
+
     @FXML
     private Button btn_finish;
 
@@ -319,12 +319,10 @@ public class Rdv_details {
 
         tech_choice.setConverter(new StringConverter<Usermodel>() {
 
-            
             public String toString(Usermodel user) {
                 return (user == null) ? "" : user.getNom() + " " + user.getPrenom();
             }
 
-           
             public Usermodel fromString(String string) {
                 return null; // not needed in this case
             }
@@ -368,15 +366,13 @@ public class Rdv_details {
     @FXML
     void enregistre(ActionEvent event) {
 
-
         Document newrdv = new Document("date_debut", date_debut_rdv.getValue());
         newrdv.append("date_fin", date_fin_rdv.getValue());
         newrdv.append("descrption_in", description_in.getText());
         newrdv.append("descrption_out", description_out.getText());
         newrdv.append("service", service.getText());
 
-        
-        newrdv.append("prix", Integer.parseInt(prix.getText())); 
+        newrdv.append("prix", Integer.parseInt(prix.getText()));
 
         List<Document> myDocuments = new ArrayList<Document>();
         for (int i = 0; i < rdv_local.getParts().size(); i++) {
@@ -464,7 +460,6 @@ public class Rdv_details {
             }
 
         } else {
-          
 
         }
 
@@ -472,13 +467,14 @@ public class Rdv_details {
 
     @FXML
     void finish(ActionEvent event) {
-        if(!rdv_local.getEtat().equals("terminé")){
+        if (!rdv_local.getEtat().equals("terminé")) {
             LocalDate currentDate = LocalDate.now();
-        Document newrdv = new Document("etat", "terminé");
-        newrdv.append("date_fin", currentDate);
-        AdminController.UpdateRdv(newrdv, rdv_local);
-        System.out.println();
-        AdminController.update_parts_qtnt(rdv_local);}
+            Document newrdv = new Document("etat", "terminé");
+            newrdv.append("date_fin", currentDate);
+            AdminController.UpdateRdv(newrdv, rdv_local);
+            System.out.println();
+            AdminController.update_parts_qtnt(rdv_local);
+        }
 
     }
 

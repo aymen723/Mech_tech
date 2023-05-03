@@ -1,6 +1,10 @@
 package application.controller;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.bson.Document;
@@ -327,9 +331,7 @@ public class AdminController {
 				car.setMatricule(cardoc.getString("matricule"));
 				car.setVin(cardoc.getString("vin"));
 
-				
-
-				List<Document> parlistdoc = doc.getList("parts", Document.class);
+				ArrayList<Document> parlistdoc = (ArrayList<Document>) doc.get("parts");
 				ArrayList<Parts> partlist = new ArrayList<Parts>();
 				for (Document pardoc : parlistdoc) {
 					Parts part = new Parts();
@@ -443,7 +445,8 @@ public class AdminController {
 
 	}
 
-	public static void update_parts_qtnt(Rendez_vous rdv){
+	// 
+	public static void update_parts_qtnt(Rendez_vous rdv) {
 		ArrayList<Parts> listp = rdv.getParts();
 		// System.out.println("id part " + listp.get(0).getName());
 		MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
@@ -460,7 +463,8 @@ public class AdminController {
 				if (list_before.get(i).getId().equals(part.getId())) {
 
 					list_before.get(i).setQuntitie(list_before.get(i).getQuntitie() - listp.get(i).getQuntitie());
-					// System.out.println(list_before.get(i).getName() + "quntt changed to " + (list_before.get(i).getQuntitie() - list.get(i).getQuntitie()));
+					// System.out.println(list_before.get(i).getName() + "quntt changed to " +
+					// (list_before.get(i).getQuntitie() - list.get(i).getQuntitie()));
 					newlist.add(list_before.get(i));
 					Document addpart = new Document("_id", new ObjectId(part.getId()));
 					addpart.append("name", list_before.get(i).getName());
@@ -468,31 +472,29 @@ public class AdminController {
 					addpart.append("quantity", list_before.get(i).getQuntitie());
 					addpart.append("description", list_before.get(i).getDescription());
 					myDocuments.add(addpart);
-					
+
 					break;
 				}
 			}
 		}
 		System.out.println(" my documents size " + myDocuments.size());
-		
-		
-        for (Document doc : myDocuments) {
+
+		for (Document doc : myDocuments) {
 			ObjectId id = doc.getObjectId("_id");
-    // Create the update operation to set the new field values
-    UpdateOneModel<Document> update = new UpdateOneModel<>(
-        Filters.eq("_id", id),
-        new Document("$set", doc));
-    updates.add(update);
+			// Create the update operation to set the new field values
+			UpdateOneModel<Document> update = new UpdateOneModel<>(
+					Filters.eq("_id", id),
+					new Document("$set", doc));
+			updates.add(update);
 
-        }
-
+		}
 
 		BulkWriteResult result = collection.bulkWrite(updates);
 		System.out.println(result);
-		
+
 	}
 
-	public static ArrayList<Rendez_vous> RdvListCar(String vin){
+	public static ArrayList<Rendez_vous> RdvListCar(String vin) {
 		MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
 		ArrayList<Rendez_vous> List = new ArrayList<>();
 		MongoCursor<Document> cursor = collection.find(Filters.in("Car.vin", vin)).iterator();
@@ -544,8 +546,6 @@ public class AdminController {
 				car.setMatricule(cardoc.getString("matricule"));
 				car.setVin(cardoc.getString("vin"));
 
-				
-
 				List<Document> parlistdoc = doc.getList("parts", Document.class);
 				ArrayList<Parts> partlist = new ArrayList<Parts>();
 				for (Document pardoc : parlistdoc) {
@@ -567,7 +567,6 @@ public class AdminController {
 				rdv.setCar_rdv(car);
 				List.add(rdv);
 
-				
 			}
 		} finally {
 			cursor.close();
@@ -577,7 +576,6 @@ public class AdminController {
 		System.out.println("this is the size of list rdv of cars " + List.size());
 
 		return List;
-
 
 	}
 
@@ -620,15 +618,14 @@ public class AdminController {
 				fournisseur.setEmail(doc.getString("email"));
 				fournisseur.setBalance(doc.getInteger("balance"));
 
-				List<Document> transactions_doc_list = doc.getList("transactions", Document.class);
+				List<Document> transactions_doc_list = doc.getList("Transactions", Document.class);
 				ArrayList<Transaction> tansactions = new ArrayList<Transaction>();
 				for (Document tansaction_doc : transactions_doc_list) {
 					Transaction transaction = new Transaction();
-
+					transaction.setId(tansaction_doc.getObjectId("_id").toString());
 					transaction.setDate_de_transaction(tansaction_doc.getDate("date_de_transaction"));
 					transaction.setSomme_payee(tansaction_doc.getInteger("somme_payee"));
 					transaction.setSomme_de_transaction(tansaction_doc.getInteger("somme_de_transaction"));
-					
 
 					tansactions.add(transaction);
 
@@ -657,40 +654,38 @@ public class AdminController {
 
 	}
 
+	public static void addTransaction(Document transaction, Fournisseur fournisseur) {
 
-		public static void addTransaction(Document transaction, Fournisseur fournisseur) {
+		MongoCollection<Document> collection = Connectdatabase.connectdb("fournisseurs");
+		Bson filter = Filters.eq("_id", new ObjectId(fournisseur.getId()));
 
-        MongoCollection<Document> collection = Connectdatabase.connectdb("fournisseurs");
-        Bson filter = Filters.eq("_id", new ObjectId(fournisseur.getId()));
+		Bson update = Updates.addToSet("Transactions", transaction);
+		Bson updatebalance = Updates.set("balance",
+				fournisseur.getBalance() + transaction.getInteger("somme_payee") - transaction
+						.getInteger("somme_de_transaction"));
+		UpdateResult URbalance = collection.updateOne(filter, updatebalance);
+		System.out.println(URbalance);
+		UpdateResult UR = collection.updateOne(filter, update);
+		System.out.println(UR);
+		Connectdatabase.closeconndb();
+	}
 
-        Bson update = Updates.addToSet("Transactions", transaction);
-        Bson updatebalance = Updates.set("balance",
-                fournisseur.getBalance() + transaction.getInteger("somme_payee") - transaction
-                        .getInteger("somme_de_transaction"));
-        UpdateResult URbalance = collection.updateOne(filter, updatebalance);
-        System.out.println(URbalance);
-        UpdateResult UR = collection.updateOne(filter, update);
-        System.out.println(UR);
-        Connectdatabase.closeconndb();
-    }
-	
 	public static void deleteTransaction(Transaction transaction, Fournisseur fournisseur) {
 
 		MongoCollection<Document> collection = Connectdatabase.connectdb("fournisseurs");
 		Bson filter = Filters.eq("_id", new ObjectId(fournisseur.getId()));
 
-		Bson update = Updates.pull("Transactions", new Document("_id", new ObjectId(fournisseur.getId())));
+		Bson update = Updates.pull("Transactions", new Document("_id", new ObjectId(transaction.getId())));
 		Bson updatebalance = Updates.set("balance",
 				fournisseur.getBalance() - transaction.getSomme_payee() + transaction
 						.getSomme_de_transaction());
-		UpdateResult UR = collection.updateMany(filter, update);
+		UpdateResult UR = collection.updateOne(filter, update);
 		System.out.println(UR);
 		UpdateResult URbalance = collection.updateOne(filter, updatebalance);
 		System.out.println(URbalance);
-		
+
 		Connectdatabase.closeconndb();
 	}
-	
 
 	public static Fournisseur findFournisseurbyid(String id) {
 
@@ -714,11 +709,11 @@ public class AdminController {
 		fournisseur.setEmail(doc.getString("email"));
 		fournisseur.setBalance(doc.getInteger("balance"));
 
-		List<Document> transactions_doc_list = doc.getList("transactions", Document.class);
+		List<Document> transactions_doc_list = doc.getList("Transactions", Document.class);
 		ArrayList<Transaction> tansactions = new ArrayList<Transaction>();
 		for (Document tansaction_doc : transactions_doc_list) {
 			Transaction transaction = new Transaction();
-
+			transaction.setId(tansaction_doc.getObjectId("_id").toString());
 			transaction.setDate_de_transaction(tansaction_doc.getDate("date_de_transaction"));
 			transaction.setSomme_payee(tansaction_doc.getInteger("somme_payee"));
 			transaction.setSomme_de_transaction(tansaction_doc.getInteger("somme_de_transaction"));
@@ -730,8 +725,6 @@ public class AdminController {
 
 		Connectdatabase.closeconndb();
 
-
 		return fournisseur;
 	}
-
 }

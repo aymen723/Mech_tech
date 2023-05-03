@@ -1,5 +1,7 @@
 package application.models;
 
+import java.util.Date;
+
 public class Parts {
 
     private String id;
@@ -7,13 +9,25 @@ public class Parts {
     private int quntitie;
     private String description;
     private int price;
+    private int buyingprice;
+    private Fournisseur Fournisseur;
 
-    public int getPrice() {
-        return price;
+    private Date buyingdate;
+
+    public Parts(String id, String name, int quntitie, String description, int price, int buyingprice,
+            Fournisseur Fournisseur, Date buyingdate) {
+        this.id = id;
+        this.name = name;
+        this.quntitie = quntitie;
+        this.description = description;
+        this.price = price;
+        this.buyingprice = buyingprice;
+        this.Fournisseur = Fournisseur;
+        this.buyingdate = buyingdate;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public Parts() {
+
     }
 
     public String getId() {
@@ -48,16 +62,36 @@ public class Parts {
         this.description = description;
     }
 
-    public Parts(String id, String name, int quntitie, String description, int price) {
-        this.id = id;
-        this.name = name;
-        this.quntitie = quntitie;
-        this.description = description;
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public Parts() {
+    public int getBuyingprice() {
+        return buyingprice;
+    }
 
+    public void setBuyingprice(int buyingprice) {
+        this.buyingprice = buyingprice;
+    }
+
+    public Fournisseur getFournisseur() {
+        return Fournisseur;
+    }
+
+    public void setFournisseur(Fournisseur fournisseur) {
+        this.Fournisseur = fournisseur;
+    }
+
+    public Date getBuyingdate() {
+        return buyingdate;
+    }
+
+    public void setBuyingdate(Date buyingdate) {
+        this.buyingdate = buyingdate;
     }
 
 }
