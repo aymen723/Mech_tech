@@ -4,7 +4,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -13,28 +12,26 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="rdv_parts_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1030.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.Rdv_parts">
+<BorderPane fx:id="rdv_parts_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1030.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.Rdv_parts">
 
    <bottom>
       <HBox alignment="CENTER" prefHeight="687.0" prefWidth="1030.0" BorderPane.alignment="CENTER">
          <children>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="390.0" prefWidth="850.0" style="-fx-border-width: 0; -fx-border-color: transparent; -fx-background-color: transparent;">
-               <children>
-                  <TableView fx:id="parts_table" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="390.0" prefWidth="853.0" stylesheets="@tablestyle.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <columns>
-                        <TableColumn fx:id="id" minWidth="-Infinity" prefWidth="65.0" resizable="false" text="Id" />
-                      <TableColumn fx:id="nom_col" minWidth="200.0" prefWidth="204.0" text="Nom" />
-                      <TableColumn fx:id="desc_col" minWidth="230.0" prefWidth="232.0" text="Description" />
-              
-
-                              <TableColumn fx:id="prix_col" minWidth="120.0" prefWidth="123.0" text="Prix" />
-
-                              <TableColumn fx:id="quntite_col" minWidth="80.0" prefWidth="82.0" text="Quntite" />
-                        <TableColumn fx:id="actionsColumn" minWidth="120.0" prefWidth="128.0" text="Action" />
-                    </columns>
-                  </TableView>
-               </children>
-            </AnchorPane>
+                <TableView fx:id="parts_table" prefHeight="346.0" prefWidth="967.0" stylesheets="@tablestyle.css">
+               <columns>
+                  <TableColumn fx:id="nom_col" minWidth="82.39999234676361" prefWidth="155.0" text="Nom" />
+                  <TableColumn fx:id="desc_col" minWidth="141.59996795654297" prefWidth="235.0" text="Description" />
+                     <TableColumn fx:id="fournisseur_col" minWidth="75.19998168945312" prefWidth="110.0" text="Fournisseur" />
+                     <TableColumn fx:id="prix_achat" minWidth="80.0" text="Prix d'achat" />
+         
+         
+                                 <TableColumn fx:id="prix_col" minWidth="80.0" text="Prix" />
+   
+                                 <TableColumn fx:id="quntite_col" minWidth="75.19998168945312" prefWidth="90.0" text="Quntite" />
+                     <TableColumn fx:id="date_achat" minWidth="99.99993896484375" prefWidth="115.0" text="Date d'achat" />
+                     <TableColumn fx:id="actionsColumn" maxWidth="200.0" minWidth="8.79998779296875" prefWidth="99.9999877929688" text="Action" />
+               </columns>
+               </TableView>
          </children>
       </HBox>
    </bottom>

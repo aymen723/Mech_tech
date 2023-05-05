@@ -11,7 +11,6 @@ public class Parts {
     private int price;
     private int buyingprice;
     private Fournisseur Fournisseur;
-
     private Date buyingdate;
 
     public Parts(String id, String name, int quntitie, String description, int price, int buyingprice,

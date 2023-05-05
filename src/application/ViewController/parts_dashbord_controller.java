@@ -3,15 +3,19 @@ package application.ViewController;
 // import java.io.IOException;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Optional;
 // import java.util.Iterator;
 import java.util.ResourceBundle;
 // import java.util.jar.Attributes.Name;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import application.controller.AdminController;
+import application.models.Fournisseur;
 import application.models.Parts;
+import javafx.beans.property.SimpleStringProperty;
 // import javafx.beans.binding.Bindings;
 // import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -26,6 +30,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
+import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -93,7 +98,7 @@ public class parts_dashbord_controller implements Initializable {
 	@FXML
 	private DatePicker date;
 	@FXML
-	private TextField fournisseur;
+	private TextField fournisseur_inp;
 
 	@FXML
 	private ContextMenu list_fornisseur;
@@ -110,8 +115,12 @@ public class parts_dashbord_controller implements Initializable {
 	private TableColumn<Parts, String> desc_col;
 
 	@FXML
-	private TableColumn<Parts, String> id;
+	private TableColumn<Parts, String> fournisseur_col;
 
+	@FXML
+	private TableColumn<Parts, Integer> prix_achat;
+	@FXML
+	private TableColumn<Parts, String> date_achat;
 	@FXML
 	private TableView<Parts> parts_table;
 
@@ -122,7 +131,10 @@ public class parts_dashbord_controller implements Initializable {
 
 	private Text txt;
 
+	private Fournisseur fournissur_local;
+
 	ObservableList<Parts> list = FXCollections.observableArrayList();
+	ObservableList<Fournisseur> list_fournisseur = FXCollections.observableArrayList();
 
 	FilteredList<Parts> filteredList = new FilteredList<>(list, b -> true);
 
@@ -136,6 +148,17 @@ public class parts_dashbord_controller implements Initializable {
 			newpart.append("price", Integer.parseInt(price.getText()));
 			newpart.append("quantity", Integer.parseInt(quntitie.getText()));
 			newpart.append("description", description.getText());
+			newpart.append("buyingprice", Integer.parseInt(prixdachat.getText()));
+			newpart.append("buyingdate", date.getValue());
+
+			Document newfournisseur = new Document("_id", new ObjectId(fournissur_local.getId()));
+			newfournisseur.append("nom", fournissur_local.getName());
+			newfournisseur.append("adresse", fournissur_local.getAddress());
+			newfournisseur.append("numero", fournissur_local.getPhone());
+			newfournisseur.append("email", fournissur_local.getEmail());
+
+			newpart.append("fournisseur", newfournisseur);
+
 			AdminController.addpart(newpart);
 
 			name.setText("");
@@ -251,12 +274,60 @@ public class parts_dashbord_controller implements Initializable {
 
 		System.out.println("hna list mazal");
 		list = AdminController.PartList();
+		list_fournisseur = FXCollections.observableArrayList(AdminController.ListFournisseur());
+
 		System.out.println("hna wra list");
 
-		id.setCellValueFactory(new PropertyValueFactory<>("id"));
+		fournisseur_inp.textProperty().addListener((observable, oldValue, newValue) -> {
+			list_fornisseur.getItems().clear();
+			for (Fournisseur fournisseur : list_fournisseur) {
+				if (fournisseur.getName().toLowerCase().contains(newValue.toLowerCase())) {
+					MenuItem item = new MenuItem(fournisseur.getName());
+					item.setOnAction(e -> {
+						// do something with selected client
+						// System.out.println(client.toString());
+						fournissur_local = fournisseur;
+
+						fournisseur_inp.setText(fournisseur.getName());
+						;
+
+					});
+
+					list_fornisseur.getItems().add(item);
+
+				}
+
+			}
+
+		});
+
+		fournisseur_inp.setOnKeyTyped(e -> {
+			if (fournisseur_inp.getText().trim() != null) {
+
+				list_fornisseur.show(fournisseur_inp, Side.BOTTOM, 0, 0);
+			}
+		});
+
+		// Hide context menu when search field loses focus
+		fournisseur_inp.focusedProperty().addListener((observable, oldValue, newValue) -> {
+			if (!newValue) {
+				list_fornisseur.hide();
+			}
+		});
+
 		nom_col.setCellValueFactory(new PropertyValueFactory<>("name"));
 		prix_col.setCellValueFactory(new PropertyValueFactory<>("price"));
 		quntite_col.setCellValueFactory(new PropertyValueFactory<>("quntitie"));
+		prix_achat.setCellValueFactory(new PropertyValueFactory<>("buyingprice"));
+		SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
+
+		date_achat.setCellValueFactory(
+
+				cellData -> new SimpleStringProperty(DATE_FORMAT.format(cellData.getValue().getBuyingdate())));
+
+		fournisseur_col.setCellValueFactory(
+
+				cellData -> new SimpleStringProperty(cellData.getValue().getFournisseur().getName()));
 
 		desc_col.setCellValueFactory(new PropertyValueFactory<>("description"));
 

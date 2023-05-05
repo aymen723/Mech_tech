@@ -28,6 +28,7 @@ import application.models.Clientmodel;
 import application.models.Fournisseur;
 import application.models.Parts;
 import application.models.Rendez_vous;
+import application.models.Sales;
 import application.models.Transaction;
 import application.models.Usermodel;
 import javafx.collections.FXCollections;
@@ -132,6 +133,21 @@ public class AdminController {
 				part.setDescription(doc.getString("description"));
 				part.setQuntitie(doc.getInteger("quantity"));
 				part.setPrice(doc.getInteger("price"));
+				part.setBuyingprice(doc.getInteger("buyingprice"));
+				part.setBuyingdate(doc.getDate("buyingdate"));
+
+				Document fourniDocument = doc.get("fournisseur", Document.class);
+				Fournisseur fournisseur = new Fournisseur();
+
+				fournisseur.setId(fourniDocument.getObjectId("_id").toString());
+				fournisseur.setName(fourniDocument.getString("nom"));
+				// SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
+				fournisseur.setAddress(fourniDocument.getString("adresse"));
+				fournisseur.setPhone(fourniDocument.getString("numero"));
+				fournisseur.setEmail(fourniDocument.getString("email"));
+
+				part.setFournisseur(fournisseur);
 
 				List.add(part);
 
@@ -336,13 +352,35 @@ public class AdminController {
 				for (Document pardoc : parlistdoc) {
 					Parts part = new Parts();
 
-					part.setId(doc.getObjectId("_id").toString());
+					// part.setId(doc.getObjectId("_id").toString());
+
+					// part.setName(pardoc.getString("name"));
+					// part.setDescription(pardoc.getString("description"));
+					// part.setQuntitie(pardoc.getInteger("quantity"));
+					// part.setPrice(pardoc.getInteger("price"));
+
+					// partlist.add(part);
+					part.setId(pardoc.getObjectId("_id").toString());
 
 					part.setName(pardoc.getString("name"));
 					part.setDescription(pardoc.getString("description"));
 					part.setQuntitie(pardoc.getInteger("quantity"));
 					part.setPrice(pardoc.getInteger("price"));
+					part.setBuyingprice(pardoc.getInteger("prix_achat"));
+					part.setBuyingdate(doc.getDate("date_de_vente"));
 
+					Document fourniDocument = pardoc.get("fournisseur", Document.class);
+					Fournisseur fournisseur = new Fournisseur();
+
+					fournisseur.setId(fourniDocument.getObjectId("_id").toString());
+					fournisseur.setName(fourniDocument.getString("name"));
+					// SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
+					fournisseur.setAddress(fourniDocument.getString("adresse"));
+					fournisseur.setPhone(fourniDocument.getString("numero"));
+					fournisseur.setEmail(fourniDocument.getString("email"));
+
+					part.setFournisseur(fournisseur);
 					partlist.add(part);
 
 				}
@@ -445,9 +483,9 @@ public class AdminController {
 
 	}
 
-	// 
-	public static void update_parts_qtnt(Rendez_vous rdv) {
-		ArrayList<Parts> listp = rdv.getParts();
+	//
+	public static void update_parts_qtnt(ArrayList<Parts> listp) {
+
 		// System.out.println("id part " + listp.get(0).getName());
 		MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
 		ObservableList<Parts> list_before = AdminController.PartList();
@@ -462,15 +500,16 @@ public class AdminController {
 				// System.out.println("haana listbefore part id" + list_before.get(i).getId());
 				if (list_before.get(i).getId().equals(part.getId())) {
 
-					list_before.get(i).setQuntitie(list_before.get(i).getQuntitie() - listp.get(i).getQuntitie());
+					list_before.get(i).setQuntitie(list_before.get(i).getQuntitie() - part.getQuntitie());
 					// System.out.println(list_before.get(i).getName() + "quntt changed to " +
 					// (list_before.get(i).getQuntitie() - list.get(i).getQuntitie()));
 					newlist.add(list_before.get(i));
 					Document addpart = new Document("_id", new ObjectId(part.getId()));
-					addpart.append("name", list_before.get(i).getName());
-					addpart.append("price", list_before.get(i).getPrice());
+					// addpart.append("name", list_before.get(i).getName());
+					// addpart.append("price", list_before.get(i).getPrice());
 					addpart.append("quantity", list_before.get(i).getQuntitie());
-					addpart.append("description", list_before.get(i).getDescription());
+					// addpart.append("description", list_before.get(i).getDescription());
+
 					myDocuments.add(addpart);
 
 					break;
@@ -490,7 +529,7 @@ public class AdminController {
 		}
 
 		BulkWriteResult result = collection.bulkWrite(updates);
-		System.out.println(result);
+		System.out.println("this is update part rslt" + result);
 
 	}
 
@@ -551,13 +590,36 @@ public class AdminController {
 				for (Document pardoc : parlistdoc) {
 					Parts part = new Parts();
 
-					part.setId(doc.getObjectId("_id").toString());
+					// part.setId(doc.getObjectId("_id").toString());
+
+					// part.setName(pardoc.getString("name"));
+					// part.setDescription(pardoc.getString("description"));
+					// part.setQuntitie(pardoc.getInteger("quantity"));
+					// part.setPrice(pardoc.getInteger("price"));
+
+					// partlist.add(part);
+
+					part.setId(pardoc.getObjectId("_id").toString());
 
 					part.setName(pardoc.getString("name"));
 					part.setDescription(pardoc.getString("description"));
 					part.setQuntitie(pardoc.getInteger("quantity"));
 					part.setPrice(pardoc.getInteger("price"));
+					part.setBuyingprice(pardoc.getInteger("prix_achat"));
+					part.setBuyingdate(doc.getDate("date_de_vente"));
 
+					Document fourniDocument = pardoc.get("fournisseur", Document.class);
+					Fournisseur fournisseur = new Fournisseur();
+
+					fournisseur.setId(fourniDocument.getObjectId("_id").toString());
+					fournisseur.setName(fourniDocument.getString("name"));
+					// SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
+					fournisseur.setAddress(fourniDocument.getString("adresse"));
+					fournisseur.setPhone(fourniDocument.getString("numero"));
+					fournisseur.setEmail(fourniDocument.getString("email"));
+
+					part.setFournisseur(fournisseur);
 					partlist.add(part);
 
 				}
@@ -727,4 +789,93 @@ public class AdminController {
 
 		return fournisseur;
 	}
+
+	public static void AddSale(Document Doc) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("ventes");
+		collection.insertOne(Doc);
+		Connectdatabase.closeconndb();
+
+	}
+
+	public static void UpdateSale(Document Doc, Sales sale) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("ventes");
+		ObjectId objid = new ObjectId(sale.getId());
+		Document found = (Document) collection.find(new Document("_id", objid)).first();
+		Doc.append("_id", objid);
+		Document updateop = new Document("$set", Doc);
+		collection.updateOne(found, updateop);
+		Connectdatabase.closeconndb();
+
+	}
+
+	public static ArrayList<Sales> ListSales() {
+		ArrayList<Sales> List = new ArrayList<Sales>();
+		MongoCollection<Document> collection = Connectdatabase.connectdb("ventes");
+
+		MongoCursor<Document> cursor = collection.find().iterator();
+		try {
+			while (cursor.hasNext()) {
+				Document doc = cursor.next();
+				Sales sale = new Sales();
+
+				sale.setId(doc.getObjectId("_id").toString());
+				sale.setDate_de_vente(doc.getDate("date_de_vente"));
+				// SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
+				List<Document> parlistdoc = doc.getList("parts", Document.class);
+				ArrayList<Parts> part_list = new ArrayList<Parts>();
+				for (Document pardoc : parlistdoc) {
+					Parts part = new Parts();
+
+					part.setId(pardoc.getObjectId("_id").toString());
+
+					part.setName(pardoc.getString("name"));
+					part.setDescription(pardoc.getString("description"));
+					part.setQuntitie(pardoc.getInteger("quantity"));
+					part.setPrice(pardoc.getInteger("price"));
+					part.setBuyingprice(pardoc.getInteger("prix_achat"));
+					part.setBuyingdate(doc.getDate("date_de_vente"));
+
+					Document fourniDocument = pardoc.get("fournisseur", Document.class);
+					Fournisseur fournisseur = new Fournisseur();
+
+					fournisseur.setId(fourniDocument.getObjectId("_id").toString());
+					fournisseur.setName(fourniDocument.getString("name"));
+					// SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
+					fournisseur.setAddress(fourniDocument.getString("adresse"));
+					fournisseur.setPhone(fourniDocument.getString("numero"));
+					fournisseur.setEmail(fourniDocument.getString("email"));
+
+					part.setFournisseur(fournisseur);
+
+					part_list.add(part);
+
+				}
+				sale.setPartList(part_list);
+				List.add(sale);
+			}
+
+		} finally {
+			cursor.close();
+			Connectdatabase.closeconndb();
+
+		}
+
+		return List;
+
+	}
+
+	public static void deleteSale(Sales sale) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("ventes");
+		ObjectId objid = new ObjectId(sale.getId());
+		Document found = (Document) collection.find(new Document("_id", objid)).first();
+		collection.deleteOne(found);
+		Connectdatabase.closeconndb();
+
+	}
+
 }

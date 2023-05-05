@@ -50,6 +50,9 @@ public class DashbordController implements Initializable {
 	private Button close_button;
 
 	@FXML
+	private Button btn_sales;
+
+	@FXML
 	private Pane tool_bar;
 
 	private Usermodel user = new Usermodel();
@@ -65,8 +68,6 @@ public class DashbordController implements Initializable {
 		Stage stage = (Stage) close_button.getScene().getWindow();
 		stage.close();
 	}
-
-	
 
 	public void dashbord(javafx.event.ActionEvent actione) throws IOException {
 		try {
@@ -92,7 +93,8 @@ public class DashbordController implements Initializable {
 			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/parts_dashbord.fxml"));
 			container.getChildren().removeAll();
 			container.getChildren().setAll(fxml);
-			System.out.println("container height " +container.getHeight() + " container width " + container.getWidth());
+			System.out
+					.println("container height " + container.getHeight() + " container width " + container.getWidth());
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -125,25 +127,24 @@ public class DashbordController implements Initializable {
 
 		Rendez_vous.getStyleClass().add("afterpress");
 
-		// try {
-		// Parent fxml =
-		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/Rendez_vous_dashbord.fxml"));
-		// Stage stage = new Stage();
-		// Scene scene = new Scene(fxml);
-		// stage.setScene(scene);
-		// stage.setTitle("Mecha Tech");
-		// scene.setFill(Color.TRANSPARENT);
+		try {
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Rendez_vous_dashbord.fxml"));
+			Stage stage = new Stage();
+			Scene scene = new Scene(fxml);
+			stage.setScene(scene);
+			stage.setTitle("Mecha Tech");
+			scene.setFill(Color.TRANSPARENT);
 
-		// // primaryStage.initStyle(StageStyle.UNDECORATED);
-		// // primaryStage.initStyle(StageStyle.TRANSPARENT);
+			// primaryStage.initStyle(StageStyle.UNDECORATED);
+			// primaryStage.initStyle(StageStyle.TRANSPARENT);
 
-		// // primaryStage.setResizable(false);
-		// stage.show();
+			// primaryStage.setResizable(false);
+			stage.show();
 
-		// } catch (IOException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -342,6 +343,39 @@ public class DashbordController implements Initializable {
 
 	public Usermodel getuser() {
 		return user;
+	}
+
+	@FXML
+	void sales(ActionEvent event) {
+
+		// try {
+		// Parent fxml =
+		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/Sales_dashbord.fxml"));
+		// container.getChildren().removeAll();
+		// container.getChildren().setAll(fxml);
+
+		// } catch (Exception e) {
+		// // TODO: handle exception
+		// }
+
+		try {
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Sales_dashbord.fxml"));
+			Stage stage = new Stage();
+			Scene scene = new Scene(fxml);
+			stage.setScene(scene);
+			stage.setTitle("Mecha Tech");
+			scene.setFill(Color.TRANSPARENT);
+
+			// primaryStage.initStyle(StageStyle.UNDECORATED);
+			// primaryStage.initStyle(StageStyle.TRANSPARENT);
+
+			// primaryStage.setResizable(false);
+			stage.show();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

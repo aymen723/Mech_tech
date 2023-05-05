@@ -2,12 +2,14 @@ package application.ViewController;
 
 // import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 // import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import application.controller.AdminController;
 import application.models.Parts;
 import application.models.Rendez_vous;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -16,6 +18,7 @@ import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 // import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -28,7 +31,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 // import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 // import javafx.stage.Stage;
@@ -49,21 +55,29 @@ public class Rdv_parts implements Initializable {
     private TextField reserch_field;
 
     @FXML
-    private TableColumn<Parts, Integer> prix_col;
+    private TableColumn<Parts, String> date_achat;
 
-    @FXML
-    private TableColumn<Parts, Integer> quntite_col;
-
-    @FXML
-    private TableColumn<Parts, String> nom_col;
     @FXML
     private TableColumn<Parts, String> desc_col;
 
     @FXML
-    private TableColumn<Parts, String> id;
+    private TableColumn<Parts, String> fournisseur_col;
 
     @FXML
+    private TableColumn<Parts, String> nom_col;
+    @FXML
+    private TableColumn<Parts, Void> actionsColumn;
+    @FXML
     private TableView<Parts> parts_table;
+
+    @FXML
+    private TableColumn<Parts, Integer> prix_achat;
+
+    @FXML
+    private TableColumn<Parts, Integer> prix_col;
+
+    @FXML
+    private TableColumn<Parts, Integer> quntite_col;
 
     @FXML
     private Button btn_conferm;
@@ -85,15 +99,16 @@ public class Rdv_parts implements Initializable {
 
     public void add_parts() {
 
-        TableViewSelectionModel<Parts> selectionModel = parts_table.getSelectionModel();
-        selectionModel.setSelectionMode(SelectionMode.SINGLE);
+        // TableViewSelectionModel<Parts> selectionModel =
+        // parts_table.getSelectionModel();
+        // selectionModel.setSelectionMode(SelectionMode.SINGLE);
 
-        Parts part = selectionModel.getSelectedItems().get(0);
+        // Parts part = selectionModel.getSelectedItems().get(0);
 
-        part.setQuntitie(Integer.parseInt(quntitie.getText()));
-        System.out.println(part.getId() + " is added");
+        // part.setQuntitie(Integer.parseInt(quntitie.getText()));
+        // System.out.println(part.getId() + " is added");
 
-        rdv_local.getParts().add(part);
+        // rdv_local.getParts().add(part);
     }
 
     public void annl_mod() {
@@ -131,32 +146,6 @@ public class Rdv_parts implements Initializable {
             // TODO: handle exception
         }
 
-        // Parent fxml;
-        // try {
-        // // fxml =
-        // //
-        // FXMLLoader.load(getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
-        // FXMLLoader loader = new
-        // FXMLLoader(getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
-        // Parent root = loader.load();
-        // System.out.println(rdv_local.getClient_rdv().getNom() + " is the one to be
-        // sent");
-        // Rdv_details rdv_details_con = loader.getController();
-        // rdv_details_con.getrdv(rdv_local);
-        // System.out.println(rdv_local.getClient_rdv().getNom() + " is the one sent");
-
-        // Stage stage = new Stage();
-        // Scene scene = new Scene(root);
-        // stage.setScene(scene);
-        // stage.setTitle("Mecha Tech");
-        // scene.setFill(Color.TRANSPARENT);
-
-        // stage.show();
-
-        // } catch (IOException e) {
-
-        // e.printStackTrace();
-        // }
     }
 
     @Override
@@ -170,10 +159,50 @@ public class Rdv_parts implements Initializable {
         list = AdminController.PartList();
         System.out.println("hna wra list");
 
-        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        // nom_col.setCellValueFactory(new PropertyValueFactory<>("name"));
+        // prix_col.setCellValueFactory(new PropertyValueFactory<>("price"));
+        // quntite_col.setCellValueFactory(new PropertyValueFactory<>("quntitie"));
+
+        // desc_col.setCellValueFactory(new PropertyValueFactory<>("description"));
+
+        // desc_col.setCellFactory(new Callback<TableColumn<Parts, String>,
+        // TableCell<Parts, String>>() {
+        // @Override
+        // public TableCell<Parts, String> call(TableColumn<Parts, String> param) {
+        // final TableCell<Parts, String> cell = new TableCell<Parts, String>() {
+        // private Text text;
+
+        // @Override
+        // public void updateItem(String item, boolean empty) {
+        // super.updateItem(item, empty);
+        // if (item != null && !empty) {
+        // setText(item);
+        // text = new Text(item.toString());
+        // txt = text;
+        // text.setWrappingWidth(desc_col.getWidth());
+        // setGraphic(text);
+
+        // } else {
+        // setText(null);
+        // }
+        // }
+        // };
+        // return cell;
+        // }
+        // });
+
         nom_col.setCellValueFactory(new PropertyValueFactory<>("name"));
         prix_col.setCellValueFactory(new PropertyValueFactory<>("price"));
         quntite_col.setCellValueFactory(new PropertyValueFactory<>("quntitie"));
+        prix_achat.setCellValueFactory(new PropertyValueFactory<>("buyingprice"));
+        SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
+
+        date_achat.setCellValueFactory(
+                cellData -> new SimpleStringProperty(DATE_FORMAT.format(cellData.getValue().getBuyingdate())));
+
+        fournisseur_col.setCellValueFactory(
+
+                cellData -> new SimpleStringProperty(cellData.getValue().getFournisseur().getName()));
 
         desc_col.setCellValueFactory(new PropertyValueFactory<>("description"));
 
@@ -200,6 +229,62 @@ public class Rdv_parts implements Initializable {
                 };
                 return cell;
             }
+        });
+
+        actionsColumn.setCellFactory(column -> {
+
+            return new TableCell<Parts, Void>() {
+
+                private final Button addButton = new Button("");
+
+                {
+
+                    addButton.setStyle(
+                            "-fx-background-radius: 5em; -fx-min-width: 25px; -fx-min-height: 25px; -fx-max-width: 25px; -fx-max-height: 25px; -fx-background-color: transparent; -fx-alignment:CENTER;");
+
+                    Image image_copy = new Image(getClass().getResourceAsStream("copy.png"));
+                    ImageView img_copy = new ImageView(image_copy);
+                    img_copy.setFitHeight(25);
+                    img_copy.setFitWidth(25);
+                    addButton.setGraphic(img_copy);
+
+                    addButton.setOnAction(event -> {
+                        // ObservableList<Parts> selectedItems =
+                        // parts_table.getSelectionModel().getSelectedItems();
+
+                        Parts part = getTableView().getItems().get(getIndex());
+
+                        if (quntitie.getText().trim().isEmpty() == true) {
+
+                            part.setQuntitie(1);
+                            System.out.println(part.getId() + " is added");
+
+                            rdv_local.getParts().add(part);
+
+                        } else {
+                            part.setQuntitie(Integer.parseInt(quntitie.getText()));
+                            System.out.println(part.getId() + " is added");
+                            rdv_local.getParts().add(part);
+
+                        }
+
+                    });
+                }
+
+                @Override
+                protected void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+                        HBox buttonsBox = new HBox(10, addButton);
+                        getAlignment();
+                        buttonsBox.setAlignment(Pos.CENTER);
+                        setGraphic(buttonsBox);
+                    }
+                }
+            };
         });
 
         parts_table.setItems(list);

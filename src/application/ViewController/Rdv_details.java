@@ -11,6 +11,7 @@ import org.bson.types.ObjectId;
 
 import application.controller.AdminController;
 import application.models.Clientmodel;
+import application.models.Fournisseur;
 import application.models.Parts;
 import application.models.Rendez_vous;
 import application.models.Usermodel;
@@ -364,7 +365,7 @@ public class Rdv_details {
     }
 
     @FXML
-    void enregistre(ActionEvent event) {
+    void enregistre() {
 
         Document newrdv = new Document("date_debut", date_debut_rdv.getValue());
         newrdv.append("date_fin", date_fin_rdv.getValue());
@@ -376,11 +377,32 @@ public class Rdv_details {
 
         List<Document> myDocuments = new ArrayList<Document>();
         for (int i = 0; i < rdv_local.getParts().size(); i++) {
+            // Parts part = rdv_local.getParts().get(i);
+            // Document addpart = new Document("_id", new ObjectId(part.getId()));
+            // addpart.append("name", part.getName());
+            // addpart.append("price", part.getPrice());
+            // addpart.append("quantity", part.getQuntitie());
+
+            // myDocuments.add(addpart);
+
+            // System.out.println(myDocuments.get(i));
             Parts part = rdv_local.getParts().get(i);
             Document addpart = new Document("_id", new ObjectId(part.getId()));
             addpart.append("name", part.getName());
             addpart.append("price", part.getPrice());
             addpart.append("quantity", part.getQuntitie());
+            addpart.append("prix_achat", part.getBuyingprice());
+            addpart.append("date_de_vente", part.getBuyingdate());
+
+            Fournisseur fournisseur = part.getFournisseur();
+            Document docfournisseur = new Document("_id", new ObjectId(fournisseur.getId()));
+            docfournisseur.append("name", fournisseur.getName());
+            docfournisseur.append("adresse", fournisseur.getAddress());
+            docfournisseur.append("email", fournisseur.getEmail());
+            docfournisseur.append("numero", fournisseur.getPhone());
+
+            addpart.append("fournisseur", docfournisseur);
+
             myDocuments.add(addpart);
 
             System.out.println(myDocuments.get(i));
@@ -468,12 +490,14 @@ public class Rdv_details {
     @FXML
     void finish(ActionEvent event) {
         if (!rdv_local.getEtat().equals("terminé")) {
+            enregistre();
             LocalDate currentDate = LocalDate.now();
             Document newrdv = new Document("etat", "terminé");
             newrdv.append("date_fin", currentDate);
             AdminController.UpdateRdv(newrdv, rdv_local);
             System.out.println();
-            AdminController.update_parts_qtnt(rdv_local);
+
+            AdminController.update_parts_qtnt(rdv_local.getParts());
         }
 
     }

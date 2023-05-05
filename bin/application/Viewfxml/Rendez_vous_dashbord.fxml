@@ -4,7 +4,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -14,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="rdv_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="930.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.Rdv_veiwcontroller">
+<BorderPane fx:id="rdv_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1030.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.Rdv_veiwcontroller">
    <top>
       <GridPane prefHeight="120.0" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -68,25 +67,18 @@
    <center>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Pane fx:id="table_container" prefHeight="200.0" prefWidth="900.0">
-               <children>
-                <AnchorPane fx:id="tables" minHeight="0.0" minWidth="0.0" prefHeight="480.0" prefWidth="900.0">
-                     <children>
-                        <TableView fx:id="rdv_table" prefHeight="480.0" prefWidth="900.0" stylesheets="@tablestyle.css">
-                          <columns>
-                            <TableColumn fx:id="nom_client_col" minWidth="90.0" prefWidth="100.0" text="Nom client" />
-                            <TableColumn fx:id="prenom_client_col" minWidth="110.0" prefWidth="120.0" text="Prenom client" />
-                              <TableColumn fx:id="num_client_col" minWidth="90.0" prefWidth="110.0" text="Numéro client" />
-                              <TableColumn fx:id="voiture_model_col" minWidth="90.0" prefWidth="100.0" text="VIN" />
-                              <TableColumn fx:id="date_deut_col" prefWidth="77.60003662109375" text="Date Debut" />
-                              <TableColumn fx:id="date_fin_col" prefWidth="166.39996337890625" text="Date Fin" />
-                              <TableColumn fx:id="etat_col" prefWidth="127.2000732421875" text="Etat" />
-                              <TableColumn fx:id="action" prefWidth="97.60009765625" text="Action" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-               </children></Pane>
+            <TableView fx:id="rdv_table" prefHeight="520.0" prefWidth="900.0" stylesheets="@tablestyle.css">
+              <columns>
+                <TableColumn fx:id="nom_client_col" minWidth="90.0" prefWidth="100.0" text="Nom client" />
+                <TableColumn fx:id="prenom_client_col" minWidth="110.0" prefWidth="120.0" text="Prenom client" />
+                  <TableColumn fx:id="num_client_col" minWidth="90.0" prefWidth="110.0" text="Numéro client" />
+                  <TableColumn fx:id="voiture_model_col" minWidth="90.0" prefWidth="100.0" text="VIN" />
+                  <TableColumn fx:id="date_deut_col" prefWidth="77.60003662109375" text="Date Debut" />
+                  <TableColumn fx:id="date_fin_col" prefWidth="166.39996337890625" text="Date Fin" />
+                  <TableColumn fx:id="etat_col" prefWidth="127.2000732421875" text="Etat" />
+                  <TableColumn fx:id="action" prefWidth="97.60009765625" text="Action" />
+              </columns>
+            </TableView>
          </children>
       </HBox>
    </center>

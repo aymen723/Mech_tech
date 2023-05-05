@@ -11,50 +11,145 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:\BoUjOu\Mecha_Tech\APP/mongo-java-driver-3.12.12.jar">
+	<classpathentry kind="lib" path="C:\java\javafx\nosql jar/mongo-java-driver-3.12.12.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:\univ programs\javafx-sdk-17.0.1\lib/javafx.base.jar">
+	<classpathentry kind="lib" path="C:\java\javafx\javafx-sdk-19.0.2.1\lib/javafx.base.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:\univ programs\javafx-sdk-17.0.1\lib/javafx.controls.jar">
+	<classpathentry kind="lib" path="C:\java\javafx\javafx-sdk-19.0.2.1\lib/javafx.controls.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:\univ programs\javafx-sdk-17.0.1\lib/javafx.fxml.jar">
+	<classpathentry kind="lib" path="C:\java\javafx\javafx-sdk-19.0.2.1\lib/javafx.fxml.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:\univ programs\javafx-sdk-17.0.1\lib/javafx.graphics.jar">
+	<classpathentry kind="lib" path="C:\java\javafx\javafx-sdk-19.0.2.1\lib/javafx.graphics.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:\univ programs\javafx-sdk-17.0.1\lib/javafx.media.jar">
+	<classpathentry kind="lib" path="C:\java\javafx\javafx-sdk-19.0.2.1\lib/javafx.media.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:\univ programs\javafx-sdk-17.0.1\lib/javafx.swing.jar">
+	<classpathentry kind="lib" path="C:\java\javafx\javafx-sdk-19.0.2.1\lib/javafx.swing.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:\univ programs\javafx-sdk-17.0.1\lib/javafx.web.jar">
+	<classpathentry kind="lib" path="C:\java\javafx\javafx-sdk-19.0.2.1\lib/javafx.web.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:\univ programs\javafx-sdk-17.0.1\lib/javafx-swt.jar">
+	<classpathentry kind="lib" path="C:\java\javafx\javafx-sdk-19.0.2.1\lib/javafx-swt.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:\java\resour\tilesfx/countries-17.0.23.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+		<classpathentry kind="lib" path="C:\java\resour\tilesfx/heatmap-17.0.12.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
 	
+		<classpathentry kind="lib" path="C:\java\resour\tilesfx/javafx-base-17.0.2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	
+		<classpathentry kind="lib" path="C:\java\resour\tilesfx/javafx-base-17.0.2-linux.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	
+		<classpathentry kind="lib" path="C:\java\resour\tilesfx/javafx-controls-17.0.2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	
+		<classpathentry kind="lib" path="C:\java\resour\tilesfx/javafx-controls-17.0.2-linux.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+		<classpathentry kind="lib" path="C:\java\resour\tilesfx/javafx-graphics-17.0.2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+		<classpathentry kind="lib" path="C:\java\resour\tilesfx/javafx-graphics-17.0.2-linux.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+		<classpathentry kind="lib" path="C:\java\resour\tilesfx/javafx-media-17.0.2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	
+		<classpathentry kind="lib" path="C:\java\resour\tilesfx/javafx-swing-17.0.2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+		<classpathentry kind="lib" path="C:\java\resour\tilesfx/javafx-swing-17.0.2-linux.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+		<classpathentry kind="lib" path="C:\java\resour\tilesfx/javafx-web-17.0.2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+		<classpathentry kind="lib" path="C:\java\resour\tilesfx/javafx-web-17.0.2-linux.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+			<classpathentry kind="lib" path="C:\java\resour\tilesfx/tilesfx-17.1.17.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+			<classpathentry kind="lib" path="C:\java\resour\tilesfx/toolbox-17.0.35.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+			<classpathentry kind="lib" path="C:\java\resour\tilesfx/toolboxfx-17.0.33.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+
+	
+			<classpathentry kind="lib" path="C:\java\resour\itext/itextpdf-5.4.0.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+
+
+
+	<classpathentry kind="output" path="bin"/>
 </classpath>
