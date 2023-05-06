@@ -85,7 +85,6 @@ public class Add_employe_container_controller implements Initializable {
 			System.out.println("test hna 2");
 
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 	}
 
@@ -109,7 +108,7 @@ public class Add_employe_container_controller implements Initializable {
 			System.out.println("test hna 2");
 
 		} catch (Exception e) {
-			// TODO: handle exception
+
 		}
 		System.out.println("test hna 3");
 
@@ -134,7 +133,6 @@ public class Add_employe_container_controller implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
 
 		role.getItems().add("Admin");
 		role.getItems().add("Caissier");

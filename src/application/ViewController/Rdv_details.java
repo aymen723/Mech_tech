@@ -473,7 +473,7 @@ public class Rdv_details {
             newrdv.append("date_fin", currentDate);
             AdminController.UpdateRdv(newrdv, rdv_local);
             System.out.println();
-            AdminController.update_parts_qtnt(rdv_local);
+            AdminController.update_parts_qtnt(rdv_local.getParts());
         }
 
     }

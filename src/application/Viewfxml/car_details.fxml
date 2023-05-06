@@ -62,22 +62,12 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7" />
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <Button fx:id="btn_supprime" layoutX="14.0" layoutY="26.0" mnemonicParsing="false" onAction="#supprime" prefHeight="30.0" prefWidth="100.0" text="Supprime" />
+                  <Button fx:id="btn_supprime" layoutX="71.0" layoutY="29.0" mnemonicParsing="false" onAction="#supprime" prefHeight="30.0" prefWidth="100.0" text="Supprime" />
                   <Button fx:id="retour" layoutX="352.0" layoutY="23.0" mnemonicParsing="false" onAction="#retour" prefHeight="30.0" prefWidth="100.0" text="&lt; Retour" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <TableView fx:id="car_rdv" layoutX="-8.0" layoutY="38.0" prefHeight="450.0" prefWidth="460.0" stylesheets="@tablestyle.css">
-                    <columns>
-                      <TableColumn fx:id="nom_col" prefWidth="75.0" text="Nom client" />
-                      <TableColumn fx:id="prenom_col" prefWidth="64.0" text="Prenom" />
-                        <TableColumn fx:id="dd_col" prefWidth="96.7999267578125" text="Date Debut" />
-                        <TableColumn fx:id="df_col" prefWidth="94.40010070800781" text="Date Fin" />
-                        <TableColumn fx:id="etat_col" prefWidth="79.2000732421875" text="Etat" />
-                        <TableColumn fx:id="action_col" prefWidth="53.5999755859375" text="Action" />
-                    </columns>
-                  </TableView>
                   <Text layoutX="-8.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Les Rendez-vous">
                      <font>
                         <Font size="18.0" />
@@ -85,11 +75,7 @@
                   </Text>
                </children>
             </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                <children>
                   <Button fx:id="btn_mod" layoutX="352.0" layoutY="23.0" mnemonicParsing="false" onAction="#modifier" prefHeight="30.0" prefWidth="100.0" text="Modifier" />
@@ -98,6 +84,20 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                <children>
                   <TextField fx:id="matricule" layoutX="83.0" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" promptText="matricule" styleClass="inpt" stylesheets="@inputs.css" />
+               </children>
+            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <TableView fx:id="car_rdv" layoutX="-14.0" layoutY="-131.0" prefHeight="373.0" prefWidth="515.0" stylesheets="@tablestyle.css">
+                    <columns>
+                      <TableColumn fx:id="nom_col" prefWidth="75.0" text="Nom client" />
+                      <TableColumn fx:id="prenom_col" prefWidth="66.0" text="Prenom" />
+                        <TableColumn fx:id="dd_col" prefWidth="105.0" text="Date Debut" />
+                        <TableColumn fx:id="df_col" prefWidth="122.0" text="Date Fin" />
+                        <TableColumn fx:id="etat_col" prefWidth="83.0" text="Etat" />
+                        <TableColumn fx:id="action_col" prefWidth="63.0" text="Action" />
+                    </columns>
+                  </TableView>
                </children>
             </Pane>
          </children>

@@ -12,7 +12,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="599.0" minWidth="1099.0" prefHeight="700.0" prefWidth="1200.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-background-color: transparent;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.DashbordController">
    <left>
-      <VBox prefHeight="200.0" prefWidth="170.0" style="-fx-background-radius: 10px;" styleClass="leftmenu" stylesheets="@dashbord_style.css" BorderPane.alignment="CENTER">
+      <VBox prefHeight="200.0" prefWidth="170.0" style="-fx-background-radius: 0 10 10 10;" styleClass="leftmenu" stylesheets="@dashbord_style.css" BorderPane.alignment="CENTER">
          <children>
             <Pane prefHeight="148.0" prefWidth="100.0" style="-fx-background-color: transparent; -fx-border-radius: 30;">
                <children>
@@ -106,7 +106,7 @@
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Pane fx:id="tool_bar" prefHeight="25.0" prefWidth="1180.0" style="-fx-background-color: #3C4048; -fx-background-radius: 20; -fx-border-radius: 20;">
+                  <Pane fx:id="tool_bar" prefHeight="25.0" prefWidth="1180.0" style="-fx-background-color: #3C4048; -fx-background-radius: 20 20 20 0; -fx-border-radius: 20;">
                      <children>
                         <Button fx:id="close_button" layoutX="1155.0" layoutY="2.0" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#close_window" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: #EB1D36; -fx-background-radius: 20; -fx-border-radius: 20;" text="X" textAlignment="JUSTIFY">
                            <font>

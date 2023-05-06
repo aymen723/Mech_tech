@@ -2,6 +2,7 @@ package application.ViewController;
 
 import application.models.Parts;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.text.Text;
 
 public class part_container {
@@ -21,4 +22,10 @@ public class part_container {
         txt_qun.setText(Integer.toString(part.getQuntitie()));
 
     }
+
+    public Parent getRoot() {
+        return txt_nom.getParent();
+    }
+
+
 }

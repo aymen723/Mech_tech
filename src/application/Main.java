@@ -21,7 +21,6 @@ public class Main extends Application {
 	public String url = "mongodb://localhost:27017";
 
 
-
 	@Override
 	public void start(Stage primaryStage) {
 

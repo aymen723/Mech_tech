@@ -116,7 +116,6 @@ public class add_employer_controller implements Initializable {
 		System.out.println("test hna 3");
 		TableViewSelectionModel<Usermodel> selectionModel = table.getSelectionModel();
 		selectionModel.setSelectionMode(SelectionMode.SINGLE);
-		// ObservableList<Usermodel> selectedItems = selectionModel.getSelectedItems();
 		System.out.println("hna fl mod " + selectionModel.getSelectedItems().get(0).getId());
 		Usermodel user_mod = selectionModel.getSelectedItems().get(0);
 		user = user_mod;

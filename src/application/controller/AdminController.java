@@ -1,6 +1,6 @@
 package application.controller;
 
-import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -13,6 +13,7 @@ import org.bson.types.ObjectId;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.bulk.BulkWriteResult;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
@@ -23,11 +24,11 @@ import com.mongodb.client.result.UpdateResult;
 import application.Connectdatabase;
 import application.ViewController.Client_dashbord;
 import application.models.Car;
-// import application.ViewController.add_employer_controller;<
 import application.models.Clientmodel;
 import application.models.Fournisseur;
 import application.models.Parts;
 import application.models.Rendez_vous;
+import application.models.Sales;
 import application.models.Transaction;
 import application.models.Usermodel;
 import javafx.collections.FXCollections;
@@ -85,27 +86,6 @@ public class AdminController {
 		return List;
 
 	}
-
-	// public static void addpart(Document Doc) {
-
-	// MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
-	// collection.insertOne(Doc);
-	// Connectdatabase.closeconndb();
-
-	// }
-
-	// public static void updatepart(Document Doc, Parts part) {
-	// MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
-	// ObjectId objid = new ObjectId(part.getId());
-	// Document found = (Document) collection.find(new Document("_id",
-	// objid)).first();
-	// System.out.println(found.get("name"));
-	// Doc.append("_id", objid);
-	// Document updateop = new Document("$set", Doc);
-	// collection.updateOne(found, updateop);
-	// Connectdatabase.closeconndb();
-
-	// }
 
 	public static void deletpart(Parts part) {
 
@@ -199,7 +179,7 @@ public class AdminController {
 
 	public static void deletClient(Clientmodel client) {
 		MongoCollection<Document> collection = Connectdatabase.connectdb("clients");
-		// ObjectId objid = new ObjectId(add_employer_controller.user.getId());
+
 		ObjectId objid = new ObjectId(client.getId());
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
 		collection.deleteOne(found);
@@ -242,7 +222,6 @@ public class AdminController {
 		MongoCollection<Document> collection = Connectdatabase.connectdb("clients");
 
 		Document doc = new Document();
-		// Document document = collection.find(eq("_id", new ObjectId(id))).first();
 		BasicDBObject query = new BasicDBObject();
 		query.put("_id", new ObjectId(id));
 
@@ -260,24 +239,6 @@ public class AdminController {
 
 	}
 
-	// public static void UpdateRdv(Document Doc , Rendez_vous rdv) {
-
-	// MongoCollection<Document> collection =
-	// Connectdatabase.connectdb("Rendez_vous");
-	// ObjectId objid = new ObjectId(rdv.getId());
-	// Document found = (Document) collection.find(new Document("_id",
-	// objid)).first();
-	// Doc.append("_id", objid);
-	// Document updated = new Document("$set", Doc);
-	// collection.updateOne(found, updated);
-	// Connectdatabase.closeconndb();
-
-	// Document doc = new Document();
-	// // Document document = collection.find(eq("_id", new ObjectId(id))).first();
-	// Connectdatabase.closeconndb();
-
-	// }
-
 	public static ArrayList<Rendez_vous> ListRdv() {
 		ArrayList<Rendez_vous> List = new ArrayList<>();
 		MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
@@ -290,7 +251,6 @@ public class AdminController {
 
 				rdv.setId(doc.getObjectId("_id").toString());
 				rdv.setCar_model(doc.getString("car model"));
-				// SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
 				rdv.setDate_debut(doc.getDate("date_debut"));
 				rdv.setDate_fin(doc.getDate("date_fin"));
@@ -331,7 +291,7 @@ public class AdminController {
 				car.setMatricule(cardoc.getString("matricule"));
 				car.setVin(cardoc.getString("vin"));
 
-				ArrayList<Document> parlistdoc = (ArrayList<Document>) doc.get("parts");
+				List<Document> parlistdoc = doc.getList("parts", Document.class);
 				ArrayList<Parts> partlist = new ArrayList<Parts>();
 				for (Document pardoc : parlistdoc) {
 					Parts part = new Parts();
@@ -445,26 +405,23 @@ public class AdminController {
 
 	}
 
-	// 
-	public static void update_parts_qtnt(Rendez_vous rdv) {
-		ArrayList<Parts> listp = rdv.getParts();
-		// System.out.println("id part " + listp.get(0).getName());
+	public static void update_parts_qtnt(ArrayList<Parts> listp) {
+
 		MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
 		ObservableList<Parts> list_before = AdminController.PartList();
-		// System.out.println("list before " + list_before.size());
+
 		ArrayList<Parts> newlist = new ArrayList<Parts>();
 		ArrayList<Document> myDocuments = new ArrayList<Document>();
 		List<UpdateOneModel<Document>> updates = new ArrayList<>();
 
 		for (Parts part : listp) {
-			// System.out.println("haana part id" + part.getId());
+
 			for (int i = 0; i < list_before.size(); i++) {
-				// System.out.println("haana listbefore part id" + list_before.get(i).getId());
+
 				if (list_before.get(i).getId().equals(part.getId())) {
 
 					list_before.get(i).setQuntitie(list_before.get(i).getQuntitie() - listp.get(i).getQuntitie());
-					// System.out.println(list_before.get(i).getName() + "quntt changed to " +
-					// (list_before.get(i).getQuntitie() - list.get(i).getQuntitie()));
+
 					newlist.add(list_before.get(i));
 					Document addpart = new Document("_id", new ObjectId(part.getId()));
 					addpart.append("name", list_before.get(i).getName());
@@ -494,6 +451,51 @@ public class AdminController {
 
 	}
 
+	public static void update_parts_qtnt_delete(ArrayList<Parts> listp) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
+		ObservableList<Parts> list_before = AdminController.PartList();
+
+		ArrayList<Parts> newlist = new ArrayList<Parts>();
+		ArrayList<Document> myDocuments = new ArrayList<Document>();
+		List<UpdateOneModel<Document>> updates = new ArrayList<>();
+
+		for (Parts part : listp) {
+
+			for (int i = 0; i < list_before.size(); i++) {
+
+				if (list_before.get(i).getId().equals(part.getId())) {
+
+					list_before.get(i).setQuntitie(list_before.get(i).getQuntitie() + listp.get(i).getQuntitie());
+
+					newlist.add(list_before.get(i));
+					Document addpart = new Document("_id", new ObjectId(part.getId()));
+					;
+					addpart.append("quantity", list_before.get(i).getQuntitie());
+
+					myDocuments.add(addpart);
+
+					break;
+				}
+			}
+		}
+		System.out.println(" my documents size " + myDocuments.size());
+
+		for (Document doc : myDocuments) {
+			ObjectId id = doc.getObjectId("_id");
+
+			UpdateOneModel<Document> update = new UpdateOneModel<>(
+					Filters.eq("_id", id),
+					new Document("$set", doc));
+			updates.add(update);
+
+		}
+
+		BulkWriteResult result = collection.bulkWrite(updates);
+		System.out.println(result);
+
+	}
+
 	public static ArrayList<Rendez_vous> RdvListCar(String vin) {
 		MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
 		ArrayList<Rendez_vous> List = new ArrayList<>();
@@ -505,7 +507,6 @@ public class AdminController {
 
 				rdv.setId(doc.getObjectId("_id").toString());
 				rdv.setCar_model(doc.getString("car model"));
-				// SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
 				rdv.setDate_debut(doc.getDate("date_debut"));
 				rdv.setDate_fin(doc.getDate("date_fin"));
@@ -611,7 +612,6 @@ public class AdminController {
 
 				fournisseur.setId(doc.getObjectId("_id").toString());
 				fournisseur.setName(doc.getString("nom"));
-				// SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
 				fournisseur.setAddress(doc.getString("adresse"));
 				fournisseur.setPhone(doc.getString("numero"));
@@ -692,7 +692,6 @@ public class AdminController {
 		MongoCollection<Document> collection = Connectdatabase.connectdb("fournisseurs");
 
 		Document doc = new Document();
-		// Document document = collection.find(eq("_id", new ObjectId(id))).first();
 		BasicDBObject query = new BasicDBObject();
 		query.put("_id", new ObjectId(id));
 
@@ -702,7 +701,6 @@ public class AdminController {
 
 		fournisseur.setId(doc.getObjectId("_id").toString());
 		fournisseur.setName(doc.getString("nom"));
-		// SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
 		fournisseur.setAddress(doc.getString("adresse"));
 		fournisseur.setPhone(doc.getString("numero"));
@@ -727,4 +725,235 @@ public class AdminController {
 
 		return fournisseur;
 	}
+
+	public static void AddSale(Document Doc) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("ventes");
+		collection.insertOne(Doc);
+		Connectdatabase.closeconndb();
+
+	}
+
+	public static void UpdateSale(Document Doc, Sales sale) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("ventes");
+		ObjectId objid = new ObjectId(sale.getId());
+		Document found = (Document) collection.find(new Document("_id", objid)).first();
+		Doc.append("_id", objid);
+		Document updateop = new Document("$set", Doc);
+		collection.updateOne(found, updateop);
+		Connectdatabase.closeconndb();
+
+	}
+
+	public static ArrayList<Fournisseur> ListSales() {
+		ArrayList<Fournisseur> List = new ArrayList<Fournisseur>();
+		MongoCollection<Document> collection = Connectdatabase.connectdb("ventes");
+
+		MongoCursor<Document> cursor = collection.find().iterator();
+		try {
+			while (cursor.hasNext()) {
+				Document doc = cursor.next();
+				Sales sale = new Sales();
+
+				sale.setId(doc.getObjectId("_id").toString());
+				sale.setDate_de_vente(doc.getDate("date_de_vente"));
+
+				List<Document> parlistdoc = doc.getList("parts", Document.class);
+				ArrayList<Parts> part_list = new ArrayList<Parts>();
+				for (Document pardoc : parlistdoc) {
+					Parts part = new Parts();
+
+					part.setId(doc.getObjectId("_id").toString());
+
+					part.setName(pardoc.getString("name"));
+					part.setDescription(pardoc.getString("description"));
+					part.setQuntitie(pardoc.getInteger("quantity"));
+					part.setPrice(pardoc.getInteger("price"));
+
+					part_list.add(part);
+
+				}
+				sale.setPartList(part_list);
+
+			}
+
+		} finally {
+			cursor.close();
+			Connectdatabase.closeconndb();
+
+		}
+
+		return List;
+
+	}
+
+	public static void deleteSale(Sales sale) {
+
+		MongoCollection<Document> collection = Connectdatabase.connectdb("ventes");
+		ObjectId objid = new ObjectId(sale.getId());
+		Document found = (Document) collection.find(new Document("_id", objid)).first();
+		collection.deleteOne(found);
+		Connectdatabase.closeconndb();
+
+	}
+
+	public static ArrayList<Rendez_vous> statRdvList(LocalDate date) {
+		MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
+		ArrayList<Rendez_vous> List = new ArrayList<>();
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+		date = date.minusDays(date.getDayOfMonth() - 1);
+		String datedabutString = date.atStartOfDay().format(formatter);
+		Date startDate = Date.from(Instant.parse(datedabutString));
+
+		LocalDate datefin = date.plusMonths(1).minusDays(1);
+		String datefinString = datefin.atStartOfDay().format(formatter);
+		Date endDate = Date.from(Instant.parse(datefinString));
+
+		Document query = new Document("date_debut", new Document("$gte", startDate)
+				.append("$lt", endDate));
+
+		FindIterable<Document> iterable = collection.find(query).sort(new Document("date_debut", 1));
+		MongoCursor<Document> cursor = iterable.iterator();
+
+		try {
+			while (cursor.hasNext()) {
+				System.out.println("this inside the wile");
+				Document doc = cursor.next();
+				Rendez_vous rdv = new Rendez_vous();
+
+				rdv.setId(doc.getObjectId("_id").toString());
+				rdv.setCar_model(doc.getString("car model"));
+
+				rdv.setDate_debut(doc.getDate("date_debut"));
+				rdv.setDate_fin(doc.getDate("date_fin"));
+				rdv.setPrix(doc.getInteger("prix"));
+				rdv.setDescrption_in(doc.getString("descrption_in"));
+				rdv.setDescrption_out(doc.getString("descrption_out"));
+				rdv.setEtat(doc.getString("etat"));
+				rdv.setService(doc.getString("service"));
+
+				Document clientdoc = doc.get("client", Document.class);
+				Clientmodel client = new Clientmodel();
+
+				client.setId(clientdoc.getObjectId("_id").toString());
+				client.setNom(clientdoc.getString("nom"));
+				client.setPrenom(clientdoc.getString("prenom"));
+				client.setEmail(clientdoc.getString("email"));
+				client.setNumero(clientdoc.getString("tel"));
+				client.setAddresse(clientdoc.getString("adresse"));
+
+				Document techniciendoc = doc.get("technicien", Document.class);
+				Usermodel technicien = new Usermodel();
+
+				technicien.setId(techniciendoc.getObjectId("_id").toString());
+				technicien.setNom(techniciendoc.getString("nom"));
+				technicien.setPrenom(techniciendoc.getString("prenom"));
+				technicien.setEmail(techniciendoc.getString("email"));
+				technicien.setNumero(techniciendoc.getString("tel"));
+				technicien.setRole(techniciendoc.getString("role"));
+				technicien.setUsername(techniciendoc.getString("nomutil"));
+
+				Document cardoc = doc.get("Car", Document.class);
+				Car car = new Car();
+
+				car.setId(cardoc.getObjectId("_id").toString());
+				car.setMarque(cardoc.getString("marque"));
+				car.setModele(cardoc.getString("modele"));
+				car.setCouleur(cardoc.getString("couleur"));
+				car.setMatricule(cardoc.getString("matricule"));
+				car.setVin(cardoc.getString("vin"));
+
+				List<Document> parlistdoc = doc.getList("parts", Document.class);
+				ArrayList<Parts> partlist = new ArrayList<Parts>();
+				for (Document pardoc : parlistdoc) {
+					Parts part = new Parts();
+
+					part.setId(doc.getObjectId("_id").toString());
+
+					part.setName(pardoc.getString("name"));
+					part.setDescription(pardoc.getString("description"));
+					part.setQuntitie(pardoc.getInteger("quantity"));
+					part.setPrice(pardoc.getInteger("price"));
+
+					partlist.add(part);
+
+				}
+				rdv.setParts(partlist);
+				rdv.setClient_rdv(client);
+				rdv.setTechnicien_rdv(technicien);
+				rdv.setCar_rdv(car);
+				List.add(rdv);
+
+			}
+		} finally {
+			cursor.close();
+			Connectdatabase.closeconndb();
+
+		}
+		System.out.println("this is the size of list rdv stats " + List.size());
+		System.out.println("date debut " + datedabutString + "date fin" + datefinString);
+
+		return List;
+
+	}
+
+	public static ArrayList<Fournisseur> statListSales(LocalDate date) {
+		ArrayList<Fournisseur> List = new ArrayList<Fournisseur>();
+		MongoCollection<Document> collection = Connectdatabase.connectdb("ventes");
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+
+		String datedabutString = date.atStartOfDay().format(formatter);
+		Date startDate = Date.from(Instant.parse(datedabutString));
+
+		LocalDate datefin = date.plusMonths(1).minusDays(1);
+		String datefinString = datefin.atStartOfDay().format(formatter);
+		Date endDate = Date.from(Instant.parse(datefinString));
+
+		Document query = new Document("date_debut", new Document("$gte", startDate)
+				.append("$lt", endDate));
+
+		FindIterable<Document> iterable = collection.find(query).sort(new Document("myDate", 1));
+		MongoCursor<Document> cursor = collection.find(query).iterator();
+
+		try {
+			while (cursor.hasNext()) {
+				Document doc = cursor.next();
+				Sales sale = new Sales();
+
+				sale.setId(doc.getObjectId("_id").toString());
+				sale.setDate_de_vente(doc.getDate("date_de_vente"));
+
+				List<Document> parlistdoc = doc.getList("parts", Document.class);
+				ArrayList<Parts> part_list = new ArrayList<Parts>();
+				for (Document pardoc : parlistdoc) {
+					Parts part = new Parts();
+
+					part.setId(doc.getObjectId("_id").toString());
+
+					part.setName(pardoc.getString("name"));
+					part.setDescription(pardoc.getString("description"));
+					part.setQuntitie(pardoc.getInteger("quantity"));
+					part.setPrice(pardoc.getInteger("price"));
+
+					part_list.add(part);
+
+				}
+				sale.setPartList(part_list);
+
+			}
+
+		} finally {
+			cursor.close();
+			Connectdatabase.closeconndb();
+
+		}
+
+		return List;
+
+	}
+
 }

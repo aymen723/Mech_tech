@@ -34,9 +34,6 @@ public class Car_details {
     private TableColumn<Rendez_vous, Void> action_col;
 
     @FXML
-    private Button btn_mod;
-
-    @FXML
     private Button btn_supprime;
 
     @FXML
@@ -207,10 +204,4 @@ public class Car_details {
 
     }
 
-    @FXML
-    void supprime(ActionEvent event) {
-
-    }
-
 }
-

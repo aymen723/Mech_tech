@@ -122,22 +122,6 @@ public class Rdv_veiwcontroller implements Initializable {
 
 	public void rdv_ajouter() {
 
-		try {
-
-			FXMLLoader loader = new FXMLLoader(
-					getClass().getResource("/application/Viewfxml/ajouter_rdv.fxml"));
-			Parent root = loader.load();
-
-			Stage stage = new Stage();
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.setTitle("Mecha Tech");
-
-			stage.show();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
 		try {
 			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/ajouter_rdv.fxml"));

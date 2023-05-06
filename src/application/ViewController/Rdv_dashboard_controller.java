@@ -13,6 +13,7 @@ import application.models.Parts;
 import application.models.Rendez_vous;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -57,6 +58,10 @@ public class Rdv_dashboard_controller {
         txt_nom.setText(rdv.getClient_rdv().getNom());
         txt_prenom.setText(rdv.getClient_rdv().getPrenom());
         txt_serv.setText(rdv.getService());
+    }
+
+    public Parent getRoot() {
+        return txt_nom.getParent();
     }
 
     @FXML
