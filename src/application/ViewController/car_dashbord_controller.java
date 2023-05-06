@@ -91,6 +91,9 @@ public class car_dashbord_controller implements Initializable {
     @FXML
     private BorderPane car_container;
 
+    @FXML
+    private TextField reserch_field;
+
     public static Car car;
 
     private Text txt;
@@ -308,6 +311,40 @@ public class car_dashbord_controller implements Initializable {
 
         filteredList = new FilteredList<>(list, b -> true);
 
+        // filteredfournisseur = new FilteredList<>(list_fornisseur, b -> true);
+
+        // Set the filter Predicate whenever the search text changes
+        reserch_field.textProperty().addListener((observable, oldValue, newValue) -> {
+            FilteredList<Car> filteredList = new FilteredList<>(list, data -> true);
+            filteredList.setPredicate(data -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (data.getVin().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (data.getMarque().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (String.valueOf(data.getMatricule()).contains(lowerCaseFilter)) {
+                    return true;
+                } else if (String.valueOf(data.getModele()).contains(lowerCaseFilter)) {
+                    return true;
+                }
+                car_table.refresh();
+                return false;
+            });
+            SortedList<Car> sortedList = new SortedList<>(filteredList);
+            sortedList.comparatorProperty().bind(car_table.comparatorProperty());
+            System.out.println(sortedList.size());
+            car_table.setItems(sortedList);
+        });
+
+        // Wrap the filtered list in a sorted list
+        SortedList<Car> sortedList = new SortedList<>(filteredList);
+
+        // Bind the sorted list to the table
+        car_table.setItems(sortedList);
+
         // Set the filter Predicate whenever the search text changes
         // reserch_field.textProperty().addListener((observable, oldValue, newValue) ->
         // {
@@ -337,10 +374,10 @@ public class car_dashbord_controller implements Initializable {
         // });
 
         // Wrap the filtered list in a sorted list
-        SortedList<Car> sortedList = new SortedList<>(filteredList);
+        // SortedList<Car> sortedList = new SortedList<>(filteredList);
 
         // Bind the sorted list to the table
-        car_table.setItems(sortedList);
+        // car_table.setItems(sortedList);
 
         // car_table.setRowFactory(tv -> {
         // TableRow<Car> row = new TableRow<>();

@@ -5,60 +5,113 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" style="-fx-border-radius: 30; -fx-background-radius: 30;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.caissier_dashbordcontroller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="599.0" minWidth="1099.0" prefHeight="700.0" prefWidth="1200.0" style="-fx-border-radius: 30; -fx-background-radius: 30; -fx-background-color: transparent;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.caissier_dashbordcontroller">
    <left>
       <VBox prefHeight="200.0" prefWidth="170.0" style="-fx-background-radius: 10px;" styleClass="leftmenu" stylesheets="@dashbord_style.css" BorderPane.alignment="CENTER">
          <children>
-            <Pane prefHeight="148.0" prefWidth="100.0">
+            <Pane prefHeight="148.0" prefWidth="100.0" style="-fx-background-color: transparent; -fx-border-radius: 30;">
                <children>
                   <ImageView fitHeight="95.0" fitWidth="118.0" layoutX="26.0" layoutY="26.0">
                      <image>
                         <Image url="@../../pics/Asset%201.png" />
                      </image>
                   </ImageView>
-               </children></Pane>
+               </children>
+            </Pane>
             <Button id="btn1" fx:id="dashbord_btn" alignment="BASELINE_LEFT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#dashbord" prefHeight="60.0" prefWidth="170.0" styleClass="btn_leftmenu" stylesheets="@dashbord_style.css" text="Dashbord" textFill="#9c9c9c">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
                <padding>
                   <Insets left="30.0" />
-               </padding></Button>
-            <Button id="btn1" fx:id="parts" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#parts" prefHeight="60.0" prefWidth="170.0" styleClass="btn_leftmenu" stylesheets="@dashbord_style.css" text="Parts" textAlignment="CENTER" textFill="#9c9c9c">
+               </padding>
+            </Button>
+            <Button id="btn1" fx:id="parts" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#parts" prefHeight="60.0" prefWidth="170.0" styleClass="btn_leftmenu" stylesheets="@dashbord_style.css" text="Piéce" textAlignment="CENTER" textFill="#9c9c9c">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
                <padding>
                   <Insets left="30.0" />
-               </padding></Button>
+               </padding>
+            </Button>
             <Button id="btn1" fx:id="Rendez_vous" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#Rendez_vous" prefHeight="60.0" prefWidth="170.0" styleClass="btn_leftmenu" stylesheets="@dashbord_style.css" text="Rendez-vous" textFill="#9c9c9c">
                <padding>
                   <Insets left="30.0" />
-               </padding></Button>
+               </padding>
+            </Button>
             <Button id="btn1" fx:id="Clients" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#Clients" prefHeight="60.0" prefWidth="170.0" styleClass="btn_leftmenu" stylesheets="@dashbord_style.css" text="Mes Clients" textFill="#9c9c9c">
                <padding>
                   <Insets left="30.0" />
-               </padding></Button>
-            <VBox alignment="BOTTOM_CENTER" prefHeight="213.0" prefWidth="170.0">
-               <children>
-                  <Button fx:id="btn_profile" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#profile" prefHeight="60.0" prefWidth="170.0" styleClass="btn_leftmenu" stylesheets="@dashbord_style.css" text="Profile" textFill="#9c9c9c">
-                     <padding>
-                        <Insets left="30.0" />
-                     </padding>
-                  </Button>
-                  <Button fx:id="btn_logout" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#logout" prefHeight="60.0" prefWidth="170.0" styleClass="btn_leftmenu" stylesheets="@dashbord_style.css" text="Logout" textFill="#9c9c9c">
-                     <padding>
-                        <Insets left="30.0" />
-                     </padding>
-                  </Button>
-               </children></VBox>
+               </padding>
+            </Button>
+            <Button id="btn1" fx:id="btn_car" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#car" prefHeight="60.0" prefWidth="170.0" styleClass="btn_leftmenu" stylesheets="@dashbord_style.css" text="Vehicles" textFill="#9c9c9c">
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+            </Button>
+            <Button id="btn1" fx:id="btn_Fournisseur" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#Fournisseur" prefHeight="60.0" prefWidth="170.0" styleClass="btn_leftmenu" stylesheets="@dashbord_style.css" text="Fournisseur" textFill="#9c9c9c">
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+            </Button>
+            <Button id="btn1" fx:id="btn_sales" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#sales" prefHeight="60.0" prefWidth="170.0" styleClass="btn_leftmenu" stylesheets="@dashbord_style.css" text="Ventes" textFill="#9c9c9c">
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+            </Button>
+            <VBox alignment="BOTTOM_LEFT" prefHeight="70.0" prefWidth="170.0" />
          </children>
       </VBox>
    </left>
    <center>
-      <BorderPane fx:id="container" prefHeight="200.0" prefWidth="200.0" style="-fx-border-radius: 30;" styleClass="container" stylesheets="@dashbord_style.css" BorderPane.alignment="CENTER" />
+      <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-border-radius: 30; -fx-background-radius: 30;" styleClass="container" stylesheets="@dashbord_style.css" BorderPane.alignment="CENTER">
+         <top>
+            <Pane prefHeight="35.0" prefWidth="1030.0" style="-fx-background-color: transparent; -fx-background-radius: 10 10 0 0; -fx-border-radius: 10 10 0 0; -fx-border-width: 0 0 2 0; -fx-border-color: #3C4048;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btn_profile" alignment="BASELINE_LEFT" layoutX="734.0" layoutY="5.0" mnemonicParsing="false" onAction="#profile" prefHeight="25.0" prefWidth="230.0" style="-fx-background-color: transparent; -fx-border-color: #3C4048; -fx-border-width: 2; -fx-background-radius: 5; -fx-border-radius: 5;" text="Profile" textAlignment="CENTER">
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btn_logout" alignment="BASELINE_LEFT" layoutX="607.0" layoutY="5.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: transparent; -fx-border-color: #3C4048; -fx-border-width: 2; -fx-background-radius: 5; -fx-border-radius: 5;" text="Logout" textAlignment="CENTER">
+                     <padding>
+                        <Insets left="30.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
+         </top>
+         <center>
+            <BorderPane fx:id="container" prefHeight="1030.0" prefWidth="640.0" BorderPane.alignment="CENTER" />
+         </center></BorderPane>
    </center>
+   <top>
+      <VBox prefHeight="25.0" prefWidth="500.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Pane fx:id="tool_bar" prefHeight="25.0" prefWidth="1180.0" style="-fx-background-color: #3C4048; -fx-background-radius: 20; -fx-border-radius: 20;">
+                     <children>
+                        <Button fx:id="close_button" layoutX="1155.0" layoutY="2.0" maxHeight="20.0" maxWidth="20.0" minHeight="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#close_window" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: #EB1D36; -fx-background-radius: 20; -fx-border-radius: 20;" text="X" textAlignment="JUSTIFY">
+                           <font>
+                              <Font name="Arial Black" size="9.0" />
+                           </font></Button>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
 </BorderPane>

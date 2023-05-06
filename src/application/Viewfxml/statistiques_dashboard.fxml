@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="sales_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="sales_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.Stat_dashboard">
    <top>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -51,28 +51,32 @@
                 <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="250.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Pane prefHeight="200.0" prefWidth="200.0" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                  <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <DatePicker layoutX="23.0" layoutY="12.0" prefHeight="30.0" prefWidth="300.0" promptText="Date" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
-                     <children>
-                        <Button layoutX="120.0" layoutY="12.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@btn.css" text="Button">
+                        <Button fx:id="btn_filtr" layoutX="196.0" layoutY="11.0" mnemonicParsing="false" onAction="#filtre" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@btn.css" text="Filtrer">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Button>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <DatePicker fx:id="date" layoutX="23.0" layoutY="12.0" prefHeight="30.0" prefWidth="300.0" promptText="Date" />
                      </children>
                   </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <Pane prefHeight="200.0" prefWidth="300.0" styleClass="pane_txt" stylesheets="@stats.css">
                            <children>
-                              <Text layoutX="113.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                              <Text fx:id="stat_2" layoutX="54.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="191.38900756835938">
                                  <font>
                                     <Font size="40.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="title_state_2" layoutX="9.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="282.07090759277344">
+                                 <font>
+                                    <Font size="15.0" />
                                  </font>
                               </Text>
                            </children>
@@ -83,8 +87,11 @@
                      <children>
                         <Pane prefHeight="200.0" prefWidth="300.0" styleClass="pane_txt" stylesheets="@stats.css">
                            <children>
-                              <Text layoutX="139.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                              <Text layoutX="102.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                              <Text fx:id="title_state_1" layoutX="16.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="267.67095947265625">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Text>
+                              <Text fx:id="stat_1" layoutX="26.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="248.18907165527344">
                                  <font>
                                     <Font size="40.0" />
                                  </font>
@@ -97,9 +104,14 @@
                      <children>
                         <Pane prefHeight="200.0" prefWidth="300.0" styleClass="pane_txt" stylesheets="@stats.css">
                            <children>
-                              <Text layoutX="105.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+                              <Text fx:id="stat_3" layoutX="52.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="196.1890869140625">
                                  <font>
                                     <Font size="40.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="title_state_3" layoutX="7.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="286.8707275390625">
+                                 <font>
+                                    <Font size="15.0" />
                                  </font>
                               </Text>
                            </children>
@@ -112,7 +124,7 @@
                <children>
                   <Pane prefHeight="238.0" prefWidth="900.0">
                      <children>
-                        <LineChart layoutY="23.0" prefHeight="311.0" prefWidth="904.0">
+                        <LineChart fx:id="line_chart" layoutX="-2.0" layoutY="12.0" prefHeight="311.0" prefWidth="904.0">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>

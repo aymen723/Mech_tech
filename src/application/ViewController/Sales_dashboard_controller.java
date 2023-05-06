@@ -11,6 +11,8 @@ import application.models.Sales;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -54,9 +56,6 @@ public class Sales_dashboard_controller implements Initializable {
     private TableColumn<Sales, Date> date_de_vente_col;
 
     @FXML
-    private Button mod_btn;
-
-    @FXML
     private TableColumn<Sales, String> total_col;
     @FXML
     private TableColumn<Sales, String> Number_pieces;
@@ -66,6 +65,8 @@ public class Sales_dashboard_controller implements Initializable {
 
     @FXML
     private BorderPane sales_container;
+
+    private FilteredList<Sales> filteredsales;
 
     ObservableList<Sales> list = FXCollections.observableArrayList();
 
@@ -81,29 +82,25 @@ public class Sales_dashboard_controller implements Initializable {
             // TODO: handle exception
         }
 
-        try {
-            Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/ajouter_sales.fxml"));
-            Stage stage = new Stage();
-            Scene scene = new Scene(fxml);
-            stage.setScene(scene);
-            stage.setTitle("Mecha Tech");
-            scene.setFill(Color.TRANSPARENT);
+        // try {
+        // Parent fxml =
+        // FXMLLoader.load(getClass().getResource("/application/Viewfxml/ajouter_sales.fxml"));
+        // Stage stage = new Stage();
+        // Scene scene = new Scene(fxml);
+        // stage.setScene(scene);
+        // stage.setTitle("Mecha Tech");
+        // scene.setFill(Color.TRANSPARENT);
 
-            // primaryStage.initStyle(StageStyle.UNDECORATED);
-            // primaryStage.initStyle(StageStyle.TRANSPARENT);
+        // // primaryStage.initStyle(StageStyle.UNDECORATED);
+        // // primaryStage.initStyle(StageStyle.TRANSPARENT);
 
-            // primaryStage.setResizable(false);
-            stage.show();
+        // // primaryStage.setResizable(false);
+        // stage.show();
 
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void mod_sales(ActionEvent event) {
-
+        // } catch (IOException e) {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // }
     }
 
     @Override
@@ -127,7 +124,6 @@ public class Sales_dashboard_controller implements Initializable {
             return new TableCell<Sales, Void>() {
 
                 private final Button deleteButton = new Button("");
-                private final Button copybutton = new Button("");
                 private final Button editButton = new Button("");
 
                 {
@@ -147,15 +143,6 @@ public class Sales_dashboard_controller implements Initializable {
                     img_edit.setFitHeight(25);
                     img_edit.setFitWidth(25);
                     editButton.setGraphic(img_edit);
-
-                    copybutton.setStyle(
-                            "-fx-background-radius: 5em; -fx-min-width: 25px; -fx-min-height: 25px; -fx-max-width: 25px; -fx-max-height: 25px; -fx-background-color: transparent; -fx-alignment:CENTER;");
-
-                    Image image_copy = new Image(getClass().getResourceAsStream("copy.png"));
-                    ImageView img_copy = new ImageView(image_copy);
-                    img_copy.setFitHeight(25);
-                    img_copy.setFitWidth(25);
-                    copybutton.setGraphic(img_copy);
 
                     deleteButton.setOnAction(event -> {
 
@@ -181,11 +168,12 @@ public class Sales_dashboard_controller implements Initializable {
                         deleteButton.setText("Supprimer");
                         Optional<ButtonType> result = alert.showAndWait();
                         if (result.get() == ButtonType.OK) {
-                            // Clientmodel client = getTableView().getItems().get(getIndex());
-                            // AdminController.deletClient(client);
-                            // list = AdminController.ListClient();
-                            // client_table.setItems(list);
-                            // client_table.refresh();
+                            Sales sales = getTableView().getItems().get(getIndex());
+                            AdminController.deleteSale(sales);
+                            AdminController.update_parts_qtnt_delete(sales.getPartList());
+                            list = FXCollections.observableArrayList(AdminController.ListSales());
+                            sales_table.setItems(list);
+                            sales_table.refresh();
                             // User clicked OK
                         } else {
                             // User clicked Cancel or closed the dialog
@@ -195,12 +183,19 @@ public class Sales_dashboard_controller implements Initializable {
                     });
 
                     editButton.setOnAction(event -> {
-                        // client = getTableView().getItems().get(getIndex());
+                        Sales sales = getTableView().getItems().get(getIndex());
+
                         try {
-                            Parent fxml = FXMLLoader
-                                    .load(getClass().getResource("/application/Viewfxml/modifier_client.fxml"));
-                            client_container.getChildren().removeAll();
-                            client_container.getChildren().setAll(fxml);
+
+                            FXMLLoader loader = new FXMLLoader(
+                                    getClass().getResource("/application/Viewfxml/mod_sales.fxml"));
+
+                            Parent root = loader.load();
+                            mod_sales mod_con = loader.getController();
+
+                            mod_con.getsale(sales);
+                            sales_container.getChildren().removeAll();
+                            sales_container.getChildren().setAll(root);
 
                         } catch (Exception e) {
                             // TODO: handle exception
@@ -208,24 +203,6 @@ public class Sales_dashboard_controller implements Initializable {
 
                     });
 
-                    copybutton.setOnAction(event -> {
-                        // ObservableList<Parts> selectedItems =
-                        // parts_table.getSelectionModel().getSelectedItems();
-
-                        // Clientmodel client = getTableView().getItems().get(getIndex());
-
-                        // StringBuilder sb = new StringBuilder();
-
-                        // sb.append(client.getNom()).append("," + "\n");
-                        // sb.append(client.getPrenom()).append("," + "\n");
-                        // sb.append(client.getAddresse()).append("\n");
-                        // sb.append(client.getEmail()).append("\n");
-                        // sb.append(client.getNumero()).append("\n");
-
-                        // ClipboardContent content = new ClipboardContent();
-                        // content.putString(sb.toString());
-                        // Clipboard.getSystemClipboard().setContent(content);
-                    });
                 }
 
                 @Override
@@ -236,7 +213,7 @@ public class Sales_dashboard_controller implements Initializable {
                     if (empty) {
                         setGraphic(null);
                     } else {
-                        HBox buttonsBox = new HBox(10, editButton, deleteButton, copybutton);
+                        HBox buttonsBox = new HBox(10, editButton, deleteButton);
                         getAlignment();
                         buttonsBox.setAlignment(Pos.CENTER);
                         setGraphic(buttonsBox);
@@ -246,5 +223,34 @@ public class Sales_dashboard_controller implements Initializable {
         });
 
         sales_table.setItems(list);
+
+        filteredsales = new FilteredList<>(list, b -> true);
+
+        // Set the filter Predicate whenever the search text changes
+        reserch_field.textProperty().addListener((observable, oldValue, newValue) -> {
+            FilteredList<Sales> filteredList = new FilteredList<>(list, data -> true);
+            filteredList.setPredicate(data -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                // if (data.getDate_de_vente().contains(lowerCaseFilter)) {
+                // return true;
+                // }
+
+                sales_table.refresh();
+                return false;
+            });
+            SortedList<Sales> sortedList = new SortedList<>(filteredList);
+            sortedList.comparatorProperty().bind(sales_table.comparatorProperty());
+            System.out.println(sortedList.size());
+            sales_table.setItems(sortedList);
+        });
+
+        // Wrap the filtered list in a sorted list
+        SortedList<Sales> sortedList = new SortedList<>(filteredsales);
+
+        // Bind the sorted list to the table
+        sales_table.setItems(sortedList);
     }
 }

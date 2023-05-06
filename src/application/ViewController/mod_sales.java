@@ -1,6 +1,5 @@
 package application.ViewController;
 
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -8,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -25,9 +23,7 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -48,7 +44,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 
-public class ajouter_sales implements Initializable {
+public class mod_sales {
 
     @FXML
     private TableColumn<Parts, Void> action_col_sale;
@@ -84,9 +80,6 @@ public class ajouter_sales implements Initializable {
     private TableColumn<Parts, String> sale_part_datedachat;
 
     @FXML
-    private TableColumn<Parts, String> sale_part_desc;
-
-    @FXML
     private TableColumn<Parts, String> sale_part_fournisseur;
 
     @FXML
@@ -118,11 +111,12 @@ public class ajouter_sales implements Initializable {
     @FXML
     private BorderPane addsale_container;
 
-    // private Sales sale_local;
+    private Sales sale_local;
 
     ObservableList<Parts> list_parts = FXCollections.observableArrayList();
     ObservableList<Parts> sales_part = FXCollections.observableArrayList();
     ArrayList<Parts> array_part = new ArrayList<Parts>();
+    ArrayList<Parts> oldparts = new ArrayList<Parts>();
     FilteredList<Parts> filteredList = new FilteredList<>(list_parts, b -> true);
 
     @FXML
@@ -140,16 +134,12 @@ public class ajouter_sales implements Initializable {
     @FXML
     void confermier(ActionEvent event) {
 
-        LocalDate date_sal = LocalDate.now();
-        Date date = Date.from(date_sal.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        // sale_local.setDate_de_vente(date);
-
-        if (sales_part.isEmpty() == false) {
-            Document newsale = new Document("date_de_vente", date);
+        if (sale_local.getPartList().isEmpty() == false) {
+            Document newsale = new Document();
 
             List<Document> myDocuments = new ArrayList<Document>();
-            for (int i = 0; i < sales_part.size(); i++) {
-                Parts part = sales_part.get(i);
+            for (int i = 0; i < sale_local.getPartList().size(); i++) {
+                Parts part = sale_local.getPartList().get(i);
                 Document addpart = new Document("_id", new ObjectId(part.getId()));
                 addpart.append("name", part.getName());
                 addpart.append("price", part.getPrice());
@@ -173,8 +163,12 @@ public class ajouter_sales implements Initializable {
 
             newsale.append("parts", myDocuments);
 
-            AdminController.AddSale(newsale);
-            AdminController.update_parts_qtnt(array_part);
+            AdminController.UpdateSale(newsale, sale_local);
+
+            AdminController.update_parts_qtnt(sale_local.getPartList());
+            System.out.println("sale locale size" + sale_local.getPartList().size());
+            AdminController.update_parts_qtnt_delete(oldparts);
+            System.out.println("old part" + oldparts.size());
 
         }
 
@@ -186,10 +180,17 @@ public class ajouter_sales implements Initializable {
         } catch (Exception e) {
             // TODO: handle exception
         }
+
     }
 
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
+    void getsale(Sales sale) {
+
+        sale_local = sale;
+        // array_part = sale.getPartList();
+        this.oldparts.addAll(sale.getPartList());
+        System.out.println("old parts first" + oldparts.size());
+
+        sales_part = FXCollections.observableArrayList(sale.getPartList());
 
         // LocalDate date_sal = LocalDate.now();
         // Date date =
@@ -251,33 +252,6 @@ public class ajouter_sales implements Initializable {
         sale_part_fournisseur.setCellValueFactory(
                 cellData -> new SimpleStringProperty(cellData.getValue().getFournisseur().getName()));
 
-        sale_part_desc.setCellValueFactory(new PropertyValueFactory<>("description"));
-
-        sale_part_desc.setCellFactory(new Callback<TableColumn<Parts, String>, TableCell<Parts, String>>() {
-            @Override
-            public TableCell<Parts, String> call(TableColumn<Parts, String> param) {
-                final TableCell<Parts, String> cell = new TableCell<Parts, String>() {
-                    private Text text;
-
-                    @Override
-                    public void updateItem(String item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (item != null && !empty) {
-                            setText(item);
-                            text = new Text(item.toString());
-                            txt = text;
-                            text.setWrappingWidth(desc_col.getWidth());
-                            setGraphic(text);
-
-                        } else {
-                            setText(null);
-                        }
-                    }
-                };
-                return cell;
-            }
-        });
-
         actionsColumn.setCellFactory(column -> {
 
             return new TableCell<Parts, Void>() {
@@ -305,12 +279,12 @@ public class ajouter_sales implements Initializable {
 
                             part.setQuntitie(1);
                             sales_part.add(part);
-                            array_part.add(part);
+                            sale_local.getPartList().add(part);
 
                         } else {
                             part.setQuntitie(Integer.parseInt(quanitie.getText()));
                             sales_part.add(part);
-                            array_part.add(part);
+                            sale_local.getPartList().add(part);
 
                         }
                         sales_table.setItems(sales_part);
@@ -378,7 +352,7 @@ public class ajouter_sales implements Initializable {
                         if (result.get() == ButtonType.OK) {
                             Parts part = getTableView().getItems().get(getIndex());
                             sales_part.remove(part);
-                            array_part.remove(part);
+                            sale_local.getPartList().remove(part);
                             sales_table.setItems(sales_part);
                             sales_table.refresh();
                         } else {
@@ -407,6 +381,7 @@ public class ajouter_sales implements Initializable {
         });
 
         parts_table.setItems(list_parts);
+        sales_table.setItems(sales_part);
 
         filteredList = new FilteredList<>(list_parts, b -> true);
 
@@ -442,6 +417,6 @@ public class ajouter_sales implements Initializable {
 
         // Bind the sorted list to the table
         parts_table.setItems(sortedList);
-    }
 
+    }
 }

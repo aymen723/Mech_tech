@@ -128,7 +128,7 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
                <children>
-                  <TextArea fx:id="description_out" layoutX="22.0" layoutY="-28.0" prefHeight="200.0" prefWidth="300.0" promptText="Out" />
+                  <TextArea fx:id="description_out" layoutX="22.0" layoutY="-42.0" prefHeight="200.0" prefWidth="300.0" promptText="Out" />
                </children></Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />

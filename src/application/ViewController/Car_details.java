@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.bson.Document;
+import org.bson.types.ObjectId;
+
 import application.controller.AdminController;
 import application.models.Car;
 import application.models.Rendez_vous;
@@ -35,9 +38,6 @@ public class Car_details {
 
     @FXML
     private Button btn_mod;
-
-    @FXML
-    private Button btn_supprime;
 
     @FXML
     private TableView<Rendez_vous> car_rdv;
@@ -199,6 +199,14 @@ public class Car_details {
 
     @FXML
     void modifier(ActionEvent event) {
+        Document updatecar = new Document("_id", new ObjectId(car_local.getId()));
+        updatecar.append("marque", marque.getText());
+        updatecar.append("modele", modele.getText());
+        updatecar.append("couleur", couleur.getText());
+        updatecar.append("matricule", matricule.getText());
+        updatecar.append("vin", vin.getText());
+
+        AdminController.UpdateCar(updatecar, car_local);
 
     }
 
@@ -207,10 +215,4 @@ public class Car_details {
 
     }
 
-    @FXML
-    void supprime(ActionEvent event) {
-
-    }
-
 }
-

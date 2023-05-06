@@ -4,6 +4,9 @@ package application.ViewController;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.Optional;
 // import java.util.Iterator;
 import java.util.ResourceBundle;
@@ -221,10 +224,25 @@ public class parts_dashbord_controller implements Initializable {
 				(description.getText().trim().isEmpty() == false) &&
 				(price.getText().trim().isEmpty() == false) &&
 				(quntitie.getText().trim().isEmpty() == false) && part != null) {
+			// Document updatepart = new Document("name", name.getText());
+			// updatepart.append("price", Integer.parseInt(price.getText()));
+			// updatepart.append("quantity", Integer.parseInt(quntitie.getText()));
+			// updatepart.append("description", description.getText());
+
 			Document updatepart = new Document("name", name.getText());
 			updatepart.append("price", Integer.parseInt(price.getText()));
 			updatepart.append("quantity", Integer.parseInt(quntitie.getText()));
 			updatepart.append("description", description.getText());
+			updatepart.append("buyingprice", Integer.parseInt(prixdachat.getText()));
+			updatepart.append("buyingdate", date.getValue());
+
+			Document newfournisseur = new Document("_id", new ObjectId(fournissur_local.getId()));
+			newfournisseur.append("nom", fournissur_local.getName());
+			newfournisseur.append("adresse", fournissur_local.getAddress());
+			newfournisseur.append("numero", fournissur_local.getPhone());
+			newfournisseur.append("email", fournissur_local.getEmail());
+
+			updatepart.append("fournisseur", newfournisseur);
 
 			AdminController.updatepart(updatepart, part);
 
@@ -238,6 +256,9 @@ public class parts_dashbord_controller implements Initializable {
 			price.setText("");
 			quntitie.setText("");
 			description.setText("");
+			fournisseur_inp.setText("");
+			prixdachat.setText("");
+
 			System.out.println("hna list mazal");
 			list = AdminController.PartList();
 			System.out.println("hna wra list");
@@ -394,11 +415,17 @@ public class parts_dashbord_controller implements Initializable {
 					editButton.setOnAction(event -> {
 						Parts Part_edit = getTableView().getItems().get(getIndex());
 						part = Part_edit;
+
+						Date date_l = part.getBuyingdate();
+						LocalDate localDate = date_l.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 						name.setText(Part_edit.getName());
 						description.setText(Part_edit.getDescription());
 						price.setText(Integer.toString(Part_edit.getPrice()));
 						quntitie.setText(Integer.toString(Part_edit.getQuntitie()));
-
+						date.setValue(localDate);
+						prixdachat.setText(Integer.toString(part.getBuyingprice()));
+						fournisseur_inp.setText(part.getFournisseur().getName());
+						fournissur_local = part.getFournisseur();
 						mod_btn.setDisable(false);
 						add_btn.setDisable(true);
 						annl_btn.setDisable(false);

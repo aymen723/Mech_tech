@@ -12,6 +12,8 @@ import application.models.Fournisseur;
 import application.models.Transaction;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -82,6 +84,8 @@ public class Fournisseur_Dashboard_controller implements Initializable {
     private BorderPane fournisseur_con;
 
     private Fournisseur local_fFournisseur;
+
+    private FilteredList<Fournisseur> filteredfournisseur;
 
     ObservableList<Fournisseur> list_fornisseur = FXCollections.observableArrayList();
 
@@ -210,5 +214,42 @@ public class Fournisseur_Dashboard_controller implements Initializable {
         });
 
         fournisseur_table.setItems(list_fornisseur);
+
+        filteredfournisseur = new FilteredList<>(list_fornisseur, b -> true);
+
+        // Set the filter Predicate whenever the search text changes
+        reserch_field.textProperty().addListener((observable, oldValue, newValue) -> {
+            FilteredList<Fournisseur> filteredList = new FilteredList<>(list_fornisseur, data -> true);
+            filteredList.setPredicate(data -> {
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (data.getName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (data.getName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (String.valueOf(data.getBalance()).contains(lowerCaseFilter)) {
+                    return true;
+                } else if (data.getAddress().contains(lowerCaseFilter)) {
+                    return true;
+                } else if (data.getPhone().contains(lowerCaseFilter)) {
+                    return true;
+                }
+
+                fournisseur_table.refresh();
+                return false;
+            });
+            SortedList<Fournisseur> sortedList = new SortedList<>(filteredList);
+            sortedList.comparatorProperty().bind(fournisseur_table.comparatorProperty());
+            System.out.println(sortedList.size());
+            fournisseur_table.setItems(sortedList);
+        });
+
+        // Wrap the filtered list in a sorted list
+        SortedList<Fournisseur> sortedList = new SortedList<>(filteredfournisseur);
+
+        // Bind the sorted list to the table
+        fournisseur_table.setItems(sortedList);
     }
 }

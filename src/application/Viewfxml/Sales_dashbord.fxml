@@ -70,11 +70,6 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="mod_btn" layoutX="-51.0" layoutY="17.0" mnemonicParsing="false" onAction="#mod_sales" prefHeight="30.0" prefWidth="130.0" styleClass="btn_mod" stylesheets="@part_style.css" text="Modifier">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />

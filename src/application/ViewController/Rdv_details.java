@@ -139,7 +139,7 @@ public class Rdv_details {
     ObservableList<Usermodel> list_tech = FXCollections.observableArrayList();
     ObservableList<Usermodel> filtered = FXCollections.observableArrayList();
     ObservableList<Parts> list = FXCollections.observableArrayList();
-
+    ArrayList<Parts> oldparts = new ArrayList<Parts>();
     @FXML
     private Button btn_finish;
 
@@ -174,10 +174,12 @@ public class Rdv_details {
         // car_model.setDisable(true);
         prix.setDisable(true);
         service.setDisable(true);
+        tech_choice.setDisable(true);
         description_in.setDisable(true);
         description_out.setDisable(true);
 
         rdv_local = rdv;
+        this.oldparts.addAll(rdv.getParts());
 
         list_tech = AdminController.EmpLiist();
 
@@ -208,6 +210,8 @@ public class Rdv_details {
         if (rdv.getEtat().equals("en attente")) {
             etat_box.setStyle("-fx-background-color: #D8D8D8");
         } else if (rdv.getEtat().equals("terminé")) {
+            btn_finish.setDisable(true);
+            eng_btn.setDisable(true);
             etat_box.setStyle("-fx-background-color: #98D8AA");
         } else if (rdv.getEtat().equals("en cours")) {
             etat_box.setStyle("-fx-background-color: #F3E99F");
@@ -236,12 +240,6 @@ public class Rdv_details {
                         img_copy.setFitHeight(25);
                         img_copy.setFitWidth(25);
                         deletebutton.setGraphic(img_copy);
-
-                        deletebutton.setOnAction(event -> {
-                            // ObservableList<Parts> selectedItems =
-                            // parts_table.getSelectionModel().getSelectedItems();
-
-                        });
 
                         deletebutton.setOnAction(event -> {
 
@@ -347,18 +345,21 @@ public class Rdv_details {
 
             date_debut_rdv.setDisable(false);
             date_fin_rdv.setDisable(false);
-            car_model.setDisable(false);
+            // car_model.setDisable(true);
             prix.setDisable(false);
             service.setDisable(false);
+            tech_choice.setDisable(false);
             description_in.setDisable(false);
             description_out.setDisable(false);
 
         } else {
+
             date_debut_rdv.setDisable(true);
             date_fin_rdv.setDisable(true);
-            car_model.setDisable(true);
+            // car_model.setDisable(true);
             prix.setDisable(true);
             service.setDisable(true);
+            tech_choice.setDisable(true);
             description_in.setDisable(true);
             description_out.setDisable(true);
         }
@@ -409,6 +410,8 @@ public class Rdv_details {
         }
         newrdv.append("parts", myDocuments);
         AdminController.UpdateRdv(newrdv, rdv_local);
+        AdminController.update_parts_qtnt_delete(oldparts);
+        AdminController.update_parts_qtnt(rdv_local.getParts());
 
     }
 
@@ -466,6 +469,7 @@ public class Rdv_details {
         if (result.get() == ButtonType.OK) {
 
             AdminController.deletrdv(rdv_local);
+            AdminController.update_parts_qtnt_delete(rdv_local.getParts());
 
             try {
 
