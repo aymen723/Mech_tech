@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.bson.Document;
@@ -409,6 +410,12 @@ public class Rdv_details {
             System.out.println(myDocuments.get(i));
         }
         newrdv.append("parts", myDocuments);
+        rdv_local.setDate_debut(Date.from(date_debut_rdv.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        rdv_local.setDate_fin(Date.from(date_fin_rdv.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        rdv_local.setDescrption_in(description_in.getText());
+        rdv_local.setDescrption_out(description_out.getText());
+        rdv_local.setService(service.getText());
+        rdv_local.setPrix(Integer.parseInt(prix.getText()));
         AdminController.UpdateRdv(newrdv, rdv_local);
         AdminController.update_parts_qtnt_delete(oldparts);
         AdminController.update_parts_qtnt(rdv_local.getParts());

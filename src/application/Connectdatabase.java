@@ -61,8 +61,8 @@ public class Connectdatabase {
 	}
 
 	public static void closeconndb() {
-        mongoClient.close();
-    }
+		mongoClient.close();
+	}
 
 	public static void testdb() throws SocketException {
 		// System.out.println(mongoClient);
@@ -112,6 +112,5 @@ public class Connectdatabase {
 	public static String getstringdb() {
 		return url;
 	}
-
 
 }

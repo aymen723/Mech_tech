@@ -110,9 +110,9 @@ public class fournisseur_details {
         numero.setText(fournisseur.getPhone());
         email.setText(fournisseur_local.getEmail());
         txt_balance.setText(Integer.toString(fournisseur_local.getBalance()));
-        if((fournisseur_local.getBalance()) < 0){
+        if ((fournisseur_local.getBalance()) < 0) {
             txt_balance.setStyle("-fx-color: red");
-           
+
         }
 
         list_transaction = FXCollections.observableArrayList(fournisseur_local.getTransactions());

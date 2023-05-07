@@ -1,6 +1,5 @@
 package application.ViewController;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -20,7 +19,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -32,7 +30,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
 public class Fournisseur_Dashboard_controller implements Initializable {
     @FXML
@@ -174,25 +171,6 @@ public class Fournisseur_Dashboard_controller implements Initializable {
                         } catch (Exception e) {
                             // TODO: handle exception
                         }
-
-                        // try {
-
-                        // FXMLLoader loader = new FXMLLoader(
-                        // getClass().getResource("/application/Viewfxml/fournisseur_details.fxml"));
-
-                        // Parent root = loader.load();
-                        // fournisseur_details fourisseur_con = loader.getController();
-                        // fourisseur_con.getfournisseur(fournisseur);
-                        // Stage stage = new Stage();
-                        // Scene scene = new Scene(root);
-                        // stage.setScene(scene);
-                        // stage.setTitle("Mecha Tech");
-
-                        // stage.show();
-
-                        // } catch (IOException e) {
-                        // e.printStackTrace();
-                        // }
 
                     });
                 }

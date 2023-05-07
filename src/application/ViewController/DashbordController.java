@@ -228,7 +228,7 @@ public class DashbordController implements Initializable {
 	@FXML
 	void car(ActionEvent event) {
 		try {
-			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Car_dashboard.fxml"));
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Car_Dashboard.fxml"));
 			container.getChildren().removeAll();
 			container.getChildren().setAll(fxml);
 
@@ -247,25 +247,6 @@ public class DashbordController implements Initializable {
 
 		btn_car.getStyleClass().add("afterpress");
 
-		// try {
-		// Parent fxml =
-		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/Car_dashboard.fxml"));
-		// Stage stage = new Stage();
-		// Scene scene = new Scene(fxml);
-		// stage.setScene(scene);
-		// // stage.setTitle("Mecha Tech");
-		// // scene.setFill(Color.TRANSPARENT);
-
-		// // primaryStage.initStyle(StageStyle.UNDECORATED);
-		// // primaryStage.initStyle(StageStyle.TRANSPARENT);
-
-		// // primaryStage.setResizable(false);
-		// stage.show();
-
-		// } catch (IOException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
 	}
 
 	@FXML
@@ -295,7 +276,7 @@ public class DashbordController implements Initializable {
 	void Fournisseur(ActionEvent event) {
 
 		try {
-			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Fournisseur_dashboard.fxml"));
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Fournisseur_Dashboard.fxml"));
 			container.getChildren().removeAll();
 			container.getChildren().setAll(fxml);
 
@@ -311,27 +292,7 @@ public class DashbordController implements Initializable {
 		btn_car.getStyleClass().remove("afterpress");
 		btn_stats.getStyleClass().remove("afterpress");
 		btn_sales.getStyleClass().remove("afterpress");
-
-		btn_Fournisseur.getStyleClass().add("afterpress");
-		// Parent fxml;
-		// try {
-		// fxml =
-		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/Fournisseur_dashboard.fxml"));
-		// Stage stage = new Stage();
-		// Scene scene = new Scene(fxml);
-		// stage.setScene(scene);
-		// stage.setTitle("Mecha Tech");
-		// scene.setFill(Color.TRANSPARENT);
-
-		// Stage stage_login = (Stage) container.getScene().getWindow();
-
-		// stage_login.close();
-
-		// stage.show();
-
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
+		btn_sales.getStyleClass().add("afterpress");
 
 	}
 
