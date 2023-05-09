@@ -1,5 +1,6 @@
 package application.controller;
 
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -112,6 +113,21 @@ public class AdminController {
 				part.setDescription(doc.getString("description"));
 				part.setQuntitie(doc.getInteger("quantity"));
 				part.setPrice(doc.getInteger("price"));
+				part.setBuyingprice(doc.getInteger("buyingprice"));
+				part.setBuyingdate(doc.getDate("buyingdate"));
+
+				Document fourniDocument = doc.get("fournisseur", Document.class);
+				Fournisseur fournisseur = new Fournisseur();
+
+				fournisseur.setId(fourniDocument.getObjectId("_id").toString());
+				fournisseur.setName(fourniDocument.getString("nom"));
+				// SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
+				fournisseur.setAddress(fourniDocument.getString("adresse"));
+				fournisseur.setPhone(fourniDocument.getString("numero"));
+				fournisseur.setEmail(fourniDocument.getString("email"));
+
+				part.setFournisseur(fournisseur);
 
 				List.add(part);
 
@@ -296,13 +312,35 @@ public class AdminController {
 				for (Document pardoc : parlistdoc) {
 					Parts part = new Parts();
 
-					part.setId(doc.getObjectId("_id").toString());
+					// part.setId(doc.getObjectId("_id").toString());
+
+					// part.setName(pardoc.getString("name"));
+					// part.setDescription(pardoc.getString("description"));
+					// part.setQuntitie(pardoc.getInteger("quantity"));
+					// part.setPrice(pardoc.getInteger("price"));
+
+					// partlist.add(part);
+					part.setId(pardoc.getObjectId("_id").toString());
 
 					part.setName(pardoc.getString("name"));
 					part.setDescription(pardoc.getString("description"));
 					part.setQuntitie(pardoc.getInteger("quantity"));
 					part.setPrice(pardoc.getInteger("price"));
+					part.setBuyingprice(pardoc.getInteger("prix_achat"));
+					part.setBuyingdate(doc.getDate("date_de_vente"));
 
+					Document fourniDocument = pardoc.get("fournisseur", Document.class);
+					Fournisseur fournisseur = new Fournisseur();
+
+					fournisseur.setId(fourniDocument.getObjectId("_id").toString());
+					fournisseur.setName(fourniDocument.getString("name"));
+					// SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
+					fournisseur.setAddress(fourniDocument.getString("adresse"));
+					fournisseur.setPhone(fourniDocument.getString("numero"));
+					fournisseur.setEmail(fourniDocument.getString("email"));
+
+					part.setFournisseur(fournisseur);
 					partlist.add(part);
 
 				}
@@ -405,8 +443,10 @@ public class AdminController {
 
 	}
 
+	//
 	public static void update_parts_qtnt(ArrayList<Parts> listp) {
 
+		// System.out.println("id part " + listp.get(0).getName());
 		MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
 		ObservableList<Parts> list_before = AdminController.PartList();
 
@@ -420,14 +460,16 @@ public class AdminController {
 
 				if (list_before.get(i).getId().equals(part.getId())) {
 
-					list_before.get(i).setQuntitie(list_before.get(i).getQuntitie() - listp.get(i).getQuntitie());
-
+					list_before.get(i).setQuntitie(list_before.get(i).getQuntitie() - part.getQuntitie());
+					// System.out.println(list_before.get(i).getName() + "quntt changed to " +
+					// (list_before.get(i).getQuntitie() - list.get(i).getQuntitie()));
 					newlist.add(list_before.get(i));
-					Document addpart = new Document("_id", new ObjectId(part.getId()));
-					addpart.append("name", list_before.get(i).getName());
-					addpart.append("price", list_before.get(i).getPrice());
+					Document addpart = new Document("_id", new ObjectId(list_before.get(i).getId()));
+					// addpart.append("name", list_before.get(i).getName());
+					// addpart.append("price", list_before.get(i).getPrice());
 					addpart.append("quantity", list_before.get(i).getQuntitie());
-					addpart.append("description", list_before.get(i).getDescription());
+					// addpart.append("description", list_before.get(i).getDescription());
+
 					myDocuments.add(addpart);
 
 					break;
@@ -447,7 +489,7 @@ public class AdminController {
 		}
 
 		BulkWriteResult result = collection.bulkWrite(updates);
-		System.out.println(result);
+		System.out.println("this is update part rslt" + result);
 
 	}
 
@@ -492,7 +534,7 @@ public class AdminController {
 		}
 
 		BulkWriteResult result = collection.bulkWrite(updates);
-		System.out.println(result);
+		System.out.println("this is update part rslt" + result);
 
 	}
 
@@ -552,13 +594,36 @@ public class AdminController {
 				for (Document pardoc : parlistdoc) {
 					Parts part = new Parts();
 
-					part.setId(doc.getObjectId("_id").toString());
+					// part.setId(doc.getObjectId("_id").toString());
+
+					// part.setName(pardoc.getString("name"));
+					// part.setDescription(pardoc.getString("description"));
+					// part.setQuntitie(pardoc.getInteger("quantity"));
+					// part.setPrice(pardoc.getInteger("price"));
+
+					// partlist.add(part);
+
+					part.setId(pardoc.getObjectId("_id").toString());
 
 					part.setName(pardoc.getString("name"));
 					part.setDescription(pardoc.getString("description"));
 					part.setQuntitie(pardoc.getInteger("quantity"));
 					part.setPrice(pardoc.getInteger("price"));
+					part.setBuyingprice(pardoc.getInteger("prix_achat"));
+					part.setBuyingdate(doc.getDate("date_de_vente"));
 
+					Document fourniDocument = pardoc.get("fournisseur", Document.class);
+					Fournisseur fournisseur = new Fournisseur();
+
+					fournisseur.setId(fourniDocument.getObjectId("_id").toString());
+					fournisseur.setName(fourniDocument.getString("name"));
+					// SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
+					fournisseur.setAddress(fourniDocument.getString("adresse"));
+					fournisseur.setPhone(fourniDocument.getString("numero"));
+					fournisseur.setEmail(fourniDocument.getString("email"));
+
+					part.setFournisseur(fournisseur);
 					partlist.add(part);
 
 				}
@@ -746,8 +811,8 @@ public class AdminController {
 
 	}
 
-	public static ArrayList<Fournisseur> ListSales() {
-		ArrayList<Fournisseur> List = new ArrayList<Fournisseur>();
+	public static ArrayList<Sales> ListSales() {
+		ArrayList<Sales> List = new ArrayList<Sales>();
 		MongoCollection<Document> collection = Connectdatabase.connectdb("ventes");
 
 		MongoCursor<Document> cursor = collection.find().iterator();
@@ -758,24 +823,40 @@ public class AdminController {
 
 				sale.setId(doc.getObjectId("_id").toString());
 				sale.setDate_de_vente(doc.getDate("date_de_vente"));
+				// SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
 				List<Document> parlistdoc = doc.getList("parts", Document.class);
 				ArrayList<Parts> part_list = new ArrayList<Parts>();
 				for (Document pardoc : parlistdoc) {
 					Parts part = new Parts();
 
-					part.setId(doc.getObjectId("_id").toString());
+					part.setId(pardoc.getObjectId("_id").toString());
 
 					part.setName(pardoc.getString("name"));
 					part.setDescription(pardoc.getString("description"));
 					part.setQuntitie(pardoc.getInteger("quantity"));
 					part.setPrice(pardoc.getInteger("price"));
+					part.setBuyingprice(pardoc.getInteger("prix_achat"));
+					part.setBuyingdate(doc.getDate("date_de_vente"));
+
+					Document fourniDocument = pardoc.get("fournisseur", Document.class);
+					Fournisseur fournisseur = new Fournisseur();
+
+					fournisseur.setId(fourniDocument.getObjectId("_id").toString());
+					fournisseur.setName(fourniDocument.getString("name"));
+					// SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+
+					fournisseur.setAddress(fourniDocument.getString("adresse"));
+					fournisseur.setPhone(fourniDocument.getString("numero"));
+					fournisseur.setEmail(fourniDocument.getString("email"));
+
+					part.setFournisseur(fournisseur);
 
 					part_list.add(part);
 
 				}
 				sale.setPartList(part_list);
-
+				List.add(sale);
 			}
 
 		} finally {
@@ -798,6 +879,54 @@ public class AdminController {
 
 	}
 
+	public static void update_parts_qtnt_delete(ArrayList<Parts> listp) {
+
+		// System.out.println("id part " + listp.get(0).getName());
+		MongoCollection<Document> collection = Connectdatabase.connectdb("parts");
+		ObservableList<Parts> list_before = AdminController.PartList();
+		// System.out.println("list before " + list_before.size());
+		ArrayList<Parts> newlist = new ArrayList<Parts>();
+		ArrayList<Document> myDocuments = new ArrayList<Document>();
+		List<UpdateOneModel<Document>> updates = new ArrayList<>();
+
+		for (Parts part : listp) {
+			// System.out.println("haana part id" + part.getId());
+			for (int i = 0; i < list_before.size(); i++) {
+				// System.out.println("haana listbefore part id" + list_before.get(i).getId());
+				if (list_before.get(i).getId().equals(part.getId())) {
+
+					list_before.get(i).setQuntitie(list_before.get(i).getQuntitie() + part.getQuntitie());
+					// System.out.println(list_before.get(i).getName() + "quntt changed to " +
+					// (list_before.get(i).getQuntitie() - list.get(i).getQuntitie()));
+					newlist.add(list_before.get(i));
+					Document addpart = new Document("_id", new ObjectId(list_before.get(i).getId()));
+					// addpart.append("name", list_before.get(i).getName());
+					// addpart.append("price", list_before.get(i).getPrice());
+					addpart.append("quantity", list_before.get(i).getQuntitie());
+					// addpart.append("description", list_before.get(i).getDescription());
+
+					myDocuments.add(addpart);
+
+					break;
+				}
+			}
+		}
+
+		for (Document doc : myDocuments) {
+			ObjectId id = doc.getObjectId("_id");
+			// Create the update operation to set the new field values
+			UpdateOneModel<Document> update = new UpdateOneModel<>(
+					Filters.eq("_id", id),
+					new Document("$set", doc));
+			updates.add(update);
+
+		}
+
+		BulkWriteResult result = collection.bulkWrite(updates);
+		System.out.println("this is update part delete rslt" + result);
+
+	}
+
 	public static ArrayList<Rendez_vous> statRdvList(LocalDate date) {
 		MongoCollection<Document> collection = Connectdatabase.connectdb("Rendez_vous");
 		ArrayList<Rendez_vous> List = new ArrayList<>();
@@ -815,8 +944,7 @@ public class AdminController {
 		Document query = new Document("date_debut", new Document("$gte", startDate)
 				.append("$lt", endDate));
 
-		FindIterable<Document> iterable = collection.find(query).sort(new Document("date_debut", 1));
-		MongoCursor<Document> cursor = iterable.iterator();
+		MongoCursor<Document> cursor = collection.find(query).iterator();
 
 		try {
 			while (cursor.hasNext()) {
@@ -889,6 +1017,7 @@ public class AdminController {
 
 			}
 		} finally {
+			List.sort((doc1, doc2) -> (doc1.getDate_debut()).compareTo(doc2.getDate_debut()));
 			cursor.close();
 			Connectdatabase.closeconndb();
 
@@ -900,12 +1029,13 @@ public class AdminController {
 
 	}
 
-	public static ArrayList<Fournisseur> statListSales(LocalDate date) {
-		ArrayList<Fournisseur> List = new ArrayList<Fournisseur>();
+	public static ArrayList<Sales> statListSales(LocalDate date) {
+		ArrayList<Sales> List = new ArrayList<Sales>();
 		MongoCollection<Document> collection = Connectdatabase.connectdb("ventes");
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
+		date = date.minusDays(date.getDayOfMonth() - 1);
 		String datedabutString = date.atStartOfDay().format(formatter);
 		Date startDate = Date.from(Instant.parse(datedabutString));
 
@@ -913,14 +1043,15 @@ public class AdminController {
 		String datefinString = datefin.atStartOfDay().format(formatter);
 		Date endDate = Date.from(Instant.parse(datefinString));
 
-		Document query = new Document("date_debut", new Document("$gte", startDate)
+		Document query = new Document("date_de_vente", new Document("$gte",
+				startDate)
 				.append("$lt", endDate));
 
-		FindIterable<Document> iterable = collection.find(query).sort(new Document("myDate", 1));
 		MongoCursor<Document> cursor = collection.find(query).iterator();
 
 		try {
 			while (cursor.hasNext()) {
+
 				Document doc = cursor.next();
 				Sales sale = new Sales();
 
@@ -932,18 +1063,20 @@ public class AdminController {
 				for (Document pardoc : parlistdoc) {
 					Parts part = new Parts();
 
-					part.setId(doc.getObjectId("_id").toString());
+					part.setId(pardoc.getObjectId("_id").toString());
 
 					part.setName(pardoc.getString("name"));
 					part.setDescription(pardoc.getString("description"));
 					part.setQuntitie(pardoc.getInteger("quantity"));
 					part.setPrice(pardoc.getInteger("price"));
+					part.setBuyingprice(pardoc.getInteger("prix_achat"));
+					part.setBuyingdate(doc.getDate("date_de_vente"));
 
 					part_list.add(part);
 
 				}
 				sale.setPartList(part_list);
-
+				List.add(sale);
 			}
 
 		} finally {
@@ -951,7 +1084,7 @@ public class AdminController {
 			Connectdatabase.closeconndb();
 
 		}
-
+		System.out.println("stat sales" + List.size());
 		return List;
 
 	}

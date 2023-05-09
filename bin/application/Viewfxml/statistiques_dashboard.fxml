@@ -1,23 +1,142 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="sales_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.Stat_dashboard">
    <top>
-      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </top>
-   <bottom>
-      <Pane prefHeight="150.0" prefWidth="1030.0" BorderPane.alignment="CENTER" />
-   </bottom>
-   <center>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="223.00000610351563" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="485.5999923706055" minHeight="10.0" prefHeight="300.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="450.0" minHeight="10.0" prefHeight="380.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <Pane prefHeight="350.0" prefWidth="450.0" />
-            <Pane prefHeight="350.0" prefWidth="450.0" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="btn_ventes" mnemonicParsing="false" onAction="#ventes" prefHeight="100.0" prefWidth="515.0" styleClass="stats_btn" stylesheets="@btn.css" text="Les ventes">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btn_rendez_vous" mnemonicParsing="false" onAction="#rendez_vous" prefHeight="100.0" prefWidth="515.0" styleClass="stats_btn" stylesheets="@btn.css" text="Rendez-vous">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+            <GridPane GridPane.rowIndex="1">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="531.0" minWidth="10.0" prefWidth="517.3999633789062" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="531.0" minWidth="10.0" prefWidth="517.3999633789062" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="636.6000366210938" minWidth="10.0" prefWidth="512.6000366210938" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="120.00000610351563" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="250.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="btn_filtr" layoutX="196.0" layoutY="11.0" mnemonicParsing="false" onAction="#filtre" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@btn.css" text="Filtrer">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children></Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <DatePicker fx:id="date" layoutX="23.0" layoutY="12.0" prefHeight="30.0" prefWidth="300.0" promptText="Date" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="300.0" styleClass="pane_txt" stylesheets="@stats.css">
+                           <children>
+                              <Text fx:id="stat_2" layoutX="54.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="191.38900756835938">
+                                 <font>
+                                    <Font size="40.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="title_state_2" layoutX="9.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="282.07090759277344">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="300.0" styleClass="pane_txt" stylesheets="@stats.css">
+                           <children>
+                              <Text fx:id="title_state_1" layoutX="16.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="267.67095947265625">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Text>
+                              <Text fx:id="stat_1" layoutX="26.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="248.18907165527344">
+                                 <font>
+                                    <Font size="40.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <children>
+                        <Pane prefHeight="200.0" prefWidth="300.0" styleClass="pane_txt" stylesheets="@stats.css">
+                           <children>
+                              <Text fx:id="stat_3" layoutX="52.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="196.1890869140625">
+                                 <font>
+                                    <Font size="40.0" />
+                                 </font>
+                              </Text>
+                              <Text fx:id="title_state_3" layoutX="7.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="286.8707275390625">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <children>
+                  <Pane prefHeight="238.0" prefWidth="900.0">
+                     <children>
+                        <LineChart fx:id="line_chart" layoutX="-2.0" layoutY="12.0" prefHeight="311.0" prefWidth="904.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </LineChart>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
          </children>
-      </HBox>
-   </center>
+      </GridPane>
+   </top>
 </BorderPane>

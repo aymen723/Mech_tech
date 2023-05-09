@@ -55,12 +55,8 @@ public class LoginController {
 	@FXML
 	BorderPane login_container;
 
-
-
 	@FXML
 	private Button close_button;
-
-
 
 	@FXML
 	private Pane tool_bar;
@@ -117,15 +113,11 @@ public class LoginController {
 
 					Parent root = loader.load();
 					DashbordController dashbord_con = loader.getController();
-					
 
 					dashbord_con.setuser(user);
 					System.out.println(user.getEmail());
 
 					Stage stage_login = (Stage) login_container.getScene().getWindow();
-
-
-					
 
 					Stage stage = new Stage();
 					Rectangle shape = new Rectangle(1200, 700);
@@ -159,15 +151,46 @@ public class LoginController {
 				user.setRole(curruser.getString("role"));
 				Parent fxml;
 				try {
-					fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/caissier_dashbord.fxml"));
-					Stage stage = new Stage();
-					Scene scene = new Scene(fxml);
-					stage.setScene(scene);
-					stage.setTitle("Mecha Tech");
-					scene.setFill(Color.TRANSPARENT);
+					// fxml =
+					// FXMLLoader.load(getClass().getResource("/application/Viewfxml/caissier_dashbord.fxml"));
+					// Stage stage = new Stage();
+					// Scene scene = new Scene(fxml);
+					// stage.setScene(scene);
+					// stage.setTitle("Mecha Tech");
+					// scene.setFill(Color.TRANSPARENT);
+
+					// Stage stage_login = (Stage) login_container.getScene().getWindow();
+
+					// stage_login.close();
+					// stage.setResizable(false);
+
+					// stage.show();
+
+					System.out.println("berfore loading");
+
+					FXMLLoader loader = new FXMLLoader(
+							getClass().getResource("/application/Viewfxml/caissier_dashbord.fxml"));
+
+					Parent root = loader.load();
+					caissier_dashbordcontroller dashbord_con = loader.getController();
+
+					dashbord_con.setuser(user);
+					System.out.println(user.getEmail());
 
 					Stage stage_login = (Stage) login_container.getScene().getWindow();
 
+					Stage stage = new Stage();
+					Rectangle shape = new Rectangle(1200, 700);
+					shape.setArcWidth(20);
+					shape.setArcHeight(20);
+
+					// Set the shape as the custom shape for the stage
+					stage.initStyle(StageStyle.UNDECORATED);
+					stage.initStyle(StageStyle.TRANSPARENT);
+					Scene scene = new Scene(root);
+					stage.setScene(scene);
+					scene.setFill(Color.TRANSPARENT);
+					stage.getScene().getRoot().setClip(shape);
 					stage_login.close();
 					stage.setResizable(false);
 
@@ -188,12 +211,5 @@ public class LoginController {
 		stage.close();
 
 	}
-
-	
-
-
-	
-
-	
 
 }

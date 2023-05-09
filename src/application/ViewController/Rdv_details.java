@@ -12,6 +12,7 @@ import org.bson.types.ObjectId;
 
 import application.controller.AdminController;
 import application.models.Clientmodel;
+import application.models.Fournisseur;
 import application.models.Parts;
 import application.models.Rendez_vous;
 import application.models.Usermodel;
@@ -139,7 +140,7 @@ public class Rdv_details {
     ObservableList<Usermodel> list_tech = FXCollections.observableArrayList();
     ObservableList<Usermodel> filtered = FXCollections.observableArrayList();
     ObservableList<Parts> list = FXCollections.observableArrayList();
-
+    ArrayList<Parts> oldparts = new ArrayList<Parts>();
     @FXML
     private Button btn_finish;
 
@@ -169,14 +170,17 @@ public class Rdv_details {
 
     public void getrdv(Rendez_vous rdv) {
 
-        // date_debut_rdv.setDisable(true);
-        // date_fin_rdv.setDisable(true);
-        // prix.setDisable(true);
-        // service.setDisable(true);
-        // description_in.setDisable(true);
-        // description_out.setDisable(true);
+        date_debut_rdv.setDisable(true);
+        date_fin_rdv.setDisable(true);
+        // car_model.setDisable(true);
+        prix.setDisable(true);
+        service.setDisable(true);
+        tech_choice.setDisable(true);
+        description_in.setDisable(true);
+        description_out.setDisable(true);
 
         rdv_local = rdv;
+        this.oldparts.addAll(rdv.getParts());
 
         list_tech = AdminController.EmpLiist();
 
@@ -207,6 +211,8 @@ public class Rdv_details {
         if (rdv.getEtat().equals("en attente")) {
             etat_box.setStyle("-fx-background-color: #D8D8D8");
         } else if (rdv.getEtat().equals("terminé")) {
+            btn_finish.setDisable(true);
+            eng_btn.setDisable(true);
             etat_box.setStyle("-fx-background-color: #98D8AA");
         } else if (rdv.getEtat().equals("en cours")) {
             etat_box.setStyle("-fx-background-color: #F3E99F");
@@ -235,12 +241,6 @@ public class Rdv_details {
                         img_copy.setFitHeight(25);
                         img_copy.setFitWidth(25);
                         deletebutton.setGraphic(img_copy);
-
-                        deletebutton.setOnAction(event -> {
-                            // ObservableList<Parts> selectedItems =
-                            // parts_table.getSelectionModel().getSelectedItems();
-
-                        });
 
                         deletebutton.setOnAction(event -> {
 
@@ -346,23 +346,28 @@ public class Rdv_details {
 
             date_debut_rdv.setDisable(false);
             date_fin_rdv.setDisable(false);
+            // car_model.setDisable(true);
             prix.setDisable(false);
             service.setDisable(false);
+            tech_choice.setDisable(false);
             description_in.setDisable(false);
             description_out.setDisable(false);
 
         } else {
+
             date_debut_rdv.setDisable(true);
             date_fin_rdv.setDisable(true);
+            // car_model.setDisable(true);
             prix.setDisable(true);
             service.setDisable(true);
+            tech_choice.setDisable(true);
             description_in.setDisable(true);
             description_out.setDisable(true);
         }
     }
 
     @FXML
-    void enregistre(ActionEvent event) {
+    void enregistre() {
 
         Document newrdv = new Document("date_debut", date_debut_rdv.getValue());
         newrdv.append("date_fin", date_fin_rdv.getValue());
@@ -383,15 +388,37 @@ public class Rdv_details {
 
         List<Document> myDocuments = new ArrayList<Document>();
         for (int i = 0; i < rdv_local.getParts().size(); i++) {
+            // Parts part = rdv_local.getParts().get(i);
+            // Document addpart = new Document("_id", new ObjectId(part.getId()));
+            // addpart.append("name", part.getName());
+            // addpart.append("price", part.getPrice());
+            // addpart.append("quantity", part.getQuntitie());
+
+            // myDocuments.add(addpart);
+
+            // System.out.println(myDocuments.get(i));
             Parts part = rdv_local.getParts().get(i);
             Document addpart = new Document("_id", new ObjectId(part.getId()));
             addpart.append("name", part.getName());
             addpart.append("price", part.getPrice());
             addpart.append("quantity", part.getQuntitie());
+            addpart.append("prix_achat", part.getBuyingprice());
+            addpart.append("date_de_vente", part.getBuyingdate());
+
+            Fournisseur fournisseur = part.getFournisseur();
+            Document docfournisseur = new Document("_id", new ObjectId(fournisseur.getId()));
+            docfournisseur.append("name", fournisseur.getName());
+            docfournisseur.append("adresse", fournisseur.getAddress());
+            docfournisseur.append("email", fournisseur.getEmail());
+            docfournisseur.append("numero", fournisseur.getPhone());
+
+            addpart.append("fournisseur", docfournisseur);
+
             myDocuments.add(addpart);
 
             System.out.println(myDocuments.get(i));
         }
+        newrdv.append("parts", myDocuments);
         rdv_local.setDate_debut(Date.from(date_debut_rdv.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         rdv_local.setDate_fin(Date.from(date_fin_rdv.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         rdv_local.setDescrption_in(description_in.getText());
@@ -399,6 +426,8 @@ public class Rdv_details {
         rdv_local.setService(service.getText());
         rdv_local.setPrix(Integer.parseInt(prix.getText()));
         AdminController.UpdateRdv(newrdv, rdv_local);
+        AdminController.update_parts_qtnt_delete(oldparts);
+        AdminController.update_parts_qtnt(rdv_local.getParts());
 
     }
 
@@ -456,6 +485,7 @@ public class Rdv_details {
         if (result.get() == ButtonType.OK) {
 
             AdminController.deletrdv(rdv_local);
+            AdminController.update_parts_qtnt_delete(rdv_local.getParts());
 
             try {
 
@@ -480,11 +510,13 @@ public class Rdv_details {
     @FXML
     void finish(ActionEvent event) {
         if (!rdv_local.getEtat().equals("terminé")) {
+            enregistre();
             LocalDate currentDate = LocalDate.now();
             Document newrdv = new Document("etat", "terminé");
             newrdv.append("date_fin", currentDate);
             AdminController.UpdateRdv(newrdv, rdv_local);
             System.out.println();
+
             AdminController.update_parts_qtnt(rdv_local.getParts());
         }
 

@@ -36,6 +36,8 @@ public class DashbordController implements Initializable {
 	@FXML
 	private Button btn_stats;
 	@FXML
+	private Button btn_Fournisseur;
+	@FXML
 	private BorderPane container;
 	@FXML
 	private Button close_add;
@@ -48,6 +50,9 @@ public class DashbordController implements Initializable {
 
 	@FXML
 	private Button close_button;
+
+	@FXML
+	private Button btn_sales;
 
 	@FXML
 	private Pane tool_bar;
@@ -66,8 +71,6 @@ public class DashbordController implements Initializable {
 		stage.close();
 	}
 
-	
-
 	public void dashbord(javafx.event.ActionEvent actione) throws IOException {
 		try {
 			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/home_dashbord.fxml"));
@@ -82,6 +85,11 @@ public class DashbordController implements Initializable {
 		Rendez_vous.getStyleClass().remove("afterpress");
 		Employés.getStyleClass().remove("afterpress");
 		Clients.getStyleClass().remove("afterpress");
+		btn_car.getStyleClass().remove("afterpress");
+		btn_stats.getStyleClass().remove("afterpress");
+		btn_Fournisseur.getStyleClass().remove("afterpress");
+		btn_sales.getStyleClass().remove("afterpress");
+
 		dashbord_btn.getStyleClass().add("afterpress");
 
 	}
@@ -92,7 +100,8 @@ public class DashbordController implements Initializable {
 			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/parts_dashbord.fxml"));
 			container.getChildren().removeAll();
 			container.getChildren().setAll(fxml);
-			System.out.println("container height " +container.getHeight() + " container width " + container.getWidth());
+			System.out
+					.println("container height " + container.getHeight() + " container width " + container.getWidth());
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -102,6 +111,10 @@ public class DashbordController implements Initializable {
 		Clients.getStyleClass().remove("afterpress");
 		dashbord_btn.getStyleClass().remove("afterpress");
 		Rendez_vous.getStyleClass().remove("afterpress");
+		btn_car.getStyleClass().remove("afterpress");
+		btn_stats.getStyleClass().remove("afterpress");
+		btn_Fournisseur.getStyleClass().remove("afterpress");
+		btn_sales.getStyleClass().remove("afterpress");
 
 		parts.getStyleClass().add("afterpress");
 
@@ -122,28 +135,12 @@ public class DashbordController implements Initializable {
 		parts.getStyleClass().remove("afterpress");
 		Employés.getStyleClass().remove("afterpress");
 		Clients.getStyleClass().remove("afterpress");
+		btn_car.getStyleClass().remove("afterpress");
+		btn_stats.getStyleClass().remove("afterpress");
+		btn_Fournisseur.getStyleClass().remove("afterpress");
+		btn_sales.getStyleClass().remove("afterpress");
 
 		Rendez_vous.getStyleClass().add("afterpress");
-
-		// try {
-		// Parent fxml =
-		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/Rendez_vous_dashbord.fxml"));
-		// Stage stage = new Stage();
-		// Scene scene = new Scene(fxml);
-		// stage.setScene(scene);
-		// stage.setTitle("Mecha Tech");
-		// scene.setFill(Color.TRANSPARENT);
-
-		// // primaryStage.initStyle(StageStyle.UNDECORATED);
-		// // primaryStage.initStyle(StageStyle.TRANSPARENT);
-
-		// // primaryStage.setResizable(false);
-		// stage.show();
-
-		// } catch (IOException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
 
 	}
 
@@ -162,6 +159,10 @@ public class DashbordController implements Initializable {
 		parts.getStyleClass().remove("afterpress");
 		Rendez_vous.getStyleClass().remove("afterpress");
 		Clients.getStyleClass().remove("afterpress");
+		btn_car.getStyleClass().remove("afterpress");
+		btn_stats.getStyleClass().remove("afterpress");
+		btn_Fournisseur.getStyleClass().remove("afterpress");
+		btn_sales.getStyleClass().remove("afterpress");
 
 		Employés.getStyleClass().add("afterpress");
 	}
@@ -181,6 +182,10 @@ public class DashbordController implements Initializable {
 		parts.getStyleClass().remove("afterpress");
 		Rendez_vous.getStyleClass().remove("afterpress");
 		Employés.getStyleClass().remove("afterpress");
+		btn_car.getStyleClass().remove("afterpress");
+		btn_stats.getStyleClass().remove("afterpress");
+		btn_Fournisseur.getStyleClass().remove("afterpress");
+		btn_sales.getStyleClass().remove("afterpress");
 
 		Clients.getStyleClass().add("afterpress");
 
@@ -223,7 +228,7 @@ public class DashbordController implements Initializable {
 	@FXML
 	void car(ActionEvent event) {
 		try {
-			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Car_dashboard.fxml"));
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Car_Dashboard.fxml"));
 			container.getChildren().removeAll();
 			container.getChildren().setAll(fxml);
 
@@ -231,37 +236,47 @@ public class DashbordController implements Initializable {
 			// TODO: handle exception
 		}
 
-		// try {
-		// Parent fxml =
-		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/Car_dashboard.fxml"));
-		// Stage stage = new Stage();
-		// Scene scene = new Scene(fxml);
-		// stage.setScene(scene);
-		// // stage.setTitle("Mecha Tech");
-		// // scene.setFill(Color.TRANSPARENT);
+		dashbord_btn.getStyleClass().remove("afterpress");
+		parts.getStyleClass().remove("afterpress");
+		Rendez_vous.getStyleClass().remove("afterpress");
+		Employés.getStyleClass().remove("afterpress");
+		Clients.getStyleClass().remove("afterpress");
+		btn_stats.getStyleClass().remove("afterpress");
+		btn_Fournisseur.getStyleClass().remove("afterpress");
+		btn_sales.getStyleClass().remove("afterpress");
 
-		// // primaryStage.initStyle(StageStyle.UNDECORATED);
-		// // primaryStage.initStyle(StageStyle.TRANSPARENT);
+		btn_car.getStyleClass().add("afterpress");
 
-		// // primaryStage.setResizable(false);
-		// stage.show();
-
-		// } catch (IOException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
 	}
 
 	@FXML
 	void stats(ActionEvent event) {
+		try {
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/statistiques_dashboard.fxml"));
+			container.getChildren().removeAll();
+			container.getChildren().setAll(fxml);
 
+		} catch (Exception e) {
+			// TODO: handle exceptiontteste
+		}
+
+		dashbord_btn.getStyleClass().remove("afterpress");
+		parts.getStyleClass().remove("afterpress");
+		Rendez_vous.getStyleClass().remove("afterpress");
+		Employés.getStyleClass().remove("afterpress");
+		Clients.getStyleClass().remove("afterpress");
+		btn_car.getStyleClass().remove("afterpress");
+		btn_Fournisseur.getStyleClass().remove("afterpress");
+		btn_sales.getStyleClass().remove("afterpress");
+
+		btn_stats.getStyleClass().add("afterpress");
 	}
 
 	@FXML
 	void Fournisseur(ActionEvent event) {
 
 		try {
-			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Fournisseur_dashboard.fxml"));
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Fournisseur_Dashboard.fxml"));
 			container.getChildren().removeAll();
 			container.getChildren().setAll(fxml);
 
@@ -269,25 +284,15 @@ public class DashbordController implements Initializable {
 			// TODO: handle exception
 		}
 
-		// Parent fxml;
-		// try {
-		// fxml =
-		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/Fournisseur_dashboard.fxml"));
-		// Stage stage = new Stage();
-		// Scene scene = new Scene(fxml);
-		// stage.setScene(scene);
-		// stage.setTitle("Mecha Tech");
-		// scene.setFill(Color.TRANSPARENT);
-
-		// Stage stage_login = (Stage) container.getScene().getWindow();
-
-		// stage_login.close();
-
-		// stage.show();
-
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
+		dashbord_btn.getStyleClass().remove("afterpress");
+		parts.getStyleClass().remove("afterpress");
+		Rendez_vous.getStyleClass().remove("afterpress");
+		Employés.getStyleClass().remove("afterpress");
+		Clients.getStyleClass().remove("afterpress");
+		btn_car.getStyleClass().remove("afterpress");
+		btn_stats.getStyleClass().remove("afterpress");
+		btn_sales.getStyleClass().remove("afterpress");
+		btn_sales.getStyleClass().add("afterpress");
 
 	}
 
@@ -342,6 +347,30 @@ public class DashbordController implements Initializable {
 
 	public Usermodel getuser() {
 		return user;
+	}
+
+	@FXML
+	void sales(ActionEvent event) {
+
+		try {
+			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Sales_dashbord.fxml"));
+			container.getChildren().removeAll();
+			container.getChildren().setAll(fxml);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		dashbord_btn.getStyleClass().remove("afterpress");
+		parts.getStyleClass().remove("afterpress");
+		Rendez_vous.getStyleClass().remove("afterpress");
+		Employés.getStyleClass().remove("afterpress");
+		Clients.getStyleClass().remove("afterpress");
+		btn_car.getStyleClass().remove("afterpress");
+		btn_stats.getStyleClass().remove("afterpress");
+		btn_Fournisseur.getStyleClass().remove("afterpress");
+
+		btn_sales.getStyleClass().add("afterpress");
 	}
 
 	@Override

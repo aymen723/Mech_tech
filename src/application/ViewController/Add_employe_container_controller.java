@@ -90,28 +90,35 @@ public class Add_employe_container_controller implements Initializable {
 
 	public void ajouter_employer() {
 
-		Document newemp = new Document("nomutil", usernamefield.getText());
-		newemp.append("nom", namefield.getText());
-		newemp.append("prenom", prenomfield.getText());
-		newemp.append("tel", numerofield.getText());
-		newemp.append("role", role.getValue());
-		newemp.append("email", emailfield.getText());
-		newemp.append("motdepass", passworField.getText());
-		AdminController.AddEmp(newemp);
+		if ((usernamefield.getText().trim().isEmpty() == false) &&
+				(namefield.getText().trim().isEmpty() == false) &&
+				(prenomfield.getText().trim().isEmpty() == false) &&
+				(emailfield.getText().trim().isEmpty() == false) &&
+				(passworField.getText().trim().isEmpty() == false) &&
+				(emailfield.getText().trim().isEmpty() == false)) {
+			Document newemp = new Document("nomutil", usernamefield.getText());
+			newemp.append("nom", namefield.getText());
+			newemp.append("prenom", prenomfield.getText());
+			newemp.append("tel", numerofield.getText());
+			newemp.append("role", role.getValue());
+			newemp.append("email", emailfield.getText());
+			newemp.append("motdepass", passworField.getText());
+			AdminController.AddEmp(newemp);
 
-		System.out.println("test hna1");
+			System.out.println("test hna1");
 
-		try {
-			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/add_employe_dashbord.fxml"));
-			add_container.getChildren().removeAll();
-			add_container.getChildren().setAll(fxml);
-			System.out.println("test hna 2");
+			try {
+				Parent fxml = FXMLLoader
+						.load(getClass().getResource("/application/Viewfxml/add_employe_dashbord.fxml"));
+				add_container.getChildren().removeAll();
+				add_container.getChildren().setAll(fxml);
+				System.out.println("test hna 2");
 
-		} catch (Exception e) {
-
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			System.out.println("test hna 3");
 		}
-		System.out.println("test hna 3");
-
 	}
 
 	@FXML

@@ -18,6 +18,8 @@ import application.models.Rendez_vous;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -111,7 +113,8 @@ public class Rdv_veiwcontroller implements Initializable {
 	private Button year_btn;
 
 	private ArrayList<Rendez_vous> listrdv = AdminController.ListRdv();
-	// private FilteredList<Rendez_vous> filteredRendezVousList;
+
+	private FilteredList<Rendez_vous> filteredRendezVousList;
 	// Arraylist<Parts> list =
 
 	LocalDate date = LocalDate.now();
@@ -121,7 +124,6 @@ public class Rdv_veiwcontroller implements Initializable {
 	ObservableList<Rendez_vous> list = FXCollections.observableArrayList(listrdv);
 
 	public void rdv_ajouter() {
-
 
 		try {
 			Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/ajouter_rdv.fxml"));
@@ -284,27 +286,6 @@ public class Rdv_veiwcontroller implements Initializable {
 							// TODO: handle exception
 						}
 
-						try {
-
-							FXMLLoader loader = new FXMLLoader(
-									getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
-							Parent root = loader.load();
-
-							Rdv_details rdv_details_con = loader.getController();
-							System.out.println(rdv_details_con);
-
-							rdv_details_con.getrdv(rdv);
-							Stage stage = new Stage();
-							Scene scene = new Scene(root);
-							stage.setScene(scene);
-							stage.setTitle("Mecha Tech");
-
-							stage.show();
-
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
 					});
 				}
 
@@ -325,6 +306,41 @@ public class Rdv_veiwcontroller implements Initializable {
 		});
 
 		rdv_table.setItems(list);
+
+		filteredRendezVousList = new FilteredList<>(list, b -> true);
+
+		// Set the filter Predicate whenever the search text changes
+		search_rdv.textProperty().addListener((observable, oldValue, newValue) -> {
+			FilteredList<Rendez_vous> filteredList = new FilteredList<>(list, data -> true);
+			filteredList.setPredicate(data -> {
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+				String lowerCaseFilter = newValue.toLowerCase();
+				if (data.getClient_rdv().getNom().toLowerCase().contains(lowerCaseFilter)) {
+					return true;
+				} else if (data.getCar_model().toLowerCase().contains(lowerCaseFilter)) {
+					return true;
+				} else if (String.valueOf(data.getCar_rdv().getVin()).contains(lowerCaseFilter)) {
+					return true;
+				} else if (String.valueOf(data.getDate_debut()).contains(lowerCaseFilter)) {
+					return true;
+				}
+
+				rdv_table.refresh();
+				return false;
+			});
+			SortedList<Rendez_vous> sortedList = new SortedList<>(filteredList);
+			sortedList.comparatorProperty().bind(rdv_table.comparatorProperty());
+			System.out.println(sortedList.size());
+			rdv_table.setItems(sortedList);
+		});
+
+		// Wrap the filtered list in a sorted list
+		SortedList<Rendez_vous> sortedList = new SortedList<>(filteredRendezVousList);
+
+		// Bind the sorted list to the table
+		rdv_table.setItems(sortedList);
 
 	}
 }

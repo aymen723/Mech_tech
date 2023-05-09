@@ -20,7 +20,6 @@ public class Main extends Application {
 
 	public String url = "mongodb://localhost:27017";
 
-
 	@Override
 	public void start(Stage primaryStage) {
 
@@ -29,7 +28,7 @@ public class Main extends Application {
 			fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Login.fxml"));
 
 			Scene scene = new Scene(fxml);
-			
+
 			primaryStage.setTitle("Mecha Tech");
 			Rectangle shape = new Rectangle(800, 500);
 			shape.setArcWidth(20);

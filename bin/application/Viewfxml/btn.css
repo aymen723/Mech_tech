@@ -29,5 +29,22 @@
   -fx-background-color: rgb(93, 204, 93);
   -fx-text-fill: White;
   -fx-background-radius: 8px;
-  -fx-background-radius: 8px;
+}
+
+.stats_btn {
+  -fx-background-color: transparent;
+}
+
+.stats_btn:hover {
+  -fx-border-style: hidden none solid none;
+  -fx-border-color: black;
+  -fx-border-width: 2px;
+  -fx-border-radius: 10px;
+}
+
+.stats_btn_clicked {
+  -fx-border-style: hidden none solid none;
+  -fx-border-color: black;
+  -fx-border-width: 2px;
+  -fx-border-radius: 10px;
 }

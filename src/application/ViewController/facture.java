@@ -36,10 +36,9 @@ public class facture {
     private Text car_fact;
 
     @FXML
-    private Text descrp_fact;
-
-    @FXML
     private Text date_debut_fact;
+    @FXML
+    private Text vin_text;
 
     @FXML
     private Text date_fin_fact;
@@ -86,9 +85,6 @@ public class facture {
     @FXML
     private Pane factpane;
 
-    @FXML
-    private Text controdu_fact;
-
     public void Gettrdv(Rendez_vous rdv) {
 
         rdv_local = rdv;
@@ -97,9 +93,7 @@ public class facture {
         nom_fact.setText(rdv_local.getClient_rdv().getNom());
         prenom_fact.setText(rdv_local.getClient_rdv().getPrenom());
         car_fact.setText(rdv_local.getCar_model());
-        descrp_fact.setText(rdv_local.getDescrption_in());
-
-        controdu_fact.setText(rdv_local.getDescrption_out());
+        vin_text.setText(rdv_local.getCar_rdv().getVin());
         date_debut_fact.setText(DATE_FORMAT.format(rdv_local.getDate_debut()));
         date_fin_fact.setText(DATE_FORMAT.format(rdv_local.getDate_fin()));
         service_fact.setText(rdv_local.getService());
@@ -107,8 +101,6 @@ public class facture {
         nom_part_fact.setCellValueFactory(new PropertyValueFactory<>("name"));
         prix_part_fact.setCellValueFactory(new PropertyValueFactory<>("price"));
         quant_part_fact.setCellValueFactory(new PropertyValueFactory<>("quntitie"));
-
-
 
         for (int i = 0; i < rdv_local.getParts().size(); i++) {
 

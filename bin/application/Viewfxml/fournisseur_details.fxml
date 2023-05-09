@@ -14,16 +14,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="details_con" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.fournisseur_details">
+<BorderPane fx:id="details_con" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.fournisseur_details">
    <top>
       <GridPane prefHeight="734.0" prefWidth="900.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="291.99999847412107" minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="291.99999847412107" minHeight="10.0" prefHeight="140.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="491.80000000000007" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="437.40001831054695" minHeight="10.0" prefHeight="400.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="430.0" minHeight="10.0" prefHeight="350.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <GridPane>
@@ -48,7 +48,7 @@
                               <Font name="System Bold" size="25.0" />
                            </font>
                         </Text>
-                        <CheckBox fx:id="mod" layoutX="14.0" layoutY="52.0" mnemonicParsing="false" onAction="#modifier" prefHeight="17.0" prefWidth="184.0" text="Modifier" />
+                        <CheckBox fx:id="mod" layoutX="166.0" layoutY="18.0" mnemonicParsing="false" onAction="#modifier" prefHeight="17.0" prefWidth="184.0" text="Modifier" />
                      </children>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
