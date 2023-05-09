@@ -97,18 +97,24 @@ public class home_controller implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
+        // TODO Auto-generated method stub
+        // throw new UnsupportedOperationException("Unimplemented method 'initialize'");
+
         list_rdv = FXCollections.observableArrayList(AdminController.ListRdv());
         list_part = FXCollections.observableArrayList(AdminController.PartList());
         LocalDate currentDate = LocalDate.now();
         System.out.println("test date" + currentDate);
 
+        int currentMonth = currentDate.getMonthValue();
         Predicate<Rendez_vous> rdvfilter = item -> (item.getDate_debut().toInstant().atZone(ZoneId.systemDefault())
                 .toLocalDate().equals(currentDate))
+                || (item.getDate_debut().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
+                        .isBefore(currentDate))
                 || (item.getEtat().equals("en cours"));
         List<Rendez_vous> filteredRdv = list_rdv.stream().filter(rdvfilter).toList();
 
         Predicate<Parts> partfilter = item -> (item.getQuntitie() <= 5);
-        List<Parts> filteredPart = list_part.stream().filter(partfilter).toList();
+        List<Parts> filteredpart = list_part.stream().filter(partfilter).toList();
 
         for (Rendez_vous rdv : filteredRdv) {
             try {
