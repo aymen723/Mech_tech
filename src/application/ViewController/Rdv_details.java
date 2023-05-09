@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.bson.Document;
@@ -168,13 +169,12 @@ public class Rdv_details {
 
     public void getrdv(Rendez_vous rdv) {
 
-        date_debut_rdv.setDisable(true);
-        date_fin_rdv.setDisable(true);
-        // car_model.setDisable(true);
-        prix.setDisable(true);
-        service.setDisable(true);
-        description_in.setDisable(true);
-        description_out.setDisable(true);
+        // date_debut_rdv.setDisable(true);
+        // date_fin_rdv.setDisable(true);
+        // prix.setDisable(true);
+        // service.setDisable(true);
+        // description_in.setDisable(true);
+        // description_out.setDisable(true);
 
         rdv_local = rdv;
 
@@ -346,7 +346,6 @@ public class Rdv_details {
 
             date_debut_rdv.setDisable(false);
             date_fin_rdv.setDisable(false);
-            car_model.setDisable(false);
             prix.setDisable(false);
             service.setDisable(false);
             description_in.setDisable(false);
@@ -355,7 +354,6 @@ public class Rdv_details {
         } else {
             date_debut_rdv.setDisable(true);
             date_fin_rdv.setDisable(true);
-            car_model.setDisable(true);
             prix.setDisable(true);
             service.setDisable(true);
             description_in.setDisable(true);
@@ -371,8 +369,17 @@ public class Rdv_details {
         newrdv.append("descrption_in", description_in.getText());
         newrdv.append("descrption_out", description_out.getText());
         newrdv.append("service", service.getText());
-
         newrdv.append("prix", Integer.parseInt(prix.getText()));
+
+        Usermodel newtechnicien = tech_choice.getValue();
+
+        Document technicienrdv = new Document("_id", new ObjectId(newtechnicien.getId()));
+        technicienrdv.append("nomutil", newtechnicien.getUsername());
+        technicienrdv.append("nom", newtechnicien.getNom());
+        technicienrdv.append("prenom", newtechnicien.getPrenom());
+        technicienrdv.append("tel", newtechnicien.getNumero());
+        technicienrdv.append("role", newtechnicien.getRole());
+        technicienrdv.append("email", newtechnicien.getEmail());
 
         List<Document> myDocuments = new ArrayList<Document>();
         for (int i = 0; i < rdv_local.getParts().size(); i++) {
@@ -385,7 +392,12 @@ public class Rdv_details {
 
             System.out.println(myDocuments.get(i));
         }
-        newrdv.append("parts", myDocuments);
+        rdv_local.setDate_debut(Date.from(date_debut_rdv.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        rdv_local.setDate_fin(Date.from(date_fin_rdv.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        rdv_local.setDescrption_in(description_in.getText());
+        rdv_local.setDescrption_out(description_out.getText());
+        rdv_local.setService(service.getText());
+        rdv_local.setPrix(Integer.parseInt(prix.getText()));
         AdminController.UpdateRdv(newrdv, rdv_local);
 
     }

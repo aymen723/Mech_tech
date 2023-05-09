@@ -147,7 +147,7 @@ public class Ajouter_rdv implements Initializable {
         newrdv.append("service", service_field.getText());
         newrdv.append("etat", "en attente");
 
-        newrdv.append("car model", car_model.getText());
+        // newrdv.append("car model", car_model.getText());
         newrdv.append("prix", Integer.parseInt(prix.getText()));
         if (invite_check.isSelected() == true) {
 
