@@ -134,76 +134,87 @@ public class Ajouter_rdv implements Initializable {
     @FXML
     void add_rdv(ActionEvent event) {
 
-        Clientmodel newclient;
-        Document clientrdv;
-        Document carrdv;
-        Usermodel newtechnicien = techni_choice.getValue();
+        if ((service_field.getText().trim().isEmpty() == false) &&
+                (car_model.getText().trim().isEmpty() == false) &&
+                (prix.getText().trim().isEmpty() == false) &&
+                (nom_client.getText().trim().isEmpty() == false) &&
+                (prenom_client.getText().trim().isEmpty() == false) &&
+                (prenom_client.getText().trim().isEmpty() == false) &&
+                (numero_client.getText().trim().isEmpty() == false)) {
+            Clientmodel newclient;
+            Document clientrdv;
+            Document carrdv;
+            Usermodel newtechnicien = techni_choice.getValue();
 
-        Document newrdv = new Document("date_debut", datedebut.getValue());
+            Document newrdv = new Document("date_debut", datedebut.getValue());
 
-        newrdv.append("date_fin", date_fin_rdv.getValue());
-        newrdv.append("descrption_in", description_in.getText());
-        newrdv.append("descrption_out", null);
-        newrdv.append("service", service_field.getText());
-        newrdv.append("etat", "en attente");
+            newrdv.append("date_fin", date_fin_rdv.getValue());
+            newrdv.append("descrption_in", description_in.getText());
+            newrdv.append("descrption_out", null);
+            newrdv.append("service", service_field.getText());
+            newrdv.append("etat", "en attente");
 
-        newrdv.append("car model", car_model.getText());
-        newrdv.append("prix", Integer.parseInt(prix.getText()));
-        if (invite_check.isSelected() == true) {
+            newrdv.append("car model", car_model.getText());
+            newrdv.append("prix", Integer.parseInt(prix.getText()));
+            if (invite_check.isSelected() == true) {
 
-            newclient = new Clientmodel(nom_client.getText(), prenom_client.getText(), numero_client.getText());
-            clientrdv = new Document("nom", newclient.getNom());
-            clientrdv.append("prenom", newclient.getPrenom());
-            clientrdv.append("numero", newclient.getNumero());
+                newclient = new Clientmodel(nom_client.getText(), prenom_client.getText(), numero_client.getText());
+                clientrdv = new Document("nom", newclient.getNom());
+                clientrdv.append("prenom", newclient.getPrenom());
+                clientrdv.append("numero", newclient.getNumero());
+
+            } else {
+                newclient = new Clientmodel(client_golbal.getId(), client_golbal.getNom(), client_golbal.getPrenom(),
+                        client_golbal.getEmail(), client_golbal.getAddresse(), client_golbal.getNumero());
+                clientrdv = new Document("_id", new ObjectId(newclient.getId()));
+                clientrdv.append("nom", newclient.getNom());
+                clientrdv.append("prenom", newclient.getPrenom());
+                clientrdv.append("tel", newclient.getNumero());
+                clientrdv.append("email", newclient.getEmail());
+                clientrdv.append("addresse", newclient.getAddresse());
+
+                // clientrdv = AdminController.findclientbyid(newclient.getId());
+
+            }
+            Document technicienrdv = new Document("_id", new ObjectId(newtechnicien.getId()));
+            technicienrdv.append("nomutil", newtechnicien.getUsername());
+            technicienrdv.append("nom", newtechnicien.getNom());
+            technicienrdv.append("prenom", newtechnicien.getPrenom());
+            technicienrdv.append("tel", newtechnicien.getNumero());
+            technicienrdv.append("role", newtechnicien.getRole());
+            technicienrdv.append("email", newtechnicien.getEmail());
+
+            carrdv = new Document("_id", new ObjectId(car_local.getId()));
+            carrdv.append("marque", car_local.getMarque());
+            carrdv.append("modele", car_local.getModele());
+            carrdv.append("couleur", car_local.getCouleur());
+            carrdv.append("matricule", car_local.getMatricule());
+            carrdv.append("vin", car_local.getVin());
+
+            newrdv.append("client", clientrdv);
+            newrdv.append("parts", new ArrayList<Parts>());
+            newrdv.append("Car", carrdv);
+            newrdv.append("technicien", technicienrdv);
+
+            AdminController.addrdv(newrdv);
+            System.out.println(newrdv);
+
+            try {
+
+                FXMLLoader loader = new FXMLLoader(
+                        getClass().getResource("/application/Viewfxml/Rendez_vous_dashbord.fxml"));
+
+                Parent root = loader.load();
+
+                add_container.getChildren().removeAll();
+                add_container.getChildren().setAll(root);
+
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
 
         } else {
-            newclient = new Clientmodel(client_golbal.getId(), client_golbal.getNom(), client_golbal.getPrenom(),
-                    client_golbal.getEmail(), client_golbal.getAddresse(), client_golbal.getNumero());
-            clientrdv = new Document("_id", new ObjectId(newclient.getId()));
-            clientrdv.append("nom", newclient.getNom());
-            clientrdv.append("prenom", newclient.getPrenom());
-            clientrdv.append("tel", newclient.getNumero());
-            clientrdv.append("email", newclient.getEmail());
-            clientrdv.append("addresse", newclient.getAddresse());
 
-            // clientrdv = AdminController.findclientbyid(newclient.getId());
-
-        }
-        Document technicienrdv = new Document("_id", new ObjectId(newtechnicien.getId()));
-        technicienrdv.append("nomutil", newtechnicien.getUsername());
-        technicienrdv.append("nom", newtechnicien.getNom());
-        technicienrdv.append("prenom", newtechnicien.getPrenom());
-        technicienrdv.append("tel", newtechnicien.getNumero());
-        technicienrdv.append("role", newtechnicien.getRole());
-        technicienrdv.append("email", newtechnicien.getEmail());
-
-        carrdv = new Document("_id", new ObjectId(car_local.getId()));
-        carrdv.append("marque", car_local.getMarque());
-        carrdv.append("modele", car_local.getModele());
-        carrdv.append("couleur", car_local.getCouleur());
-        carrdv.append("matricule", car_local.getMatricule());
-        carrdv.append("vin", car_local.getVin());
-
-        newrdv.append("client", clientrdv);
-        newrdv.append("parts", new ArrayList<Parts>());
-        newrdv.append("Car", carrdv);
-        newrdv.append("technicien", technicienrdv);
-
-        AdminController.addrdv(newrdv);
-        System.out.println(newrdv);
-
-        try {
-
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/application/Viewfxml/Rendez_vous_dashbord.fxml"));
-
-            Parent root = loader.load();
-
-            add_container.getChildren().removeAll();
-            add_container.getChildren().setAll(root);
-
-        } catch (Exception e) {
-            // TODO: handle exception
         }
 
     }

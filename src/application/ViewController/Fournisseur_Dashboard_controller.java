@@ -89,17 +89,24 @@ public class Fournisseur_Dashboard_controller implements Initializable {
     @FXML
     void add_fournisseur(ActionEvent event) {
 
-        Fournisseur fournisseur;
-        Document newfournisseur = new Document("nom", name.getText());
-        newfournisseur.append("adresse", address.getText());
-        newfournisseur.append("numero", numero.getText());
-        newfournisseur.append("email", email.getText());
+        if ((name.getText().trim().isEmpty() == false) &&
+                (address.getText().trim().isEmpty() == false) &&
+                (numero.getText().trim().isEmpty() == false) &&
+                (email.getText().trim().isEmpty() == false)) {
+            Fournisseur fournisseur;
+            Document newfournisseur = new Document("nom", name.getText());
+            newfournisseur.append("adresse", address.getText());
+            newfournisseur.append("numero", numero.getText());
+            newfournisseur.append("email", email.getText());
 
-        newfournisseur.append("balance", 0);
+            newfournisseur.append("balance", 0);
 
-        newfournisseur.append("Transactions", new ArrayList<Transaction>());
+            newfournisseur.append("Transactions", new ArrayList<Transaction>());
 
-        AdminController.AddFournisseur(newfournisseur);
+            AdminController.AddFournisseur(newfournisseur);
+        } else {
+
+        }
 
     }
 
