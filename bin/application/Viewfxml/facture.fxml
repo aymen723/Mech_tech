@@ -133,22 +133,22 @@
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                      <children>
-                        <Text layoutX="28.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix total des pices :">
+                        <Text layoutX="47.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix total des pices :">
                            <font>
                               <Font name="Yu Gothic Bold" size="16.0" />
                            </font>
                         </Text>
-                        <Text layoutX="28.0" layoutY="456.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix Total :">
+                        <Text layoutX="47.0" layoutY="456.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix Total :">
                            <font>
                               <Font name="Yu Gothic Bold" size="16.0" />
                            </font>
                         </Text>
-                        <Text fx:id="parts_price" layoutX="206.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
+                        <Text fx:id="parts_price" layoutX="223.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
                            <font>
                               <Font name="Yu Gothic Regular" size="16.0" />
                            </font>
                         </Text>
-                        <Text fx:id="prix_fact" layoutX="129.0" layoutY="457.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
+                        <Text fx:id="prix_fact" layoutX="176.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
                            <font>
                               <Font name="Yu Gothic Regular" size="16.0" />
                            </font>
@@ -162,7 +162,22 @@
                         </TableView>
                         <Line endX="505.39996337890625" endY="-3.0517578125E-5" layoutX="93.0" layoutY="379.0" startX="-100.0" />
                         <Line endX="753.0" layoutX="-155.0" layoutY="-1.0" startX="154.0" />
-                        <Text layoutX="271.0" layoutY="457.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DA">
+                        <Text layoutX="284.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DA">
+                           <font>
+                              <Font name="Yu Gothic Regular" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="47.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prix de service">
+                           <font>
+                              <Font name="Yu Gothic Bold" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="total_fact" layoutX="147.0" layoutY="456.0" strokeType="OUTSIDE" strokeWidth="0.0" text="test">
+                           <font>
+                              <Font name="Yu Gothic Regular" size="16.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="262.0" layoutY="456.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DA">
                            <font>
                               <Font name="Yu Gothic Regular" size="16.0" />
                            </font>
@@ -173,7 +188,7 @@
                   <Pane prefHeight="1169.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <children>
                         <Button fx:id="btn_print" layoutX="194.0" layoutY="402.0" mnemonicParsing="false" onAction="#print" styleClass="btn_mod" stylesheets="@btn.css" text="Enregistrer" textFill="WHITE" />
-                        <Text layoutX="14.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DA">
+                        <Text layoutX="3.0" layoutY="404.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DA">
                            <font>
                               <Font name="Yu Gothic Regular" size="16.0" />
                            </font>

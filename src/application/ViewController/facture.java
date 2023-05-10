@@ -61,6 +61,9 @@ public class facture {
     @FXML
     private Text prix_fact;
 
+    @FXML
+    private Text total_fact;
+
     private Rendez_vous rdv_local;
 
     SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
@@ -108,6 +111,7 @@ public class facture {
         }
 
         parts_price.setText(Integer.toString(sum));
+        total_fact.setText(Integer.toString(rdv_local.getPrix()) + Integer.toString(sum));
         table_facture.setFixedCellSize(25);
         table_facture.setItems(list);
 

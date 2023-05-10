@@ -22,7 +22,6 @@ import javafx.beans.property.SimpleStringProperty;
 // import javafx.beans.binding.Bindings;
 // import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -32,42 +31,30 @@ import javafx.fxml.FXML;
 // import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.geometry.Side;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Control;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.InputMethodEvent;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import javafx.util.Callback;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class parts_dashbord_controller implements Initializable {
@@ -142,11 +129,23 @@ public class parts_dashbord_controller implements Initializable {
 	FilteredList<Parts> filteredList = new FilteredList<>(list, b -> true);
 
 	public void add_parts(javafx.event.ActionEvent actione) {
+
+		fournisseur_inp.getStyleClass().remove("inptempty");
+		date.getStyleClass().remove("inptempty");
+		prixdachat.getStyleClass().remove("inptempty");
+		name.getStyleClass().remove("inptempty");
+		description.getStyleClass().remove("inptempty");
+		quntitie.getStyleClass().remove("inptempty");
+		price.getStyleClass().remove("inptempty");
+
 		// System.out.println(name.getText().trim().isEmpty());
 		if (name.getText().trim().isEmpty() == false &&
 				description.getText().trim().isEmpty() == false &&
 				quntitie.getText().trim().isEmpty() == false &&
-				price.getText().trim().isEmpty() == false) {
+				price.getText().trim().isEmpty() == false &&
+				price.getText().matches("[0-9]+") &&
+				quntitie.getText().matches("[0-9]+") &&
+				prixdachat.getText().matches("[0-9]+")) {
 			Document newpart = new Document("name", name.getText());
 			newpart.append("price", Integer.parseInt(price.getText()));
 			newpart.append("quantity", Integer.parseInt(quntitie.getText()));
@@ -161,7 +160,7 @@ public class parts_dashbord_controller implements Initializable {
 			newfournisseur.append("email", fournissur_local.getEmail());
 
 			newpart.append("fournisseur", newfournisseur);
-
+			// date.setValue(null);
 			AdminController.addpart(newpart);
 
 			name.setText("");
@@ -175,6 +174,18 @@ public class parts_dashbord_controller implements Initializable {
 			// filteredList = new FilteredList<>(list, b -> true);
 			parts_table.refresh();
 		} else {
+			if (fournissur_local == null) {
+
+				fournisseur_inp.getStyleClass().add("inptempty");
+			}
+			if (date.getValue() == null) {
+
+				date.getStyleClass().add("inptempty");
+			}
+			if (prixdachat.getText().trim().isEmpty() == true || !prixdachat.getText().matches("[0-9]+")) {
+
+				prixdachat.getStyleClass().add("inptempty");
+			}
 			if (name.getText().trim().isEmpty() == true) {
 
 				name.getStyleClass().add("inptempty");
@@ -183,12 +194,12 @@ public class parts_dashbord_controller implements Initializable {
 
 				description.getStyleClass().add("inptempty");
 			}
-			if (quntitie.getText().trim().isEmpty() == true) {
+			if (quntitie.getText().trim().isEmpty() == true || !quntitie.getText().matches("[0-9]+")) {
 
 				quntitie.getStyleClass().add("inptempty");
 			}
 
-			if (price.getText().trim().isEmpty() == true) {
+			if (price.getText().trim().isEmpty() == true || !price.getText().matches("[0-9]+")) {
 
 				price.getStyleClass().add("inptempty");
 			}
@@ -220,10 +231,21 @@ public class parts_dashbord_controller implements Initializable {
 
 	public void mod_parts(javafx.event.ActionEvent actione) {
 
-		if ((name.getText().trim().isEmpty() == false) &&
-				(description.getText().trim().isEmpty() == false) &&
-				(price.getText().trim().isEmpty() == false) &&
-				(quntitie.getText().trim().isEmpty() == false) && part != null) {
+		fournisseur_inp.getStyleClass().remove("inptempty");
+		date.getStyleClass().remove("inptempty");
+		prixdachat.getStyleClass().remove("inptempty");
+		name.getStyleClass().remove("inptempty");
+		description.getStyleClass().remove("inptempty");
+		quntitie.getStyleClass().remove("inptempty");
+		price.getStyleClass().remove("inptempty");
+
+		if (name.getText().trim().isEmpty() == false &&
+				description.getText().trim().isEmpty() == false &&
+				quntitie.getText().trim().isEmpty() == false &&
+				price.getText().trim().isEmpty() == false &&
+				price.getText().matches("[0-9]+") &&
+				quntitie.getText().matches("[0-9]+") &&
+				prixdachat.getText().matches("[0-9]+")) {
 			// Document updatepart = new Document("name", name.getText());
 			// updatepart.append("price", Integer.parseInt(price.getText()));
 			// updatepart.append("quantity", Integer.parseInt(quntitie.getText()));
@@ -264,6 +286,18 @@ public class parts_dashbord_controller implements Initializable {
 			System.out.println("hna wra list");
 			parts_table.setItems(list);
 		} else {
+			if (fournissur_local == null) {
+
+				fournisseur_inp.getStyleClass().add("inptempty");
+			}
+			if (date.getValue() == null) {
+
+				date.getStyleClass().add("inptempty");
+			}
+			if (prixdachat.getText().trim().isEmpty() == true || !prixdachat.getText().matches("[0-9]+")) {
+
+				prixdachat.getStyleClass().add("inptempty");
+			}
 			if (name.getText().trim().isEmpty() == true) {
 
 				name.getStyleClass().add("inptempty");
@@ -272,12 +306,12 @@ public class parts_dashbord_controller implements Initializable {
 
 				description.getStyleClass().add("inptempty");
 			}
-			if (quntitie.getText().trim().isEmpty() == true) {
+			if (quntitie.getText().trim().isEmpty() == true || !quntitie.getText().matches("[0-9]+")) {
 
 				quntitie.getStyleClass().add("inptempty");
 			}
 
-			if (price.getText().trim().isEmpty() == true) {
+			if (price.getText().trim().isEmpty() == true || !price.getText().matches("[0-9]+")) {
 
 				price.getStyleClass().add("inptempty");
 			}
@@ -558,37 +592,6 @@ public class parts_dashbord_controller implements Initializable {
 				}
 			});
 			return row;
-		});
-		name.textProperty().addListener((observable, oldValue, newValue) -> {
-			// Your code here to handle the text field value change
-			System.out.println("Text changed from " + oldValue + " to " + newValue);
-			if (name.getText().trim().isEmpty() == false) {
-				name.getStyleClass().remove("inptempty");
-			}
-
-		});
-		description.textProperty().addListener((observable, oldValue, newValue) -> {
-			// Your code here to handle the text field value change
-			System.out.println("Text changed from " + oldValue + " to " + newValue);
-			if (description.getText().trim().isEmpty() == false) {
-				description.getStyleClass().remove("inptempty");
-			}
-
-		});
-		quntitie.textProperty().addListener((observable, oldValue, newValue) -> {
-			// Your code here to handle the text field value change
-			System.out.println("Text changed from " + oldValue + " to " + newValue);
-			if (quntitie.getText().trim().isEmpty() == false) {
-				quntitie.getStyleClass().remove("inptempty");
-			}
-
-		});
-		price.textProperty().addListener((observable, oldValue, newValue) -> {
-			// Your code here to handle the text field value change
-			System.out.println("Text changed from " + oldValue + " to " + newValue);
-			if (price.getText().trim().isEmpty() == false) {
-				price.getStyleClass().remove("inptempty");
-			}
 		});
 
 	}

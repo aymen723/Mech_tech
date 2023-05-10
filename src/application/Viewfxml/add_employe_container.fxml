@@ -58,32 +58,32 @@
                </children></Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <children>
-                  <TextField fx:id="usernamefield" layoutX="49.0" layoutY="25.0" prefHeight="30.0" prefWidth="300.0" promptText="Nom d'utilisateur" styleClass="inpt" stylesheets="@inputs.css" />
+                  <TextField fx:id="usernamefield" layoutX="50.0" layoutY="25.0" prefHeight="30.0" prefWidth="300.0" promptText="Nom d'utilisateur" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <TextField fx:id="namefield" layoutX="49.0" layoutY="25.0" prefHeight="30.0" prefWidth="300.0" promptText="Nom" styleClass="inpt" stylesheets="@inputs.css" />
+                  <TextField fx:id="namefield" layoutX="50.0" layoutY="25.0" prefHeight="30.0" prefWidth="300.0" promptText="Nom" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <children>
-                  <TextField fx:id="prenomfield" layoutX="49.0" layoutY="25.0" prefHeight="30.0" prefWidth="300.0" promptText="Prenom" styleClass="inpt" stylesheets="@inputs.css" />
+                  <TextField fx:id="prenomfield" layoutX="50.0" layoutY="25.0" prefHeight="30.0" prefWidth="300.0" promptText="Prenom" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <children>
-                  <TextField fx:id="numerofield" layoutX="49.0" layoutY="25.0" prefHeight="30.0" prefWidth="300.0" promptText="Numéro" styleClass="inpt" stylesheets="@inputs.css" />
+                  <TextField fx:id="numerofield" layoutX="50.0" layoutY="25.0" prefHeight="30.0" prefWidth="300.0" promptText="Numéro" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <children>
-                  <TextField fx:id="emailfield" layoutX="49.0" layoutY="25.0" prefHeight="30.0" prefWidth="300.0" promptText="Email" styleClass="inpt" stylesheets="@inputs.css" />
+                  <TextField fx:id="emailfield" layoutX="50.0" layoutY="25.0" prefHeight="30.0" prefWidth="300.0" promptText="Email" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <children>
-                  <PasswordField fx:id="passworField" layoutX="49.0" layoutY="25.0" prefHeight="3.0" prefWidth="300.0" promptText="Mot de Pass">
+                  <PasswordField fx:id="passworField" layoutX="50.0" layoutY="25.0" prefHeight="3.0" prefWidth="300.0" promptText="Mot de Pass" styleClass="inpt" stylesheets="@inputs.css">
                      <tooltip>
                         <Tooltip fx:id="password" text="password" />
                      </tooltip>
@@ -92,7 +92,8 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                <children>
-                  <ChoiceBox fx:id="role" layoutX="49.0" layoutY="23.0" prefHeight="30.0" prefWidth="300.0" />
+                  <ChoiceBox fx:id="role" layoutX="50.0" prefHeight="30.0" prefWidth="300.0" styleClass="inpt" stylesheets="@inputs.css" />
+                  <CheckBox fx:id="passwordvue" layoutX="374.0" layoutY="5.0" mnemonicParsing="false" onAction="#showpassword" text="Mot de Pass visible" />
                </children></Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7">
                <children>
@@ -103,7 +104,6 @@
                   </Button>
                </children>
             </Pane>
-            <CheckBox fx:id="passwordvue" mnemonicParsing="false" onAction="#showpassword" text="Mot de Pass visible" GridPane.columnIndex="2" GridPane.rowIndex="6" />
          </children>
       </GridPane>
    </center>
