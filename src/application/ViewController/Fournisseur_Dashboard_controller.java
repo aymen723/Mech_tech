@@ -105,6 +105,22 @@ public class Fournisseur_Dashboard_controller implements Initializable {
 
             AdminController.AddFournisseur(newfournisseur);
         } else {
+            if (name.getText().trim().isEmpty() == true) {
+
+                name.getStyleClass().add("inptempty");
+            }
+            if (address.getText().trim().isEmpty() == true) {
+
+                address.getStyleClass().add("inptempty");
+            }
+            if (numero.getText().trim().isEmpty() == true) {
+
+                numero.getStyleClass().add("inptempty");
+            }
+            if (email.getText().trim().isEmpty() == true) {
+
+                email.getStyleClass().add("inptempty");
+            }
 
         }
 

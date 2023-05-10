@@ -134,13 +134,28 @@ public class Ajouter_rdv implements Initializable {
     @FXML
     void add_rdv(ActionEvent event) {
 
+        serch.getStyleClass().remove("inptempty");
+
+        car_model.getStyleClass().remove("inptempty");
+
+        techni_choice.getStyleClass().remove("inptempty");
+
+        datedebut.getStyleClass().remove("inptempty");
+
+        date_fin_rdv.getStyleClass().remove("inptempty");
+
+        prix.getStyleClass().remove("inptempty");
+
+        service_field.getStyleClass().remove("inptempty");
+
         if ((service_field.getText().trim().isEmpty() == false) &&
                 (car_model.getText().trim().isEmpty() == false) &&
                 (prix.getText().trim().isEmpty() == false) &&
+                (prix.getText().matches("[0-9]+")) &&
                 (nom_client.getText().trim().isEmpty() == false) &&
                 (prenom_client.getText().trim().isEmpty() == false) &&
-                (prenom_client.getText().trim().isEmpty() == false) &&
-                (numero_client.getText().trim().isEmpty() == false)) {
+                (numero_client.getText().trim().isEmpty() == false) &&
+                (techni_choice.getValue() != null)) {
             Clientmodel newclient;
             Document clientrdv;
             Document carrdv;
@@ -214,6 +229,34 @@ public class Ajouter_rdv implements Initializable {
             }
 
         } else {
+            if (serch.getText().trim().isEmpty() == true) {
+
+                serch.getStyleClass().add("inptempty");
+            }
+            if (car_local == null) {
+
+                car_model.getStyleClass().add("inptempty");
+            }
+            if (techni_choice.getValue() == null) {
+
+                techni_choice.getStyleClass().add("inptempty");
+            }
+            if (datedebut.getValue() == null) {
+
+                datedebut.getStyleClass().add("inptempty");
+            }
+            if (date_fin_rdv.getValue() == null) {
+
+                date_fin_rdv.getStyleClass().add("inptempty");
+            }
+            if (prix.getText().trim().isEmpty() == true || !prix.getText().matches("[0-9]+")) {
+
+                prix.getStyleClass().add("inptempty");
+            }
+            if (service_field.getText().trim().isEmpty() == true) {
+
+                service_field.getStyleClass().add("inptempty");
+            }
 
         }
 

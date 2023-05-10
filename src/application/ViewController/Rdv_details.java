@@ -369,65 +369,110 @@ public class Rdv_details {
     @FXML
     void enregistre() {
 
-        Document newrdv = new Document("date_debut", date_debut_rdv.getValue());
-        newrdv.append("date_fin", date_fin_rdv.getValue());
-        newrdv.append("descrption_in", description_in.getText());
-        newrdv.append("descrption_out", description_out.getText());
-        newrdv.append("service", service.getText());
-        newrdv.append("prix", Integer.parseInt(prix.getText()));
+        tech_choice.getStyleClass().remove("inptempty");
 
-        Usermodel newtechnicien = tech_choice.getValue();
+        date_debut_rdv.getStyleClass().remove("inptempty");
 
-        Document technicienrdv = new Document("_id", new ObjectId(newtechnicien.getId()));
-        technicienrdv.append("nomutil", newtechnicien.getUsername());
-        technicienrdv.append("nom", newtechnicien.getNom());
-        technicienrdv.append("prenom", newtechnicien.getPrenom());
-        technicienrdv.append("tel", newtechnicien.getNumero());
-        technicienrdv.append("role", newtechnicien.getRole());
-        technicienrdv.append("email", newtechnicien.getEmail());
+        date_fin_rdv.getStyleClass().remove("inptempty");
 
-        List<Document> myDocuments = new ArrayList<Document>();
-        for (int i = 0; i < rdv_local.getParts().size(); i++) {
-            // Parts part = rdv_local.getParts().get(i);
-            // Document addpart = new Document("_id", new ObjectId(part.getId()));
-            // addpart.append("name", part.getName());
-            // addpart.append("price", part.getPrice());
-            // addpart.append("quantity", part.getQuntitie());
+        prix.getStyleClass().remove("inptempty");
 
-            // myDocuments.add(addpart);
+        service.getStyleClass().remove("inptempty");
 
-            // System.out.println(myDocuments.get(i));
-            Parts part = rdv_local.getParts().get(i);
-            Document addpart = new Document("_id", new ObjectId(part.getId()));
-            addpart.append("name", part.getName());
-            addpart.append("price", part.getPrice());
-            addpart.append("quantity", part.getQuntitie());
-            addpart.append("prix_achat", part.getBuyingprice());
-            addpart.append("date_de_vente", part.getBuyingdate());
+        if ((service.getText().trim().isEmpty() == false) &&
+                (car_model.getText().trim().isEmpty() == false) &&
+                (description_in.getText().trim().isEmpty() == false) &&
+                (prix.getText().trim().isEmpty() == false) &&
+                (prix.getText().matches("[0-9]+")) &&
+                (tech_choice.getValue() != null)) {
 
-            Fournisseur fournisseur = part.getFournisseur();
-            Document docfournisseur = new Document("_id", new ObjectId(fournisseur.getId()));
-            docfournisseur.append("name", fournisseur.getName());
-            docfournisseur.append("adresse", fournisseur.getAddress());
-            docfournisseur.append("email", fournisseur.getEmail());
-            docfournisseur.append("numero", fournisseur.getPhone());
+            Document newrdv = new Document("date_debut", date_debut_rdv.getValue());
+            newrdv.append("date_fin", date_fin_rdv.getValue());
+            newrdv.append("descrption_in", description_in.getText());
+            newrdv.append("descrption_out", description_out.getText());
+            newrdv.append("service", service.getText());
+            newrdv.append("prix", Integer.parseInt(prix.getText()));
 
-            addpart.append("fournisseur", docfournisseur);
+            Usermodel newtechnicien = tech_choice.getValue();
 
-            myDocuments.add(addpart);
+            Document technicienrdv = new Document("_id", new ObjectId(newtechnicien.getId()));
+            technicienrdv.append("nomutil", newtechnicien.getUsername());
+            technicienrdv.append("nom", newtechnicien.getNom());
+            technicienrdv.append("prenom", newtechnicien.getPrenom());
+            technicienrdv.append("tel", newtechnicien.getNumero());
+            technicienrdv.append("role", newtechnicien.getRole());
+            technicienrdv.append("email", newtechnicien.getEmail());
 
-            System.out.println(myDocuments.get(i));
+            List<Document> myDocuments = new ArrayList<Document>();
+            for (int i = 0; i < rdv_local.getParts().size(); i++) {
+                // Parts part = rdv_local.getParts().get(i);
+                // Document addpart = new Document("_id", new ObjectId(part.getId()));
+                // addpart.append("name", part.getName());
+                // addpart.append("price", part.getPrice());
+                // addpart.append("quantity", part.getQuntitie());
+
+                // myDocuments.add(addpart);
+
+                // System.out.println(myDocuments.get(i));
+                Parts part = rdv_local.getParts().get(i);
+                Document addpart = new Document("_id", new ObjectId(part.getId()));
+                addpart.append("name", part.getName());
+                addpart.append("price", part.getPrice());
+                addpart.append("quantity", part.getQuntitie());
+                addpart.append("prix_achat", part.getBuyingprice());
+                addpart.append("date_de_vente", part.getBuyingdate());
+
+                Fournisseur fournisseur = part.getFournisseur();
+                Document docfournisseur = new Document("_id", new ObjectId(fournisseur.getId()));
+                docfournisseur.append("name", fournisseur.getName());
+                docfournisseur.append("adresse", fournisseur.getAddress());
+                docfournisseur.append("email", fournisseur.getEmail());
+                docfournisseur.append("numero", fournisseur.getPhone());
+
+                addpart.append("fournisseur", docfournisseur);
+
+                myDocuments.add(addpart);
+
+                System.out.println(myDocuments.get(i));
+            }
+            newrdv.append("parts", myDocuments);
+            rdv_local.setDate_debut(
+                    Date.from(date_debut_rdv.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+            rdv_local.setDate_fin(Date.from(date_fin_rdv.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+            rdv_local.setDescrption_in(description_in.getText());
+            rdv_local.setDescrption_out(description_out.getText());
+            rdv_local.setService(service.getText());
+            rdv_local.setPrix(Integer.parseInt(prix.getText()));
+            AdminController.UpdateRdv(newrdv, rdv_local);
+            AdminController.update_parts_qtnt_delete(oldparts);
+            AdminController.update_parts_qtnt(rdv_local.getParts());
+        } else {
+            if (description_in.getText().trim().isEmpty() == true) {
+
+                description_in.getStyleClass().add("inptempty");
+            }
+            if (tech_choice.getValue() == null) {
+
+                tech_choice.getStyleClass().add("inptempty");
+            }
+            if (date_debut_rdv.getValue() == null) {
+
+                date_debut_rdv.getStyleClass().add("inptempty");
+            }
+            if (date_fin_rdv.getValue() == null) {
+
+                date_fin_rdv.getStyleClass().add("inptempty");
+            }
+            if (prix.getText().trim().isEmpty() == true || !prix.getText().matches("[0-9]+")) {
+
+                prix.getStyleClass().add("inptempty");
+            }
+            if (service.getText().trim().isEmpty() == true) {
+
+                service.getStyleClass().add("inptempty");
+            }
+
         }
-        newrdv.append("parts", myDocuments);
-        rdv_local.setDate_debut(Date.from(date_debut_rdv.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        rdv_local.setDate_fin(Date.from(date_fin_rdv.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        rdv_local.setDescrption_in(description_in.getText());
-        rdv_local.setDescrption_out(description_out.getText());
-        rdv_local.setService(service.getText());
-        rdv_local.setPrix(Integer.parseInt(prix.getText()));
-        AdminController.UpdateRdv(newrdv, rdv_local);
-        AdminController.update_parts_qtnt_delete(oldparts);
-        AdminController.update_parts_qtnt(rdv_local.getParts());
 
     }
 
