@@ -73,30 +73,73 @@ public class mod_employe_container_controller {
 
     public void modifier_employer() {
 
-        Document newemp = new Document("username", username_field_mod.getText());
-        newemp.append("_id", user_local.getId());
-        newemp.append("nom", name_field_mod.getText());
-        newemp.append("nomutil", username_field_mod.getText());
-        newemp.append("prenom", prenom_field_mod.getText());
-        newemp.append("motdepass", password_field_mod.getText());
-        newemp.append("tel", numero_field_mod.getText());
-        newemp.append("role", role_select.getValue());
-        newemp.append("email", email_field_mod.getText());
-        // newemp.append("password",email_field_mod.getText());
-        AdminController.UpdateEmp(newemp,user_local);
+        username_field_mod.getStyleClass().remove("inptempty");
 
-        System.out.println("test hna1");
+        name_field_mod.getStyleClass().remove("inptempty");
+
+        prenom_field_mod.getStyleClass().remove("inptempty");
+
+        email_field_mod.getStyleClass().remove("inptempty");
+
+        password_field_mod.getStyleClass().remove("inptempty");
+
+        role_select.getStyleClass().add("inptempty");
+
+        if ((username_field_mod.getText().trim().isEmpty() == false) &&
+                (name_field_mod.getText().trim().isEmpty() == false) &&
+                (prenom_field_mod.getText().trim().isEmpty() == false) &&
+                (email_field_mod.getText().trim().isEmpty() == false) &&
+                (password_field_mod.getText().trim().isEmpty() == false) &&
+                (role_select.getValue() == null)) {
+            Document newemp = new Document("username", username_field_mod.getText());
+            newemp.append("_id", user_local.getId());
+            newemp.append("nom", name_field_mod.getText());
+            newemp.append("nomutil", username_field_mod.getText());
+            newemp.append("prenom", prenom_field_mod.getText());
+            newemp.append("motdepass", password_field_mod.getText());
+            newemp.append("tel", numero_field_mod.getText());
+            newemp.append("role", role_select.getValue());
+            newemp.append("email", email_field_mod.getText());
+            // newemp.append("password",email_field_mod.getText());
+            AdminController.UpdateEmp(newemp, user_local);
+        } else {
+
+            if (username_field_mod.getText().trim().isEmpty() == true) {
+
+                username_field_mod.getStyleClass().add("inptempty");
+            }
+            if (name_field_mod.getText().trim().isEmpty() == true) {
+
+                name_field_mod.getStyleClass().add("inptempty");
+            }
+            if (prenom_field_mod.getText().trim().isEmpty() == true) {
+
+                prenom_field_mod.getStyleClass().add("inptempty");
+            }
+            if (email_field_mod.getText().trim().isEmpty() == true) {
+
+                email_field_mod.getStyleClass().add("inptempty");
+            }
+
+            if (password_field_mod.getText().trim().isEmpty() == true) {
+
+                password_field_mod.getStyleClass().add("inptempty");
+            }
+            if (role_select.getValue() == null) {
+
+                role_select.getStyleClass().add("inptempty");
+            }
+
+        }
 
         try {
             Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/add_employe_dashbord.fxml"));
             mod_container.getChildren().removeAll();
             mod_container.getChildren().setAll(fxml);
-            System.out.println("test hna 2");
 
         } catch (Exception e) {
             // TODO: handle exception
         }
-        System.out.println("test hna 3");
 
     }
 

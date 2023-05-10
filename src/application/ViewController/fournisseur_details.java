@@ -207,50 +207,104 @@ public class fournisseur_details {
 
     @FXML
     void save_fournisseur(ActionEvent event) {
-        Fournisseur fournisseur = new Fournisseur();
-        Document newfournisseur = new Document("nom", nom.getText());
-        newfournisseur.append("adresse", address.getText());
-        newfournisseur.append("numero", numero.getText());
-        newfournisseur.append("email", email.getText());
-        fournisseur.setName(nom.getText());
-        fournisseur.setAddress(address.getText());
-        fournisseur.setPhone(numero.getText());
-        fournisseur.setEmail(email.getText());
-        AdminController.UpdateFournisseur(newfournisseur, fournisseur_local);
-        getfournisseur(AdminController.findFournisseurbyid(fournisseur_local.getId()));
+
+        nom.getStyleClass().remove("inptempty");
+
+        address.getStyleClass().remove("inptempty");
+
+        numero.getStyleClass().remove("inptempty");
+
+        email.getStyleClass().remove("inptempty");
+
+        if ((nom.getText().trim().isEmpty() == false) &&
+                (address.getText().trim().isEmpty() == false) &&
+                (numero.getText().trim().isEmpty() == false) &&
+                (email.getText().trim().isEmpty() == false)) {
+            Fournisseur fournisseur = new Fournisseur();
+            Document newfournisseur = new Document("nom", nom.getText());
+            newfournisseur.append("adresse", address.getText());
+            newfournisseur.append("numero", numero.getText());
+            newfournisseur.append("email", email.getText());
+            fournisseur.setName(nom.getText());
+            fournisseur.setAddress(address.getText());
+            fournisseur.setPhone(numero.getText());
+            fournisseur.setEmail(email.getText());
+            AdminController.UpdateFournisseur(newfournisseur, fournisseur_local);
+            getfournisseur(AdminController.findFournisseurbyid(fournisseur_local.getId()));
+        } else {
+
+            if (nom.getText().trim().isEmpty() == true) {
+
+                nom.getStyleClass().add("inptempty");
+            }
+            if (address.getText().trim().isEmpty() == true) {
+
+                address.getStyleClass().add("inptempty");
+            }
+            if (numero.getText().trim().isEmpty() == true) {
+
+                numero.getStyleClass().add("inptempty");
+            }
+            if (email.getText().trim().isEmpty() == true) {
+
+                email.getStyleClass().add("inptempty");
+            }
+
+        }
     }
 
     @FXML
     void save_transaction(ActionEvent event) {
 
-        Transaction transaction = new Transaction();
+        somme_payee.getStyleClass().remove("inptempty");
 
-        LocalDate date = LocalDate.now();
+        somme_transaction.getStyleClass().remove("inptempty");
 
-        Document doctransaction = new Document("_id", new ObjectId());
-        doctransaction.append("date_de_transaction", date);
-        doctransaction.append("somme_payee", Integer.parseInt(somme_payee.getText()));
-        doctransaction.append("somme_de_transaction", Integer.parseInt(somme_transaction.getText()));
+        if ((somme_payee.getText().trim().isEmpty() == false &&
+                somme_payee.getText().matches("[0-9]+")) &&
+                (somme_transaction.getText().trim().isEmpty() == false) &&
+                somme_transaction.getText().matches("[0-9]+")) {
 
-        AdminController.addTransaction(doctransaction, fournisseur_local);
-        transaction.setDate_de_transaction(Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        transaction.setSomme_de_transaction(Integer.parseInt(somme_payee.getText()));
-        transaction.setSomme_payee(Integer.parseInt(somme_transaction.getText()));
+            Transaction transaction = new Transaction();
+            LocalDate date = LocalDate.now();
 
-        fournisseur_local.getTransactions().add(transaction);
-        txt_balance.setText(Integer.toString(fournisseur_local.getBalance()));
+            Document doctransaction = new Document("_id", new ObjectId());
+            doctransaction.append("date_de_transaction", date);
+            doctransaction.append("somme_payee", Integer.parseInt(somme_payee.getText()));
+            doctransaction.append("somme_de_transaction", Integer.parseInt(somme_transaction.getText()));
 
-        // list_transaction =
-        // FXCollections.observableArrayList(fournisseur_local.getTransactions());
-        // table_transaction.setItems(list_transaction);
-        // table_transaction.refresh();
+            AdminController.addTransaction(doctransaction, fournisseur_local);
+            transaction.setDate_de_transaction(Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+            transaction.setSomme_de_transaction(Integer.parseInt(somme_payee.getText()));
+            transaction.setSomme_payee(Integer.parseInt(somme_transaction.getText()));
 
-        Fournisseur newfournisseur = AdminController.findFournisseurbyid(fournisseur_local.getId());
+            fournisseur_local.getTransactions().add(transaction);
+            txt_balance.setText(Integer.toString(fournisseur_local.getBalance()));
 
-        // txt_balance.setText(Integer.toString(newfournisseur.getBalance()));
-        // stage.getScene().getWindow().setWidth(element.getScene().getWidth() + 0.001);
+            // list_transaction =
+            // FXCollections.observableArrayList(fournisseur_local.getTransactions());
+            // table_transaction.setItems(list_transaction);
+            // table_transaction.refresh();
 
-        getfournisseur(newfournisseur);
+            Fournisseur newfournisseur = AdminController.findFournisseurbyid(fournisseur_local.getId());
+
+            // txt_balance.setText(Integer.toString(newfournisseur.getBalance()));
+            // stage.getScene().getWindow().setWidth(element.getScene().getWidth() + 0.001);
+
+            getfournisseur(newfournisseur);
+        } else {
+
+            if (somme_payee.getText().trim().isEmpty() == true || !somme_payee.getText().matches("[0-9]+")) {
+
+                somme_payee.getStyleClass().add("inptempty");
+            }
+            if (somme_transaction.getText().trim().isEmpty() == true
+                    || !somme_transaction.getText().matches("[0-9]+")) {
+
+                somme_transaction.getStyleClass().add("inptempty");
+            }
+
+        }
 
     }
 

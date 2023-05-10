@@ -709,7 +709,7 @@ public class AdminController {
 
 	public static void deleteFournisseur(Fournisseur fournisseur) {
 
-		MongoCollection<Document> collection = Connectdatabase.connectdb("cars");
+		MongoCollection<Document> collection = Connectdatabase.connectdb("fournisseurs");
 		ObjectId objid = new ObjectId(fournisseur.getId());
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
 		collection.deleteOne(found);

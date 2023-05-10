@@ -2,6 +2,7 @@ package application.ViewController;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import org.bson.Document;
@@ -19,17 +20,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.StageStyle;
 
 public class Fournisseur_Dashboard_controller implements Initializable {
     @FXML
@@ -104,6 +111,9 @@ public class Fournisseur_Dashboard_controller implements Initializable {
             newfournisseur.append("Transactions", new ArrayList<Transaction>());
 
             AdminController.AddFournisseur(newfournisseur);
+            list_fornisseur = FXCollections.observableArrayList(AdminController.ListFournisseur());
+            fournisseur_table.setItems(list_fornisseur);
+            fournisseur_table.refresh();
         } else {
             if (name.getText().trim().isEmpty() == true) {
 
@@ -160,17 +170,26 @@ public class Fournisseur_Dashboard_controller implements Initializable {
             return new TableCell<Fournisseur, Void>() {
 
                 private final Button copybutton = new Button("");
+                private final Button deleteButton = new Button("");
 
                 {
 
                     copybutton.setStyle(
                             "-fx-background-radius: 5em; -fx-min-width: 25px; -fx-min-height: 25px; -fx-max-width: 25px; -fx-max-height: 25px; -fx-background-color: transparent; -fx-alignment:CENTER;");
 
-                    Image image_copy = new Image(getClass().getResourceAsStream("copy.png"));
+                    Image image_copy = new Image(getClass().getResourceAsStream("menu.png"));
                     ImageView img_copy = new ImageView(image_copy);
                     img_copy.setFitHeight(25);
                     img_copy.setFitWidth(25);
                     copybutton.setGraphic(img_copy);
+
+                    deleteButton.setStyle(
+                            "-fx-background-radius: 5em; -fx-min-width: 25px; -fx-min-height: 25px; -fx-max-width: 25px; -fx-max-height: 25px; -fx-background-color: transparent; -fx-alignment:CENTER;");
+                    Image image = new Image(getClass().getResourceAsStream("Delete.png"));
+                    ImageView img = new ImageView(image);
+                    img.setFitHeight(25);
+                    img.setFitWidth(25);
+                    deleteButton.setGraphic(img);
 
                     copybutton.setOnAction(event -> {
                         // ObservableList<Parts> selectedItems =
@@ -196,6 +215,43 @@ public class Fournisseur_Dashboard_controller implements Initializable {
                         }
 
                     });
+
+                    deleteButton.setOnAction(event -> {
+
+                        Alert alert = new Alert(AlertType.CONFIRMATION);
+                        alert.setTitle("Confirmation de suppression");
+                        DialogPane dialogPane = alert.getDialogPane();
+                        dialogPane.setGraphic(null);
+
+                        dialogPane.getStylesheets()
+                                .add(getClass().getResource("/application/Viewfxml/part_style.css").toExternalForm());
+                        dialogPane.getStyleClass().add("dialog-pane ");
+
+                        alert.initStyle(StageStyle.UNDECORATED);
+
+                        alert.setContentText("cette action ne peut pas être inversé !");
+
+                        ButtonBar buttonBar = (ButtonBar) alert.getDialogPane().lookup(".button-bar");
+                        Button cancelButton = (Button) buttonBar.getButtons().get(1);
+                        Button deleteButton = (Button) buttonBar.getButtons().get(0);
+                        cancelButton.getStyleClass().add("cancel_btn");
+                        deleteButton.getStyleClass().add("delet_btn");
+                        cancelButton.setText("Annuler");
+                        deleteButton.setText("Supprimer");
+                        Optional<ButtonType> result = alert.showAndWait();
+                        if (result.get() == ButtonType.OK) {
+                            Fournisseur fournisseur = getTableView().getItems().get(getIndex());
+                            AdminController.deleteFournisseur(fournisseur);
+                            list_fornisseur = FXCollections.observableArrayList(AdminController.ListFournisseur());
+                            fournisseur_table.setItems(list_fornisseur);
+                            fournisseur_table.refresh();
+                            // User clicked OK
+                        } else {
+                            // User clicked Cancel or closed the dialog
+
+                        }
+
+                    });
                 }
 
                 @Override
@@ -205,7 +261,7 @@ public class Fournisseur_Dashboard_controller implements Initializable {
                     if (empty) {
                         setGraphic(null);
                     } else {
-                        HBox buttonsBox = new HBox(10, copybutton);
+                        HBox buttonsBox = new HBox(10, copybutton, deleteButton);
                         getAlignment();
                         buttonsBox.setAlignment(Pos.CENTER);
                         setGraphic(buttonsBox);

@@ -95,7 +95,7 @@ public class Add_employe_container_controller implements Initializable {
 				(prenomfield.getText().trim().isEmpty() == false) &&
 				(emailfield.getText().trim().isEmpty() == false) &&
 				(passworField.getText().trim().isEmpty() == false) &&
-				(emailfield.getText().trim().isEmpty() == false)) {
+				(role.getValue() == null)) {
 			Document newemp = new Document("nomutil", usernamefield.getText());
 			newemp.append("nom", namefield.getText());
 			newemp.append("prenom", prenomfield.getText());
@@ -118,7 +118,36 @@ public class Add_employe_container_controller implements Initializable {
 				// TODO: handle exception
 			}
 			System.out.println("test hna 3");
+		} else {
+
+			if (usernamefield.getText().trim().isEmpty() == true) {
+
+				usernamefield.getStyleClass().add("inptempty");
+			}
+			if (namefield.getText().trim().isEmpty() == true) {
+
+				namefield.getStyleClass().add("inptempty");
+			}
+			if (prenomfield.getText().trim().isEmpty() == true) {
+
+				prenomfield.getStyleClass().add("inptempty");
+			}
+			if (emailfield.getText().trim().isEmpty() == true) {
+
+				emailfield.getStyleClass().add("inptempty");
+			}
+
+			if (passworField.getText().trim().isEmpty() == true) {
+
+				passworField.getStyleClass().add("inptempty");
+			}
+			if (role.getValue() == null) {
+
+				role.getStyleClass().add("inptempty");
+			}
+
 		}
+
 	}
 
 	@FXML
