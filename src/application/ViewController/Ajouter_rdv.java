@@ -149,7 +149,6 @@ public class Ajouter_rdv implements Initializable {
         service_field.getStyleClass().remove("inptempty");
 
         if ((service_field.getText().trim().isEmpty() == false) &&
-                (car_model.getText().trim().isEmpty() == false) &&
                 (prix.getText().trim().isEmpty() == false) &&
                 (prix.getText().matches("[0-9]+")) &&
                 (nom_client.getText().trim().isEmpty() == false) &&

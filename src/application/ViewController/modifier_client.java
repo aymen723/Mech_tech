@@ -48,7 +48,7 @@ public class modifier_client implements Initializable {
                 (email_field.getText().trim().isEmpty() == false) &&
                 (address_field.getText().trim().isEmpty() == false) &&
                 (numero_field.getText().trim().isEmpty() == false) &&
-                Client_dashbord.client != null
+                (Client_dashbord.client != null)
 
         ) {
 
@@ -62,18 +62,16 @@ public class modifier_client implements Initializable {
 
             AdminController.UpdateClient(newemp);
 
-            System.out.println("test hna1");
+           
 
             try {
                 Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Client_dashbord.fxml"));
                 mod_container.getChildren().removeAll();
                 mod_container.getChildren().setAll(fxml);
-                System.out.println("test hna 2");
-
+                
             } catch (Exception e) {
                 // TODO: handle exception
             }
-            System.out.println("test hna 3");
         } else {
             if (name_field.getText().trim().isEmpty() == true) {
 
