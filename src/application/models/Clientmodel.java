@@ -8,6 +8,15 @@ public class Clientmodel {
     private String numero;
     private String addresse;
     private String email;
+    private boolean invit;
+
+    public boolean isInvit() {
+        return invit;
+    }
+
+    public void setInvit(boolean invit) {
+        this.invit = invit;
+    }
 
     public Clientmodel(String id, String nom, String prenom, String numero, String addresse, String email) {
         this.id = id;
@@ -16,6 +25,7 @@ public class Clientmodel {
         this.numero = numero;
         this.addresse = addresse;
         this.email = email;
+        this.invit = invit;
 
     }
 
@@ -26,6 +36,7 @@ public class Clientmodel {
         this.numero = numero;
         this.addresse = null;
         this.email = null;
+        this.invit = invit;
 
     }
 

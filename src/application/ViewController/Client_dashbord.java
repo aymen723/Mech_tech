@@ -273,6 +273,6 @@ public class Client_dashbord implements Initializable {
 
         // Bind the sorted list to the table
         client_table.setItems(sortedList);
-        
+
     }
 }

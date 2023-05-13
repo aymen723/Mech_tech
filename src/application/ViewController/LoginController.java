@@ -70,8 +70,8 @@ public class LoginController {
 		filter.append("motdepass", password.getText());
 		System.out.println("here outside");
 
-		final String adminrole = "admin";
-		final String caissierrole = "caissier";
+		final String adminrole = "Admin";
+		final String caissierrole = "Caissier";
 
 		// Connectdatabase connecterdatabase = new Connectdatabase();
 		MongoCollection<Document> collection = Connectdatabase.connectdb("users");

@@ -175,7 +175,7 @@ public class Ajouter_rdv implements Initializable {
                 newclient = new Clientmodel(nom_client.getText(), prenom_client.getText(), numero_client.getText());
                 clientrdv = new Document("nom", newclient.getNom());
                 clientrdv.append("prenom", newclient.getPrenom());
-                clientrdv.append("numero", newclient.getNumero());
+                clientrdv.append("tel", newclient.getNumero());
 
             } else {
                 newclient = new Clientmodel(client_golbal.getId(), client_golbal.getNom(), client_golbal.getPrenom(),
