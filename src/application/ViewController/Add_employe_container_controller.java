@@ -90,12 +90,24 @@ public class Add_employe_container_controller implements Initializable {
 
 	public void ajouter_employer() {
 
+		usernamefield.getStyleClass().remove("inptempty");
+
+		namefield.getStyleClass().remove("inptempty");
+
+		prenomfield.getStyleClass().remove("inptempty");
+
+		emailfield.getStyleClass().remove("inptempty");
+
+		passworField.getStyleClass().remove("inptempty");
+
+		role.getStyleClass().add("inptempty");
+
 		if ((usernamefield.getText().trim().isEmpty() == false) &&
 				(namefield.getText().trim().isEmpty() == false) &&
 				(prenomfield.getText().trim().isEmpty() == false) &&
 				(emailfield.getText().trim().isEmpty() == false) &&
 				(passworField.getText().trim().isEmpty() == false) &&
-				(role.getValue() == null)) {
+				(role.getValue() != null)) {
 			Document newemp = new Document("nomutil", usernamefield.getText());
 			newemp.append("nom", namefield.getText());
 			newemp.append("prenom", prenomfield.getText());

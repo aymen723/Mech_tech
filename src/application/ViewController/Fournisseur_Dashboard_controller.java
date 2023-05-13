@@ -96,6 +96,18 @@ public class Fournisseur_Dashboard_controller implements Initializable {
     @FXML
     void add_fournisseur(ActionEvent event) {
 
+            name.getStyleClass().remove("inptempty");
+
+
+            address.getStyleClass().remove("inptempty");
+
+
+            numero.getStyleClass().remove("inptempty");
+
+
+            email.getStyleClass().remove("inptempty");
+        
+
         if ((name.getText().trim().isEmpty() == false) &&
                 (address.getText().trim().isEmpty() == false) &&
                 (numero.getText().trim().isEmpty() == false) &&

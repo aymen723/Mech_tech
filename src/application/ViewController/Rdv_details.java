@@ -380,7 +380,6 @@ public class Rdv_details {
         service.getStyleClass().remove("inptempty");
 
         if ((service.getText().trim().isEmpty() == false) &&
-                (car_model.getText().trim().isEmpty() == false) &&
                 (description_in.getText().trim().isEmpty() == false) &&
                 (prix.getText().trim().isEmpty() == false) &&
                 (prix.getText().matches("[0-9]+")) &&
@@ -405,15 +404,6 @@ public class Rdv_details {
 
             List<Document> myDocuments = new ArrayList<Document>();
             for (int i = 0; i < rdv_local.getParts().size(); i++) {
-                // Parts part = rdv_local.getParts().get(i);
-                // Document addpart = new Document("_id", new ObjectId(part.getId()));
-                // addpart.append("name", part.getName());
-                // addpart.append("price", part.getPrice());
-                // addpart.append("quantity", part.getQuntitie());
-
-                // myDocuments.add(addpart);
-
-                // System.out.println(myDocuments.get(i));
                 Parts part = rdv_local.getParts().get(i);
                 Document addpart = new Document("_id", new ObjectId(part.getId()));
                 addpart.append("name", part.getName());
@@ -444,8 +434,12 @@ public class Rdv_details {
             rdv_local.setService(service.getText());
             rdv_local.setPrix(Integer.parseInt(prix.getText()));
             AdminController.UpdateRdv(newrdv, rdv_local);
-            AdminController.update_parts_qtnt_delete(oldparts);
-            AdminController.update_parts_qtnt(rdv_local.getParts());
+            if (oldparts.size() > 0) {
+                AdminController.update_parts_qtnt_delete(oldparts);
+            }
+            if (rdv_local.getParts().size() > 0) {
+                AdminController.update_parts_qtnt(rdv_local.getParts());
+            }
         } else {
             if (description_in.getText().trim().isEmpty() == true) {
 
