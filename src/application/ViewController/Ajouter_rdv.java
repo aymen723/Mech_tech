@@ -129,6 +129,15 @@ public class Ajouter_rdv implements Initializable {
     @FXML
     void add_car(ActionEvent event) {
 
+        try {
+            Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Car_Dashboard.fxml"));
+            add_container.getChildren().removeAll();
+            add_container.getChildren().setAll(fxml);
+
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
     }
 
     @FXML

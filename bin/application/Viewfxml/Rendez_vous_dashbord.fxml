@@ -37,10 +37,10 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="All_btn" layoutX="34.0" layoutY="2.0" mnemonicParsing="false" onAction="#All" text="All" />
-                  <Button fx:id="year_btn" layoutX="64.0" layoutY="2.0" mnemonicParsing="false" onAction="#this_year" text="This year" />
-                  <Button fx:id="month_btn" layoutX="127.0" layoutY="2.0" mnemonicParsing="false" onAction="#this_month" text="This month" />
-                  <Button fx:id="week_btn" layoutX="197.0" layoutY="2.0" mnemonicParsing="false" onAction="#this_week" text="This Week" />
+                  <Button fx:id="All_btn" layoutX="65.0" layoutY="3.0" mnemonicParsing="false" onAction="#All" styleClass="btn_mod" stylesheets="@btn.css" text="All" />
+                  <Button fx:id="year_btn" layoutX="99.0" layoutY="3.0" mnemonicParsing="false" onAction="#this_year" styleClass="btn_mod" stylesheets="@btn.css" text="This year" />
+                  <Button fx:id="month_btn" layoutX="166.0" layoutY="3.0" mnemonicParsing="false" onAction="#this_month" styleClass="btn_mod" stylesheets="@btn.css" text="This month" />
+                  <Button fx:id="week_btn" layoutX="246.0" layoutY="3.0" mnemonicParsing="false" onAction="#this_week" styleClass="btn_mod" stylesheets="@btn.css" text="This Week" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">

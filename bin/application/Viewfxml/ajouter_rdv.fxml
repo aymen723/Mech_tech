@@ -72,7 +72,7 @@
                           </items>
                         </ContextMenu>
                      </contextMenu></TextField>
-                  <Button fx:id="btn_add_car" layoutX="408.0" layoutY="27.0" mnemonicParsing="false" onAction="#add_car" text="Ajouter" />
+                  <Button fx:id="btn_add_car" layoutX="39.0" layoutY="25.0" mnemonicParsing="false" onAction="#add_car" prefHeight="29.0" prefWidth="63.0" styleClass="btn_mod" stylesheets="@btn.css" text="Ajouter" />
                </children></Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
                <children>
