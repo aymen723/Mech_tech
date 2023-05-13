@@ -369,7 +369,6 @@ public class DashbordController implements Initializable {
 		btn_car.getStyleClass().remove("afterpress");
 		btn_stats.getStyleClass().remove("afterpress");
 		btn_Fournisseur.getStyleClass().remove("afterpress");
-
 		btn_sales.getStyleClass().add("afterpress");
 	}
 
