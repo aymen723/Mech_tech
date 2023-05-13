@@ -90,7 +90,7 @@ public class mod_employe_container_controller {
                 (prenom_field_mod.getText().trim().isEmpty() == false) &&
                 (email_field_mod.getText().trim().isEmpty() == false) &&
                 (password_field_mod.getText().trim().isEmpty() == false) &&
-                (role_select.getValue() == null)) {
+                (role_select.getValue() != null)) {
             Document newemp = new Document("username", username_field_mod.getText());
             newemp.append("_id", user_local.getId());
             newemp.append("nom", name_field_mod.getText());
