@@ -302,16 +302,62 @@ public class ajouter_sales implements Initializable {
                         Parts part = getTableView().getItems().get(getIndex());
 
                         if (quanitie.getText().trim().isEmpty() == true) {
+                            if (part.getQuntitie() >= 1) {
+                                part.setQuntitie(1);
+                                sales_part.add(part);
+                                array_part.add(part);
 
-                            part.setQuntitie(1);
-                            sales_part.add(part);
-                            array_part.add(part);
+                            } else {
 
+                                Alert alert = new Alert(AlertType.INFORMATION);
+                                alert.setTitle("Confirmation de suppression");
+                                DialogPane dialogPane = alert.getDialogPane();
+                                dialogPane.setGraphic(null);
+
+                                dialogPane.getStylesheets()
+                                        .add(getClass().getResource("/application/Viewfxml/part_style.css")
+                                                .toExternalForm());
+                                dialogPane.getStyleClass().add("dialog-pane ");
+
+                                alert.initStyle(StageStyle.UNDECORATED);
+
+                                alert.setContentText("La quantité est insuffisante !");
+
+                                ButtonBar buttonBar = (ButtonBar) alert.getDialogPane().lookup(".button-bar");
+                                Button cancelButton = (Button) buttonBar.getButtons().get(0);
+                                cancelButton.getStyleClass().add("cancel_btn");
+                                cancelButton.setText("OK");
+                                Optional<ButtonType> result = alert.showAndWait();
+
+                            }
                         } else {
-                            part.setQuntitie(Integer.parseInt(quanitie.getText()));
-                            sales_part.add(part);
-                            array_part.add(part);
+                            if (part.getQuntitie() >= Integer.parseInt(quanitie.getText())) {
+                                part.setQuntitie(Integer.parseInt(quanitie.getText()));
+                                sales_part.add(part);
+                                array_part.add(part);
 
+                            } else {
+
+                                Alert alert = new Alert(AlertType.INFORMATION);
+                                alert.setTitle("Confirmation de suppression");
+                                DialogPane dialogPane = alert.getDialogPane();
+                                dialogPane.setGraphic(null);
+
+                                dialogPane.getStylesheets()
+                                        .add(getClass().getResource("/application/Viewfxml/part_style.css")
+                                                .toExternalForm());
+                                dialogPane.getStyleClass().add("dialog-pane ");
+
+                                alert.initStyle(StageStyle.UNDECORATED);
+
+                                alert.setContentText("La quantité est insuffisante !");
+
+                                ButtonBar buttonBar = (ButtonBar) alert.getDialogPane().lookup(".button-bar");
+                                Button cancelButton = (Button) buttonBar.getButtons().get(0);
+                                cancelButton.getStyleClass().add("cancel_btn");
+                                cancelButton.setText("OK");
+                                Optional<ButtonType> result = alert.showAndWait();
+                            }
                         }
                         sales_table.setItems(sales_part);
                         sales_table.refresh();
