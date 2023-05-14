@@ -20,6 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -287,6 +288,33 @@ public class car_dashbord_controller implements Initializable {
                             // TODO: handle exception
                         }
 
+                        // try {
+                        // FXMLLoader loader = new FXMLLoader(
+                        // getClass().getResource("/application/Viewfxml/car_details.fxml"));
+                        // Parent root = loader.load();
+
+                        // Stage stage = new Stage();
+                        // Scene scene = new Scene(root);
+                        // Car_details car_con = loader.getController();
+                        // // System.out.println(rdv_details_con);
+
+                        // // System.out.println(rdv.getDescrption_in());
+                        // car_con.getcar(car_edit);
+
+                        // stage.setScene(scene);
+                        // stage.setTitle("Mecha Tech");
+                        // scene.setFill(Color.TRANSPARENT);
+
+                        // // primaryStage.initStyle(StageStyle.UNDECORATED);
+                        // // primaryStage.initStyle(StageStyle.TRANSPARENT);
+
+                        // // primaryStage.setResizable(false);
+                        // stage.show();
+
+                        // } catch (IOException e) {
+                        // // TODO Auto-generated catch block
+                        // e.printStackTrace();
+                        // }
                     });
 
                 }

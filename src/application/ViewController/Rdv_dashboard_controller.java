@@ -112,6 +112,8 @@ public class Rdv_dashboard_controller {
         }
         newrdv.append("parts", myDocuments);
         AdminController.UpdateRdv(newrdv, rdv);
-
+        rd_container.setStyle("-fx-background-color: #F0EB8D;-fx-background-radius: 15;-fx-border-radius: 15");
+        btn_der.setDisable(true);
     }
+
 }

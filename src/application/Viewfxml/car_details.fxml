@@ -41,25 +41,25 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
                   <TextField fx:id="marque" layoutX="83.0" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" promptText="Marque" styleClass="inpt" stylesheets="@inputs.css" />
-                  <Text layoutX="83.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                  <Text layoutX="83.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Marque" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                <children>
                   <TextField fx:id="modele" layoutX="83.0" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" promptText="Modele" styleClass="inpt" stylesheets="@inputs.css" />
-                  <Text layoutX="81.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                  <Text layoutX="81.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modele" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                <children>
                   <TextField fx:id="couleur" layoutX="83.0" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" promptText="Couleur" styleClass="inpt" stylesheets="@inputs.css" />
-                  <Text layoutX="83.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                  <Text layoutX="83.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Couleur" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
                <children>
-                  <TextField fx:id="vin" layoutX="83.0" layoutY="25.0" prefHeight="30.0" prefWidth="300.0" promptText="vin" styleClass="inpt" stylesheets="@inputs.css" />
-                  <Text layoutX="83.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                  <TextField fx:id="vin" layoutX="83.0" layoutY="25.0" prefHeight="30.0" prefWidth="300.0" promptText="Vin" styleClass="inpt" stylesheets="@inputs.css" />
+                  <Text layoutX="83.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vin" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="6">
@@ -91,8 +91,8 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
                <children>
-                  <TextField fx:id="matricule" layoutX="83.0" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" promptText="matricule" styleClass="inpt" stylesheets="@inputs.css" />
-                  <Text layoutX="83.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                  <TextField fx:id="matricule" layoutX="83.0" layoutY="26.0" prefHeight="30.0" prefWidth="300.0" promptText="Matricule" styleClass="inpt" stylesheets="@inputs.css" />
+                  <Text layoutX="83.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Matricule" />
                </children>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">

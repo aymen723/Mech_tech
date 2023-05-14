@@ -2,12 +2,6 @@ package application.ViewController;
 
 import org.bson.Document;
 
-import com.mongodb.ConnectionString;
-import com.mongodb.MongoClientSettings;
-import com.mongodb.MongoException;
-import com.mongodb.MongoSocketOpenException;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import application.Connectdatabase;
 import application.models.Usermodel;
@@ -16,34 +10,26 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Point2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.SocketException;
-import java.net.URL;
-import java.util.Properties;
-import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
 
-public class LoginController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class LoginController implements Initializable {
 
 	@FXML
 	private TextField username;
@@ -60,6 +46,9 @@ public class LoginController {
 
 	@FXML
 	private Pane tool_bar;
+
+	@FXML
+	private Tooltip passwordvu;
 
 	private Usermodel user = new Usermodel();
 
@@ -210,6 +199,17 @@ public class LoginController {
 		Stage stage = (Stage) close_button.getScene().getWindow();
 		stage.close();
 
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		password.setOnKeyTyped(e -> {
+
+			passwordvu.setText(password.getText());
+			// passwordvu.show();
+
+		});
 	}
 
 }

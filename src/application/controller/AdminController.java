@@ -563,12 +563,22 @@ public class AdminController {
 				Document clientdoc = doc.get("client", Document.class);
 				Clientmodel client = new Clientmodel();
 
-				client.setId(clientdoc.getObjectId("_id").toString());
+				if (clientdoc.getObjectId("_id") != null) {
+					client.setId(clientdoc.getObjectId("_id").toString());
+				}
+
 				client.setNom(clientdoc.getString("nom"));
 				client.setPrenom(clientdoc.getString("prenom"));
-				client.setEmail(clientdoc.getString("email"));
 				client.setNumero(clientdoc.getString("tel"));
-				client.setAddresse(clientdoc.getString("adresse"));
+				client.setAddresse(null);
+				client.setEmail(null);
+
+				// client.setId(clientdoc.getObjectId("_id").toString());
+				// client.setNom(clientdoc.getString("nom"));
+				// client.setPrenom(clientdoc.getString("prenom"));
+				// client.setEmail(clientdoc.getString("email"));
+				// client.setNumero(clientdoc.getString("tel"));
+				// client.setAddresse(clientdoc.getString("adresse"));
 
 				Document techniciendoc = doc.get("technicien", Document.class);
 				Usermodel technicien = new Usermodel();
