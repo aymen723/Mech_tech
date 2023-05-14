@@ -260,7 +260,6 @@ public class Rdv_parts implements Initializable {
                         // parts_table.getSelectionModel().getSelectedItems();
 
                         Parts part = getTableView().getItems().get(getIndex());
-
                         if (quntitie.getText().trim().isEmpty() == true) {
                             if (part.getQuntitie() >= 1) {
                                 part.setQuntitie(1);

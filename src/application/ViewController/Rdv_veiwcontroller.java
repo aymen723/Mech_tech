@@ -134,6 +134,25 @@ public class Rdv_veiwcontroller implements Initializable {
 			// TODO: handle exception
 		}
 
+		// try {
+		// Parent fxml =
+		// FXMLLoader.load(getClass().getResource("/application/Viewfxml/ajouter_rdv.fxml"));
+		// Stage stage = new Stage();
+		// Scene scene = new Scene(fxml);
+		// stage.setScene(scene);
+		// stage.setTitle("Mecha Tech");
+
+		// // primaryStage.initStyle(StageStyle.UNDECORATED);
+		// // primaryStage.initStyle(StageStyle.TRANSPARENT);
+
+		// // primaryStage.setResizable(false);
+		// stage.show();
+
+		// } catch (IOException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+
 	}
 
 	public void rdv_modifier() {

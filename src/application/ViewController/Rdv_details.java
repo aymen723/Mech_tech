@@ -137,6 +137,8 @@ public class Rdv_details {
     @FXML
     private Text txt_vin;
 
+    // public static Stage stage;
+
     ObservableList<Usermodel> list_tech = FXCollections.observableArrayList();
     ObservableList<Usermodel> filtered = FXCollections.observableArrayList();
     ObservableList<Parts> list = FXCollections.observableArrayList();

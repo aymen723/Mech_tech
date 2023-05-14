@@ -133,7 +133,7 @@ public class facture {
         // check if the job was created successfully
         if (job != null) {
             // set the content to be printed
-
+            // job.showPrintDialog(Rdv_details.stage);
             job.printPage(grid);
             job.endJob();
         }
