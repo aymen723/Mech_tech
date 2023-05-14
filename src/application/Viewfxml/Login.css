@@ -6,12 +6,21 @@
 
 .rightbox {
   /* -fx-background-color: white; */
-  -fx-background-color: #F8F9FA;
+  -fx-background-color: #f8f9fa;
   -fx-border-radius: 0 30 30 0;
   -fx-background-radius: 0 30 30 0;
+  -fx-text-fill: white;
 }
 
 .btn {
   -fx-background-color: #fac400;
   -fx-color: white;
+}
+
+.btn:hover {
+  -fx-background-color: rgb(250, 196, 0);
+  -fx-effect: dropshadow(three-pass-box, rgba(250, 196, 0, 0.8), 10, 0, 0, 0);
+}
+.btn:pressed {
+  -fx-text-fill: black;
 }

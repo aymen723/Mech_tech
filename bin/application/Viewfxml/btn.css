@@ -5,6 +5,11 @@
   -fx-background-radius: 8px;
 }
 
+.btn_add:hover {
+  -fx-background-color: rgba(250, 203, 33, 0.878);
+  -fx-effect: dropshadow(three-pass-box, rgba(250, 203, 33, 0.8), 10, 0, 0, 0);
+}
+
 .btn_mod {
   -fx-background-color: transparent;
   -fx-text-fill: #454545;
@@ -12,6 +17,15 @@
   -fx-background-radius: 8px;
   -fx-border-color: #454545;
   -fx-border-width: 1.5px;
+}
+
+.btn_mod:hover {
+  -fx-border-color: #454545;
+  -fx-border-width: 1.5px;
+  -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.8), 10, 0, 0, 0);
+}
+.btn_mod:pressed {
+  -fx-text-fill: gray;
 }
 
 .btn_return {
@@ -24,11 +38,25 @@
   -fx-background-radius: 8px;
   -fx-background-radius: 8px;
 }
+.btn_delet:hover {
+  -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 10, 0, 0, 0);
+}
+
+.btn_delet:pressed {
+  -fx-text-fill: black;
+}
 
 .btn_terminer {
   -fx-background-color: rgb(93, 204, 93);
   -fx-text-fill: White;
   -fx-background-radius: 8px;
+}
+
+.btn_terminer:hover {
+  -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 10, 0, 0, 0);
+}
+.btn_terminer:pressed {
+  -fx-text-fill: black;
 }
 
 .stats_btn {
@@ -52,4 +80,34 @@
 .btn_add:pressed {
   -fx-background-color: "#fac400";
   -fx-text-fill: black;
+}
+
+.btn_lunch {
+  -fx-background-color: #99d6ea;
+  -fx-text-fill: White;
+  -fx-background-radius: 8px;
+  -fx-background-radius: 8px;
+}
+
+.btn_lunch:hover {
+  -fx-effect: dropshadow(three-pass-box, rgba(132, 208, 233, 0.8), 10, 0, 0, 0);
+}
+.btn_lunch:pressed {
+  -fx-text-fill: black;
+}
+
+.btn_hdashbord {
+  -fx-background-color: white;
+  -fx-border-color: #3c4048;
+  -fx-border-width: 2;
+  -fx-border-radius: 15;
+  -fx-background-radius: 15;
+  -fx-effect: dropshadow(three-pass-box, rgba(10, 10, 10, 0.4), 10, 0, 0, 0);
+}
+.btn_hdashbord:hover {
+  -fx-background-color: rgb(233, 233, 233);
+  -fx-effect: dropshadow(three-pass-box, rgba(10, 10, 10, 0.8), 10, 0, 0, 0);
+}
+.btn_hdashbord:pressed {
+  -fx-text-fill: gray;
 }

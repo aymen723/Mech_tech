@@ -53,7 +53,7 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <children>
-                  <Button fx:id="btn_conferm" layoutX="144.0" layoutY="29.0" mnemonicParsing="false" onAction="#conferm" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@part_style.css" text="Confermier">
+                  <Button fx:id="btn_conferm" layoutX="144.0" layoutY="29.0" mnemonicParsing="false" onAction="#conferm" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@btn.css" text="Confermier">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -71,12 +71,12 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="add_btn" layoutX="144.0" layoutY="21.0" mnemonicParsing="false" onAction="#add_parts" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@part_style.css" text="Ajouter">
+                  <Button fx:id="add_btn" layoutX="144.0" layoutY="21.0" mnemonicParsing="false" onAction="#add_parts" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@btn.css" text="Ajouter">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="annl_btn" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#annl_mod" prefHeight="30.0" prefWidth="100.0" styleClass="btn_mod" stylesheets="@part_style.css" text="Annuler">
+                  <Button fx:id="annl_btn" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#annl_mod" prefHeight="30.0" prefWidth="100.0" styleClass="btn_mod" stylesheets="@btn.css" text="Annuler">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

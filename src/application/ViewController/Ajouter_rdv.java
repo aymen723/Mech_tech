@@ -355,6 +355,7 @@ public class Ajouter_rdv implements Initializable {
                         // do something with selected client
                         System.out.println(car.toString());
                         car_local = car;
+                        car_model.setText(car.getMarque() + " " + car.getModele());
 
                     });
 

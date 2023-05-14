@@ -42,7 +42,7 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="add_emp" layoutX="401.0" layoutY="18.0" mnemonicParsing="false" onAction="#add_emp_conatiner" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@add_employe_style.css" text="Ajouter">
+                  <Button fx:id="add_emp" layoutX="371.0" layoutY="18.0" mnemonicParsing="false" onAction="#add_emp_conatiner" prefHeight="30.0" prefWidth="130.0" styleClass="btn_add" stylesheets="@btn.css" text="Ajouter">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>

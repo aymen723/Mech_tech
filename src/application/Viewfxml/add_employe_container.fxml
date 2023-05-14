@@ -97,7 +97,7 @@
                </children></Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7">
                <children>
-                  <Button fx:id="ajouter_employer" layoutX="112.0" layoutY="23.0" mnemonicParsing="false" onAction="#ajouter_employer" prefHeight="30.0" prefWidth="125.0" styleClass="btn_add" stylesheets="@add_employe_style.css" text="Ajouter">
+                  <Button fx:id="ajouter_employer" layoutX="112.0" layoutY="23.0" mnemonicParsing="false" onAction="#ajouter_employer" prefHeight="30.0" prefWidth="125.0" styleClass="btn_add" stylesheets="@btn.css" text="Ajouter">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

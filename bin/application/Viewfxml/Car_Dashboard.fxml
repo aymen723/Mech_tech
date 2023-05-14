@@ -57,7 +57,14 @@
         </rowConstraints>
          <children>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <children>
+                  <Button fx:id="annl_btn" layoutX="92.0" layoutY="17.0" mnemonicParsing="false" onAction="#annl_mod" prefHeight="30.0" prefWidth="100.0" styleClass="btn_mod" stylesheets="@btn.css" text="Annuler">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children></Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <children>
                   <TextField fx:id="matricule" layoutX="16.0" layoutY="20.0" prefWidth="150.0" promptText="Matricule" styleClass="inpt" stylesheets="@inputs.css" />
@@ -101,12 +108,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="mod_btn" layoutX="93.0" layoutY="18.0" mnemonicParsing="false" onAction="#mod_parts" prefHeight="30.0" prefWidth="100.0" styleClass="btn_mod" stylesheets="@part_style.css" text="Modifier">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="annl_btn" layoutX="-20.0" layoutY="18.0" mnemonicParsing="false" onAction="#annl_mod" prefHeight="30.0" prefWidth="100.0" styleClass="btn_mod" stylesheets="@part_style.css" text="Annuler">
+                  <Button fx:id="mod_btn" layoutX="92.0" layoutY="18.0" mnemonicParsing="false" onAction="#mod_parts" prefHeight="30.0" prefWidth="100.0" styleClass="btn_mod" stylesheets="@btn.css" text="Modifier">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -121,7 +123,7 @@
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
                <children>
-                  <Button fx:id="add_btn" layoutX="43.0" layoutY="18.0" mnemonicParsing="false" onAction="#add_parts" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@part_style.css" text="Ajouter">
+                  <Button fx:id="add_btn" layoutX="92.0" layoutY="18.0" mnemonicParsing="false" onAction="#add_parts" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@btn.css" text="Ajouter">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

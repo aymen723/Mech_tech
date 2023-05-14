@@ -91,7 +91,7 @@
                </children></Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7">
                <children>
-                  <Button fx:id="modifier_employer" layoutX="50.0" layoutY="23.0" mnemonicParsing="false" onAction="#modifier_employer" prefHeight="30.0" prefWidth="125.0" text="Modifier">
+                  <Button fx:id="modifier_employer" layoutX="50.0" layoutY="23.0" mnemonicParsing="false" onAction="#modifier_employer" prefHeight="30.0" prefWidth="125.0" styleClass="btn_mod" stylesheets="@btn.css" text="Modifier">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>

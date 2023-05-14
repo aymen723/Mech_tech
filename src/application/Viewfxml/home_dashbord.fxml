@@ -16,11 +16,11 @@
 
    </center>
    <center>
-      <Pane prefHeight="283.0" prefWidth="930.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
-            <ScrollPane fx:id="rdv_scroll" hbarPolicy="ALWAYS" layoutX="44.0" layoutY="1.0" prefHeight="232.0" prefWidth="843.0" style="-fx-background-color: transparent;" stylesheets="@scrollbar_style.css" vbarPolicy="NEVER">
+            <ScrollPane fx:id="rdv_scroll" hbarPolicy="ALWAYS" prefHeight="270.0" prefWidth="843.0" style="-fx-background-color: transparent;" stylesheets="@scrollbar_style.css" vbarPolicy="NEVER">
                <content>
-                  <HBox fx:id="rdv_hbox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="215.0" prefWidth="235.0" spacing="20.0" style="-fx-background-color: transparent;">
+                  <HBox fx:id="rdv_hbox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="270.0" prefWidth="260.0" spacing="20.0" style="-fx-background-color: transparent;">
                      <padding>
                         <Insets bottom="10.0" top="10.0" />
                      </padding>
@@ -28,12 +28,17 @@
                </content>
             </ScrollPane>
          </children>
-      </Pane>
+      </HBox>
    </center>
    <top>
-      <Pane prefHeight="170.0" prefWidth="930.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
+      <Pane prefHeight="135.0" prefWidth="930.0" style="-fx-background-color: transparent;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="new_client" layoutX="121.0" layoutY="45.0" mnemonicParsing="false" onAction="#new_client" prefHeight="75.0" prefWidth="110.0" style="-fx-background-color: white; -fx-border-color: #3c4048; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15;" text=" NOUVEAU CLIENT" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="new_client" layoutX="121.0" layoutY="45.0" mnemonicParsing="false" onAction="#new_client" prefHeight="75.0" prefWidth="110.0" styleClass="btn_hdashbord" stylesheets="@btn.css" text=" NOUVEAU CLIENT" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="new_rdv" layoutX="408.0" layoutY="45.0" mnemonicParsing="false" onAction="#new_rdv" prefHeight="75.0" prefWidth="110.0" styleClass="btn_hdashbord" stylesheets="@btn.css" text="NOUVEAU RENDEZ-VOUS" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -45,34 +50,15 @@
                   </DropShadow>
                </effect>
             </Button>
-            <Button fx:id="new_rdv" layoutX="408.0" layoutY="45.0" mnemonicParsing="false" onAction="#new_rdv" prefHeight="75.0" prefWidth="110.0" style="-fx-background-color: white; -fx-border-color: #3c4048; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15;" text="NOUVEAU RENDEZ-VOUS" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="new_sale" layoutX="720.0" layoutY="45.0" mnemonicParsing="false" onAction="#new_sale" prefHeight="75.0" prefWidth="110.0" styleClass="btn_hdashbord" stylesheets="@btn.css" text="NOUVEAU VENTE" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
-               <effect>
-                  <DropShadow height="0.0" radius="4.5" width="20.0">
-                     <color>
-                        <Color red="0.40789473056793213" green="0.40789473056793213" blue="0.40789473056793213" />
-                     </color>
-                  </DropShadow>
-               </effect>
-            </Button>
-            <Button fx:id="new_sale" layoutX="720.0" layoutY="45.0" mnemonicParsing="false" onAction="#new_sale" prefHeight="75.0" prefWidth="110.0" style="-fx-background-color: white; -fx-border-color: #3c4048; -fx-border-width: 2; -fx-border-radius: 15; -fx-background-radius: 15;" text="NOUVEAU VENTE" textAlignment="CENTER" wrapText="true">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <effect>
-                  <DropShadow height="0.0" radius="4.5" width="20.0">
-                     <color>
-                        <Color red="0.40789473056793213" green="0.40789473056793213" blue="0.40789473056793213" />
-                     </color>
-                  </DropShadow>
-               </effect>
             </Button>
          </children></Pane>
    </top>
    <bottom>
-      <Pane prefHeight="197.0" prefWidth="930.0" BorderPane.alignment="CENTER">
+      <Pane prefHeight="178.0" prefWidth="930.0" BorderPane.alignment="CENTER">
          <children>
             <ScrollPane fx:id="part_scroll" hbarPolicy="ALWAYS" layoutX="43.0" layoutY="31.0" prefHeight="135.0" prefWidth="844.0" style="-fx-background-color: transparent;" stylesheets="@scrollbar_style.css" vbarPolicy="NEVER">
                <content>

@@ -78,7 +78,7 @@
                <children>
                   <Button fx:id="modifier_employer" layoutX="87.0" layoutY="21.0" mnemonicParsing="false" onAction="#modifier_employer" prefHeight="35.0" prefWidth="125.0" styleClass="btn_add" stylesheets="@btn.css" text="enregistré">
                      <font>
-                        <Font name="System Bold" size="12.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
                </children>
