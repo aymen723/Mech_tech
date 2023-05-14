@@ -3,6 +3,7 @@ package application.ViewController;
 // import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Optional;
 // import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -20,9 +21,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 // import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -37,6 +43,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 // import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.stage.StageStyle;
 // import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -255,17 +262,59 @@ public class Rdv_parts implements Initializable {
                         Parts part = getTableView().getItems().get(getIndex());
 
                         if (quntitie.getText().trim().isEmpty() == true) {
+                            if (part.getQuntitie() >= 1) {
+                                part.setQuntitie(1);
+                                rdv_local.getParts().add(part);
 
-                            part.setQuntitie(1);
-                            System.out.println(part.getId() + " is added");
+                            } else {
+                                Alert alert = new Alert(AlertType.INFORMATION);
+                                alert.setTitle("Confirmation de suppression");
+                                DialogPane dialogPane = alert.getDialogPane();
+                                dialogPane.setGraphic(null);
 
-                            rdv_local.getParts().add(part);
+                                dialogPane.getStylesheets()
+                                        .add(getClass().getResource("/application/Viewfxml/part_style.css")
+                                                .toExternalForm());
+                                dialogPane.getStyleClass().add("dialog-pane ");
 
+                                alert.initStyle(StageStyle.UNDECORATED);
+
+                                alert.setContentText("La quantité est insuffisante !");
+
+                                ButtonBar buttonBar = (ButtonBar) alert.getDialogPane().lookup(".button-bar");
+                                Button cancelButton = (Button) buttonBar.getButtons().get(0);
+                                cancelButton.getStyleClass().add("cancel_btn");
+                                cancelButton.setText("OK");
+                                alert.showAndWait();
+
+                            }
                         } else {
-                            part.setQuntitie(Integer.parseInt(quntitie.getText()));
-                            System.out.println(part.getId() + " is added");
-                            rdv_local.getParts().add(part);
 
+                            if (part.getQuntitie() >= Integer.parseInt(quntitie.getText())) {
+                                part.setQuntitie(Integer.parseInt(quntitie.getText()));
+                                rdv_local.getParts().add(part);
+                            } else {
+                                Alert alert = new Alert(AlertType.INFORMATION);
+                                alert.setTitle("Confirmation de suppression");
+                                DialogPane dialogPane = alert.getDialogPane();
+                                dialogPane.setGraphic(null);
+
+                                dialogPane.getStylesheets()
+                                        .add(getClass().getResource("/application/Viewfxml/part_style.css")
+                                                .toExternalForm());
+                                dialogPane.getStyleClass().add("dialog-pane ");
+
+                                alert.initStyle(StageStyle.UNDECORATED);
+
+                                alert.setContentText("La quantité est insuffisante !");
+
+                                ButtonBar buttonBar = (ButtonBar) alert.getDialogPane().lookup(".button-bar");
+                                Button cancelButton = (Button) buttonBar.getButtons().get(0);
+                                cancelButton.getStyleClass().add("cancel_btn");
+                                cancelButton.setText("OK");
+                                alert.showAndWait();
+
+                            }
                         }
 
                     });

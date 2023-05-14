@@ -111,7 +111,7 @@ public class facture {
         }
 
         parts_price.setText(Integer.toString(sum));
-        total_fact.setText(Integer.toString(rdv_local.getPrix()) + Integer.toString(sum));
+        total_fact.setText(Integer.toString(rdv_local.getPrix() + sum));
         table_facture.setFixedCellSize(25);
         table_facture.setItems(list);
 
@@ -121,15 +121,6 @@ public class facture {
 
     @FXML
     void print(ActionEvent event) {
-        // // Print the report using the default printer
-        // javafx.print.Printer printer = javafx.print.Printer.getDefaultPrinter();
-        // javafx.print.PrinterJob job =
-        // javafx.print.PrinterJob.createPrinterJob(printer);
-        // if (job != null) {
-        // // grid.setPrefWidth("");
-        // job.printPage(grid);
-        // job.endJob();
-        // }
 
         Printer printer = Printer.getDefaultPrinter();
         PageLayout pageLayout = printer.createPageLayout(Paper.A4, PageOrientation.PORTRAIT,
@@ -147,36 +138,5 @@ public class facture {
             job.endJob();
         }
     }
-
-    // @FXML
-    // void save(ActionEvent event) throws IOException {
-
-    // // Use a FileChooser to prompt the user for the save location
-    // // FileChooser fileChooser = new FileChooser();
-    // // fileChooser.setTitle("Save Report As PDF");
-    // // File file = fileChooser.showSaveDialog(nom_fact.getScene().getWindow());
-    // // if (file != null) {
-    // // // Create a new PDF document and writer
-    // // Document document = new Document();
-    // // try {
-    // // PdfWriter.getInstance(document, new FileOutputStream(file));
-    // // } catch (FileNotFoundException e) {
-    // // // TODO Auto-generated catch block
-    // // e.printStackTrace();
-    // // } catch (DocumentException e) {
-    // // // TODO Auto-generated catch block
-    // // e.printStackTrace();
-    // // }
-
-    // // // Open the document and add the report text as a paragraph
-    // // document.open();
-    // // document.add(new Paragraph(nom_fact.getText()));
-
-    // // // Close the document
-    // // document.close();
-    // // }
-    // // facture.saveAsPDF(grid, "test.pdf");
-
-    // }
 
 }

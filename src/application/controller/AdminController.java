@@ -320,14 +320,10 @@ public class AdminController {
 				Document clientdoc = doc.get("client", Document.class);
 				Clientmodel client = new Clientmodel();
 
-				// client.setId(clientdoc.getObjectId("_id").toString());
-				// client.setNom(clientdoc.getString("nom"));
-				// client.setPrenom(clientdoc.getString("prenom"));
-				// client.setEmail(clientdoc.getString("email"));
-				// client.setNumero(clientdoc.getString("tel"));
-				// client.setAddresse(clientdoc.getString("adresse"));
+				if (clientdoc.getObjectId("_id") != null) {
+					client.setId(clientdoc.getObjectId("_id").toString());
+				}
 
-				client.setId(null);
 				client.setNom(clientdoc.getString("nom"));
 				client.setPrenom(clientdoc.getString("prenom"));
 				client.setNumero(clientdoc.getString("tel"));

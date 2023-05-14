@@ -49,7 +49,5 @@
   -fx-border-radius: 10px;
 }
 
-.btn_add:pressed {
-  -fx-background-color: "#fac400";
-  -fx-text-fill: black;
+.btn_sml {
 }
