@@ -59,8 +59,8 @@ public class LoginController implements Initializable {
 		filter.append("motdepass", password.getText());
 		System.out.println("here outside");
 
-		final String adminrole = "Admin";
-		final String caissierrole = "Caissier";
+		final String adminrole = "admin";
+		final String caissierrole = "caissier";
 
 		// Connectdatabase connecterdatabase = new Connectdatabase();
 		MongoCollection<Document> collection = Connectdatabase.connectdb("users");

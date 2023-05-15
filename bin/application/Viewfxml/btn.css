@@ -11,7 +11,7 @@
 }
 
 .btn_mod {
-  -fx-background-color: transparent;
+  -fx-background-color: #EAEAEA;
   -fx-text-fill: #454545;
   -fx-border-radius: 8px;
   -fx-background-radius: 8px;

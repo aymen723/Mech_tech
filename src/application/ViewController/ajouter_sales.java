@@ -327,7 +327,7 @@ public class ajouter_sales implements Initializable {
                                 Button cancelButton = (Button) buttonBar.getButtons().get(0);
                                 cancelButton.getStyleClass().add("cancel_btn");
                                 cancelButton.setText("OK");
-                                Optional<ButtonType> result = alert.showAndWait();
+                                alert.showAndWait();
 
                             }
                         } else {
@@ -356,7 +356,7 @@ public class ajouter_sales implements Initializable {
                                 Button cancelButton = (Button) buttonBar.getButtons().get(0);
                                 cancelButton.getStyleClass().add("cancel_btn");
                                 cancelButton.setText("OK");
-                                Optional<ButtonType> result = alert.showAndWait();
+                                alert.showAndWait();
                             }
                         }
                         sales_table.setItems(sales_part);

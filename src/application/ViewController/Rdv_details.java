@@ -75,6 +75,8 @@ public class Rdv_details {
     @FXML
     private Button fact_tbn;
     @FXML
+    private Button parts_page_btn;
+    @FXML
     private Button eng_btn;
 
     @FXML
@@ -136,6 +138,8 @@ public class Rdv_details {
 
     @FXML
     private Text txt_vin;
+    @FXML
+    private Button btn_finish;
 
     // public static Stage stage;
 
@@ -143,8 +147,6 @@ public class Rdv_details {
     ObservableList<Usermodel> filtered = FXCollections.observableArrayList();
     ObservableList<Parts> list = FXCollections.observableArrayList();
     ArrayList<Parts> oldparts = new ArrayList<Parts>();
-    @FXML
-    private Button btn_finish;
 
     @FXML
     void add_parts_rdv(ActionEvent event) {
@@ -468,6 +470,33 @@ public class Rdv_details {
                 service.getStyleClass().add("inptempty");
             }
 
+        }
+
+    }
+
+    @FXML
+    void parts_page(ActionEvent event) {
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/application/Viewfxml/Parts_page.fxml"));
+            Parent root = loader.load();
+
+            Parts_page_controller con = loader.getController();
+            System.out.println(con);
+            con.Gettrdv(rdv_local);
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.setTitle("Mecha Tech");
+
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }

@@ -14,11 +14,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="pane" maxHeight="789.0" prefHeight="703.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.facture">
+<AnchorPane fx:id="pane" maxHeight="789.0" prefHeight="703.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.facture">
    <children>
-      <Pane fx:id="factpane" prefHeight="723.0" prefWidth="600.0">
+      <Pane fx:id="factpane" prefHeight="723.0" prefWidth="580.0">
          <children>
-            <GridPane fx:id="grid" maxHeight="720.0" prefHeight="720.0" prefWidth="600.0" style="-fx-background-color: white; -fx-border-color: black;">
+            <GridPane fx:id="grid" maxHeight="720.0" prefHeight="720.0" prefWidth="580.0" style="-fx-background-color: white; -fx-border-color: black;">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -58,7 +58,7 @@
                               <Font name="Yu Gothic Regular" size="16.0" />
                            </font>
                         </Text>
-                        <Line endX="503.0" layoutX="97.0" layoutY="99.0" startX="-100.0" />
+                        <Line endX="482.0" layoutX="97.0" layoutY="99.0" startX="-100.0" />
                         <Text layoutX="14.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VIN :">
                            <font>
                               <Font name="Yu Gothic Bold" size="16.0" />
@@ -153,15 +153,15 @@
                               <Font name="Yu Gothic Regular" size="16.0" />
                            </font>
                         </Text>
-                        <TableView fx:id="table_facture" layoutX="47.0" layoutY="14.0" maxHeight="365.0" prefHeight="340.0" prefWidth="503.0" stylesheets="@tablestyle.css">
+                        <TableView fx:id="table_facture" layoutX="38.0" layoutY="14.0" maxHeight="365.0" prefHeight="340.0" prefWidth="503.0" stylesheets="@tablestyle.css">
                           <columns>
                             <TableColumn fx:id="nom_part_fact" prefWidth="247.19998168945312" text="Nom" />
                             <TableColumn fx:id="quant_part_fact" minWidth="0.0" prefWidth="128.800048828125" text="Quantité" />
                               <TableColumn fx:id="prix_part_fact" minWidth="0.0" prefWidth="123.20001220703125" text="Prix" />
                           </columns>
                         </TableView>
-                        <Line endX="505.39996337890625" endY="-3.0517578125E-5" layoutX="93.0" layoutY="379.0" startX="-100.0" />
-                        <Line endX="753.0" layoutX="-155.0" layoutY="-1.0" startX="154.0" />
+                        <Line endX="486.0" layoutX="93.0" layoutY="379.0" startX="-100.0" />
+                        <Line endX="734.0" layoutX="-155.0" layoutY="-1.0" startX="154.0" />
                         <Text layoutX="284.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DA">
                            <font>
                               <Font name="Yu Gothic Regular" size="16.0" />

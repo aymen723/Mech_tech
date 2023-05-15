@@ -24,7 +24,6 @@
 .table-cell {
   -fx-text-overrun: ellipsis;
   -fx-max-height: 100px;
-  
   -fx-text-wrap: true;
   -fx-alignment: CENTER;
 }
