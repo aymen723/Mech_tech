@@ -145,6 +145,7 @@ public class parts_dashbord_controller implements Initializable {
 				price.getText().trim().isEmpty() == false &&
 				price.getText().matches("[0-9]+") &&
 				quntitie.getText().matches("[0-9]+") &&
+				date.getValue() != null &&
 				prixdachat.getText().matches("[0-9]+")) {
 			Document newpart = new Document("name", name.getText());
 			newpart.append("price", Integer.parseInt(price.getText()));
