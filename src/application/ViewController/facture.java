@@ -46,17 +46,17 @@ public class facture {
     @FXML
     private Text service_fact;
 
-    @FXML
-    private TableColumn<Parts, Integer> nom_part_fact;
+    // @FXML
+    // private TableColumn<Parts, Integer> nom_part_fact;
 
-    @FXML
-    private TableColumn<Parts, Integer> prix_part_fact;
+    // @FXML
+    // private TableColumn<Parts, Integer> prix_part_fact;
 
-    @FXML
-    private TableColumn<Parts, Integer> quant_part_fact;
+    // @FXML
+    // private TableColumn<Parts, Integer> quant_part_fact;
 
-    @FXML
-    private TableView<Parts> table_facture;
+    // @FXML
+    // private TableView<Parts> table_facture;
 
     @FXML
     private Text prix_fact;
@@ -101,9 +101,9 @@ public class facture {
         date_fin_fact.setText(DATE_FORMAT.format(rdv_local.getDate_fin()));
         service_fact.setText(rdv_local.getService());
         prix_fact.setText(Integer.toString(rdv_local.getPrix()));
-        nom_part_fact.setCellValueFactory(new PropertyValueFactory<>("name"));
-        prix_part_fact.setCellValueFactory(new PropertyValueFactory<>("price"));
-        quant_part_fact.setCellValueFactory(new PropertyValueFactory<>("quntitie"));
+        // nom_part_fact.setCellValueFactory(new PropertyValueFactory<>("name"));
+        // prix_part_fact.setCellValueFactory(new PropertyValueFactory<>("price"));
+        // quant_part_fact.setCellValueFactory(new PropertyValueFactory<>("quntitie"));
 
         for (int i = 0; i < rdv_local.getParts().size(); i++) {
 
@@ -112,10 +112,11 @@ public class facture {
 
         parts_price.setText(Integer.toString(sum));
         total_fact.setText(Integer.toString(rdv_local.getPrix() + sum));
-        table_facture.setFixedCellSize(25);
-        table_facture.setItems(list);
+        // table_facture.setFixedCellSize(25);
+        // table_facture.setItems(list);
 
-        table_facture.setPrefHeight(table_facture.getFixedCellSize() * rdv_local.getParts().size() + 47);
+        // table_facture.setPrefHeight(table_facture.getFixedCellSize() *
+        // rdv_local.getParts().size() + 47);
 
     }
 

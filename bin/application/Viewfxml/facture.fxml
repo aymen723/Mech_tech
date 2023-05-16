@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -153,13 +152,6 @@
                               <Font name="Yu Gothic Regular" size="16.0" />
                            </font>
                         </Text>
-                        <TableView fx:id="table_facture" layoutX="38.0" layoutY="14.0" maxHeight="365.0" prefHeight="340.0" prefWidth="503.0" stylesheets="@tablestyle.css">
-                          <columns>
-                            <TableColumn fx:id="nom_part_fact" prefWidth="247.19998168945312" text="Nom" />
-                            <TableColumn fx:id="quant_part_fact" minWidth="0.0" prefWidth="128.800048828125" text="Quantité" />
-                              <TableColumn fx:id="prix_part_fact" minWidth="0.0" prefWidth="123.20001220703125" text="Prix" />
-                          </columns>
-                        </TableView>
                         <Line endX="486.0" layoutX="93.0" layoutY="379.0" startX="-100.0" />
                         <Line endX="734.0" layoutX="-155.0" layoutY="-1.0" startX="154.0" />
                         <Text layoutX="284.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DA">
@@ -182,6 +174,12 @@
                               <Font name="Yu Gothic Regular" size="16.0" />
                            </font>
                         </Text>
+                        <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Note :">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <TextArea layoutX="14.0" layoutY="32.0" prefHeight="153.0" prefWidth="554.0" />
                      </children>
                   </Pane>
                   <Pane prefHeight="67.0" prefWidth="292.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
