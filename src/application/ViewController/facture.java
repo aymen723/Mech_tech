@@ -29,11 +29,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.common.PDRectangle;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
+// import org.apache.pdfbox.pdmodel.PDDocument;
+// import org.apache.pdfbox.pdmodel.PDPage;
+// import org.apache.pdfbox.pdmodel.PDPageContentStream;
+// import org.apache.pdfbox.pdmodel.common.PDRectangle;
+// import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
