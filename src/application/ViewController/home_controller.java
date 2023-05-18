@@ -108,8 +108,6 @@ public class home_controller implements Initializable {
         int currentMonth = currentDate.getMonthValue();
         Predicate<Rendez_vous> rdvfilter = item -> (item.getDate_debut().toInstant().atZone(ZoneId.systemDefault())
                 .toLocalDate().equals(currentDate))
-                || (item.getDate_debut().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()
-                        .isBefore(currentDate))
                 || (item.getEtat().equals("en cours"));
         List<Rendez_vous> filteredRdv = list_rdv.stream().filter(rdvfilter).toList();
 
