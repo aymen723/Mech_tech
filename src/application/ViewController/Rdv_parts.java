@@ -50,7 +50,19 @@ import javafx.util.Callback;
 public class Rdv_parts implements Initializable {
 
     @FXML
-    private Button add_btn;
+    private TableView<Parts> part_rdv;
+
+    @FXML
+    private TableColumn<Parts, Void> action_col;
+
+    @FXML
+    private TableColumn<Parts, String> nom_part_col;
+
+    @FXML
+    private TableColumn<Parts, Integer> prix_rdv__col;
+
+    @FXML
+    private TableColumn<Parts, Integer> quantite_part_col;
 
     @FXML
     private Button annl_btn;
@@ -104,27 +116,12 @@ public class Rdv_parts implements Initializable {
 
     FilteredList<Parts> filteredList = new FilteredList<>(list, b -> true);
 
-    public void add_parts() {
-
-        // TableViewSelectionModel<Parts> selectionModel =
-        // parts_table.getSelectionModel();
-        // selectionModel.setSelectionMode(SelectionMode.SINGLE);
-
-        // Parts part = selectionModel.getSelectedItems().get(0);
-
-        // part.setQuntitie(Integer.parseInt(quntitie.getText()));
-        // System.out.println(part.getId() + " is added");
-
-        // rdv_local.getParts().add(part);
-    }
-
     public void annl_mod() {
 
         quntitie.setText("");
 
         part = null;
 
-        add_btn.setDisable(false);
         annl_btn.setDisable(true);
         annl_btn.setVisible(false);
 
@@ -132,6 +129,97 @@ public class Rdv_parts implements Initializable {
 
     public void setrdv(Rendez_vous rdv) {
         this.rdv_local = rdv;
+
+        if (rdv.getParts() != null) {
+            list = FXCollections.observableArrayList(rdv_local.getParts());
+
+            nom_part_col.setCellValueFactory(new PropertyValueFactory<>("name"));
+            prix_rdv__col.setCellValueFactory(new PropertyValueFactory<>("price"));
+            quantite_part_col.setCellValueFactory(new PropertyValueFactory<>("quntitie"));
+
+            action_col.setCellFactory(column -> {
+
+                return new TableCell<Parts, Void>() {
+
+                    private final Button deletebutton = new Button("");
+
+                    {
+
+                        deletebutton.setStyle(
+                                "-fx-background-radius: 5em; -fx-min-width: 25px; -fx-min-height: 25px; -fx-max-width: 25px; -fx-max-height: 25px; -fx-background-color: transparent; -fx-alignment:CENTER;");
+
+                        Image image_copy = new Image(getClass().getResourceAsStream("Delete.png"));
+                        ImageView img_copy = new ImageView(image_copy);
+                        img_copy.setFitHeight(25);
+                        img_copy.setFitWidth(25);
+                        deletebutton.setGraphic(img_copy);
+
+                        deletebutton.setOnAction(event -> {
+
+                            Alert alert = new Alert(AlertType.CONFIRMATION);
+                            alert.setTitle("Confirmation de suppression");
+                            DialogPane dialogPane = alert.getDialogPane();
+                            dialogPane.setGraphic(null);
+
+                            dialogPane.getStylesheets()
+                                    .add(getClass().getResource("/application/Viewfxml/part_style.css")
+                                            .toExternalForm());
+                            dialogPane.getStyleClass().add("dialog-pane ");
+
+                            alert.initStyle(StageStyle.UNDECORATED);
+
+                            alert.setContentText("cette action ne peut pas être inversé !");
+
+                            ButtonBar buttonBar = (ButtonBar) alert.getDialogPane().lookup(".button-bar");
+                            Button cancelButton = (Button) buttonBar.getButtons().get(1);
+                            Button deleteButton = (Button) buttonBar.getButtons().get(0);
+                            cancelButton.getStyleClass().add("cancel_btn");
+                            deleteButton.getStyleClass().add("delet_btn");
+                            cancelButton.setText("Annuler");
+                            deleteButton.setText("Supprimer");
+                            Optional<ButtonType> result = alert.showAndWait();
+                            if (result.get() == ButtonType.OK) {
+
+                                rdv_local.getParts().remove(getIndex());
+                                list = FXCollections.observableArrayList(rdv_local.getParts());
+                                // Parts part = getTableView().getItems().get(getIndex());
+                                // AdminController.deletpart(part);
+                                // list = AdminController.PartList();
+                                part_rdv.setItems(list);
+                                part_rdv.refresh();
+                                // User clicked OK
+                            } else {
+                                // User clicked Cancel or closed the dialog
+
+                            }
+
+                        });
+                    }
+
+                    @Override
+                    protected void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            HBox buttonsBox = new HBox(10, deletebutton);
+                            getAlignment();
+                            buttonsBox.setAlignment(Pos.CENTER);
+                            setGraphic(buttonsBox);
+                        }
+                    }
+                };
+            });
+            part_rdv.setItems(list);
+            // for (int i = 0; i < rdv_local.getParts().size(); i++) {
+            // listview_part.getItems().add(rdv_local.getParts().get(i).getName());
+            // }
+
+            // HBox hbox = new HBox(listview_part);
+        } else {
+            // System.out.println("is null");
+        }
 
     }
 
@@ -264,6 +352,10 @@ public class Rdv_parts implements Initializable {
                             if (part.getQuntitie() >= 1) {
                                 part.setQuntitie(1);
                                 rdv_local.getParts().add(part);
+                                
+                                list = FXCollections.observableArrayList(rdv_local.getParts());
+                                part_rdv.setItems(list);
+                                part_rdv.refresh();
 
                             } else {
                                 Alert alert = new Alert(AlertType.INFORMATION);
@@ -292,6 +384,11 @@ public class Rdv_parts implements Initializable {
                             if (part.getQuntitie() >= Integer.parseInt(quntitie.getText())) {
                                 part.setQuntitie(Integer.parseInt(quntitie.getText()));
                                 rdv_local.getParts().add(part);
+
+                                list = FXCollections.observableArrayList(rdv_local.getParts());
+                                part_rdv.setItems(list);
+                                part_rdv.refresh();
+                                
                             } else {
                                 Alert alert = new Alert(AlertType.INFORMATION);
                                 alert.setTitle("Confirmation de suppression");
@@ -314,6 +411,7 @@ public class Rdv_parts implements Initializable {
                                 alert.showAndWait();
 
                             }
+
                         }
 
                     });

@@ -229,8 +229,8 @@ public class Stat_dashboard {
             stat_2.setText(Integer.toString(state_2));
             stat_3.setText(Double.toString(state_3));
 
-            CategoryAxis xAxis = new CategoryAxis();
-            NumberAxis yAxis = new NumberAxis();
+            // CategoryAxis xAxis = new CategoryAxis();
+            // NumberAxis yAxis = new NumberAxis();
 
             // Create the line chart
             // LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);
@@ -293,8 +293,8 @@ public class Stat_dashboard {
             stat_2.setText(Integer.toString(state_2));
             stat_3.setText(Double.toString(state_3));
 
-            CategoryAxis xAxis = new CategoryAxis();
-            NumberAxis yAxis = new NumberAxis();
+            // CategoryAxis xAxis = new CategoryAxis();
+            // NumberAxis yAxis = new NumberAxis();
 
             // Create the line chart
             // LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);

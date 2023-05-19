@@ -15,9 +15,9 @@
 <BorderPane fx:id="rdv_parts_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1030.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ViewController.Rdv_parts">
 
    <bottom>
-      <HBox alignment="CENTER" prefHeight="687.0" prefWidth="1030.0" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="328.0" prefWidth="1030.0" BorderPane.alignment="CENTER">
          <children>
-                <TableView fx:id="parts_table" prefHeight="346.0" prefWidth="967.0" stylesheets="@tablestyle.css">
+                <TableView fx:id="parts_table" prefHeight="362.0" prefWidth="967.0" stylesheets="@tablestyle.css">
                <columns>
                   <TableColumn fx:id="nom_col" minWidth="82.39999234676361" prefWidth="155.0" text="Nom" />
                   <TableColumn fx:id="desc_col" minWidth="141.59996795654297" prefWidth="235.0" text="Description" />
@@ -35,8 +35,8 @@
          </children>
       </HBox>
    </bottom>
-   <top>
-      <GridPane prefHeight="216.0" prefWidth="1030.0" BorderPane.alignment="CENTER">
+   <center>
+      <GridPane prefHeight="145.0" prefWidth="1030.0" BorderPane.alignment="CENTER">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -44,51 +44,49 @@
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="150.0" minHeight="10.0" prefHeight="68.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
-               <children>
-                  <Button fx:id="btn_conferm" layoutX="144.0" layoutY="29.0" mnemonicParsing="false" onAction="#conferm" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@btn.css" text="Confermier">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-               </children>
-            </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" />
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+            <Pane prefHeight="200.0" prefWidth="200.0">
                <children>
                   <TextField fx:id="reserch_field" layoutX="14.0" layoutY="21.0" prefHeight="30.0" prefWidth="300.0" promptText="Recherche" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
                <children>
-                  <Button fx:id="add_btn" layoutX="144.0" layoutY="21.0" mnemonicParsing="false" onAction="#add_parts" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@btn.css" text="Ajouter">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
                   <Button fx:id="annl_btn" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#annl_mod" prefHeight="30.0" prefWidth="100.0" styleClass="btn_mod" stylesheets="@btn.css" text="Annuler">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
+                  <Button fx:id="btn_conferm" layoutX="143.0" layoutY="21.0" mnemonicParsing="false" onAction="#conferm" prefHeight="30.0" prefWidth="100.0" styleClass="btn_add" stylesheets="@btn.css" text="Confermier">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
                </children>
             </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
                   <TextField fx:id="quntitie" layoutX="94.0" layoutY="21.0" prefHeight="30.0" prefWidth="300.0" promptText="Quantité" styleClass="inpt" stylesheets="@inputs.css" />
                </children>
             </Pane>
          </children>
       </GridPane>
+   </center>
+   <top>
+      <HBox alignment="CENTER" prefHeight="245.0" prefWidth="1030.0" BorderPane.alignment="CENTER">
+         <children>
+               <TableView fx:id="part_rdv" prefHeight="245.0" prefWidth="608.0" stylesheets="@tablestyle.css">
+                    <columns>
+                      <TableColumn fx:id="nom_part_col" minWidth="105.5999755859375" prefWidth="320.0" text="Nom" />
+                        <TableColumn fx:id="prix_rdv__col" minWidth="40.79998779296875" prefWidth="118.0" text="Prix" />
+                      <TableColumn fx:id="quantite_part_col" minWidth="47.0" prefWidth="91.0" text="Quantité " />
+                        <TableColumn fx:id="action_col" minWidth="40.0" prefWidth="65.0" text="Action" />
+                    </columns>
+                  </TableView>
+         </children>
+      </HBox>
    </top>
 </BorderPane>

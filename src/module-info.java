@@ -4,7 +4,6 @@ module mecha {
 	requires javafx.fxml;
 	requires mongo.java.driver;
 	requires javafx.base;
-	requires pdfbox.app;
 	requires javafx.swing;
 	requires itextpdf;
 	// requires com.jfoenix;
