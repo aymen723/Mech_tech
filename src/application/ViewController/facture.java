@@ -1,6 +1,5 @@
 package application.ViewController;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 import javax.swing.JFileChooser;
@@ -13,38 +12,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.print.PageLayout;
-import javafx.print.PageOrientation;
-import javafx.print.Paper;
-import javafx.print.Printer;
-import javafx.print.PrinterJob;
+
 import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.common.PDRectangle;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
-
 import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
-import java.awt.Color;
-import java.io.File;
 import java.io.FileOutputStream;
-import java.io.File;
-import java.io.IOException;
 
 public class facture {
 
@@ -107,6 +89,8 @@ public class facture {
 
     @FXML
     private Pane factpane;
+
+    String logoPath = "E:/aymen/javavs/projects/Mech_tech/src/application/ViewController/logo.png";
 
     public void Gettrdv(Rendez_vous rdv) {
 
@@ -274,16 +258,46 @@ public class facture {
         // }
 
         try {
+
+            // JFileChooser fileChooser = new JFileChooser();
+            // int option = fileChooser.showSaveDialog(null);
+
+            // // if (option == JFileChooser.APPROVE_OPTION) {
+            // String filePath = fileChooser.getSelectedFile().getAbsolutePath();
             // Create a new Document
             Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream("invoice.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("test.pdf"));
 
             // Open the Document
             document.open();
 
-            // Adding content to the Document
+            PdfPTable tabletitle = new PdfPTable(3);
+            tabletitle.setWidthPercentage(100);
 
-            document.add(new Paragraph(50f, "MECA-TECH" + "                                 " + "Bon de Reglement"));
+            // Add logo cell
+            PdfPCell logoCell = new PdfPCell();
+            Image logoImage = Image.getInstance(logoPath);
+            logoImage.scaleToFit(100, 100); // Adjust the size of the logo
+            logoCell.addElement(logoImage);
+            logoCell.setBorder(Rectangle.NO_BORDER);
+            tabletitle.addCell(logoCell);
+            // Adding content to the Document
+            PdfPCell paragraphCell = new PdfPCell();
+
+            Font titleFont = new Font(BaseFont.createFont(BaseFont.HELVETICA_BOLD, BaseFont.CP1250, BaseFont.EMBEDDED),
+                    18);
+            Font contentFont = new Font(BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1250, BaseFont.EMBEDDED),
+                    12);
+
+            paragraphCell.addElement(new Paragraph("MECA-TECH",
+                    titleFont));
+            // paragraphCell.addElement(new Paragraph("Bon de Reglement",
+            // titleFont));
+
+            tabletitle.addCell(paragraphCell);
+
+            document.add(tabletitle);
+
             document.add(new Paragraph(20f, " "));
 
             document.add(new Paragraph(
@@ -311,9 +325,9 @@ public class facture {
                 for (Parts row : rdv_local.getParts()) {
                     table.addCell(createCell(row.getName(), PdfPCell.ALIGN_LEFT));
                     table.addCell(createCell(Integer.toString(row.getQuntitie()),
-                            PdfPCell.ALIGN_LEFT));
+                            PdfPCell.ALIGN_CENTER));
                     table.addCell(createCell(Integer.toString(row.getPrice()),
-                            PdfPCell.ALIGN_LEFT));
+                            PdfPCell.ALIGN_CENTER));
 
                 }
             }
