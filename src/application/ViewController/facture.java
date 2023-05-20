@@ -36,9 +36,11 @@ import javafx.scene.layout.Pane;
 // import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfAppearance;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.PdfWriter.PdfBody;
 
 import java.awt.Color;
 import java.io.File;
@@ -274,6 +276,10 @@ public class facture {
         // }
 
         try {
+            SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
+
+            Font headerfont = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD, BaseColor.WHITE);
+            Font titlefont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.BLACK);
             // Create a new Document
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream("invoice.pdf"));
@@ -283,37 +289,98 @@ public class facture {
 
             // Adding content to the Document
 
-            document.add(new Paragraph(50f, "MECA-TECH" + "                                 " + "Bon de Reglement"));
+            PdfPTable tableheader = new PdfPTable(3);
+            tableheader.setWidthPercentage(100);
+
+            PdfPCell imageCell = new PdfPCell();
+            BaseColor bgcolor = new BaseColor(69, 69, 69);
+            imageCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            imageCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            imageCell.setPadding(5);
+            imageCell.setFixedHeight(40);
+            imageCell.setBorder(0);
+            imageCell.setBackgroundColor(bgcolor);
+
+            Image image = Image.getInstance("src/pics/Asset 1.png");
+
+            image.scaleToFit(100, 100);
+
+            imageCell.addElement(image);
+
+            PdfPCell boncell = new PdfPCell(new Phrase("Bon de Réglement", headerfont));
+            boncell.setBorder(0);
+            boncell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            boncell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            boncell.setBackgroundColor(bgcolor);
+
+            PdfPCell mecacell = new PdfPCell(new Phrase("MECA-TECH", headerfont));
+            mecacell.setBorder(0);
+            mecacell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            mecacell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            mecacell.setBackgroundColor(bgcolor);
+
+            tableheader.addCell(imageCell);
+            tableheader.addCell(boncell);
+            tableheader.addCell(mecacell);
+
+            document.add(tableheader);
+
+            // document.add(new Paragraph(50f, "MECA-TECH" + " " + "Bon de Reglement"));
             document.add(new Paragraph(20f, " "));
 
-            document.add(new Paragraph(
-                    "Client : " + rdv_local.getClient_rdv().getNom() + " " + rdv_local.getClient_rdv().getPrenom()));
-            document.add(new Paragraph("Model de Voiture : " + " " +
-                    rdv_local.getCar_rdv().getMarque() + " "
-                    + rdv_local.getCar_rdv().getModele()));
-            document.add(new Paragraph("Date de Rendez-vous :" + rdv_local.getDate_debut() + " " +
-                    rdv_local.getDate_fin()));
-            document.add(new Paragraph("Vin : " + rdv_local.getCar_rdv().getVin()));
-            document.add(new Paragraph("Type de Service: " + rdv_local.getService()));
+            // PdfPTable infotable = new PdfPTable(2);
+            // PdfPCell clientcell = new PdfPCell(new Phrase("", titlefont)
+            Paragraph clientpr = new Paragraph();
+            clientpr.add(new Phrase("Client :  ", titlefont));
+            clientpr.add(new Phrase(rdv_local.getClient_rdv().getNom() + "  " + rdv_local.getClient_rdv().getPrenom()));
+            document.add(clientpr);
+
+            Paragraph voiturepr = new Paragraph();
+            voiturepr.add(new Phrase("Vehicule :  ", titlefont));
+            voiturepr.add(new Phrase(rdv_local.getCar_rdv().getMarque() + "  " + rdv_local.getCar_rdv().getModele()));
+            document.add(voiturepr);
+
+            Paragraph rdvpr = new Paragraph();
+            rdvpr.add(new Phrase("Date de Rendez-vous :  ", titlefont));
+            rdvpr.add(new Phrase(DATE_FORMAT.format(rdv_local.getDate_debut()) + " / "
+                    + DATE_FORMAT.format(rdv_local.getDate_fin())));
+            document.add(rdvpr);
+
+            Paragraph vinpr = new Paragraph();
+            vinpr.add(new Phrase("VIN :  ", titlefont));
+            vinpr.add(new Phrase(rdv_local.getCar_rdv().getVin()));
+            document.add(vinpr);
+
+            Paragraph servicepr = new Paragraph();
+            servicepr.add(new Phrase("Type de Service :  ", titlefont));
+            servicepr.add(new Phrase(rdv_local.getService()));
+            document.add(servicepr);
+
+            // document.add(new Paragraph("Date de Rendez-vous :" +
+            // rdv_local.getDate_debut() + " " +
+            // rdv_local.getDate_fin()));
+            // document.add(new Paragraph("Vin : " + rdv_local.getCar_rdv().getVin()));
+            // document.add(new Paragraph("Type de Service: " + rdv_local.getService()));
             document.add(new Paragraph(20f, " "));
 
             PdfPTable table = new PdfPTable(3);
             table.setWidthPercentage(100);
 
             // Add table headers
-            table.addCell(createCell("Nom", PdfPCell.ALIGN_LEFT));
-            table.addCell(createCell("Quantity", PdfPCell.ALIGN_CENTER));
-            table.addCell(createCell("Prix", PdfPCell.ALIGN_CENTER));
+            table.addCell(createCell("Nom", PdfPCell.ALIGN_CENTER)).setFixedHeight(20);
+            ;
+            table.addCell(createCell("Quantity", PdfPCell.ALIGN_CENTER)).setFixedHeight(20);
+            table.addCell(createCell("Prix", PdfPCell.ALIGN_CENTER)).setFixedHeight(20);
 
             // Add table data
 
             if (rdv_local.getParts() != null) {
                 for (Parts row : rdv_local.getParts()) {
-                    table.addCell(createCell(row.getName(), PdfPCell.ALIGN_LEFT));
+                    table.addCell(createCell(row.getName(), PdfPCell.ALIGN_CENTER)).setFixedHeight(18);
                     table.addCell(createCell(Integer.toString(row.getQuntitie()),
-                            PdfPCell.ALIGN_LEFT));
+                            PdfPCell.ALIGN_CENTER)).setFixedHeight(18);
                     table.addCell(createCell(Integer.toString(row.getPrice()),
-                            PdfPCell.ALIGN_LEFT));
+                            PdfPCell.ALIGN_CENTER)).setFixedHeight(18);
 
                 }
             }
@@ -322,9 +389,23 @@ public class facture {
 
             document.add(table);
 
-            document.add(new Paragraph("Prix total des pices : " + parts_price.getText()));
-            document.add(new Paragraph("Prix de service : " + rdv_local.getPrix()));
-            document.add(new Paragraph("Prix Total : " + Integer.toString(rdv_local.getPrix() + sum)));
+            Paragraph prixpiecepr = new Paragraph();
+            prixpiecepr.add(new Phrase("Prix total des pices :  ", titlefont));
+            prixpiecepr.add(new Phrase(parts_price.getText() + " DA"));
+
+            document.add(prixpiecepr);
+
+            Paragraph prixservicepr = new Paragraph();
+            prixservicepr.add(new Phrase("Prix de service :  ", titlefont));
+            prixservicepr.add(new Phrase(Integer.toString(rdv_local.getPrix()) + " DA"));
+
+            document.add(prixservicepr);
+
+            Paragraph prixtotalpr = new Paragraph();
+            prixtotalpr.add(new Phrase("Prix Total :  ", titlefont));
+            prixtotalpr.add(new Phrase(Integer.toString(rdv_local.getPrix() + sum) + " DA"));
+
+            document.add(prixtotalpr);
 
             // Close the Document
             document.close();
