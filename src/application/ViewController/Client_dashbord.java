@@ -356,7 +356,7 @@ public class Client_dashbord implements Initializable {
         SortedList<Clientmodel> sortedList = new SortedList<>(filteredList);
 
         // Bind the sorted list to the table
-        client_table.setItems(sortedList);
+        // client_table.setItems(sortedList);
 
     }
 }

@@ -2,6 +2,7 @@ package application.ViewController;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.bson.Document;
@@ -12,13 +13,18 @@ import application.models.Car;
 import application.models.Rendez_vous;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -29,7 +35,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 
 public class Car_details {
 
@@ -78,9 +88,74 @@ public class Car_details {
     @FXML
     private TextField vin;
 
+    private ProgressIndicator progressIndicator = new ProgressIndicator();
+
     private Car car_local;
 
     ObservableList<Rendez_vous> list_rdv = FXCollections.observableArrayList();
+
+    private void loadData() {
+        // Create a task to load the data in the background
+        Task<ArrayList<Rendez_vous>> loadTask = new Task<ArrayList<Rendez_vous>>() {
+            @Override
+            protected ArrayList<Rendez_vous> call() throws Exception {
+                // Perform your data loading operation here
+                Thread.sleep(2000);
+                return AdminController.RdvListCar(car_local.getVin());
+            }
+        };
+
+        // Set up loading indicator
+        Alert loadingAlert = new Alert(AlertType.INFORMATION);
+        loadingAlert.setTitle("Loading");
+        loadingAlert.setHeaderText("Please wait...");
+        loadingAlert.setContentText("Loading data from the server...");
+        loadingAlert.initOwner(car_rdv.getScene().getWindow());
+        loadingAlert.setGraphic(progressIndicator);
+        DialogPane dialogPane = loadingAlert.getDialogPane();
+        dialogPane.getStylesheets()
+                .add(getClass().getResource("/application/Viewfxml/part_style.css")
+                        .toExternalForm());
+        dialogPane.getStyleClass().add("dialog-pane ");
+
+        loadingAlert.initStyle(StageStyle.UNDECORATED);
+
+        // Show the loading indicator and start the data loading task
+        loadingAlert.show();
+        Thread dataThread = new Thread(loadTask);
+        dataThread.start();
+
+        // Handle task completion
+        loadTask.setOnSucceeded(event -> {
+            // Retrieve the loaded data from the task
+            ArrayList<Rendez_vous> listrdv = loadTask.getValue();
+
+            // Update the UI with the loaded data
+            Platform.runLater(() -> {
+                ObservableList<Rendez_vous> list = FXCollections.observableArrayList(listrdv);
+                car_rdv.setItems(list);
+                loadingAlert.close();
+            });
+        });
+
+        // Handle task failure
+        loadTask.setOnFailed(event -> {
+            // Display an error message
+            Platform.runLater(() -> {
+                loadingAlert.close();
+                showErrorAlert("Data Loading Error", "Failed to load data from the server.");
+            });
+        });
+    }
+
+    private void showErrorAlert(String title, String message) {
+        Alert errorAlert = new Alert(AlertType.ERROR);
+        errorAlert.setTitle(title);
+        errorAlert.setHeaderText(null);
+        errorAlert.setContentText(message);
+        errorAlert.initOwner(car_rdv.getScene().getWindow());
+        errorAlert.showAndWait();
+    }
 
     public void getcar(Car car) {
         this.car_local = car;
@@ -91,7 +166,20 @@ public class Car_details {
         couleur.setText(car_local.getCouleur());
         vin.setText(car_local.getVin());
 
-        list_rdv = FXCollections.observableArrayList(AdminController.RdvListCar(car_local.getVin()));
+        // list_rdv =
+        // FXCollections.observableArrayList(AdminController.RdvListCar(car_local.getVin()));
+
+        ChangeListener<Scene> chl = new ChangeListener<Scene>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
+                if (newValue != null) {
+                    loadData();
+                }
+            }
+
+        };
+        car_rdv.sceneProperty().addListener(chl);
 
         nom_col.setCellValueFactory(
                 cellData -> new SimpleStringProperty(cellData.getValue().getClient_rdv().getNom()));
@@ -193,7 +281,7 @@ public class Car_details {
             };
         });
 
-        car_rdv.setItems(list_rdv);
+        // car_rdv.setItems(list_rdv);
 
     }
 

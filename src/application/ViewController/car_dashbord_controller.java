@@ -9,12 +9,15 @@ import org.bson.Document;
 
 import application.controller.AdminController;
 import application.models.Car;
-
+import application.models.Clientmodel;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,6 +29,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -94,6 +98,8 @@ public class car_dashbord_controller implements Initializable {
 
     @FXML
     private TextField reserch_field;
+
+    private ProgressIndicator progressIndicator = new ProgressIndicator();
 
     public static Car car;
 
@@ -231,6 +237,70 @@ public class car_dashbord_controller implements Initializable {
 
     }
 
+    private void loadData() {
+        // Create a task to load the data in the background
+        Task<ObservableList<Car>> loadTask = new Task<ObservableList<Car>>() {
+            @Override
+            protected ObservableList<Car> call() throws Exception {
+                // Perform your data loading operation here
+
+                return AdminController.CarLiist();
+            }
+        };
+
+        // Set up loading indicator
+        Alert loadingAlert = new Alert(AlertType.INFORMATION);
+        loadingAlert.setTitle("Loading");
+        loadingAlert.setHeaderText("Please wait...");
+        loadingAlert.setContentText("Loading data from the server...");
+        loadingAlert.initOwner(car_table.getScene().getWindow());
+        loadingAlert.setGraphic(progressIndicator);
+        DialogPane dialogPane = loadingAlert.getDialogPane();
+        dialogPane.getStylesheets()
+                .add(getClass().getResource("/application/Viewfxml/part_style.css")
+                        .toExternalForm());
+        dialogPane.getStyleClass().add("dialog-pane ");
+
+        loadingAlert.initStyle(StageStyle.UNDECORATED);
+
+        // Show the loading indicator and start the data loading task
+        loadingAlert.show();
+        Thread dataThread = new Thread(loadTask);
+        dataThread.start();
+
+        // Handle task completion
+        loadTask.setOnSucceeded(event -> {
+            // Retrieve the loaded data from the task
+            list = loadTask.getValue();
+
+            // Update the UI with the loaded data
+            Platform.runLater(() -> {
+                // ObservableList<Rendez_vous> list =
+                // FXCollections.observableArrayList(listrdv);
+                car_table.setItems(list);
+                loadingAlert.close();
+            });
+        });
+
+        // Handle task failure
+        loadTask.setOnFailed(event -> {
+            // Display an error message
+            Platform.runLater(() -> {
+                loadingAlert.close();
+                showErrorAlert("Data Loading Error", "Failed to load data from the server.");
+            });
+        });
+    }
+
+    private void showErrorAlert(String title, String message) {
+        Alert errorAlert = new Alert(AlertType.ERROR);
+        errorAlert.setTitle(title);
+        errorAlert.setHeaderText(null);
+        errorAlert.setContentText(message);
+        errorAlert.initOwner(car_table.getScene().getWindow());
+        errorAlert.showAndWait();
+    }
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -238,9 +308,21 @@ public class car_dashbord_controller implements Initializable {
         annl_btn.setVisible(false);
         mod_btn.setDisable(true);
 
-        System.out.println("hna list mazal");
-        list = AdminController.CarLiist();
-        System.out.println("hna wra list");
+        // System.out.println("hna list mazal");
+        // list = AdminController.CarLiist();
+        // System.out.println("hna wra list");
+
+        ChangeListener<Scene> chl = new ChangeListener<Scene>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
+                if (newValue != null) {
+                    loadData();
+                }
+            }
+
+        };
+        car_table.sceneProperty().addListener(chl);
 
         marque_col.setCellValueFactory(new PropertyValueFactory<>("marque"));
         modele_col.setCellValueFactory(new PropertyValueFactory<>("modele"));

@@ -8,23 +8,30 @@ import java.util.ResourceBundle;
 import org.bson.Document;
 
 import application.controller.AdminController;
+import application.models.Clientmodel;
 import application.models.Fournisseur;
 import application.models.Transaction;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -87,6 +94,8 @@ public class Fournisseur_Dashboard_controller implements Initializable {
     @FXML
     private BorderPane fournisseur_con;
 
+    private ProgressIndicator progressIndicator = new ProgressIndicator();
+
     private Fournisseur local_fFournisseur;
 
     private FilteredList<Fournisseur> filteredfournisseur;
@@ -96,17 +105,13 @@ public class Fournisseur_Dashboard_controller implements Initializable {
     @FXML
     void add_fournisseur(ActionEvent event) {
 
-            name.getStyleClass().remove("inptempty");
+        name.getStyleClass().remove("inptempty");
 
+        address.getStyleClass().remove("inptempty");
 
-            address.getStyleClass().remove("inptempty");
+        numero.getStyleClass().remove("inptempty");
 
-
-            numero.getStyleClass().remove("inptempty");
-
-
-            email.getStyleClass().remove("inptempty");
-        
+        email.getStyleClass().remove("inptempty");
 
         if ((name.getText().trim().isEmpty() == false) &&
                 (address.getText().trim().isEmpty() == false) &&
@@ -163,10 +168,86 @@ public class Fournisseur_Dashboard_controller implements Initializable {
 
     }
 
+    private void loadData() {
+        // Create a task to load the data in the background
+        Task<ArrayList<Fournisseur>> loadTask = new Task<ArrayList<Fournisseur>>() {
+            @Override
+            protected ArrayList<Fournisseur> call() throws Exception {
+                // Perform your data loading operation here
+
+                return AdminController.ListFournisseur();
+            }
+        };
+
+        // Set up loading indicator
+        Alert loadingAlert = new Alert(AlertType.INFORMATION);
+        loadingAlert.setTitle("Loading");
+        loadingAlert.setHeaderText("Please wait...");
+        loadingAlert.setContentText("Loading data from the server...");
+        loadingAlert.initOwner(fournisseur_table.getScene().getWindow());
+        loadingAlert.setGraphic(progressIndicator);
+        DialogPane dialogPane = loadingAlert.getDialogPane();
+        dialogPane.getStylesheets()
+                .add(getClass().getResource("/application/Viewfxml/part_style.css")
+                        .toExternalForm());
+        dialogPane.getStyleClass().add("dialog-pane ");
+
+        loadingAlert.initStyle(StageStyle.UNDECORATED);
+
+        // Show the loading indicator and start the data loading task
+        loadingAlert.show();
+        Thread dataThread = new Thread(loadTask);
+        dataThread.start();
+
+        // Handle task completion
+        loadTask.setOnSucceeded(event -> {
+            // Retrieve the loaded data from the task
+            ArrayList<Fournisseur> list_f = loadTask.getValue();
+            // Update the UI with the loaded data
+            Platform.runLater(() -> {
+                list_fornisseur = FXCollections.observableArrayList(list_f);
+
+                fournisseur_table.setItems(list_fornisseur);
+                loadingAlert.close();
+            });
+        });
+
+        // Handle task failure
+        loadTask.setOnFailed(event -> {
+            // Display an error message
+            Platform.runLater(() -> {
+                loadingAlert.close();
+                showErrorAlert("Data Loading Error", "Failed to load data from the server.");
+            });
+        });
+    }
+
+    private void showErrorAlert(String title, String message) {
+        Alert errorAlert = new Alert(AlertType.ERROR);
+        errorAlert.setTitle(title);
+        errorAlert.setHeaderText(null);
+        errorAlert.setContentText(message);
+        errorAlert.initOwner(fournisseur_table.getScene().getWindow());
+        errorAlert.showAndWait();
+    }
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
-        list_fornisseur = FXCollections.observableArrayList(AdminController.ListFournisseur());
+        // list_fornisseur =
+        // FXCollections.observableArrayList(AdminController.ListFournisseur());
+
+        ChangeListener<Scene> chl = new ChangeListener<Scene>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
+                if (newValue != null) {
+                    loadData();
+                }
+            }
+
+        };
+        fournisseur_table.sceneProperty().addListener(chl);
 
         // TODO Auto-generated method stub
         // System.out.println("hna kayn nom" + list_fornisseur.get(0).getName());
@@ -282,7 +363,7 @@ public class Fournisseur_Dashboard_controller implements Initializable {
             };
         });
 
-        fournisseur_table.setItems(list_fornisseur);
+        // fournisseur_table.setItems(list_fornisseur);
 
         filteredfournisseur = new FilteredList<>(list_fornisseur, b -> true);
 
