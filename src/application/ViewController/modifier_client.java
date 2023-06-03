@@ -42,7 +42,7 @@ public class modifier_client implements Initializable {
     private Button return_back;
 
     @FXML
-    void modifier_client(ActionEvent event) {
+    void modifierClient(ActionEvent event) {
         if ((name_field.getText().trim().isEmpty() == false) &&
                 (pernom_field.getText().trim().isEmpty() == false) &&
                 (email_field.getText().trim().isEmpty() == false) &&
@@ -53,22 +53,21 @@ public class modifier_client implements Initializable {
         ) {
 
             System.out.println(Client_dashbord.client.getId());
-            Document newemp = new Document("nom", name_field.getText());
-            newemp.append("_id", Client_dashbord.client.getId());
+
+            Document newemp = new Document("_id", Client_dashbord.client.getId());
+            newemp.append("nom", name_field.getText());
             newemp.append("prenom", pernom_field.getText());
             newemp.append("email", email_field.getText());
             newemp.append("tel", numero_field.getText());
             newemp.append("adresse", address_field.getText());
 
-            AdminController.UpdateClient(newemp);
-
-           
+            AdminController.UpdateClient(newemp, Client_dashbord.client);
 
             try {
                 Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Client_dashbord.fxml"));
                 mod_container.getChildren().removeAll();
                 mod_container.getChildren().setAll(fxml);
-                
+
             } catch (Exception e) {
                 // TODO: handle exception
             }
