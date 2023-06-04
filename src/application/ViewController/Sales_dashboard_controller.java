@@ -2,17 +2,23 @@ package application.ViewController;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import application.controller.AdminController;
+import application.models.Rendez_vous;
 import application.models.Sales;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +31,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -66,6 +73,8 @@ public class Sales_dashboard_controller implements Initializable {
     @FXML
     private BorderPane sales_container;
 
+    private ProgressIndicator progressIndicator = new ProgressIndicator();
+
     private FilteredList<Sales> filteredsales;
 
     ObservableList<Sales> list = FXCollections.observableArrayList();
@@ -103,12 +112,87 @@ public class Sales_dashboard_controller implements Initializable {
         // }
     }
 
+    private void loadData() {
+        // Create a task to load the data in the background
+        Task<ArrayList<Sales>> loadTask = new Task<ArrayList<Sales>>() {
+            @Override
+            protected ArrayList<Sales> call() throws Exception {
+                // Perform your data loading operation here
+
+                return AdminController.ListSales();
+            }
+        };
+
+        // Set up loading indicator
+        Alert loadingAlert = new Alert(AlertType.INFORMATION);
+        loadingAlert.setTitle("Loading");
+        loadingAlert.setHeaderText("Please wait...");
+        loadingAlert.setContentText("Loading data from the server...");
+        loadingAlert.initOwner(sales_table.getScene().getWindow());
+        loadingAlert.setGraphic(progressIndicator);
+        DialogPane dialogPane = loadingAlert.getDialogPane();
+        dialogPane.getStylesheets()
+                .add(getClass().getResource("/application/Viewfxml/part_style.css")
+                        .toExternalForm());
+        dialogPane.getStyleClass().add("dialog-pane ");
+
+        loadingAlert.initStyle(StageStyle.UNDECORATED);
+
+        // Show the loading indicator and start the data loading task
+        loadingAlert.show();
+        Thread dataThread = new Thread(loadTask);
+        dataThread.start();
+
+        // Handle task completion
+        loadTask.setOnSucceeded(event -> {
+            // Retrieve the loaded data from the task
+            ArrayList<Sales> listsale = loadTask.getValue();
+
+            // Update the UI with the loaded data
+            Platform.runLater(() -> {
+                ObservableList<Sales> list = FXCollections.observableArrayList(listsale);
+                sales_table.setItems(list);
+                loadingAlert.close();
+            });
+        });
+
+        // Handle task failure
+        loadTask.setOnFailed(event -> {
+            // Display an error message
+            Platform.runLater(() -> {
+                loadingAlert.close();
+                showErrorAlert("Data Loading Error", "Failed to load data from the server.");
+            });
+        });
+    }
+
+    private void showErrorAlert(String title, String message) {
+        Alert errorAlert = new Alert(AlertType.ERROR);
+        errorAlert.setTitle(title);
+        errorAlert.setHeaderText(null);
+        errorAlert.setContentText(message);
+        errorAlert.initOwner(sales_table.getScene().getWindow());
+        errorAlert.showAndWait();
+    }
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
 
-        list = FXCollections.observableArrayList(AdminController.ListSales());
-        System.out.println(list.size());
+        // list = FXCollections.observableArrayList(AdminController.ListSales());
+        // System.out.println(list.size());
+
+        ChangeListener<Scene> chl = new ChangeListener<Scene>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
+                if (newValue != null) {
+                    loadData();
+                }
+            }
+
+        };
+        sales_table.sceneProperty().addListener(chl);
 
         date_de_vente_col.setCellValueFactory(new PropertyValueFactory<>("date_de_vente"));
         // total_col.setCellValueFactory(new PropertyValueFactory<>("Prenom"));
@@ -222,7 +306,7 @@ public class Sales_dashboard_controller implements Initializable {
             };
         });
 
-        sales_table.setItems(list);
+        // sales_table.setItems(list);
 
         filteredsales = new FilteredList<>(list, b -> true);
 

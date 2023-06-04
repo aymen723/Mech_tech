@@ -15,11 +15,15 @@ import java.util.function.Predicate;
 
 import application.controller.AdminController;
 import application.models.Rendez_vous;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,13 +31,17 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 // import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -41,9 +49,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 // import javafx.scene.paint.Color;
 // import javafx.stage.Stage;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class Rdv_veiwcontroller implements Initializable {
 
@@ -112,7 +122,9 @@ public class Rdv_veiwcontroller implements Initializable {
 	@FXML
 	private Button year_btn;
 
-	private ArrayList<Rendez_vous> listrdv = AdminController.ListRdv();
+	private ProgressIndicator progressIndicator = new ProgressIndicator();
+
+	private ArrayList<Rendez_vous> listrdv = new ArrayList<Rendez_vous>();
 
 	private FilteredList<Rendez_vous> filteredRendezVousList;
 	// Arraylist<Parts> list =
@@ -121,7 +133,7 @@ public class Rdv_veiwcontroller implements Initializable {
 
 	LocalDate date_debut = date.minusDays(1);
 	LocalDate date_fin = date.plusDays(2);
-	ObservableList<Rendez_vous> list = FXCollections.observableArrayList(listrdv);
+	ObservableList<Rendez_vous> list = FXCollections.observableArrayList();
 
 	public void rdv_ajouter() {
 
@@ -223,6 +235,16 @@ public class Rdv_veiwcontroller implements Initializable {
 
 	}
 
+	private Alert createLoadingAlert() {
+		Alert alert = new Alert(AlertType.NONE);
+		alert.setTitle("Loading");
+		alert.setHeaderText("Please wait...");
+		// alert.initOwner(year_btn.getScene().getWindow());
+		alert.initModality(Modality.APPLICATION_MODAL);
+		alert.setGraphic(progressIndicator);
+		return alert;
+	}
+
 	// year_btn.setOnAction(event -> {
 	// ObservableList<Rendez_vous> rdvs = rdv_table.getItems();
 	// LocalDate currentDate = LocalDate.now();
@@ -233,8 +255,83 @@ public class Rdv_veiwcontroller implements Initializable {
 	// rdvs.setAll(data.filter(yearFilter));
 	// });
 
+	private void loadData() {
+		// Create a task to load the data in the background
+		Task<ArrayList<Rendez_vous>> loadTask = new Task<ArrayList<Rendez_vous>>() {
+			@Override
+			protected ArrayList<Rendez_vous> call() throws Exception {
+				// Perform your data loading operation here
+
+				return AdminController.ListRdv();
+			}
+		};
+
+		// Set up loading indicator
+		Alert loadingAlert = new Alert(AlertType.INFORMATION);
+		loadingAlert.setTitle("Loading");
+		loadingAlert.setHeaderText("Please wait...");
+		loadingAlert.setContentText("Loading data from the server...");
+		loadingAlert.initOwner(rdv_table.getScene().getWindow());
+		loadingAlert.setGraphic(progressIndicator);
+		DialogPane dialogPane = loadingAlert.getDialogPane();
+		dialogPane.getStylesheets()
+				.add(getClass().getResource("/application/Viewfxml/part_style.css")
+						.toExternalForm());
+		dialogPane.getStyleClass().add("dialog-pane ");
+
+		loadingAlert.initStyle(StageStyle.UNDECORATED);
+
+		// Show the loading indicator and start the data loading task
+		loadingAlert.show();
+		Thread dataThread = new Thread(loadTask);
+		dataThread.start();
+
+		// Handle task completion
+		loadTask.setOnSucceeded(event -> {
+			// Retrieve the loaded data from the task
+			listrdv = loadTask.getValue();
+
+			// Update the UI with the loaded data
+			Platform.runLater(() -> {
+				ObservableList<Rendez_vous> list = FXCollections.observableArrayList(listrdv);
+				rdv_table.setItems(list);
+				loadingAlert.close();
+			});
+		});
+
+		// Handle task failure
+		loadTask.setOnFailed(event -> {
+			// Display an error message
+			Platform.runLater(() -> {
+				loadingAlert.close();
+				showErrorAlert("Data Loading Error", "Failed to load data from the server.");
+			});
+		});
+	}
+
+	private void showErrorAlert(String title, String message) {
+		Alert errorAlert = new Alert(AlertType.ERROR);
+		errorAlert.setTitle(title);
+		errorAlert.setHeaderText(null);
+		errorAlert.setContentText(message);
+		errorAlert.initOwner(rdv_table.getScene().getWindow());
+		errorAlert.showAndWait();
+	}
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+
+		ChangeListener<Scene> chl = new ChangeListener<Scene>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
+				if (newValue != null) {
+					loadData();
+				}
+			}
+
+		};
+		rdv_table.sceneProperty().addListener(chl);
 
 		nom_client_col.setCellValueFactory(
 				cellData -> new SimpleStringProperty(cellData.getValue().getClient_rdv().getNom()));

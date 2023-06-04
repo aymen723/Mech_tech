@@ -3,6 +3,7 @@ package application.ViewController;
 // import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Optional;
 // import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -10,18 +11,22 @@ import java.util.ResourceBundle;
 import application.controller.AdminController;
 import application.models.Parts;
 import application.models.Rendez_vous;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
+import javafx.concurrent.Task;
 // import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 // import javafx.scene.Scene;
@@ -30,6 +35,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -111,6 +117,8 @@ public class Rdv_parts implements Initializable {
 
     @FXML
     private BorderPane rdv_parts_container;
+
+    private ProgressIndicator progressIndicator = new ProgressIndicator();
 
     // private ArrayList<Parts> parts_list;
 
@@ -269,6 +277,69 @@ public class Rdv_parts implements Initializable {
 
     }
 
+    private void loadData() {
+        // Create a task to load the data in the background
+        Task<ObservableList<Parts>> loadTask = new Task<ObservableList<Parts>>() {
+            @Override
+            protected ObservableList<Parts> call() throws Exception {
+                // Perform your data loading operation here
+
+                return AdminController.PartList();
+            }
+        };
+
+        // Set up loading indicator
+        Alert loadingAlert = new Alert(AlertType.INFORMATION);
+        loadingAlert.setTitle("Loading");
+        loadingAlert.setHeaderText("Please wait...");
+        loadingAlert.setContentText("Loading data from the server...");
+        loadingAlert.initOwner(parts_table.getScene().getWindow());
+        loadingAlert.setGraphic(progressIndicator);
+        DialogPane dialogPane = loadingAlert.getDialogPane();
+        dialogPane.getStylesheets()
+                .add(getClass().getResource("/application/Viewfxml/part_style.css")
+                        .toExternalForm());
+        dialogPane.getStyleClass().add("dialog-pane ");
+
+        loadingAlert.initStyle(StageStyle.UNDECORATED);
+
+        // Show the loading indicator and start the data loading task
+        loadingAlert.show();
+        Thread dataThread = new Thread(loadTask);
+        dataThread.start();
+
+        // Handle task completion
+        loadTask.setOnSucceeded(event -> {
+            // Retrieve the loaded data from the task
+            list = loadTask.getValue();
+
+            // Update the UI with the loaded data
+            Platform.runLater(() -> {
+                // ObservableList<Parts> list = FXCollections.observableArrayList(listrdv);
+                parts_table.setItems(list);
+                loadingAlert.close();
+            });
+        });
+
+        // Handle task failure
+        loadTask.setOnFailed(event -> {
+            // Display an error message
+            Platform.runLater(() -> {
+                loadingAlert.close();
+                showErrorAlert("Data Loading Error", "Failed to load data from the server.");
+            });
+        });
+    }
+
+    private void showErrorAlert(String title, String message) {
+        Alert errorAlert = new Alert(AlertType.ERROR);
+        errorAlert.setTitle(title);
+        errorAlert.setHeaderText(null);
+        errorAlert.setContentText(message);
+        errorAlert.initOwner(parts_table.getScene().getWindow());
+        errorAlert.showAndWait();
+    }
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
@@ -276,10 +347,21 @@ public class Rdv_parts implements Initializable {
         // annl_btn.setDisable(true);
         // annl_btn.setVisible(false);
 
-        System.out.println("hna list mazal");
-        list = AdminController.PartList();
-        System.out.println("hna wra list");
+        // System.out.println("hna list mazal");
+        // list = AdminController.PartList();
+        // System.out.println("hna wra list");
 
+        ChangeListener<Scene> chl = new ChangeListener<Scene>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
+                if (newValue != null) {
+                    loadData();
+                }
+            }
+
+        };
+        parts_table.sceneProperty().addListener(chl);
         // nom_col.setCellValueFactory(new PropertyValueFactory<>("name"));
         // prix_col.setCellValueFactory(new PropertyValueFactory<>("price"));
         // quntite_col.setCellValueFactory(new PropertyValueFactory<>("quntitie"));
@@ -459,7 +541,7 @@ public class Rdv_parts implements Initializable {
             };
         });
 
-        parts_table.setItems(list);
+        // parts_table.setItems(list);
 
         filteredList = new FilteredList<>(list, b -> true);
 

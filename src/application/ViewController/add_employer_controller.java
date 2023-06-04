@@ -6,11 +6,16 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import application.controller.AdminController;
+import application.models.Clientmodel;
 import application.models.Usermodel;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,6 +27,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -84,15 +90,13 @@ public class add_employer_controller implements Initializable {
 	@FXML
 	private Button ajouter_employer;
 
+	private ProgressIndicator progressIndicator = new ProgressIndicator();
+
 	public static Usermodel user;
 
 	private Usermodel user_local;
 
-	ObservableList<Usermodel> list = FXCollections.observableArrayList(
-			new Usermodel("1", "test", "test", "test", "test", "0011", "test", "test1", "admin"),
-			new Usermodel("2", "teszdat", "test", "test", "test", "0022", "test", "test2", "admint"),
-			new Usermodel("3", "test3", "test", "test", "test", "0033", "test", "test3", "addd"),
-			new Usermodel("4", "test4", "test", "test", "test", "0044", "test", "test4", "slave"));
+	ObservableList<Usermodel> list = FXCollections.observableArrayList();
 
 	FilteredList<Usermodel> filteredList = new FilteredList<>(list, b -> true);
 
@@ -131,6 +135,70 @@ public class add_employer_controller implements Initializable {
 
 	}
 
+	private void loadData() {
+		// Create a task to load the data in the background
+		Task<ObservableList<Usermodel>> loadTask = new Task<ObservableList<Usermodel>>() {
+			@Override
+			protected ObservableList<Usermodel> call() throws Exception {
+				// Perform your data loading operation here
+				Thread.sleep(2000);
+				return AdminController.EmpLiist();
+			}
+		};
+
+		// Set up loading indicator
+		Alert loadingAlert = new Alert(AlertType.INFORMATION);
+		loadingAlert.setTitle("Loading");
+		loadingAlert.setHeaderText("Please wait...");
+		loadingAlert.setContentText("Loading data from the server...");
+		loadingAlert.initOwner(table.getScene().getWindow());
+		loadingAlert.setGraphic(progressIndicator);
+		DialogPane dialogPane = loadingAlert.getDialogPane();
+		dialogPane.getStylesheets()
+				.add(getClass().getResource("/application/Viewfxml/part_style.css")
+						.toExternalForm());
+		dialogPane.getStyleClass().add("dialog-pane ");
+
+		loadingAlert.initStyle(StageStyle.UNDECORATED);
+
+		// Show the loading indicator and start the data loading task
+		loadingAlert.show();
+		Thread dataThread = new Thread(loadTask);
+		dataThread.start();
+
+		// Handle task completion
+		loadTask.setOnSucceeded(event -> {
+			// Retrieve the loaded data from the task
+			list = loadTask.getValue();
+
+			// Update the UI with the loaded data
+			Platform.runLater(() -> {
+				// ObservableList<Rendez_vous> list =
+				// FXCollections.observableArrayList(listrdv);
+				table.setItems(list);
+				loadingAlert.close();
+			});
+		});
+
+		// Handle task failure
+		loadTask.setOnFailed(event -> {
+			// Display an error message
+			Platform.runLater(() -> {
+				loadingAlert.close();
+				showErrorAlert("Data Loading Error", "Failed to load data from the server.");
+			});
+		});
+	}
+
+	private void showErrorAlert(String title, String message) {
+		Alert errorAlert = new Alert(AlertType.ERROR);
+		errorAlert.setTitle(title);
+		errorAlert.setHeaderText(null);
+		errorAlert.setContentText(message);
+		errorAlert.initOwner(table.getScene().getWindow());
+		errorAlert.showAndWait();
+	}
+
 	// public void return_back(javafx.event.ActionEvent event) {
 	//
 	// try {
@@ -146,9 +214,22 @@ public class add_employer_controller implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		System.out.println("hna list mazal");
-		list = AdminController.EmpLiist();
-		System.out.println("hna wra list");
+
+		// System.out.println("hna list mazal");
+		// list = AdminController.EmpLiist();
+		// System.out.println("hna wra list");
+
+		ChangeListener<Scene> chl = new ChangeListener<Scene>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
+				if (newValue != null) {
+					loadData();
+				}
+			}
+
+		};
+		table.sceneProperty().addListener(chl);
 
 		username.setCellValueFactory(new PropertyValueFactory<>("username"));
 		nom.setCellValueFactory(new PropertyValueFactory<>("nom"));
@@ -282,7 +363,7 @@ public class add_employer_controller implements Initializable {
 			};
 		});
 
-		table.setItems(list);
+		// table.setItems(list);
 
 		filteredList = new FilteredList<>(list, b -> true);
 

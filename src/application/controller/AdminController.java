@@ -48,11 +48,20 @@ public class AdminController {
 	public static void UpdateEmp(Document Doc, Usermodel user) {
 
 		MongoCollection<Document> collection = Connectdatabase.connectdb("users");
+		MongoCollection<Document> collectionrdv = Connectdatabase.connectdb("Rendez_vous");
 		ObjectId objid = new ObjectId(user.getId());
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
 		Doc.append("_id", objid);
 		Document updateop = new Document("$set", Doc);
 		collection.updateOne(found, updateop);
+
+		if (user.getRole().equals("technicien")) {
+			var filter = Filters.eq("technicien._id", objid);
+			var update = Updates.set("technicien", Doc);
+
+			var updateResult = collectionrdv.updateMany(filter, update);
+			System.out.println("Number of documents updated: " + updateResult.getModifiedCount());
+		}
 		Connectdatabase.closeconndb();
 
 	}
@@ -181,6 +190,7 @@ public class AdminController {
 		Doc.append("_id", objid);
 		Document updateop = new Document("$set", Doc);
 		collection.updateOne(found, updateop);
+
 		Connectdatabase.closeconndb();
 
 	}
@@ -202,14 +212,22 @@ public class AdminController {
 
 	}
 
-	public static void UpdateClient(Document Doc) {
+	public static void UpdateClient(Document Doc, Clientmodel client) {
 
 		MongoCollection<Document> collection = Connectdatabase.connectdb("clients");
-		ObjectId objid = new ObjectId(Client_dashbord.client.getId());
+		MongoCollection<Document> collectionrdv = Connectdatabase.connectdb("Rendez_vous");
+		ObjectId objid = new ObjectId(client.getId());
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
 		Doc.append("_id", objid);
 		Document updated = new Document("$set", Doc);
 		collection.updateOne(found, updated);
+
+		var filter = Filters.eq("client._id", objid);
+		var update = Updates.set("client", Doc);
+
+		var updateResult = collectionrdv.updateMany(filter, update);
+		System.out.println("Number of documents updated: " + updateResult.getModifiedCount());
+
 		Connectdatabase.closeconndb();
 
 	}
@@ -441,11 +459,19 @@ public class AdminController {
 	public static void UpdateCar(Document Doc, Car car) {
 
 		MongoCollection<Document> collection = Connectdatabase.connectdb("cars");
+		MongoCollection<Document> collectionrdv = Connectdatabase.connectdb("Rendez_vous");
 		ObjectId objid = new ObjectId(car.getId());
 		Document found = (Document) collection.find(new Document("_id", objid)).first();
 		Doc.append("_id", objid);
 		Document updateop = new Document("$set", Doc);
 		collection.updateOne(found, updateop);
+
+		var filter = Filters.eq("Car._id", objid);
+		var update = Updates.set("Car", Doc);
+
+		var updateResult = collectionrdv.updateMany(filter, update);
+		System.out.println("Number of documents updated: " + updateResult.getModifiedCount());
+
 		Connectdatabase.closeconndb();
 
 	}
@@ -667,13 +693,21 @@ public class AdminController {
 
 	public static void UpdateFournisseur(Document Doc, Fournisseur fournisseur) {
 
-		MongoCollection<Document> collection = Connectdatabase.connectdb("fournisseurs");
+		MongoCollection<Document> collectionf = Connectdatabase.connectdb("fournisseurs");
+		MongoCollection<Document> collectionp = Connectdatabase.connectdb("parts");
 		ObjectId objid = new ObjectId(fournisseur.getId());
-		Document found = (Document) collection.find(new Document("_id", objid)).first();
+		Document found = (Document) collectionf.find(new Document("_id", objid)).first();
 		Doc.append("_id", objid);
-		Document updateop = new Document("$set", Doc);
-		collection.updateOne(found, updateop);
 
+		Document updateop = new Document("$set", Doc);
+		collectionf.updateOne(found, updateop);
+		var filter = Filters.eq("fournisseur._id", objid);
+		var update = Updates.set("fournisseur", Doc);
+
+		Doc.remove("Transactions");
+		Doc.remove("balance");
+		var updateResult = collectionp.updateMany(filter, update);
+		System.out.println("Number of documents updated: " + updateResult.getModifiedCount());
 		Connectdatabase.closeconndb();
 
 	}

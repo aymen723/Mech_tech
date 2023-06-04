@@ -2,6 +2,8 @@ package application.ViewController;
 
 import java.text.SimpleDateFormat;
 
+// import com.itextpdf.text.DocumentException;
+
 import application.models.Parts;
 import application.models.Rendez_vous;
 import javafx.collections.FXCollections;
@@ -186,9 +188,7 @@ public class facture {
             imageCell.setBorder(0);
             imageCell.setBackgroundColor(bgcolor);
 
-            Image image = Image.getInstance("src/pics/logo.png");
-            // Image image = Image.getInstance(new java.net.URL("src/pics/close2.png"));
-            // Image i = Image.getInstance(new java.net.URL("src/pics/close2.png"));
+            Image image = Image.getInstance("src/pics/Asset 1.png");
 
             image.scaleToFit(100, 100);
 
@@ -221,13 +221,11 @@ public class facture {
 
             Paragraph voiturepr = new Paragraph();
             voiturepr.add(new Phrase("Vehicule :  ", titlefont));
-            voiturepr.add(new Phrase(rdv_local.getCar_rdv().getMarque() + "  " + rdv_local.getCar_rdv().getModele()));
+            voiturepr.add(
+                    new Phrase(rdv_local.getCar_rdv().getMarque() + "  " + rdv_local.getCar_rdv().getModele() + "   "));
+            voiturepr.add(new Phrase("VIN :  ", titlefont));
+            voiturepr.add(new Phrase(rdv_local.getCar_rdv().getVin()));
             document.add(voiturepr);
-
-            Paragraph vinpr = new Paragraph();
-            vinpr.add(new Phrase("VIN :  ", titlefont));
-            vinpr.add(new Phrase(rdv_local.getCar_rdv().getVin()));
-            document.add(vinpr);
 
             Paragraph rdvpr = new Paragraph();
             rdvpr.add(new Phrase("Date de Rendez-vous :  ", titlefont));
@@ -268,18 +266,21 @@ public class facture {
 
             Paragraph prixpiecepr = new Paragraph();
             prixpiecepr.add(new Phrase("Prix total des pices :  ", titlefont));
+            prixpiecepr.add(Chunk.NEWLINE);
             prixpiecepr.add(new Phrase(parts_price.getText() + " DA"));
             table.addCell(prixpiecepr);
             // document.add(prixpiecepr);
 
             Paragraph prixservicepr = new Paragraph();
             prixservicepr.add(new Phrase("Prix de service :  ", titlefont));
+            prixservicepr.add(Chunk.NEWLINE);
             prixservicepr.add(new Phrase(Integer.toString(rdv_local.getPrix()) + " DA"));
             table.addCell(prixservicepr);
             // document.add(prixservicepr);
 
             Paragraph prixtotalpr = new Paragraph();
             prixtotalpr.add(new Phrase("Prix Total :  ", titlefont));
+            prixtotalpr.add(Chunk.NEWLINE);
             prixtotalpr.add(new Phrase(Integer.toString(rdv_local.getPrix() + sum) + " DA"));
             table.addCell(prixtotalpr);
             // document.add(prixtotalpr);

@@ -6,6 +6,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 // import java.util.Iterator;
@@ -18,13 +19,17 @@ import org.bson.types.ObjectId;
 import application.controller.AdminController;
 import application.models.Fournisseur;
 import application.models.Parts;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 // import javafx.beans.binding.Bindings;
 // import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.concurrent.Task;
 // import javafx.event.ActionEvent;
 // import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -32,6 +37,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.geometry.Side;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -40,6 +46,7 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -116,6 +123,8 @@ public class parts_dashbord_controller implements Initializable {
 
 	@FXML
 	private TableColumn<Parts, Void> actionsColumn;
+
+	private ProgressIndicator progressIndicator = new ProgressIndicator();
 
 	public static Parts part;
 
@@ -321,6 +330,114 @@ public class parts_dashbord_controller implements Initializable {
 
 	}
 
+	private void loadData() {
+		// Create a task to load the data in the background
+		Task<ObservableList<Parts>> loadTask = new Task<ObservableList<Parts>>() {
+			@Override
+			protected ObservableList<Parts> call() throws Exception {
+				// Perform your data loading operation here
+
+				return AdminController.PartList();
+			}
+		};
+		Task<ArrayList<Fournisseur>> loadTaskF = new Task<ArrayList<Fournisseur>>() {
+			@Override
+			protected ArrayList<Fournisseur> call() throws Exception {
+				// Perform your data loading operation here
+
+				return AdminController.ListFournisseur();
+			}
+		};
+
+		// Set up loading indicator
+		Alert loadingAlert = new Alert(AlertType.INFORMATION);
+		loadingAlert.setTitle("Loading");
+		loadingAlert.setHeaderText("Please wait...");
+		loadingAlert.setContentText("Loading data from the server...");
+		loadingAlert.initOwner(parts_table.getScene().getWindow());
+		loadingAlert.setGraphic(progressIndicator);
+		DialogPane dialogPane = loadingAlert.getDialogPane();
+		dialogPane.getStylesheets()
+				.add(getClass().getResource("/application/Viewfxml/part_style.css")
+						.toExternalForm());
+		dialogPane.getStyleClass().add("dialog-pane ");
+
+		loadingAlert.initStyle(StageStyle.UNDECORATED);
+
+		// Show the loading indicator and start the data loading task
+		loadingAlert.show();
+		Thread dataThread = new Thread(loadTask);
+		dataThread.start();
+		Thread dataThreadF = new Thread(loadTaskF);
+		dataThreadF.start();
+
+		// Handle task completion
+		loadTask.setOnSucceeded(event -> {
+			// Retrieve the loaded data from the task
+			list = loadTask.getValue();
+
+			// Update the UI with the loaded data
+			Platform.runLater(() -> {
+				// ObservableList<Parts> list = FXCollections.observableArrayList(listrdv);
+				parts_table.setItems(list);
+				if (!loadTaskF.isRunning()) {
+					loadingAlert.close();
+				}
+			});
+		});
+
+		loadTaskF.setOnSucceeded(EVENT -> {
+
+			ArrayList<Fournisseur> list_f = loadTaskF.getValue();
+			// Update the UI with the loaded data
+			Platform.runLater(() -> {
+				list_fournisseur = FXCollections.observableArrayList(list_f);
+
+				fournisseur_inp.textProperty().addListener((observable, oldValue, newValue) -> {
+					list_fornisseur.getItems().clear();
+					for (Fournisseur fournisseur : list_fournisseur) {
+						if (fournisseur.getName().toLowerCase().contains(newValue.toLowerCase())) {
+							MenuItem item = new MenuItem(fournisseur.getName());
+							item.setOnAction(e -> {
+								// do something with selected client
+								// System.out.println(client.toString());
+								fournissur_local = fournisseur;
+
+								fournisseur_inp.setText(fournisseur.getName());
+								;
+
+							});
+
+							list_fornisseur.getItems().add(item);
+
+						}
+
+					}
+
+				});
+			});
+
+		});
+
+		// Handle task failure
+		loadTask.setOnFailed(event -> {
+			// Display an error message
+			Platform.runLater(() -> {
+				loadingAlert.close();
+				showErrorAlert("Data Loading Error", "Failed to load data from the server.");
+			});
+		});
+	}
+
+	private void showErrorAlert(String title, String message) {
+		Alert errorAlert = new Alert(AlertType.ERROR);
+		errorAlert.setTitle(title);
+		errorAlert.setHeaderText(null);
+		errorAlert.setContentText(message);
+		errorAlert.initOwner(parts_table.getScene().getWindow());
+		errorAlert.showAndWait();
+	}
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -328,34 +445,47 @@ public class parts_dashbord_controller implements Initializable {
 		annl_btn.setVisible(false);
 		mod_btn.setDisable(true);
 
-		System.out.println("hna list mazal");
-		list = AdminController.PartList();
-		list_fournisseur = FXCollections.observableArrayList(AdminController.ListFournisseur());
+		ChangeListener<Scene> chl = new ChangeListener<Scene>() {
 
-		System.out.println("hna wra list");
-
-		fournisseur_inp.textProperty().addListener((observable, oldValue, newValue) -> {
-			list_fornisseur.getItems().clear();
-			for (Fournisseur fournisseur : list_fournisseur) {
-				if (fournisseur.getName().toLowerCase().contains(newValue.toLowerCase())) {
-					MenuItem item = new MenuItem(fournisseur.getName());
-					item.setOnAction(e -> {
-						// do something with selected client
-						// System.out.println(client.toString());
-						fournissur_local = fournisseur;
-
-						fournisseur_inp.setText(fournisseur.getName());
-						;
-
-					});
-
-					list_fornisseur.getItems().add(item);
-
+			@Override
+			public void changed(ObservableValue<? extends Scene> observable, Scene oldValue, Scene newValue) {
+				if (newValue != null) {
+					loadData();
 				}
-
 			}
 
-		});
+		};
+		parts_table.sceneProperty().addListener(chl);
+		// System.out.println("hna list mazal");
+		// list = AdminController.PartList();
+		// list_fournisseur =
+		// FXCollections.observableArrayList(AdminController.ListFournisseur());
+
+		// System.out.println("hna wra list");
+
+		// fournisseur_inp.textProperty().addListener((observable, oldValue, newValue)
+		// -> {
+		// list_fornisseur.getItems().clear();
+		// for (Fournisseur fournisseur : list_fournisseur) {
+		// if (fournisseur.getName().toLowerCase().contains(newValue.toLowerCase())) {
+		// MenuItem item = new MenuItem(fournisseur.getName());
+		// item.setOnAction(e -> {
+		// // do something with selected client
+		// // System.out.println(client.toString());
+		// fournissur_local = fournisseur;
+
+		// fournisseur_inp.setText(fournisseur.getName());
+		// ;
+
+		// });
+
+		// list_fornisseur.getItems().add(item);
+
+		// }
+
+		// }
+
+		// });
 
 		fournisseur_inp.setOnKeyTyped(e -> {
 			if (fournisseur_inp.getText().trim() != null) {
