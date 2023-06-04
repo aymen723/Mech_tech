@@ -97,6 +97,9 @@ public class fournisseur_details {
     @FXML
     private BorderPane details_con;
 
+    @FXML
+    private Button btn_retour;
+
     ObservableList<Transaction> list_transaction = FXCollections.observableArrayList();
 
     public void getfournisseur(Fournisseur fournisseur) {
@@ -203,6 +206,19 @@ public class fournisseur_details {
     @FXML
     void annuler_founrisseur(ActionEvent event) {
 
+    }
+
+    @FXML
+    void retour(ActionEvent event) {
+
+        try {
+            Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Fournisseur_Dashboard.fxml"));
+            details_con.getChildren().removeAll();
+            details_con.getChildren().setAll(fxml);
+
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
     }
 
     @FXML

@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -198,6 +199,15 @@ public class LoginController implements Initializable {
 	void close_window(ActionEvent event) {
 		Stage stage = (Stage) close_button.getScene().getWindow();
 		stage.close();
+
+	}
+
+	@FXML
+	void connectkey(KeyEvent event) {
+		// if (event.getCode() == ) {
+		// System.out.println("Key Pressed: " + ke.getCode());
+		// // ke.consume(); // <-- stops passing the event to next node
+		// }
 
 	}
 

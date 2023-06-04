@@ -212,7 +212,14 @@ public class Car_details {
 
     @FXML
     void retour(ActionEvent event) {
+        try {
+            Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Car_Dashboard.fxml"));
+            rdv_container.getChildren().removeAll();
+            rdv_container.getChildren().setAll(fxml);
 
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
     }
 
 }

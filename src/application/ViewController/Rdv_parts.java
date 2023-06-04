@@ -15,6 +15,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
+import javafx.event.ActionEvent;
 // import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -101,6 +102,9 @@ public class Rdv_parts implements Initializable {
     @FXML
     private Button btn_conferm;
 
+    @FXML
+    private Button btn_retour;
+
     public static Parts part;
 
     private Text txt;
@@ -115,6 +119,28 @@ public class Rdv_parts implements Initializable {
     ObservableList<Parts> list = FXCollections.observableArrayList();
 
     FilteredList<Parts> filteredList = new FilteredList<>(list, b -> true);
+
+    @FXML
+    void retour(ActionEvent event) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/application/Viewfxml/rdv_details.fxml"));
+
+            Parent root = loader.load();
+            Rdv_details rdv_details_con = loader.getController();
+            System.out.println(rdv_details_con);
+
+            // System.out.println(rdv.getDescrption_in());
+            rdv_details_con.getrdv(rdv_local);
+            rdv_parts_container.getChildren().removeAll();
+            rdv_parts_container.getChildren().setAll(root);
+
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+    }
 
     public void annl_mod() {
 
@@ -352,7 +378,7 @@ public class Rdv_parts implements Initializable {
                             if (part.getQuntitie() >= 1) {
                                 part.setQuntitie(1);
                                 rdv_local.getParts().add(part);
-                                
+
                                 list = FXCollections.observableArrayList(rdv_local.getParts());
                                 part_rdv.setItems(list);
                                 part_rdv.refresh();
@@ -388,7 +414,7 @@ public class Rdv_parts implements Initializable {
                                 list = FXCollections.observableArrayList(rdv_local.getParts());
                                 part_rdv.setItems(list);
                                 part_rdv.refresh();
-                                
+
                             } else {
                                 Alert alert = new Alert(AlertType.INFORMATION);
                                 alert.setTitle("Confirmation de suppression");

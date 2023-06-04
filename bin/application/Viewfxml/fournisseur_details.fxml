@@ -40,7 +40,14 @@
               </rowConstraints>
                <children>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
-                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
+                  <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
+                     <children>
+                        <Button fx:id="btn_retour" layoutX="144.0" layoutY="6.0" mnemonicParsing="false" onAction="#retour" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: transpart;" text="&lt; Retour">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children></Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <Text layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fournisseur">
@@ -94,11 +101,11 @@
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
                      <children>
-                        <Button fx:id="btn_save_fournisseur" layoutX="133.0" layoutY="23.0" mnemonicParsing="false" onAction="#save_fournisseur" prefHeight="30.0" prefWidth="110.0" styleClass="btn_add" stylesheets="@btn.css" text="Enregistrer">
+                        <Button fx:id="btn_annuler_fournisseur" layoutX="134.0" layoutY="11.0" mnemonicParsing="false" onAction="#annuler_founrisseur" prefHeight="30.0" prefWidth="110.0" styleClass="btn_mod" stylesheets="@btn.css" text="Annuler">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Button>
-                        <Button fx:id="btn_annuler_fournisseur" layoutY="23.0" mnemonicParsing="false" onAction="#annuler_founrisseur" prefHeight="30.0" prefWidth="110.0" styleClass="btn_mod" stylesheets="@btn.css" text="Annuler">
+                        <Button fx:id="btn_save_fournisseur" layoutX="6.0" layoutY="11.0" mnemonicParsing="false" onAction="#save_fournisseur" prefHeight="30.0" prefWidth="110.0" styleClass="btn_add" stylesheets="@btn.css" text="Enregistrer">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Button>
@@ -131,22 +138,22 @@
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
                         <TextField fx:id="somme_payee" layoutX="14.0" layoutY="10.0" prefHeight="30.0" prefWidth="230.0" styleClass="inpt" stylesheets="@inputs.css" />
-                        <Text layoutX="14.0" layoutY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="La somme payée" />
+                        <Text layoutX="14.0" layoutY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Somme payée" />
                      </children>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
                         <TextField fx:id="somme_transaction" layoutX="26.0" layoutY="13.0" prefHeight="30.0" prefWidth="230.0" styleClass="inpt" stylesheets="@inputs.css" />
-                        <Text layoutX="26.0" layoutY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="La somme du transcation" />
+                        <Text layoutX="26.0" layoutY="4.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Somme de la transcation" />
                      </children>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
-                        <Button fx:id="btn_save_trans" layoutX="222.0" layoutY="14.0" mnemonicParsing="false" onAction="#save_transaction" prefHeight="30.0" prefWidth="110.0" styleClass="btn_add" stylesheets="@btn.css" text="Enregistrer">
+                        <Button fx:id="btn_save_trans" layoutX="95.0" layoutY="14.0" mnemonicParsing="false" onAction="#save_transaction" prefHeight="30.0" prefWidth="110.0" styleClass="btn_add" stylesheets="@btn.css" text="Enregistrer">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Button>
-                        <Button fx:id="btn_annuler_trans" layoutX="91.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" styleClass="btn_mod" stylesheets="@btn.css" text="Annuler">
+                        <Button fx:id="btn_annuler_trans" layoutX="222.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="110.0" styleClass="btn_mod" stylesheets="@btn.css" text="Annuler">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Button>

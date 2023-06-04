@@ -78,7 +78,8 @@
    <top>
       <HBox alignment="CENTER" prefHeight="245.0" prefWidth="1030.0" BorderPane.alignment="CENTER">
          <children>
-               <TableView fx:id="part_rdv" prefHeight="245.0" prefWidth="608.0" stylesheets="@tablestyle.css">
+            <Pane prefHeight="246.0" prefWidth="228.0" />
+               <TableView fx:id="part_rdv" prefHeight="245.0" prefWidth="600.0" stylesheets="@tablestyle.css">
                     <columns>
                       <TableColumn fx:id="nom_part_col" minWidth="105.5999755859375" prefWidth="320.0" text="Nom" />
                         <TableColumn fx:id="prix_rdv__col" minWidth="40.79998779296875" prefWidth="118.0" text="Prix" />
@@ -86,6 +87,15 @@
                         <TableColumn fx:id="action_col" minWidth="40.0" prefWidth="65.0" text="Action" />
                     </columns>
                   </TableView>
+            <Pane prefHeight="246.0" prefWidth="214.0">
+               <children>
+                  <Button fx:id="btn_retour" layoutX="76.0" layoutY="14.0" mnemonicParsing="false" onAction="#retour" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: transpaert;" text="&lt; Retour">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+            </Pane>
          </children>
       </HBox>
    </top>

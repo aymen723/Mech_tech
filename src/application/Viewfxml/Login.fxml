@@ -41,7 +41,7 @@
                            </tooltip></PasswordField>
                         <HBox alignment="CENTER" layoutY="168.0" prefHeight="86.0" prefWidth="345.0">
                            <children>
-                              <Button fx:id="loginbtn" mnemonicParsing="false" onAction="#connect" prefHeight="30.0" prefWidth="120.0" styleClass="btn" stylesheets="@Login.css" text="Se Connecter" textFill="WHITE">
+                              <Button fx:id="loginbtn" mnemonicParsing="false" onAction="#connect" onKeyPressed="#connect" prefHeight="30.0" prefWidth="120.0" styleClass="btn" stylesheets="@Login.css" text="Se Connecter" textFill="WHITE">
                                  <effect>
                                     <DropShadow>
                                        <color>
