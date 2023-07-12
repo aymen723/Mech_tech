@@ -3,8 +3,6 @@ package application.ViewController;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
@@ -100,7 +98,7 @@ public class Car_details {
             @Override
             protected ArrayList<Rendez_vous> call() throws Exception {
                 // Perform your data loading operation here
-                Thread.sleep(2000);
+
                 return AdminController.RdvListCar(car_local.getVin());
             }
         };
@@ -294,7 +292,51 @@ public class Car_details {
         updatecar.append("matricule", matricule.getText());
         updatecar.append("vin", vin.getText());
 
-        AdminController.UpdateCar(updatecar, car_local);
+        Task<Integer> updateTask = new Task<Integer>() {
+
+            @Override
+            protected Integer call() throws Exception {
+
+                AdminController.UpdateCar(updatecar, car_local);
+                return 0;
+            }
+
+        };
+
+        Alert loadingAlert = new Alert(AlertType.INFORMATION);
+        loadingAlert.setTitle("Loading");
+        loadingAlert.setHeaderText("Please wait...");
+        loadingAlert.setContentText("Loading data from the server...");
+        loadingAlert.initOwner(car_rdv.getScene().getWindow());
+        loadingAlert.setGraphic(progressIndicator);
+        DialogPane dialogPane = loadingAlert.getDialogPane();
+        dialogPane.getStylesheets()
+                .add(getClass().getResource("/application/Viewfxml/part_style.css")
+                        .toExternalForm());
+        dialogPane.getStyleClass().add("dialog-pane ");
+
+        loadingAlert.initStyle(StageStyle.UNDECORATED);
+
+        // Show the loading indicator and start the data loading task
+        loadingAlert.show();
+        Thread dataThread = new Thread(updateTask);
+        dataThread.start();
+
+        // Handle task completion
+        updateTask.setOnSucceeded(ev -> {
+            Platform.runLater(() -> {
+                loadingAlert.close();
+            });
+        });
+
+        // Handle task failure
+        updateTask.setOnFailed(ev -> {
+            // Display an error message
+            Platform.runLater(() -> {
+                loadingAlert.close();
+                showErrorAlert("Data Loading Error", "Failed to load data from the server.");
+            });
+        });
 
     }
 

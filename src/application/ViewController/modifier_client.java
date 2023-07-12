@@ -7,14 +7,21 @@ import org.bson.Document;
 
 import application.controller.AdminController;
 import application.models.Clientmodel;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.StageStyle;
 
 public class modifier_client implements Initializable {
     @FXML
@@ -41,6 +48,8 @@ public class modifier_client implements Initializable {
     @FXML
     private Button return_back;
 
+    private ProgressIndicator progressIndicator = new ProgressIndicator();
+
     @FXML
     void modifierClient(ActionEvent event) {
         if ((name_field.getText().trim().isEmpty() == false) &&
@@ -61,7 +70,51 @@ public class modifier_client implements Initializable {
             newemp.append("tel", numero_field.getText());
             newemp.append("adresse", address_field.getText());
 
-            AdminController.UpdateClient(newemp, Client_dashbord.client);
+            Task<Integer> updateTask = new Task<Integer>() {
+
+                @Override
+                protected Integer call() throws Exception {
+
+                    AdminController.UpdateClient(newemp, Client_dashbord.client);
+                    return 0;
+                }
+
+            };
+
+            Alert loadingAlert = new Alert(AlertType.INFORMATION);
+            loadingAlert.setTitle("Loading");
+            loadingAlert.setHeaderText("Please wait...");
+            loadingAlert.setContentText("Loading data from the server...");
+            loadingAlert.initOwner(mod_container.getScene().getWindow());
+            loadingAlert.setGraphic(progressIndicator);
+            DialogPane dialogPane = loadingAlert.getDialogPane();
+            dialogPane.getStylesheets()
+                    .add(getClass().getResource("/application/Viewfxml/part_style.css")
+                            .toExternalForm());
+            dialogPane.getStyleClass().add("dialog-pane ");
+
+            loadingAlert.initStyle(StageStyle.UNDECORATED);
+
+            // Show the loading indicator and start the data loading task
+            loadingAlert.show();
+            Thread dataThread = new Thread(updateTask);
+            dataThread.start();
+
+            // Handle task completion
+            updateTask.setOnSucceeded(ev -> {
+                Platform.runLater(() -> {
+                    loadingAlert.close();
+                });
+            });
+
+            // Handle task failure
+            updateTask.setOnFailed(ev -> {
+                // Display an error message
+                Platform.runLater(() -> {
+                    loadingAlert.close();
+                    showErrorAlert("Data Loading Error", "Failed to load data from the server.");
+                });
+            });
 
             try {
                 Parent fxml = FXMLLoader.load(getClass().getResource("/application/Viewfxml/Client_dashbord.fxml"));
@@ -97,6 +150,15 @@ public class modifier_client implements Initializable {
 
         }
 
+    }
+
+    private void showErrorAlert(String title, String message) {
+        Alert errorAlert = new Alert(AlertType.ERROR);
+        errorAlert.setTitle(title);
+        errorAlert.setHeaderText(null);
+        errorAlert.setContentText(message);
+        errorAlert.initOwner(mod_container.getScene().getWindow());
+        errorAlert.showAndWait();
     }
 
     @FXML

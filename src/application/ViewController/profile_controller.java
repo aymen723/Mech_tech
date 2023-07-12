@@ -4,13 +4,20 @@ import org.bson.Document;
 
 import application.controller.AdminController;
 import application.models.Usermodel;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DialogPane;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.StageStyle;
 
 public class profile_controller {
 
@@ -42,6 +49,9 @@ public class profile_controller {
 
     @FXML
     private Button retour_btn;
+
+    private ProgressIndicator progressIndicator = new ProgressIndicator();
+
     private Usermodel user = new Usermodel();
 
     public Usermodel getUser() {
@@ -85,9 +95,64 @@ public class profile_controller {
         newemp.append("role", role_select.getValue());
         newemp.append("email", email_field_mod.getText());
         // newemp.append("password",email_field_mod.getText());
-        AdminController.UpdateEmp(newemp,user);
+
+        Task<Integer> updateTask = new Task<Integer>() {
+
+            @Override
+            protected Integer call() throws Exception {
+
+                AdminController.UpdateEmp(newemp, user);
+                return 0;
+            }
+
+        };
+
+        Alert loadingAlert = new Alert(AlertType.INFORMATION);
+        loadingAlert.setTitle("Loading");
+        loadingAlert.setHeaderText("Please wait...");
+        loadingAlert.setContentText("Loading data from the server...");
+        loadingAlert.initOwner(mod_container.getScene().getWindow());
+        loadingAlert.setGraphic(progressIndicator);
+        DialogPane dialogPane = loadingAlert.getDialogPane();
+        dialogPane.getStylesheets()
+                .add(getClass().getResource("/application/Viewfxml/part_style.css")
+                        .toExternalForm());
+        dialogPane.getStyleClass().add("dialog-pane ");
+
+        loadingAlert.initStyle(StageStyle.UNDECORATED);
+
+        // Show the loading indicator and start the data loading task
+        loadingAlert.show();
+        Thread dataThread = new Thread(updateTask);
+        dataThread.start();
+
+        // Handle task completion
+        updateTask.setOnSucceeded(ev -> {
+            Platform.runLater(() -> {
+                loadingAlert.close();
+            });
+        });
+
+        // Handle task failure
+        updateTask.setOnFailed(ev -> {
+            // Display an error message
+            Platform.runLater(() -> {
+                loadingAlert.close();
+                showErrorAlert("Data Loading Error", "Failed to load data from the server.");
+            });
+        });
 
         System.out.println("test hna1");
 
+    }
 
-}}
+    private void showErrorAlert(String title, String message) {
+        Alert errorAlert = new Alert(AlertType.ERROR);
+        errorAlert.setTitle(title);
+        errorAlert.setHeaderText(null);
+        errorAlert.setContentText(message);
+        errorAlert.initOwner(mod_container.getScene().getWindow());
+        errorAlert.showAndWait();
+    }
+
+}

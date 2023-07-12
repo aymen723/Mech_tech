@@ -1,6 +1,5 @@
 package application.controller;
 
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -22,7 +21,6 @@ import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.UpdateResult;
 
 import application.Connectdatabase;
-import application.ViewController.Client_dashbord;
 import application.models.Car;
 // import application.ViewController.add_employer_controller;<
 import application.models.Clientmodel;
@@ -369,7 +367,7 @@ public class AdminController {
 				car.setMatricule(cardoc.getString("matricule"));
 				car.setVin(cardoc.getString("vin"));
 
-				ArrayList<Document> parlistdoc = (ArrayList<Document>) doc.get("parts");
+				ArrayList<Document> parlistdoc = doc.get("parts", ArrayList.class);
 				ArrayList<Parts> partlist = new ArrayList<Parts>();
 				for (Document pardoc : parlistdoc) {
 					Parts part = new Parts();

@@ -1,12 +1,10 @@
 package application.ViewController;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import application.controller.AdminController;
-import application.models.Clientmodel;
 import application.models.Usermodel;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -42,8 +40,6 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class add_employer_controller implements Initializable {
@@ -94,7 +90,7 @@ public class add_employer_controller implements Initializable {
 
 	public static Usermodel user;
 
-	private Usermodel user_local;
+	// private Usermodel user_local;
 
 	ObservableList<Usermodel> list = FXCollections.observableArrayList();
 
@@ -141,7 +137,7 @@ public class add_employer_controller implements Initializable {
 			@Override
 			protected ObservableList<Usermodel> call() throws Exception {
 				// Perform your data loading operation here
-				Thread.sleep(2000);
+				// Thread.sleep(2000);
 				return AdminController.EmpLiist();
 			}
 		};
@@ -330,7 +326,8 @@ public class add_employer_controller implements Initializable {
 					});
 
 					copybutton.setOnAction(event -> {
-						ObservableList<Usermodel> selectedItems = table.getSelectionModel().getSelectedItems();
+						// ObservableList<Usermodel> selectedItems =
+						// table.getSelectionModel().getSelectedItems();
 
 						Usermodel user = getTableView().getItems().get(getIndex());
 

@@ -28,7 +28,7 @@ public class Connectdatabase {
 	private static MongoDatabase database;
 	private static MongoCollection<Document> collection;
 
-	static public String url = "mongodb://localhost:27017";
+	static public String url = "mongodb://192.168.138.95:27017";
 
 	static public String url2;
 

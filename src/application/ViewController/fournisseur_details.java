@@ -3,7 +3,6 @@ package application.ViewController;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 
@@ -13,20 +12,21 @@ import org.bson.types.ObjectId;
 import application.controller.AdminController;
 import application.models.Fournisseur;
 import application.models.Transaction;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -96,6 +96,8 @@ public class fournisseur_details {
 
     @FXML
     private BorderPane details_con;
+
+    private ProgressIndicator progressIndicator = new ProgressIndicator();
 
     ObservableList<Transaction> list_transaction = FXCollections.observableArrayList();
 
@@ -229,8 +231,55 @@ public class fournisseur_details {
             fournisseur.setAddress(address.getText());
             fournisseur.setPhone(numero.getText());
             fournisseur.setEmail(email.getText());
-            AdminController.UpdateFournisseur(newfournisseur, fournisseur_local);
-            getfournisseur(AdminController.findFournisseurbyid(fournisseur_local.getId()));
+
+            Task<Integer> updateTask = new Task<Integer>() {
+
+                @Override
+                protected Integer call() throws Exception {
+
+                    AdminController.UpdateFournisseur(newfournisseur, fournisseur_local);
+
+                    getfournisseur(AdminController.findFournisseurbyid(fournisseur_local.getId()));
+                    return 0;
+                }
+
+            };
+
+            Alert loadingAlert = new Alert(AlertType.INFORMATION);
+            loadingAlert.setTitle("Loading");
+            loadingAlert.setHeaderText("Please wait...");
+            loadingAlert.setContentText("Loading data from the server...");
+            loadingAlert.initOwner(details_con.getScene().getWindow());
+            loadingAlert.setGraphic(progressIndicator);
+            DialogPane dialogPane = loadingAlert.getDialogPane();
+            dialogPane.getStylesheets()
+                    .add(getClass().getResource("/application/Viewfxml/part_style.css")
+                            .toExternalForm());
+            dialogPane.getStyleClass().add("dialog-pane ");
+
+            loadingAlert.initStyle(StageStyle.UNDECORATED);
+
+            // Show the loading indicator and start the data loading task
+            loadingAlert.show();
+            Thread dataThread = new Thread(updateTask);
+            dataThread.start();
+
+            // Handle task completion
+            updateTask.setOnSucceeded(ev -> {
+                Platform.runLater(() -> {
+                    loadingAlert.close();
+                });
+            });
+
+            // Handle task failure
+            updateTask.setOnFailed(ev -> {
+                // Display an error message
+                Platform.runLater(() -> {
+                    loadingAlert.close();
+                    showErrorAlert("Data Loading Error", "Failed to load data from the server.");
+                });
+            });
+
         } else {
 
             if (nom.getText().trim().isEmpty() == true) {
@@ -251,6 +300,15 @@ public class fournisseur_details {
             }
 
         }
+    }
+
+    private void showErrorAlert(String title, String message) {
+        Alert errorAlert = new Alert(AlertType.ERROR);
+        errorAlert.setTitle(title);
+        errorAlert.setHeaderText(null);
+        errorAlert.setContentText(message);
+        errorAlert.initOwner(details_con.getScene().getWindow());
+        errorAlert.showAndWait();
     }
 
     @FXML

@@ -1,14 +1,11 @@
 package application.ViewController;
 
-import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import application.controller.AdminController;
 import application.models.Clientmodel;
-import application.models.Rendez_vous;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -42,7 +39,6 @@ import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Client_dashbord implements Initializable {

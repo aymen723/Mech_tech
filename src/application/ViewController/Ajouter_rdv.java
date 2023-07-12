@@ -96,7 +96,7 @@ public class Ajouter_rdv implements Initializable {
 
     final int max = 500;
 
-    private Usermodel tech_local;
+    // private Usermodel tech_local;
 
     @FXML
     void date_dd(ActionEvent event) {
@@ -269,9 +269,7 @@ public class Ajouter_rdv implements Initializable {
 
     }
 
-    ObservableList<Clientmodel> list = FXCollections.observableArrayList(
-            new Clientmodel("1", "client1", "cleint1", "5555", "address", "email"),
-            new Clientmodel("2", "client2", "cleint2", "5555", "address", "email"));
+    ObservableList<Clientmodel> list = FXCollections.observableArrayList();
 
     ObservableList<Usermodel> list_tech = FXCollections.observableArrayList();
 
