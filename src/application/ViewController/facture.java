@@ -47,18 +47,6 @@ public class facture {
     @FXML
     private Text service_fact;
 
-    // @FXML
-    // private TableColumn<Parts, Integer> nom_part_fact;
-
-    // @FXML
-    // private TableColumn<Parts, Integer> prix_part_fact;
-
-    // @FXML
-    // private TableColumn<Parts, Integer> quant_part_fact;
-
-    // @FXML
-    // private TableView<Parts> table_facture;
-
     @FXML
     private Text prix_fact;
 
@@ -188,7 +176,7 @@ public class facture {
             imageCell.setBorder(0);
             imageCell.setBackgroundColor(bgcolor);
 
-            Image image = Image.getInstance("src/pics/Asset 1.png");
+            Image image = Image.getInstance("C:/Program Files/MecaTech/src/pics/Asset 1.png");
 
             image.scaleToFit(100, 100);
 

@@ -216,7 +216,7 @@ public class Rdv_details {
             etat_box.setStyle("-fx-background-color: #D8D8D8");
         } else if (rdv.getEtat().equals("terminé")) {
             btn_finish.setDisable(true);
-            eng_btn.setDisable(true);
+            // eng_btn.setDisable(true);
             etat_box.setStyle("-fx-background-color: #98D8AA");
         } else if (rdv.getEtat().equals("en cours")) {
             etat_box.setStyle("-fx-background-color: #F3E99F");
@@ -589,6 +589,7 @@ public class Rdv_details {
 
             AdminController.update_parts_qtnt(rdv_local.getParts());
         }
+        btn_finish.setDisable(true);
 
     }
 

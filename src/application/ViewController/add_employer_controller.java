@@ -141,7 +141,7 @@ public class add_employer_controller implements Initializable {
 			@Override
 			protected ObservableList<Usermodel> call() throws Exception {
 				// Perform your data loading operation here
-				Thread.sleep(2000);
+				// Thread.sleep(2000);
 				return AdminController.EmpLiist();
 			}
 		};

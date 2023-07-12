@@ -1,5 +1,7 @@
 package application.ViewController;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -36,6 +38,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.scene.control.Alert;
@@ -43,8 +47,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
+import com.itextpdf.text.*;
+// import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 
 public class mod_sales {
+
+    @FXML
+    private Button fact_btn;
 
     @FXML
     private TableColumn<Parts, Void> action_col_sale;
@@ -112,6 +126,12 @@ public class mod_sales {
     private BorderPane addsale_container;
 
     private Sales sale_local;
+
+    SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
+
+    private static Font headerfont = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD, BaseColor.WHITE);
+    private static Font titlefont = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD, BaseColor.BLACK);
+    private static Font tablefont = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL, BaseColor.BLACK);
 
     ObservableList<Parts> list_parts = FXCollections.observableArrayList();
     ObservableList<Parts> sales_part = FXCollections.observableArrayList();
@@ -418,5 +438,170 @@ public class mod_sales {
         // Bind the sorted list to the table
         parts_table.setItems(sortedList);
 
+    }
+
+    private static PdfPCell createCell(String text, int alignment, String type) {
+        PdfPCell cell = new PdfPCell(new Phrase(text, tablefont));
+        cell.setHorizontalAlignment(alignment);
+        cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+        cell.setFixedHeight(17);
+        if (type.equals("header")) {
+            cell.setBorderWidth(1);
+        }
+        if (type.equals("data")) {
+            cell.setBorderWidthBottom(0);
+            cell.setBorderWidthTop(0);
+        }
+        return cell;
+    }
+
+    @FXML
+    void print(ActionEvent event) {
+
+        int sum = 0;
+
+        try {
+
+            FileChooser fileChooser = new FileChooser();
+
+            // Set the extension filter for PDF files
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDFfiles (*.pdf)", "*.pdf");
+            fileChooser.getExtensionFilters().add(extFilter);
+            fileChooser.setInitialFileName("BonDeVentes - " +
+                    DATE_FORMAT.format(
+                            sale_local.getDate_de_vente())
+                    + " .pdf");
+
+            Stage primaryStage = new Stage();
+            File file = fileChooser.showSaveDialog(primaryStage);
+
+            SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy");
+
+            com.itextpdf.text.Document document = new com.itextpdf.text.Document();
+
+            PdfWriter.getInstance(document, new FileOutputStream(file.getAbsolutePath()));
+
+            document.open();
+
+            Paragraph infopr = new Paragraph();
+            infopr.add(new Phrase("Email : ", titlefont));
+            infopr.add(new Phrase("MECA-TECH@outlook.com "));
+            infopr.add(new Phrase("Telephone : ", titlefont));
+            infopr.add(new Phrase("05-55-24-78-62"));
+            infopr.setAlignment(Element.ALIGN_JUSTIFIED_ALL);
+            document.add(infopr);
+
+            document.add(new Paragraph(5f, " "));
+
+            PdfPTable tableheader = new PdfPTable(3);
+            tableheader.setWidthPercentage(100);
+
+            PdfPCell imageCell = new PdfPCell();
+            BaseColor bgcolor = new BaseColor(60, 64, 72);
+            imageCell.setHorizontalAlignment(Element.ALIGN_LEFT);
+            imageCell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            imageCell.setPadding(5);
+            imageCell.setFixedHeight(40);
+            imageCell.setBorder(0);
+            imageCell.setBackgroundColor(bgcolor);
+
+            // Image image = Image.getInstance("C:/Program
+            // Files/MecaTech/src/pics/Asset1.png");
+
+            // image.scaleToFit(100, 100);
+
+            // imageCell.addElement(image);
+
+            PdfPCell boncell = new PdfPCell(new Phrase("Bon de Réglement", headerfont));
+            boncell.setBorder(0);
+            boncell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            boncell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            boncell.setBackgroundColor(bgcolor);
+
+            PdfPCell mecacell = new PdfPCell(new Phrase("MECA-TECH", headerfont));
+            mecacell.setBorder(0);
+            mecacell.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            mecacell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+            mecacell.setBackgroundColor(bgcolor);
+
+            tableheader.addCell(imageCell);
+            tableheader.addCell(boncell);
+            tableheader.addCell(mecacell);
+
+            document.add(tableheader);
+
+            document.add(new Paragraph(20f, " "));
+
+            // Paragraph clientpr = new Paragraph();
+            // clientpr.add(new Phrase("Client : ", titlefont));
+            // clientpr.add(new Phrase(rdv_local.getClient_rdv().getNom() + " " +
+            // rdv_local.getClient_rdv().getPrenom()));
+            // document.add(clientpr);
+
+            Paragraph rdvpr = new Paragraph();
+            rdvpr.add(new Phrase("Date de Ventes : ", titlefont));
+            rdvpr.add(new Phrase(DATE_FORMAT.format(sale_local.getDate_de_vente())));
+            document.add(rdvpr);
+
+            document.add(new Paragraph(20f, " "));
+
+            PdfPTable table = new PdfPTable(3);
+            table.setWidthPercentage(100);
+
+            table.addCell(createCell("Nom", PdfPCell.ALIGN_CENTER,
+                    "header")).setFixedHeight(20);
+            ;
+            table.addCell(createCell("Quantity", PdfPCell.ALIGN_CENTER,
+                    "header")).setFixedHeight(20);
+            table.addCell(createCell("Prix", PdfPCell.ALIGN_CENTER,
+                    "header")).setFixedHeight(20);
+
+            if (sale_local.getPartList() != null) {
+                for (Parts row : sale_local.getPartList()) {
+                    table.addCell(createCell(row.getName(), PdfPCell.ALIGN_CENTER, "data"));
+                    table.addCell(createCell(Integer.toString(row.getQuntitie()),
+                            PdfPCell.ALIGN_CENTER, "data"));
+                    table.addCell(createCell(Integer.toString(row.getPrice()),
+                            PdfPCell.ALIGN_CENTER, "data"));
+
+                }
+            }
+
+            // Paragraph prixpiecepr = new Paragraph();
+            // prixpiecepr.add(new Phrase("Prix total des pices : ", titlefont));
+            // prixpiecepr.add(Chunk.NEWLINE);
+            // prixpiecepr.add(new Phrase(parts_price.getText() + " DA"));
+            // table.addCell(prixpiecepr);
+            // document.add(prixpiecepr);
+
+            // Paragraph prixservicepr = new Paragraph();
+            // prixservicepr.add(new Phrase("Prix de service : ", titlefont));
+            // prixservicepr.add(Chunk.NEWLINE);
+            // prixservicepr.add(new Phrase(Integer.toString(rdv_local.getPrix()) + " DA"));
+            // table.addCell(prixservicepr);
+            // document.add(prixservicepr);
+
+            for (int i = 0; i < sale_local.getPartList().size(); i++) {
+
+                sum = (sale_local.getPartList().get(i).getPrice()) + sum;
+            }
+
+            Paragraph prixtotalpr = new Paragraph();
+            prixtotalpr.add(new Phrase("Prix Total : ", titlefont));
+            prixtotalpr.add(Chunk.NEWLINE);
+            prixtotalpr.add(new Phrase(Integer.toString(sum) +
+                    "DA"));
+            table.addCell(prixtotalpr);
+            // document.add(prixtotalpr);
+
+            document.add(table);
+
+            document.close();
+
+            System.out.println("Pdf generated successfully");
+
+        } catch (Exception e) {
+            System.err.println("Error generating invoice: " + e.getMessage());
+        }
     }
 }

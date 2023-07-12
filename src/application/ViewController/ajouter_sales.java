@@ -1,5 +1,7 @@
 package application.ViewController;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -12,6 +14,14 @@ import java.util.ResourceBundle;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
+
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import application.controller.AdminController;
 import application.models.Fournisseur;
@@ -40,6 +50,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.scene.control.Alert;
@@ -49,6 +61,9 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 
 public class ajouter_sales implements Initializable {
+
+    // @FXML
+    // private Button fact_btn;
 
     @FXML
     private TableColumn<Parts, Void> action_col_sale;
